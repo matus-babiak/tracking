@@ -1,8 +1,75 @@
+import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ResponsiveContainer, BarChart, Bar, LineChart, Line, ComposedChart,
   XAxis, YAxis, Tooltip, CartesianGrid, Legend,
 } from 'recharts'
-import { fmtEur, fmtNum, PRESETS, COMPARE_MODES, monthKey, monthFull } from '../lib/helpers'
+import { fmtEur, fmtNum, PRESETS, COMPARE_MODES, monthKey, monthFull, presetRange } from '../lib/helpers'
+
+function compareSortValues(a, b, dir) {
+  const mul = dir === 'asc' ? 1 : -1
+  if (a == null && b == null) return 0
+  if (a == null) return 1
+  if (b == null) return -1
+  if (typeof a === 'string' && typeof b === 'string') return a.localeCompare(b, 'sk') * mul
+  return (a - b) * mul
+}
+
+// Tabuľka s triedením stĺpcov (klik na hlavičku: najprv zostupne, potom vzostupne)
+export function SortableTable({ columns, rows, rowKey, footer, defaultSortKey, defaultSortDir = 'desc' }) {
+  const [sortKey, setSortKey] = useState(defaultSortKey || columns.find((c) => c.sort)?.key)
+  const [sortDir, setSortDir] = useState(defaultSortDir)
+
+  const sorted = useMemo(() => {
+    const col = columns.find((c) => c.key === sortKey)
+    if (!col?.sort) return rows
+    return [...rows].sort((a, b) => compareSortValues(col.sort(a), col.sort(b), sortDir))
+  }, [rows, columns, sortKey, sortDir])
+
+  const onSort = (col) => {
+    if (!col.sort) return
+    if (sortKey === col.key) setSortDir((d) => (d === 'desc' ? 'asc' : 'desc'))
+    else {
+      setSortKey(col.key)
+      setSortDir('desc')
+    }
+  }
+
+  return (
+    <div className="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            {columns.map((col) => (
+              <th
+                key={col.key}
+                className={[col.align === 'num' ? 'num' : '', col.sort ? 'sortable' : ''].filter(Boolean).join(' ')}
+                onClick={() => onSort(col)}
+                aria-sort={col.sort && sortKey === col.key ? (sortDir === 'asc' ? 'ascending' : 'descending') : undefined}
+              >
+                <span className="th-label">{col.label}</span>
+                {col.sort && sortKey === col.key && (
+                  <span className="sort-indicator" aria-hidden>{sortDir === 'desc' ? '↓' : '↑'}</span>
+                )}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sorted.map((row) => (
+            <tr key={rowKey(row)}>
+              {columns.map((col) => (
+                <td key={col.key} className={col.align === 'num' ? 'num' : ''}>
+                  {col.render(row)}
+                </td>
+              ))}
+            </tr>
+          ))}
+          {footer}
+        </tbody>
+      </table>
+    </div>
+  )
+}
 
 // delta: % zmena voči porovnávaciemu obdobiu (null = neukázať)
 // deltaGood: 'up' (rast = dobrý, zelený), 'down' (pokles = dobrý), 'neutral'
@@ -43,34 +110,58 @@ export function Section({ title, hint, children }) {
   )
 }
 
-// GA4-style výber obdobia: preset + vlastný rozsah + porovnanie
-export function PeriodPicker({ client, preset, onPreset, customFrom, customTo, onCustomFrom, onCustomTo, compare, onCompare }) {
+// GA4-style výber obdobia: od–do + rýchle predvoľby
+export function PeriodPicker({ client, from, to, onFrom, onTo, compare, onCompare }) {
   const all = client.months
+
+  const setFrom = (key) => {
+    onFrom(key)
+    if (key > to) onTo(key)
+  }
+
+  const setTo = (key) => {
+    onTo(key)
+    if (key < from) onFrom(key)
+  }
+
   return (
     <div className="period-picker">
       <div className="period-row">
-        <select className="period-select" value={preset} onChange={(e) => onPreset(e.target.value)}>
-          {PRESETS.map((p) => <option key={p.id} value={p.id}>{p.label}</option>)}
+        <select className="period-select" value={from} onChange={(e) => setFrom(Number(e.target.value))} aria-label="Od mesiaca">
+          {all.map((m) => (
+            <option key={monthKey(m)} value={monthKey(m)}>{monthFull(m)}</option>
+          ))}
         </select>
-        <select className="period-select compare" value={compare} onChange={(e) => onCompare(e.target.value)}>
+        <span className="range-sep">–</span>
+        <select className="period-select" value={to} onChange={(e) => setTo(Number(e.target.value))} aria-label="Do mesiaca">
+          {all.map((m) => (
+            <option key={monthKey(m)} value={monthKey(m)}>{monthFull(m)}</option>
+          ))}
+        </select>
+      </div>
+      <div className="period-row period-actions">
+        <div className="period-chips">
+          {PRESETS.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              className="period-chip"
+              onClick={() => {
+                const range = presetRange(client, p.id)
+                if (range) {
+                  onFrom(range.from)
+                  onTo(range.to)
+                }
+              }}
+            >
+              {p.label}
+            </button>
+          ))}
+        </div>
+        <select className="period-select compare" value={compare} onChange={(e) => onCompare(e.target.value)} aria-label="Porovnanie">
           {COMPARE_MODES.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
         </select>
       </div>
-      {preset === 'custom' && (
-        <div className="period-row">
-          <select className="period-select" value={customFrom} onChange={(e) => onCustomFrom(Number(e.target.value))}>
-            {all.map((m) => (
-              <option key={monthKey(m)} value={monthKey(m)} disabled={monthKey(m) > customTo}>{monthFull(m)}</option>
-            ))}
-          </select>
-          <span className="range-sep">→</span>
-          <select className="period-select" value={customTo} onChange={(e) => onCustomTo(Number(e.target.value))}>
-            {all.map((m) => (
-              <option key={monthKey(m)} value={monthKey(m)} disabled={monthKey(m) < customFrom}>{monthFull(m)}</option>
-            ))}
-          </select>
-        </div>
-      )}
     </div>
   )
 }
@@ -94,7 +185,7 @@ function baseAxes() {
 
 // Stĺpcový graf — series: [{ key, name, color, eur }]
 export function MonthBarChart({ data, series, height = 240 }) {
-  const isEur = series.some((s) => s.eur)
+  const seriesByKey = Object.fromEntries(series.map((s) => [s.key, s]))
   return (
     <ResponsiveContainer width="100%" height={height}>
       <BarChart data={data} barGap={2} barCategoryGap="28%">
@@ -102,7 +193,10 @@ export function MonthBarChart({ data, series, height = 240 }) {
         <YAxis tick={{ fontSize: 11.5, fill: '#999' }} axisLine={false} tickLine={false} width={52}
           tickFormatter={(v) => v >= 1000 ? `${(v / 1000).toLocaleString('sk-SK')}k` : v} />
         <Tooltip contentStyle={tooltipStyle}
-          formatter={(val, name, item) => [isEur && item?.dataKey !== 'roas' ? eurFmt(val) : numFmt(val), name]}
+          formatter={(val, name, item) => [
+            seriesByKey[item?.dataKey]?.eur ? eurFmt(val) : numFmt(val),
+            name,
+          ]}
           cursor={{ fill: 'rgba(0,0,0,0.03)' }} />
         {series.length > 1 && <Legend wrapperStyle={{ fontSize: 12.5 }} iconType="circle" iconSize={8} />}
         {series.map((s) => (
@@ -159,4 +253,60 @@ export function RoasBadge({ value }) {
   if (value == null) return <span className="badge na">–</span>
   const cls = value >= 3 ? 'good' : value >= 1 ? 'mid' : 'bad'
   return <span className={`badge ${cls}`}>{value.toLocaleString('sk-SK', { maximumFractionDigits: 2 })}</span>
+}
+
+export function ClientDropdown({ value, clients, onChange, placeholder, className = '' }) {
+  const [open, setOpen] = useState(false)
+  const rootRef = useRef(null)
+
+  const selected = clients.find((c) => c.id === value)
+  const label = selected?.name ?? placeholder ?? 'Vybrať klienta'
+
+  useEffect(() => {
+    if (!open) return undefined
+    const close = (e) => {
+      if (!rootRef.current?.contains(e.target)) setOpen(false)
+    }
+    document.addEventListener('mousedown', close)
+    return () => document.removeEventListener('mousedown', close)
+  }, [open])
+
+  const pick = (id) => {
+    onChange(id)
+    setOpen(false)
+  }
+
+  const options = placeholder ? [{ id: '', name: placeholder }, ...clients] : clients
+
+  return (
+    <div ref={rootRef} className={`client-dropdown ${className}`.trim()}>
+      <button
+        type="button"
+        className={`client-dropdown-trigger ${!selected && placeholder ? 'placeholder' : ''} ${open ? 'open' : ''}`}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+      >
+        <span className="client-dropdown-label">{label}</span>
+        <svg className="client-dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+      {open && (
+        <ul className="client-dropdown-menu" role="listbox">
+          {options.map((c) => (
+            <li key={c.id || '__placeholder__'} role="option" aria-selected={value === c.id}>
+              <button
+                type="button"
+                className={`client-dropdown-option ${value === c.id ? 'active' : ''}`}
+                onClick={() => pick(c.id)}
+              >
+                {c.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
 }

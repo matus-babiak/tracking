@@ -58,14 +58,40 @@ export function rangeLabel(months) {
 
 export const PRESETS = [
   { id: '1m', label: 'Posledný mesiac' },
-  { id: '3m', label: 'Posledné 3 mesiace' },
-  { id: '6m', label: 'Posledných 6 mesiacov' },
-  { id: '12m', label: 'Posledných 12 mesiacov' },
+  { id: '3m', label: '3 mesiace' },
+  { id: '6m', label: '6 mesiacov' },
   { id: 'ytd', label: 'Tento rok' },
-  { id: 'lastyear', label: 'Minulý rok' },
   { id: 'all', label: 'Celé obdobie' },
-  { id: 'custom', label: 'Vlastné obdobie' },
 ]
+
+// Rozšírené preset-y pre resolvePeriod (12m, lastyear — nie v UI)
+const PRESET_RESOLVE = {
+  ...Object.fromEntries(PRESETS.map((p) => [p.id, p.id])),
+  '12m': '12m',
+  lastyear: 'lastyear',
+  custom: 'custom',
+}
+
+export const DEFAULT_PRESET = '1m'
+
+export function presetRange(client, presetId) {
+  const months = resolvePeriod(client, PRESET_RESOLVE[presetId] ?? presetId, null, null)
+  if (!months.length) return null
+  return { from: monthKey(months[0]), to: monthKey(months[months.length - 1]) }
+}
+
+// Ktoré taby má klient k dispozícii podľa dostupných dát
+export function clientTabs(client) {
+  const m = client.months
+  const has = {
+    overview: true,
+    meta: m.some((x) => x.meta),
+    google: m.some((x) => x.google),
+    ga: m.some((x) => x.ga),
+    email: m.some((x) => x.email),
+  }
+  return Object.entries(has).filter(([, ok]) => ok).map(([id]) => id)
+}
 
 export const COMPARE_MODES = [
   { id: 'none', label: 'Bez porovnania' },
@@ -78,6 +104,7 @@ export const COMPARE_MODES = [
 export function resolvePeriod(client, preset, customFrom, customTo) {
   const all = client.months
   const n = all.length
+  if (n === 0) return []
   const lastN = (k) => all.slice(Math.max(0, n - k))
   switch (preset) {
     case '1m': return lastN(1)

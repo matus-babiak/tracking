@@ -1,3 +1,13 @@
 node_modules/
 dist/
 .DS_Store
+
+# Lokálny kontext pre AI — citlivé dáta, nikdy necommitovať
+Kontext.md
+
+# PDF reporty klientov — citlivé dáta
+reportyHH/
+
+# Heslá klientov (plaintext) a lokálny kľúč
+passwords.local.json
+.env.local

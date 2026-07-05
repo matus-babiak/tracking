@@ -1,5 +1,5 @@
-import { Kpi, Section, SpendRoasChart, MonthBarChart, RoasBadge } from '../components/ui'
-import { monthFull, monthLabel, fmtEur, fmtNum, fmtRoas, sum, pctChange } from '../lib/helpers'
+import { Kpi, Section, SpendRoasChart, MonthBarChart, RoasBadge, SortableTable } from '../components/ui'
+import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtRoas, sum, pctChange } from '../lib/helpers'
 
 function googleStats(months) {
   const rows = months.filter((m) => m.google)
@@ -12,11 +12,60 @@ function googleStats(months) {
     clicks: sum(rows, (m) => m.google.clicks),
     roas: spend > 0 ? value / spend : null,
     cpp: purchases > 0 ? spend / purchases : null,
+    cpc: (() => {
+      const clicks = sum(rows, (m) => m.google.clicks)
+      return clicks ? spend / clicks : null
+    })(),
   }
 }
 
-export default function GoogleAds({ months, compare }) {
+const campaignColumnsFull = [
+  { key: 'name', label: 'Kampaň', sort: (c) => c.name, render: (c) => c.name },
+  { key: 'spend', label: 'Investícia', align: 'num', sort: (c) => c.spend, render: (c) => fmtEur(c.spend) },
+  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (c) => c.clicks, render: (c) => fmtNum(c.clicks || null) },
+  { key: 'purchases', label: 'Nákupy', align: 'num', sort: (c) => c.purchases, render: (c) => fmtNum(c.purchases) },
+  { key: 'value', label: 'Hodnota', align: 'num', sort: (c) => c.value, render: (c) => fmtEur(c.value) },
+  { key: 'roas', label: 'ROAS', align: 'num', sort: (c) => (c.spend > 0 ? c.value / c.spend : null), render: (c) => <RoasBadge value={c.spend > 0 && c.value > 0 ? c.value / c.spend : c.spend > 0 ? 0 : null} /> },
+  { key: 'months', label: 'Aktívna (mes.)', align: 'num', sort: (c) => c.months, render: (c) => c.months },
+]
+
+const campaignColumnsEshop = [
+  { key: 'name', label: 'Kampaň', sort: (c) => c.name, render: (c) => c.name },
+  { key: 'spend', label: 'Investícia', align: 'num', sort: (c) => c.spend, render: (c) => fmtEur(c.spend) },
+  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (c) => c.clicks, render: (c) => fmtNum(c.clicks || null) },
+  { key: 'purchases', label: 'Nákupy', align: 'num', sort: (c) => c.purchases, render: (c) => fmtNum(c.purchases) },
+  { key: 'value', label: 'Hodnota nákupov', align: 'num', sort: (c) => c.value, render: (c) => fmtEur(c.value) },
+  { key: 'roas', label: 'ROAS', align: 'num', sort: (c) => (c.spend > 0 ? c.value / c.spend : null), render: (c) => <RoasBadge value={c.spend > 0 && c.value > 0 ? c.value / c.spend : c.spend > 0 ? 0 : null} /> },
+  { key: 'cpp', label: 'Cena / nákup', align: 'num', sort: (c) => (c.purchases > 0 ? c.spend / c.purchases : null), render: (c) => fmtEur(c.purchases > 0 ? c.spend / c.purchases : null, 2) },
+  { key: 'months', label: 'Aktívna (mes.)', align: 'num', sort: (c) => c.months, render: (c) => c.months },
+]
+
+const monthColumnsFull = [
+  { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
+  { key: 'spend', label: 'Investícia', align: 'num', sort: (m) => m.google.spend, render: (m) => fmtEur(m.google.spend) },
+  { key: 'impressions', label: 'Zobrazenia', align: 'num', sort: (m) => m.google.impressions, render: (m) => fmtNum(m.google.impressions) },
+  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (m) => m.google.clicks, render: (m) => fmtNum(m.google.clicks) },
+  { key: 'ctr', label: 'CTR', align: 'num', sort: (m) => m.google.ctr, render: (m) => (m.google.ctr != null ? `${m.google.ctr.toLocaleString('sk-SK')} %` : '–') },
+  { key: 'cpc', label: 'CPC', align: 'num', sort: (m) => m.google.cpc, render: (m) => fmtEur(m.google.cpc, 2) },
+  { key: 'purchases', label: 'Nákupy', align: 'num', sort: (m) => m.google.purchases, render: (m) => fmtNum(m.google.purchases) },
+  { key: 'value', label: 'Hodnota', align: 'num', sort: (m) => m.google.purchaseValue, render: (m) => fmtEur(m.google.purchaseValue) },
+  { key: 'roas', label: 'ROAS', align: 'num', sort: (m) => (m.google.spend > 0 ? m.google.purchaseValue / m.google.spend : null), render: (m) => <RoasBadge value={m.google.spend > 0 ? m.google.purchaseValue / m.google.spend : null} /> },
+]
+
+const monthColumnsEshop = [
+  { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
+  { key: 'spend', label: 'Investícia', align: 'num', sort: (m) => m.google.spend, render: (m) => fmtEur(m.google.spend) },
+  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (m) => m.google.clicks, render: (m) => fmtNum(m.google.clicks) },
+  { key: 'cpc', label: 'CPC', align: 'num', sort: (m) => m.google.cpc, render: (m) => fmtEur(m.google.cpc, 2) },
+  { key: 'purchases', label: 'Nákupy', align: 'num', sort: (m) => m.google.purchases, render: (m) => fmtNum(m.google.purchases) },
+  { key: 'value', label: 'Hodnota nákupov', align: 'num', sort: (m) => m.google.purchaseValue, render: (m) => fmtEur(m.google.purchaseValue) },
+  { key: 'roas', label: 'ROAS', align: 'num', sort: (m) => (m.google.spend > 0 ? m.google.purchaseValue / m.google.spend : null), render: (m) => <RoasBadge value={m.google.spend > 0 ? m.google.purchaseValue / m.google.spend : null} /> },
+  { key: 'cpp', label: 'Cena / nákup', align: 'num', sort: (m) => (m.google.purchases > 0 ? m.google.spend / m.google.purchases : null), render: (m) => fmtEur(m.google.purchases > 0 ? m.google.spend / m.google.purchases : null, 2) },
+]
+
+export default function GoogleAds({ months, compare, client }) {
   const rows = months.filter((m) => m.google)
+  const eshop = client?.adsProfile === 'eshop'
 
   if (rows.length === 0) {
     return (
@@ -51,7 +100,7 @@ export default function GoogleAds({ months, compare }) {
       campaignMap.set(c.name, curC)
     }
   }
-  const campaigns = [...campaignMap.values()].sort((a, b) => b.spend - a.spend)
+  const campaigns = [...campaignMap.values()]
 
   return (
     <>
@@ -60,10 +109,21 @@ export default function GoogleAds({ months, compare }) {
         <Kpi label="Hodnota nákupov" value={fmtEur(cur.value)} sub={`${fmtNum(cur.purchases)} nákupov`} delta={d('value')} />
         <Kpi label="ROAS" value={fmtRoas(cur.roas)} delta={d('roas')}
           subClass={cur.roas >= 3 ? 'up' : cur.roas < 1 ? 'down' : ''} />
-        <Kpi label="Zobrazenia" value={fmtNum(cur.impressions)} delta={d('impressions')} />
-        <Kpi label="Kliknutia" value={fmtNum(cur.clicks)} delta={d('clicks')}
-          sub={cur.clicks && cur.spend ? `CPC ${fmtEur(cur.spend / cur.clicks, 2)}` : null} />
-        <Kpi label="Cena za nákup" value={fmtEur(cur.cpp, 2)} delta={d('cpp')} deltaGood="down" />
+        {eshop ? (
+          <>
+            <Kpi label="Nákupy" value={fmtNum(cur.purchases)} delta={d('purchases')} />
+            <Kpi label="Cena za nákup" value={fmtEur(cur.cpp, 2)} delta={d('cpp')} deltaGood="down" />
+            <Kpi label="Kliknutia" value={fmtNum(cur.clicks)} delta={d('clicks')}
+              sub={cur.cpc != null ? `CPC ${fmtEur(cur.cpc, 2)}` : null} />
+          </>
+        ) : (
+          <>
+            <Kpi label="Zobrazenia" value={fmtNum(cur.impressions)} delta={d('impressions')} />
+            <Kpi label="Kliknutia" value={fmtNum(cur.clicks)} delta={d('clicks')}
+              sub={cur.clicks && cur.spend ? `CPC ${fmtEur(cur.spend / cur.clicks, 2)}` : null} />
+            <Kpi label="Cena za nákup" value={fmtEur(cur.cpp, 2)} delta={d('cpp')} deltaGood="down" />
+          </>
+        )}
       </div>
 
       <Section title="Investícia vs. hodnota nákupov" hint="mesačne">
@@ -74,83 +134,41 @@ export default function GoogleAds({ months, compare }) {
 
       <div className="chart-grid section">
         <div>
-          <div className="section-title">Kliknutia</div>
+          <div className="section-title">Nákupy <span className="hint">mesačne</span></div>
           <div className="card">
-            <MonthBarChart data={chartData} series={[{ key: 'clicks', name: 'Kliknutia', color: '#f59e0b' }]} />
+            <MonthBarChart data={chartData} series={[{ key: 'purchases', name: 'Nákupy', color: '#10b981' }]} />
           </div>
         </div>
         <div>
-          <div className="section-title">Nákupy</div>
+          <div className="section-title">{eshop ? 'Investícia' : 'Kliknutia'} <span className="hint">mesačne</span></div>
           <div className="card">
-            <MonthBarChart data={chartData} series={[{ key: 'purchases', name: 'Nákupy', color: '#10b981' }]} />
+            <MonthBarChart
+              data={chartData}
+              series={eshop
+                ? [{ key: 'spend', name: 'Investícia', color: '#f59e0b', eur: true }]
+                : [{ key: 'clicks', name: 'Kliknutia', color: '#f59e0b' }]}
+            />
           </div>
         </div>
       </div>
 
       <Section title="Kampane" hint="súčet za vybrané obdobie">
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Kampaň</th>
-                <th className="num">Investícia</th>
-                <th className="num">Kliknutia</th>
-                <th className="num">Nákupy</th>
-                <th className="num">Hodnota</th>
-                <th className="num">ROAS</th>
-                <th className="num">Aktívna (mes.)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {campaigns.map((c) => (
-                <tr key={c.name}>
-                  <td>{c.name}</td>
-                  <td className="num">{fmtEur(c.spend)}</td>
-                  <td className="num">{fmtNum(c.clicks || null)}</td>
-                  <td className="num">{fmtNum(c.purchases)}</td>
-                  <td className="num">{fmtEur(c.value)}</td>
-                  <td className="num"><RoasBadge value={c.spend > 0 && c.value > 0 ? c.value / c.spend : c.spend > 0 ? 0 : null} /></td>
-                  <td className="num">{c.months}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <SortableTable
+          columns={eshop ? campaignColumnsEshop : campaignColumnsFull}
+          rows={campaigns}
+          rowKey={(c) => c.name}
+          defaultSortKey="spend"
+        />
       </Section>
 
       <Section title="Mesačný detail">
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Mesiac</th>
-                <th className="num">Investícia</th>
-                <th className="num">Zobrazenia</th>
-                <th className="num">Kliknutia</th>
-                <th className="num">CTR</th>
-                <th className="num">CPC</th>
-                <th className="num">Nákupy</th>
-                <th className="num">Hodnota</th>
-                <th className="num">ROAS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((m) => (
-                <tr key={`${m.year}-${m.month}`}>
-                  <td>{monthFull(m)}</td>
-                  <td className="num">{fmtEur(m.google.spend)}</td>
-                  <td className="num">{fmtNum(m.google.impressions)}</td>
-                  <td className="num">{fmtNum(m.google.clicks)}</td>
-                  <td className="num">{m.google.ctr != null ? `${m.google.ctr.toLocaleString('sk-SK')} %` : '–'}</td>
-                  <td className="num">{fmtEur(m.google.cpc, 2)}</td>
-                  <td className="num">{fmtNum(m.google.purchases)}</td>
-                  <td className="num">{fmtEur(m.google.purchaseValue)}</td>
-                  <td className="num"><RoasBadge value={m.google.spend > 0 ? m.google.purchaseValue / m.google.spend : null} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <SortableTable
+          columns={eshop ? monthColumnsEshop : monthColumnsFull}
+          rows={rows}
+          rowKey={(m) => `${m.year}-${m.month}`}
+          defaultSortKey="month"
+          defaultSortDir="desc"
+        />
       </Section>
     </>
   )

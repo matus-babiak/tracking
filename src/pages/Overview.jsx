@@ -1,15 +1,30 @@
-import { Kpi, Section, SpendRoasChart, MonthBarChart, RoasBadge } from '../components/ui'
-import { monthFull, monthLabel, fmtEur, fmtNum, fmtPct, fmtRoas, aggregate, pctChange } from '../lib/helpers'
+import { Kpi, Section, SpendRoasChart, MonthBarChart, RoasBadge, SortableTable } from '../components/ui'
+import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtPct, fmtRoas, aggregate, pctChange } from '../lib/helpers'
+
+function monthMetrics(m) {
+  const spend = (m.meta?.spend ?? 0) + (m.google?.spend ?? 0) + (m.boosting?.spend ?? 0)
+  const value = (m.meta?.purchaseValue ?? 0) + (m.google?.purchaseValue ?? 0) + (m.boosting?.value ?? 0)
+  const purchases = (m.meta?.purchases ?? 0) + (m.google?.purchases ?? 0) + (m.boosting?.purchases ?? 0)
+  const share = m.eshop?.revenue ? (value / m.eshop.revenue) * 100 : null
+  return { spend, value, purchases, roas: spend > 0 ? value / spend : null, share }
+}
 
 // Prehľad: PPC reklamy (Meta + Google) vs. výsledky e-shopu
 export default function Overview({ months, compare }) {
+  if (months.length === 0) {
+    return (
+      <div className="empty-state">
+        Zatiaľ nie sú dostupné dáta. Pošli reporty a doplníme ich.
+      </div>
+    )
+  }
+
   const agg = aggregate(months)
   const prev = compare ? aggregate(compare.months) : null
   const d = (key) => (prev ? pctChange(agg[key], prev[key]) : null)
 
   const chartData = months.map((m) => {
-    const spend = (m.meta?.spend ?? 0) + (m.google?.spend ?? 0) + (m.boosting?.spend ?? 0)
-    const value = (m.meta?.purchaseValue ?? 0) + (m.google?.purchaseValue ?? 0) + (m.boosting?.value ?? 0)
+    const { spend, value } = monthMetrics(m)
     return {
       label: monthLabel(m),
       spend: Math.round(spend * 100) / 100,
@@ -20,6 +35,16 @@ export default function Overview({ months, compare }) {
       googleSpend: m.google?.spend ?? 0,
     }
   })
+
+  const tableColumns = [
+    { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
+    { key: 'spend', label: 'Investícia', align: 'num', sort: (m) => monthMetrics(m).spend, render: (m) => fmtEur(monthMetrics(m).spend) },
+    { key: 'value', label: 'Hodnota z reklám', align: 'num', sort: (m) => monthMetrics(m).value, render: (m) => fmtEur(monthMetrics(m).value) },
+    { key: 'roas', label: 'ROAS', align: 'num', sort: (m) => monthMetrics(m).roas, render: (m) => <RoasBadge value={monthMetrics(m).roas} /> },
+    { key: 'purchases', label: 'Nákupy z reklám', align: 'num', sort: (m) => monthMetrics(m).purchases, render: (m) => fmtNum(monthMetrics(m).purchases) },
+    { key: 'eshop', label: 'Tržby e-shopu', align: 'num', sort: (m) => m.eshop?.revenue, render: (m) => fmtEur(m.eshop?.revenue) },
+    { key: 'share', label: 'Podiel reklám', align: 'num', sort: (m) => monthMetrics(m).share, render: (m) => { const s = monthMetrics(m).share; return s != null ? fmtPct(s) : '–' } },
+  ]
 
   return (
     <>
@@ -64,37 +89,14 @@ export default function Overview({ months, compare }) {
       </div>
 
       <Section title="Mesačný prehľad">
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Mesiac</th>
-                <th className="num">Investícia</th>
-                <th className="num">Hodnota z reklám</th>
-                <th className="num">ROAS</th>
-                <th className="num">Nákupy z reklám</th>
-                <th className="num">Tržby e-shopu</th>
-                <th className="num">Podiel reklám</th>
-              </tr>
-            </thead>
-            <tbody>
-              {months.map((m) => {
-                const spend = (m.meta?.spend ?? 0) + (m.google?.spend ?? 0) + (m.boosting?.spend ?? 0)
-                const value = (m.meta?.purchaseValue ?? 0) + (m.google?.purchaseValue ?? 0) + (m.boosting?.value ?? 0)
-                const purchases = (m.meta?.purchases ?? 0) + (m.google?.purchases ?? 0) + (m.boosting?.purchases ?? 0)
-                const share = m.eshop?.revenue ? (value / m.eshop.revenue) * 100 : null
-                return (
-                  <tr key={`${m.year}-${m.month}`}>
-                    <td>{monthFull(m)}</td>
-                    <td className="num">{fmtEur(spend)}</td>
-                    <td className="num">{fmtEur(value)}</td>
-                    <td className="num"><RoasBadge value={spend > 0 ? value / spend : null} /></td>
-                    <td className="num">{fmtNum(purchases)}</td>
-                    <td className="num">{fmtEur(m.eshop?.revenue)}</td>
-                    <td className="num">{share != null ? fmtPct(share) : '–'}</td>
-                  </tr>
-                )
-              })}
+        <SortableTable
+          columns={tableColumns}
+          rows={months}
+          rowKey={(m) => `${m.year}-${m.month}`}
+          defaultSortKey="month"
+          defaultSortDir="desc"
+          footer={(
+            <>
               <tr className="total">
                 <td>Spolu</td>
                 <td className="num">{fmtEur(agg.adSpend)}</td>
@@ -115,9 +117,9 @@ export default function Overview({ months, compare }) {
                   <td className="num">{prev.adShareOfRevenue != null ? fmtPct(prev.adShareOfRevenue) : '–'}</td>
                 </tr>
               )}
-            </tbody>
-          </table>
-        </div>
+            </>
+          )}
+        />
       </Section>
     </>
   )

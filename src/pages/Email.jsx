@@ -1,5 +1,5 @@
-import { Kpi, Section, MonthLineChart, MonthBarChart } from '../components/ui'
-import { monthFull, monthLabel, fmtEur, fmtNum, fmtPct, sum, pctChange } from '../lib/helpers'
+import { Kpi, Section, MonthLineChart, MonthBarChart, SortableTable } from '../components/ui'
+import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtPct, sum, pctChange } from '../lib/helpers'
 
 function emailStats(months) {
   const rows = months.filter((m) => m.email)
@@ -12,6 +12,18 @@ function emailStats(months) {
     avgClick: rows.length ? rows.reduce((a, m) => a + (m.email.clickRate ?? 0), 0) / rows.length : null,
   }
 }
+
+const monthColumns = [
+  { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
+  { key: 'campaigns', label: 'Kampane', align: 'num', sort: (m) => m.email.campaignsCount, render: (m) => fmtNum(m.email.campaignsCount) },
+  { key: 'sent', label: 'Odoslané', align: 'num', sort: (m) => m.email.sent, render: (m) => fmtNum(m.email.sent) },
+  { key: 'openRate', label: 'Open rate', align: 'num', sort: (m) => m.email.openRate, render: (m) => fmtPct(m.email.openRate) },
+  { key: 'clickRate', label: 'Click rate', align: 'num', sort: (m) => m.email.clickRate, render: (m) => fmtPct(m.email.clickRate, 2) },
+  { key: 'clicks', label: 'Unikátne kliky', align: 'num', sort: (m) => m.email.uniqueClicks, render: (m) => fmtNum(m.email.uniqueClicks) },
+  { key: 'unsub', label: 'Odhlásenia', align: 'num', sort: (m) => m.email.unsubRate, render: (m) => fmtPct(m.email.unsubRate, 2) },
+  { key: 'orders', label: 'Objednávky', align: 'num', sort: (m) => m.email.orders, render: (m) => fmtNum(m.email.orders) },
+  { key: 'revenue', label: 'Tržby', align: 'num', sort: (m) => m.email.revenue, render: (m) => fmtEur(m.email.revenue) },
+]
 
 export default function Email({ months, compare }) {
   const rows = months.filter((m) => m.email)
@@ -69,38 +81,13 @@ export default function Email({ months, compare }) {
       </div>
 
       <Section title="Mesačný detail" hint="Mailchimp">
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Mesiac</th>
-                <th className="num">Kampane</th>
-                <th className="num">Odoslané</th>
-                <th className="num">Open rate</th>
-                <th className="num">Click rate</th>
-                <th className="num">Unikátne kliky</th>
-                <th className="num">Odhlásenia</th>
-                <th className="num">Objednávky</th>
-                <th className="num">Tržby</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((m) => (
-                <tr key={`${m.year}-${m.month}`}>
-                  <td>{monthFull(m)}</td>
-                  <td className="num">{fmtNum(m.email.campaignsCount)}</td>
-                  <td className="num">{fmtNum(m.email.sent)}</td>
-                  <td className="num">{fmtPct(m.email.openRate)}</td>
-                  <td className="num">{fmtPct(m.email.clickRate, 2)}</td>
-                  <td className="num">{fmtNum(m.email.uniqueClicks)}</td>
-                  <td className="num">{fmtPct(m.email.unsubRate, 2)}</td>
-                  <td className="num">{fmtNum(m.email.orders)}</td>
-                  <td className="num">{fmtEur(m.email.revenue)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <SortableTable
+          columns={monthColumns}
+          rows={rows}
+          rowKey={(m) => `${m.year}-${m.month}`}
+          defaultSortKey="month"
+          defaultSortDir="desc"
+        />
       </Section>
     </>
   )

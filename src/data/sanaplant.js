@@ -1,4 +1,4 @@
-// Klient: Sanaplant — dáta extrahované z mesačných reportov 2/2025 – 5/2026.
+// Klient: Sanaplant — dáta extrahované z mesačných reportov 2/2025 – 6/2026.
 // Hodnoty null = metrika v danom mesiaci nebola v reporte dostupná
 // (napr. Google Ads bežali až od apríla 2025, v decembri 2025 boli vypnuté).
 
@@ -16,7 +16,7 @@ const sanaplant = {
     'Reálne dáta sa môžu líšiť od skutočných predajov e-shopu (atribučné modely, cookie lišta).',
   ],
 
-  // Mesiace zoradené chronologicky: 2/2025 … 5/2026
+  // Mesiace zoradené chronologicky: 2/2025 … 6/2026
   months: [
     {
       year: 2025, month: 2,
@@ -503,6 +503,28 @@ const sanaplant = {
         unsubRate: 0.31, orders: 5, revenue: 164.13, campaignsCount: 4,
       },
       eshop: { revenue: 28675.02, items: 533, orders: 230, netRevenue: 22910.77 },
+    },
+    {
+      year: 2026, month: 6,
+      meta: {
+        spend: 872.7, impressions: 360745, reach: 162387, clicks: 7940,
+        purchases: 36, purchaseValue: 3556.34, roas: 4.07, addToCart: 188,
+        cpc: 0.11, costPerPurchase: 24.24,
+        campaigns: [
+          { name: 'Produktové kampane', spend: 442.01, clicks: 3021, purchases: 19, value: 2010.41, roas: 4.55 },
+          { name: 'Boosting kampane', spend: 241.01, clicks: 3385, purchases: 0, value: 0, roas: 0 },
+          { name: 'Vybrané produkty', spend: 189.68, clicks: 1534, purchases: 17, value: 1545.93, roas: 8.15 },
+        ],
+      },
+      google: {
+        spend: 1407.19, impressions: 365724, clicks: 7804, cpc: 0.18, ctr: 2.13,
+        purchases: 86, purchaseValue: 8517.31, conversions: 86, roas: 6.05,
+      },
+      ga: {
+        paid: { sessions: 7647, users: 6852, engagementRate: 37.33, avgDuration: '00:11:59' },
+        organic: { sessions: 11125, users: 8435, engagementRate: 48.23, avgDuration: '00:13:51' },
+      },
+      eshop: { revenue: 24537.89, items: 619, orders: 202, netRevenue: 19814.41 },
     },
   ],
 }

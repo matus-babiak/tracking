@@ -1,5 +1,11 @@
-import { Kpi, Section, MonthLineChart, MonthBarChart } from '../components/ui'
-import { monthFull, monthLabel, fmtEur, fmtNum, fmtPct, sum, pctChange } from '../lib/helpers'
+import { Kpi, Section, MonthLineChart, MonthBarChart, SortableTable } from '../components/ui'
+import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtPct, sum, pctChange } from '../lib/helpers'
+
+function durationSec(s) {
+  if (!s || s === '–') return null
+  const [h, m, sec] = s.split(':').map(Number)
+  return h * 3600 + m * 60 + sec
+}
 
 function gaStats(months) {
   const rows = months.filter((m) => m.ga)
@@ -15,6 +21,27 @@ function gaStats(months) {
     eshopItems: sum(rows, (m) => m.eshop?.items),
   }
 }
+
+const trafficColumns = [
+  { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
+  { key: 'paidSessions', label: 'Relácie (kampane)', align: 'num', sort: (m) => m.ga.paid?.sessions, render: (m) => fmtNum(m.ga.paid?.sessions) },
+  { key: 'paidUsers', label: 'Návšt. (kampane)', align: 'num', sort: (m) => m.ga.paid?.users, render: (m) => fmtNum(m.ga.paid?.users) },
+  { key: 'paidEng', label: 'Interakcia (kamp.)', align: 'num', sort: (m) => m.ga.paid?.engagementRate, render: (m) => fmtPct(m.ga.paid?.engagementRate, 1) },
+  { key: 'paidDur', label: 'Trvanie (kamp.)', align: 'num', sort: (m) => durationSec(m.ga.paid?.avgDuration), render: (m) => m.ga.paid?.avgDuration ?? '–' },
+  { key: 'orgSessions', label: 'Relácie (org.)', align: 'num', sort: (m) => m.ga.organic?.sessions, render: (m) => fmtNum(m.ga.organic?.sessions) },
+  { key: 'orgUsers', label: 'Návšt. (org.)', align: 'num', sort: (m) => m.ga.organic?.users, render: (m) => fmtNum(m.ga.organic?.users) },
+  { key: 'orgEng', label: 'Interakcia (org.)', align: 'num', sort: (m) => m.ga.organic?.engagementRate, render: (m) => fmtPct(m.ga.organic?.engagementRate, 1) },
+  { key: 'orgDur', label: 'Trvanie (org.)', align: 'num', sort: (m) => durationSec(m.ga.organic?.avgDuration), render: (m) => m.ga.organic?.avgDuration ?? '–' },
+]
+
+const eshopColumns = [
+  { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
+  { key: 'revenue', label: 'Tržby', align: 'num', sort: (m) => m.eshop?.revenue, render: (m) => fmtEur(m.eshop?.revenue) },
+  { key: 'netRevenue', label: 'Čisté predaje', align: 'num', sort: (m) => m.eshop?.netRevenue, render: (m) => fmtEur(m.eshop?.netRevenue) },
+  { key: 'items', label: 'Predané položky', align: 'num', sort: (m) => m.eshop?.items, render: (m) => fmtNum(m.eshop?.items) },
+  { key: 'orders', label: 'Objednávky', align: 'num', sort: (m) => m.eshop?.orders, render: (m) => fmtNum(m.eshop?.orders) },
+  { key: 'ency', label: 'z toho Encyklopédia (ks)', align: 'num', sort: (m) => m.eshop?.encyItems, render: (m) => fmtNum(m.eshop?.encyItems) },
+]
 
 export default function Analytics({ months, compare }) {
   const rows = months.filter((m) => m.ga)
@@ -72,67 +99,23 @@ export default function Analytics({ months, compare }) {
       </div>
 
       <Section title="Mesačný detail">
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Mesiac</th>
-                <th className="num">Relácie (kampane)</th>
-                <th className="num">Návšt. (kampane)</th>
-                <th className="num">Interakcia (kamp.)</th>
-                <th className="num">Trvanie (kamp.)</th>
-                <th className="num">Relácie (org.)</th>
-                <th className="num">Návšt. (org.)</th>
-                <th className="num">Interakcia (org.)</th>
-                <th className="num">Trvanie (org.)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((m) => (
-                <tr key={`${m.year}-${m.month}`}>
-                  <td>{monthFull(m)}</td>
-                  <td className="num">{fmtNum(m.ga.paid?.sessions)}</td>
-                  <td className="num">{fmtNum(m.ga.paid?.users)}</td>
-                  <td className="num">{fmtPct(m.ga.paid?.engagementRate, 1)}</td>
-                  <td className="num">{m.ga.paid?.avgDuration ?? '–'}</td>
-                  <td className="num">{fmtNum(m.ga.organic?.sessions)}</td>
-                  <td className="num">{fmtNum(m.ga.organic?.users)}</td>
-                  <td className="num">{fmtPct(m.ga.organic?.engagementRate, 1)}</td>
-                  <td className="num">{m.ga.organic?.avgDuration ?? '–'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <SortableTable
+          columns={trafficColumns}
+          rows={rows}
+          rowKey={(m) => `${m.year}-${m.month}`}
+          defaultSortKey="month"
+          defaultSortDir="desc"
+        />
       </Section>
 
       <Section title="E-shop (GA4)" hint="tržby, položky a objednávky podľa reportov">
-        <div className="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Mesiac</th>
-                <th className="num">Tržby</th>
-                <th className="num">Čisté predaje</th>
-                <th className="num">Predané položky</th>
-                <th className="num">Objednávky</th>
-                <th className="num">z toho Encyklopédia (ks)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((m) => (
-                <tr key={`${m.year}-${m.month}`}>
-                  <td>{monthFull(m)}</td>
-                  <td className="num">{fmtEur(m.eshop?.revenue)}</td>
-                  <td className="num">{fmtEur(m.eshop?.netRevenue)}</td>
-                  <td className="num">{fmtNum(m.eshop?.items)}</td>
-                  <td className="num">{fmtNum(m.eshop?.orders)}</td>
-                  <td className="num">{fmtNum(m.eshop?.encyItems)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <SortableTable
+          columns={eshopColumns}
+          rows={rows}
+          rowKey={(m) => `${m.year}-${m.month}`}
+          defaultSortKey="month"
+          defaultSortDir="desc"
+        />
       </Section>
     </>
   )
