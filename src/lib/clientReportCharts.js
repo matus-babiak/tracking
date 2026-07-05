@@ -8,6 +8,12 @@ import {
 
 const PIE_COLORS = ['#1877F2', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444', '#64748b', '#06b6d4', '#ec4899']
 
+const AD_PLATFORM_COLORS = {
+  meta: '#1877F2',
+  google: '#f59e0b',
+  boosting: '#94a3b8',
+}
+
 function barChart({ title, height = 220, series, data }) {
   if (!data?.length || !series?.length) return null
   return { type: 'bar', title, height, series, data }
@@ -315,9 +321,9 @@ export function buildOverviewCharts(months, agg) {
   const boostSpend = sum(months.filter((m) => m.boosting), (m) => m.boosting?.spend ?? 0)
 
   const spendSlices = [
-    metaSpend > 0 ? { name: 'Meta Ads', value: metaSpend, color: '#1877F2' } : null,
-    googleSpend > 0 ? { name: 'Google Ads', value: googleSpend, color: '#4285F4' } : null,
-    boostSpend > 0 ? { name: 'Boosting', value: boostSpend, color: '#94a3b8' } : null,
+    metaSpend > 0 ? { name: 'Meta Ads', value: metaSpend, color: AD_PLATFORM_COLORS.meta } : null,
+    googleSpend > 0 ? { name: 'Google Ads', value: googleSpend, color: AD_PLATFORM_COLORS.google } : null,
+    boostSpend > 0 ? { name: 'Boosting', value: boostSpend, color: AD_PLATFORM_COLORS.boosting } : null,
   ].filter(Boolean)
 
   if (spendSlices.length >= 2) {

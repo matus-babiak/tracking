@@ -12,15 +12,6 @@ function toneClass(item) {
   return metricToneClass(resolveMetricTone(item))
 }
 
-function RichParts({ parts }) {
-  if (!parts?.length) return null
-  return parts.map((p, i) => (
-    p.bold
-      ? <strong key={i}>{p.text}</strong>
-      : <span key={i}>{p.text}</span>
-  ))
-}
-
 function ReportRows({ rows }) {
   if (!rows?.length) return null
   return (
@@ -153,81 +144,26 @@ function ReportSection({ title, intro, rows, topCampaigns, topProducts, charts, 
   )
 }
 
-function ReportCallout({ callout }) {
-  if (!callout) return null
-  return (
-    <div className="client-report-callout client-report-pdf-avoid">
-      {callout.lead?.length > 0 && (
-        <p className="client-report-callout-lead">
-          <RichParts parts={callout.lead} />
-        </p>
-      )}
-      {callout.blocks?.map((block) => (
-        <div key={block.title} className="client-report-callout-block">
-          <p className="client-report-callout-block-title">{block.title}</p>
-          {block.lines.map((parts, i) => (
-            <p key={i} className="client-report-callout-line">
-              <RichParts parts={parts} />
-            </p>
-          ))}
-        </div>
-      ))}
-      {callout.note && <p className="client-report-callout-note">{callout.note}</p>}
-    </div>
-  )
+function RichParts({ parts }) {
+  if (!parts?.length) return null
+  return parts.map((p, i) => (
+    p.bold
+      ? <strong key={i}>{p.text}</strong>
+      : <span key={i}>{p.text}</span>
+  ))
 }
 
-function ReportInsights({ insights }) {
-  if (!insights) return null
-  const { verdict, strengths, watchouts, recommendations } = insights
-  const hasLists = strengths?.length || watchouts?.length
-  const hasRecs = recommendations?.length > 0
-  if (!verdict && !hasLists && !hasRecs) return null
-
+function ReportSummary({ summary }) {
+  if (!summary?.paragraphs?.length) return null
   return (
-    <div className="client-report-insights client-report-pdf-avoid">
-      {verdict?.length > 0 && (
-        <p className="client-report-insights-verdict">
-          <RichParts parts={verdict} />
+    <section className="client-report-section client-report-section--summary client-report-pdf-avoid">
+      <h3 className="client-report-section-title">{summary.title}</h3>
+      {summary.paragraphs.map((parts, i) => (
+        <p key={i} className="client-report-summary-p">
+          <RichParts parts={parts} />
         </p>
-      )}
-
-      {hasLists && (
-        <div className={`client-report-insights-grid${!watchouts?.length || !strengths?.length ? ' client-report-insights-grid--single' : ''}`}>
-          {strengths?.length > 0 && (
-            <div className="client-report-insights-box client-report-insights-box--good">
-              <p className="client-report-insights-box-title">Čo funguje</p>
-              <ul>
-                {strengths.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-          {watchouts?.length > 0 && (
-            <div className="client-report-insights-box client-report-insights-box--watch">
-              <p className="client-report-insights-box-title">Na čo si dať pozor</p>
-              <ul>
-                {watchouts.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-      )}
-
-      {hasRecs && (
-        <div className="client-report-insights-rec">
-          <p className="client-report-insights-rec-title">Odporúčania</p>
-          <ul>
-            {recommendations.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+      ))}
+    </section>
   )
 }
 
@@ -251,11 +187,7 @@ function ReportOverview({ overview }) {
         </div>
       )}
 
-      <ReportInsights insights={overview.insights} />
-
       <ReportCharts charts={overview.charts} />
-
-      <ReportCallout callout={overview.callout} />
     </section>
   )
 }
@@ -328,6 +260,8 @@ export default function ClientReport({ client, months }) {
         ))}
 
         <ReportOverview overview={report.overview} />
+
+        <ReportSummary summary={report.summary} />
       </div>
 
       <footer className="client-report-footer client-report-pdf-avoid">

@@ -1,4 +1,5 @@
 import { fmtEur, fmtNum, fmtPct, monthLabel, sum } from './helpers'
+import { skPhrase } from './skGrammar'
 
 export function isGa4ExportMonth(m) {
   return !!(m.ga?.trafficAcquisition?.length || m.ga?.landingPages?.length)
@@ -161,7 +162,7 @@ export function pickTopGaProducts(ctx, limit = 5) {
   const items = ctx.topProducts.slice(0, limit).map((p) => ({
     name: p.name,
     value: fmtEur(p.revenue),
-    detail: p.purchased > 0 ? `${fmtNum(p.purchased)} ks` : null,
+    detail: p.purchased > 0 ? skPhrase(p.purchased, 'kus', 'nom') : null,
     tone: 'revenue',
   }))
   return { heading: `Top ${items.length} produktov (GA4 tržby)`, items }

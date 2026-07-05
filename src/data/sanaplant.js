@@ -1986,7 +1986,7 @@ const sanaplant = {
               itemRevenue: 62.31
             }
           ]
-        },
+      },
       email: {
         sent: null, openRate: 12.84, clickRate: 1.18, uniqueClicks: 280,
         unsubRate: 0.31, orders: 5, revenue: 164.13, campaignsCount: 4,

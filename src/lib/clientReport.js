@@ -1,5 +1,4 @@
-import { aggregate, fmtEur, fmtNum, fmtPct, fmtRoas, monthLabel, rangeLabel, sum } from './helpers'
-import { mergeCategoryRows } from './eshopMerge'
+import { aggregate, fmtEur, fmtNum, fmtPct, fmtRoas, rangeLabel, sum } from './helpers'
 import { metricToneFromLabel } from './metricTone'
 import { getClientUiProfile } from './clientMetrics'
 import {
@@ -9,11 +8,12 @@ import {
 } from './googleConversions'
 import {
   fmtSkCount,
-  skClicksSummary,
-  skInterakcieSummary,
-  skKonverzieSummary,
+  skNavstevyNaWeb,
   skNavstevyZReklam,
-  skReachSummary,
+  skOsloviliLudi,
+  skPhrase,
+  skPredanychPoloziek,
+  skZ,
   topReklamy,
 } from './skGrammar'
 import {
@@ -140,7 +140,7 @@ function formatTopCampaign(c, mode) {
     const parts = []
     if (c.campaign) parts.push(c.campaign)
     if (hasMoney(c.spend)) parts.push(`Investícia ${fmtEur(c.spend)}`)
-    if (hasCount(c.purchases)) parts.push(fmtSkCount(c.purchases, 'nakup'))
+    if (hasCount(c.purchases)) parts.push(skPhrase(c.purchases, 'nakup', 'acc'))
     if (hasMoney(c.spend) && hasMoney(c.value)) parts.push(`ROAS ${fmtRoas(c.value / c.spend)}`)
     return {
       name: c.name,
@@ -152,9 +152,9 @@ function formatTopCampaign(c, mode) {
 
   const parts = []
   if (hasMoney(c.spend)) parts.push(`Investícia ${fmtEur(c.spend)}`)
-  if (hasCount(c.clicks)) parts.push(fmtSkCount(c.clicks, 'kliknutie'))
-  if (hasCount(c.landingPageViews)) parts.push(fmtSkCount(c.landingPageViews, 'navsteva'))
-  if (hasCount(c.engagements)) parts.push(fmtSkCount(c.engagements, 'interakcia'))
+  if (hasCount(c.clicks)) parts.push(skPhrase(c.clicks, 'kliknutie', 'acc'))
+  if (hasCount(c.landingPageViews)) parts.push(skPhrase(c.landingPageViews, 'navsteva', 'acc'))
+  if (hasCount(c.engagements)) parts.push(skPhrase(c.engagements, 'interakcia', 'acc'))
   return {
     name: c.name,
     value: hasMoney(c.spend) ? fmtEur(c.spend) : '–',
@@ -301,10 +301,10 @@ function buildMetaSection(months, mode, client) {
   if (!rows.length) return null
 
   const intro = isEshop
-    ? 'Reklamy na sociálnych sieťach — dosah, kliknutia a nákupy.'
+    ? 'Reklamy na sociálnych sieťach: dosah, kliknutia a nákupy.'
     : hasCount(metaSum(months, 'landingPageViews'))
-      ? 'Prehľad výsledkov reklamných kampaní — dosah, návštevy a interakcie.'
-      : 'Prehľad výsledkov reklamných kampaní — dosah a interakcie.'
+      ? 'Prehľad výsledkov reklamných kampaní: dosah, návštevy a interakcie.'
+      : 'Prehľad výsledkov reklamných kampaní: dosah a interakcie.'
 
   const topCampaigns = pickTopCampaigns(months, 'meta', isEshop ? 'eshop' : 'leadgen', client)
 
@@ -416,8 +416,8 @@ function buildGoogleSection(months, mode, client) {
   if (!rows.length) return null
 
   const intro = isEshop
-    ? 'Vyhľadávanie a Performance Max — zobrazenia, kliknutia, konverzie a nákupy.'
-    : 'Vyhľadávanie — kliknutia, telefónne hovory a formuláre.'
+    ? 'Vyhľadávanie a Performance Max: zobrazenia, kliknutia, konverzie a nákupy.'
+    : 'Vyhľadávanie: kliknutia, telefónne hovory a formuláre.'
 
   const topCampaigns = pickTopCampaigns(months, 'google', isEshop ? 'eshop' : 'leadgen', client)
 
@@ -441,8 +441,8 @@ function buildGaSection(months) {
   const ga = aggregateGa(months)
   const snapshot = ctx.snapshot
   const ga4Label = ctx.hasGa4 ? ga4ExportPeriodLabel(ctx.ga4Months) : null
-  const ga4Hint = ga4Label ? `GA4 export — ${ga4Label}` : null
-  const legacyHint = ctx.hasLegacy ? 'PDF report — starší import' : null
+  const ga4Hint = ga4Label ? `GA4 export (${ga4Label})` : null
+  const legacyHint = ctx.hasLegacy ? 'PDF report, starší import' : null
 
   const rows = [
     ctx.hasGa4 && snapshot?.sessions != null && hasCount(snapshot.sessions)
@@ -479,16 +479,16 @@ function buildGaSection(months) {
       ? row('Noví používatelia', fmtNum(snapshot.newUsers), ga4Hint)
       : null,
     !ctx.hasGa4 && ga.paidUsers != null && hasCount(ga.paidUsers)
-      ? row('Používatelia — platená', fmtNum(ga.paidUsers))
+      ? row('Používatelia (platená)', fmtNum(ga.paidUsers))
       : null,
     !ctx.hasGa4 && ga.organicUsers != null && hasCount(ga.organicUsers)
-      ? row('Používatelia — organická', fmtNum(ga.organicUsers))
+      ? row('Používatelia (organická)', fmtNum(ga.organicUsers))
       : null,
     !ctx.hasGa4 && ga.paidEngagement != null
-      ? row('Miera interakcie — platená', fmtPct(ga.paidEngagement))
+      ? row('Miera interakcie (platená)', fmtPct(ga.paidEngagement))
       : null,
     !ctx.hasGa4 && ga.organicEngagement != null
-      ? row('Miera interakcie — organická', fmtPct(ga.organicEngagement))
+      ? row('Miera interakcie (organická)', fmtPct(ga.organicEngagement))
       : null,
     snapshot?.engagementRate != null
       ? row('Engagement rate', fmtEngagementRate(snapshot.engagementRate), ga4Hint)
@@ -503,9 +503,9 @@ function buildGaSection(months) {
 
   if (!rows.length) return null
 
-  let intro = 'Návštevnosť webu — platená vs. organická návštevnosť a miera interakcie.'
+  let intro = 'Návštevnosť webu: platená a organická návštevnosť, miera interakcie.'
   if (ctx.isGa4Only) {
-    intro = 'Návštevnosť webu z GA4 exportov — relácie podľa kanálov, používatelia a tržby.'
+    intro = 'Návštevnosť webu z GA4 exportov: relácie podľa kanálov, používatelia a tržby.'
   } else if (ctx.isMixed) {
     intro = `GA4 CSV export za ${ga4Label}; staršie mesiace majú zjednodušený import z PDF reportu.`
   } else if (ctx.hasGa4) {
@@ -518,7 +518,7 @@ function buildGaSection(months) {
         'Návštevy webu celkom',
         'Platená návštevnosť',
         'Organická návštevnosť',
-        'Miera interakcie — organická',
+        'Miera interakcie (organická)',
       ])
 
   return {
@@ -553,7 +553,7 @@ function buildEshopSection(months) {
   if (!rows.length) return null
 
   let intro = eshop.hasWoo
-    ? 'Predaje a objednávky z WooCommerce — súhrn za zvolené obdobie.'
+    ? 'Predaje a objednávky z WooCommerce: súhrn za zvolené obdobie.'
     : 'Predaje v e-shope podľa dostupných reportov.'
 
   if (eshop.combinedShops.length) {
@@ -652,7 +652,7 @@ function buildEmailSection(months) {
   return {
     title: 'E-mail marketing (Mailchimp)',
     accent: 'email',
-    intro: 'Newsletter a automatické e-maily — odoslanie, otvorenosť a tržby.',
+    intro: 'Newsletter a automatické e-maily: odoslanie, otvorenosť a tržby.',
     metrics,
     rows,
     charts: buildEmailCharts(months),
@@ -713,7 +713,7 @@ function buildHighlights(months, profile, agg) {
       highlights.push({
         label: 'Objednávky e-shopu',
         value: fmtNum(eshop.orders),
-        hint: hasCount(eshop.items) ? `${fmtNum(eshop.items)} predaných položiek` : null,
+        hint: hasCount(eshop.items) ? skPredanychPoloziek(eshop.items) : null,
       })
     }
     if (hasCount(ga.totalSessions)) {
@@ -731,7 +731,7 @@ function buildHighlights(months, profile, agg) {
       highlights.push({
         label: 'Tržby z e-mailov',
         value: fmtEur(email.revenue),
-        hint: hasCount(email.orders) ? fmtSkCount(email.orders, 'objednavka') : 'Mailchimp',
+        hint: hasCount(email.orders) ? skZ(email.orders, 'objednavka') : 'Mailchimp',
         tone: 'revenue',
       })
     }
@@ -792,634 +792,398 @@ function summaryPart(text, bold = false) {
   return { text, bold: !!bold }
 }
 
-function buildOverviewRows(months, profile, agg) {
-  if (profile !== 'eshop') return []
-
-  const email = aggregateEmail(months)
-  const eshop = aggregateEshop(months)
-  const ga = aggregateGa(months)
-  const ctx = getGaReportContext(months)
-
-  return [
-    hasMoney(agg.adSpend) ? row('Investícia do reklám celkom', fmtEur(agg.adSpend)) : null,
-    hasMoney(agg.adValue) ? row('Hodnota nákupov z reklám', fmtEur(agg.adValue)) : null,
-    agg.roas != null ? row('Návratnosť reklám (ROAS)', fmtRoas(agg.roas)) : null,
-    agg.pno != null ? row('PNO (podiel nákladov)', fmtPct(agg.pno)) : null,
-    hasMoney(eshop?.revenue) ? row('Celkové predaje e-shopu', fmtEur(eshop.revenue)) : null,
-    hasMoney(eshop?.netRevenue) ? row('Čisté predaje e-shopu', fmtEur(eshop.netRevenue)) : null,
-    hasCount(eshop?.orders) ? row('Objednávky e-shopu', fmtNum(eshop.orders)) : null,
-    hasCount(eshop?.items) ? row('Predané položky', fmtNum(eshop.items)) : null,
-    hasCount(ga.totalSessions) ? row(ctx.hasGa4 ? 'Relácie (GA4)' : 'Návštevy webu (GA)', fmtNum(ga.totalSessions)) : null,
-    hasMoney(email?.revenue) ? row('Tržby z e-mailov', fmtEur(email.revenue)) : null,
-  ].filter(Boolean)
+function sp(text) {
+  return summaryPart(text, false)
 }
 
-function buildSummaryCallout(months, profile, agg, client) {
-  if (profile !== 'eshop') {
-    const text = buildComprehensiveSummary(months, profile, agg, client)[0]
-    return text ? { lead: [summaryPart(text)], blocks: [], note: null } : null
-  }
+function sb(text) {
+  return summaryPart(text, true)
+}
 
-  const email = aggregateEmail(months)
-  const eshop = aggregateEshop(months)
-  const ga = aggregateGa(months)
-  const ctx = getGaReportContext(months)
-  const metaSpend = metaSum(months, 'spend')
-  const metaValue = metaSum(months, 'purchaseValue')
-  const googleSpend = googleSum(months, 'spend')
-  const googleValue = googleSum(months, 'purchaseValue')
+function buildReportSummary(months, profile, agg) {
   const period = rangeLabel(months)
-
-  const lead = []
-  if (hasMoney(eshop?.netRevenue)) {
-    lead.push(
-      summaryPart('Za obdobie '),
-      summaryPart(period, true),
-      summaryPart(' dosiahli ste '),
-      summaryPart('čisté predaje ', true),
-      summaryPart(fmtEur(eshop.netRevenue), true),
-      summaryPart(hasCount(eshop.orders) ? ` z ${fmtSkCount(eshop.orders, 'objednavka')}.` : '.'),
-    )
-  } else if (hasMoney(eshop?.revenue)) {
-    lead.push(
-      summaryPart('Za obdobie '),
-      summaryPart(period, true),
-      summaryPart(' dosiahli ste tržby e-shopu '),
-      summaryPart(fmtEur(eshop.revenue), true),
-      summaryPart('.'),
-    )
-  } else {
-    lead.push(summaryPart(`Prehľad marketingových výsledkov za ${period}.`))
-  }
-
-  const blocks = []
-
-  if (hasMoney(agg.adSpend)) {
-    blocks.push({
-      title: 'Platená reklama',
-      lines: [[
-        summaryPart('Investícia '),
-        summaryPart(fmtEur(agg.adSpend), true),
-        summaryPart(' (Meta '),
-        summaryPart(fmtEur(metaSpend), true),
-        summaryPart(' · Google '),
-        summaryPart(fmtEur(googleSpend), true),
-        summaryPart(') priniesla nákupy v hodnote '),
-        summaryPart(fmtEur(agg.adValue), true),
-        summaryPart(agg.roas != null ? ` — ROAS ${fmtRoas(agg.roas)}.` : '.'),
-      ]],
-    })
-  }
-
-  if (hasMoney(metaValue) || hasMoney(googleValue)) {
-    const lines = []
-    if (hasMoney(metaValue)) {
-      lines.push([
-        summaryPart('Meta Ads: '),
-        summaryPart(fmtEur(metaValue), true),
-        summaryPart(' hodnoty nákupov pri investícii '),
-        summaryPart(fmtEur(metaSpend), true),
-        summaryPart(metaSpend > 0 ? ` (ROAS ${fmtRoas(metaValue / metaSpend)}).` : '.'),
-      ])
-    }
-    if (hasMoney(googleValue)) {
-      lines.push([
-        summaryPart('Google Ads: '),
-        summaryPart(fmtEur(googleValue), true),
-        summaryPart(' hodnoty nákupov pri investícii '),
-        summaryPart(fmtEur(googleSpend), true),
-        summaryPart(googleSpend > 0 ? ` (ROAS ${fmtRoas(googleValue / googleSpend)}).` : '.'),
-      ])
-    }
-    if (lines.length) blocks.push({ title: 'Kanály', lines })
-  }
-
-  if (hasCount(ga.totalSessions)) {
-    const parts = [
-      summaryPart('Google Analytics zaznamenal '),
-      summaryPart(fmtNum(ga.totalSessions), true),
-      summaryPart(ctx.hasGa4 ? ' relácií' : ' návštev'),
-    ]
-    if (ctx.hasGa4 && ctx.snapshot?.totalRevenue) {
-      parts.push(summaryPart(' a tržby '), summaryPart(fmtEur(ctx.snapshot.totalRevenue), true))
-    }
-    if (hasCount(ga.organicSessions) && hasCount(ga.paidSessions)) {
-      parts.push(
-        summaryPart(' — organické kanály '),
-        summaryPart(fmtNum(ga.organicSessions), true),
-        summaryPart(', platené '),
-        summaryPart(fmtNum(ga.paidSessions), true),
-      )
-    }
-    parts.push(summaryPart('.'))
-    blocks.push({ title: 'Web', lines: [parts] })
-  }
-
-  if (email && (hasMoney(email.revenue) || hasCount(email.sent))) {
-    blocks.push({
-      title: 'E-mail',
-      lines: [[
-        hasCount(email.sent) ? summaryPart(fmtSkCount(email.sent, 'email')) : summaryPart('Kampane'),
-        summaryPart(' odoslaných'),
-        email.avgOpen != null ? summaryPart(', open rate ') : null,
-        email.avgOpen != null ? summaryPart(fmtPct(email.avgOpen), true) : null,
-        hasMoney(email.revenue) ? summaryPart(', tržby ') : null,
-        hasMoney(email.revenue) ? summaryPart(fmtEur(email.revenue), true) : null,
-        summaryPart('.'),
-      ].filter(Boolean)],
-    })
-  }
-
-  if (eshop && (hasMoney(eshop.revenue) || hasCount(eshop.orders))) {
-    blocks.push({
-      title: 'E-shop',
-      lines: [[
-        summaryPart('Celkové predaje '),
-        summaryPart(fmtEur(eshop.revenue), true),
-        hasMoney(eshop.netRevenue) ? summaryPart(', čisté predaje ') : null,
-        hasMoney(eshop.netRevenue) ? summaryPart(fmtEur(eshop.netRevenue), true) : null,
-        hasCount(eshop.items) ? summaryPart(`, ${fmtNum(eshop.items)} predaných položiek`) : null,
-        summaryPart('.'),
-      ].filter(Boolean)],
-    })
-  }
-
-  const note = 'Report spája dáta z reklamných účtov, Google Analytics, Mailchimpu a WooCommerce. '
-    + 'E-shopové metriky sú ručne exportované — nemusia zodpovedať 1:1 analytike v administrácii. '
-    + 'Atribúcia nákupov k reklamám závisí od meracích modelov platformy.'
-
-  return { lead, blocks, note }
-}
-
-function buildReportHook(months, profile, agg) {
-  const period = rangeLabel(months)
-  if (profile === 'eshop' && hasMoney(agg.eshopRevenue)) {
-    return `Jeden prehľad za ${period} — reklama, návštevnosť webu, e-mail a predaje e-shopu bez prepínania medzi nástrojmi.`
-  }
-  return `Marketingový report za ${period} — prehľadne a bez zbytočného šumu.`
-}
-
-function buildComprehensiveSummary(months, profile, agg, client) {
-  const email = aggregateEmail(months)
-  const eshop = aggregateEshop(months)
-  const ga = aggregateGa(months)
   const paragraphs = []
 
   if (profile === 'eshop') {
     const metaSpend = metaSum(months, 'spend')
-    const metaValue = metaSum(months, 'purchaseValue')
-    const metaPurchases = metaSum(months, 'purchases')
     const googleSpend = googleSum(months, 'spend')
+    const boostSpend = sum(months, (m) => m.boosting?.spend)
+    const adSpend = (agg.adSpend ?? ((metaSpend ?? 0) + (googleSpend ?? 0) + (boostSpend ?? 0))) || null
+    const metaValue = metaSum(months, 'purchaseValue')
     const googleValue = googleSum(months, 'purchaseValue')
-    const googlePurchases = googleSum(months, 'purchases')
-    const convKeys = getGoogleConvKeys(client)
+    const adValue = ((metaValue ?? 0) + (googleValue ?? 0) + (sum(months, (m) => m.boosting?.value) ?? 0)) || null
+    const email = aggregateEmail(months)
+    const eshop = aggregateEshop(months)
+    const ga = aggregateGa(months)
+    const ctx = getGaReportContext(months)
+    const metaRoas = metaSpend > 0 && metaValue ? metaValue / metaSpend : null
+    const googleRoas = googleSpend > 0 && googleValue ? googleValue / googleSpend : null
 
-    if (hasMoney(metaSpend)) {
-      let p = `Meta Ads (Facebook a Instagram): investícia ${fmtEur(metaSpend)}`
-      if (hasMoney(metaValue)) {
-        p += `, hodnota nákupov ${fmtEur(metaValue)}`
-        if (hasCount(metaPurchases)) p += ` (${fmtSkCount(metaPurchases, 'nakup')})`
-        if (metaSpend > 0) p += `, ROAS ${fmtRoas(metaValue / metaSpend)}`
+    const introParts = [
+      sp('Tento report za obdobie '),
+      sb(period),
+      sp(' spája výsledky z platených reklám, návštevnosti webu, e-mailového marketingu a predajov v e-shope. '),
+    ]
+    if (hasMoney(eshop?.netRevenue)) {
+      introParts.push(
+        sp('V e-shope ste dosiahli '),
+        sb(`čisté predaje ${fmtEur(eshop.netRevenue)}`),
+      )
+      if (hasCount(eshop.orders)) {
+        introParts.push(sp(' '), sb(skZ(eshop.orders, 'objednavka')))
       }
-      if (hasCount(metaSum(months, 'reach'))) {
-        p += `. Dosah ${fmtNum(metaSum(months, 'reach'))} ľudí`
+      introParts.push(sp('.'))
+      if (hasMoney(eshop.revenue) && eshop.revenue !== eshop.netRevenue) {
+        introParts.push(
+          sp(' Celkové predaje vrátane daní a dopravy boli '),
+          sb(fmtEur(eshop.revenue)),
+          sp('.'),
+        )
       }
-      if (hasCount(metaSum(months, 'clicks'))) {
-        p += `, ${fmtSkCount(metaSum(months, 'clicks'), 'kliknutie')}`
-      }
-      paragraphs.push(`${p}.`)
+    } else if (hasMoney(eshop?.revenue)) {
+      introParts.push(sp('Tržby e-shopu boli '), sb(fmtEur(eshop.revenue)), sp('.'))
+    } else {
+      introParts.push(sp('Nižšie nájdete detailné metriky z jednotlivých kanálov.'))
     }
+    if (hasCount(eshop?.items)) {
+      introParts.push(sp(' Predali ste '), sb(skPhrase(eshop.items, 'polozka', 'acc')), sp('.'))
+    }
+    paragraphs.push(introParts)
 
-    if (hasMoney(googleSpend)) {
-      let p = `Google Ads: investícia ${fmtEur(googleSpend)}`
-      if (hasMoney(googleValue)) {
-        p += `, hodnota nákupov ${fmtEur(googleValue)}`
-        if (hasCount(googlePurchases)) p += ` (${fmtDec(googlePurchases)} nákupov)`
-        if (googleSpend > 0) p += `, ROAS ${fmtRoas(googleValue / googleSpend)}`
+    if (hasMoney(adSpend)) {
+      const adsParts = [
+        sp('Do platených reklám ste investovali spolu '),
+        sb(fmtEur(adSpend)),
+      ]
+      const channels = []
+      if (hasMoney(metaSpend)) channels.push(sb(`Meta Ads ${fmtEur(metaSpend)}`))
+      if (hasMoney(googleSpend)) channels.push(sb(`Google Ads ${fmtEur(googleSpend)}`))
+      if (hasMoney(boostSpend)) channels.push(sb(`boosting ${fmtEur(boostSpend)}`))
+      if (channels.length) {
+        adsParts.push(sp(' ('))
+        channels.forEach((part, i) => {
+          if (i > 0) adsParts.push(sp(', '))
+          adsParts.push(part)
+        })
+        adsParts.push(sp(')'))
       }
-      if (convKeys) {
-        const actions = []
-        for (const m of months) {
-          if (!m.google?.conversionActions) continue
-          for (const key of convKeys) {
-            if (m.google.conversionActions[key] != null) {
-              actions[key] = (actions[key] ?? 0) + m.google.conversionActions[key]
-            }
-          }
+      adsParts.push(sp('.'))
+      if (hasMoney(adValue)) {
+        adsParts.push(
+          sp(' Podľa atribúcie reklamných platforiem priniesli kampane nákupy v hodnote '),
+          sb(fmtEur(adValue)),
+        )
+        if (hasCount(agg.adPurchases)) {
+          adsParts.push(sp(' ('), sb(skPhrase(agg.adPurchases, 'nakup', 'acc')), sp(')'))
         }
-        const funnel = convKeys
-          .filter((k) => hasCount(actions[k]))
-          .map((k) => `${ESHOP_GOOGLE_CONV_LABELS[k]} ${fmtDec(actions[k])}`)
-        if (funnel.length) p += `. Konverzný lievik: ${funnel.join(' → ')}`
+        if (agg.roas != null) {
+          adsParts.push(
+            sp(', čo zodpovedá návratnosti '),
+            sb(`ROAS ${fmtRoas(agg.roas)}`),
+            sp(` (na každé 1 € investície pripadá približne ${fmtRoas(agg.roas)} € v hodnote nákupov)`),
+          )
+        }
+        adsParts.push(sp('. '))
       }
-      paragraphs.push(`${p}.`)
-    }
-
-    if (hasMoney(agg.adSpend) && (hasMoney(metaSpend) || hasMoney(googleSpend))) {
-      let p = `Platená reklama celkom: investícia ${fmtEur(agg.adSpend)}`
-      if (hasMoney(agg.adValue)) {
-        p += `, hodnota nákupov ${fmtEur(agg.adValue)}`
-        if (agg.roas != null) p += ` (ROAS ${fmtRoas(agg.roas)})`
+      if (hasMoney(metaValue) && hasMoney(metaSpend)) {
+        adsParts.push(
+          sb('Meta Ads'),
+          sp(' dosiahli hodnotu nákupov '),
+          sb(fmtEur(metaValue)),
+          sp(' pri investícii '),
+          sb(fmtEur(metaSpend)),
+        )
+        if (metaRoas != null) adsParts.push(sp(' ('), sb(`ROAS ${fmtRoas(metaRoas)}`), sp(')'))
+        adsParts.push(sp('. '))
       }
-      if (hasMoney(eshop?.netRevenue) && hasMoney(agg.adValue)) {
-        p += `. Podiel hodnoty nákupov z reklám voči čistým predajom e-shopu: ${fmtPct(agg.adShareOfRevenue)}`
+      if (hasMoney(googleValue) && hasMoney(googleSpend)) {
+        adsParts.push(
+          sb('Google Ads'),
+          sp(' priniesli '),
+          sb(fmtEur(googleValue)),
+          sp(' hodnoty nákupov pri investícii '),
+          sb(fmtEur(googleSpend)),
+        )
+        if (googleRoas != null) adsParts.push(sp(' ('), sb(`ROAS ${fmtRoas(googleRoas)}`), sp(')'))
+        adsParts.push(sp('. '))
       }
-      paragraphs.push(`${p}.`)
+      if (metaRoas != null && googleRoas != null && googleRoas >= metaRoas * 1.2) {
+        adsParts.push(
+          sb('Google Ads'),
+          sp(' sa v tomto období ukázali efektívnejšie na priamu návratnosť investície. '),
+          sb('Meta Ads'),
+          sp(' dopĺňajú dosah na Facebooku a Instagrame a pomáhajú budovať povedomie o značke.'),
+        )
+      } else if (metaRoas != null && googleRoas != null && metaRoas >= googleRoas * 1.2) {
+        adsParts.push(
+          sb('Meta Ads'),
+          sp(' priniesli lepšiu priamu návratnosť. '),
+          sb('Google Ads'),
+          sp(' dopĺňajú vyhľadávanie a zachytávajú zákazníkov s nákupným zámerom.'),
+        )
+      } else if (agg.roas != null && agg.roas >= 2) {
+        adsParts.push(sp('Platená reklama sa v tomto období '), sb('ekonomicky vyplatila'), sp('.'))
+      } else if (agg.roas != null && agg.roas < 1) {
+        adsParts.push(
+          sp('Priamu návratnosť reklám sledujte spolu s '),
+          sb('celkovými tržbami e-shopu'),
+          sp('. Zákazníci často nekonvertujú hneď z prvej reklamy, ale nakúpia neskôr cez iný kanál.'),
+        )
+      }
+      paragraphs.push(adsParts)
     }
 
     if (hasCount(ga.totalSessions)) {
-      const ctx = getGaReportContext(months)
-      let p = ctx.hasGa4
-        ? `Google Analytics (GA4 export): ${fmtSkCount(ga.totalSessions, 'relacia')} webu`
-        : `Google Analytics: ${fmtSkCount(ga.totalSessions, 'navsteva')} webu`
-      if (hasCount(ga.paidSessions) && hasCount(ga.organicSessions)) {
-        p += ctx.hasGa4
-          ? ` (organické kanály ${fmtNum(ga.organicSessions)}, platené ${fmtNum(ga.paidSessions)})`
-          : ` (platená ${fmtNum(ga.paidSessions)}, organická ${fmtNum(ga.organicSessions)})`
+      const webParts = [
+        sb('Google Analytics'),
+        sp(ctx.hasGa4 ? ' (GA4) zaznamenal ' : ' zaznamenal '),
+        sb(skPhrase(ga.totalSessions, ctx.hasGa4 ? 'relacia' : 'navsteva', 'acc')),
+        sp(' na webe'),
+      ]
+      if (hasCount(ga.organicSessions) && hasCount(ga.paidSessions)) {
+        const organicPct = (ga.organicSessions / ga.totalSessions) * 100
+        webParts.push(
+          sp('. '),
+          sb('Organické kanály'),
+          sp(' prispeli '),
+          sb(skPhrase(ga.organicSessions, 'relacia', 'ins')),
+          sp(' ('),
+          sb(fmtPct(organicPct)),
+          sp('), '),
+          sb('platené kanály'),
+          sp(' prispeli '),
+          sb(skPhrase(ga.paidSessions, 'relacia', 'ins')),
+        )
       }
-      if (ctx.snapshot?.totalRevenue) {
-        p += `. Tržby v GA4 ${fmtEur(ctx.snapshot.totalRevenue)}`
+      if (ctx.hasGa4 && ctx.snapshot?.totalRevenue) {
+        webParts.push(
+          sp('. Tržby merané v GA4 boli '),
+          sb(fmtEur(ctx.snapshot.totalRevenue)),
+          sp(' (iný spôsob merania než WooCommerce, čísla sa nemusia zhodovať)'),
+        )
       }
-      if (!ctx.hasGa4 && ga.organicEngagement != null) {
-        p += `. Organická miera interakcie ${fmtPct(ga.organicEngagement)}`
-        if (ga.paidEngagement != null) p += `, platená ${fmtPct(ga.paidEngagement)}`
-      } else if (ctx.snapshot?.engagementRate != null) {
-        p += `. Engagement rate ${fmtEngagementRate(ctx.snapshot.engagementRate)}`
-      }
-      const topChannel = ctx.channels[0]
+      const topChannel = ctx.channels?.[0]
       if (topChannel) {
-        p += `. Najsilnejší kanál: ${topChannel.name} (${fmtNum(topChannel.sessions)} relácií)`
+        webParts.push(
+          sp('. Najsilnejší kanál podľa relácií: '),
+          sb(topChannel.name),
+          sp(' ('),
+          sb(skPhrase(topChannel.sessions, 'relacia', 'gen')),
+          sp(')'),
+        )
       }
-      paragraphs.push(`${p}.`)
+      if (ctx.isMixed) {
+        webParts.push(sp('. Pre časť obdobia máme plný GA4 export, staršie mesiace vychádzajú zo zjednodušeného importu z PDF reportu'))
+      }
+      webParts.push(sp('.'))
+      paragraphs.push(webParts)
     }
 
     if (email && (hasCount(email.sent) || hasMoney(email.revenue))) {
-      let p = 'E-mail marketing (Mailchimp)'
-      if (hasCount(email.sent)) p += `: ${fmtSkCount(email.sent, 'email')} odoslaných`
-      if (email.avgOpen != null) p += `, priemerná otvorenosť ${fmtPct(email.avgOpen)}`
+      const mailParts = [sb('E-mail marketing (Mailchimp)')]
+      if (hasCount(email.sent)) mailParts.push(sp(' odoslal '), sb(fmtSkCount(email.sent, 'email')))
+      if (email.avgOpen != null) mailParts.push(sp(' s priemernou otvorenosťou '), sb(fmtPct(email.avgOpen)))
+      if (email.avgClick != null) mailParts.push(sp(' a click rate '), sb(fmtPct(email.avgClick, 2)))
       if (hasMoney(email.revenue)) {
-        p += `, tržby ${fmtEur(email.revenue)}`
-        if (hasCount(email.orders)) p += ` z ${fmtSkCount(email.orders, 'objednavka')}`
+        mailParts.push(sp('. Tržby priradené e-mailom boli '), sb(fmtEur(email.revenue)))
+        if (hasCount(email.orders)) mailParts.push(sp(' '), sb(skZ(email.orders, 'objednavka')))
       }
-      paragraphs.push(`${p}.`)
+      mailParts.push(sp('.'))
+      paragraphs.push(mailParts)
     }
 
-    if (eshop && (hasMoney(eshop.revenue) || hasCount(eshop.orders))) {
-      let p = 'E-shop'
-      if (hasMoney(eshop.revenue)) p += `: celkové predaje ${fmtEur(eshop.revenue)}`
-      if (hasMoney(eshop.netRevenue)) p += `, čisté predaje ${fmtEur(eshop.netRevenue)}`
-      if (hasCount(eshop.orders)) p += `, ${fmtSkCount(eshop.orders, 'objednavka')}`
-      if (hasCount(eshop.items)) p += `, ${fmtNum(eshop.items)} predaných položiek`
-      if (eshop.combinedShops.length) {
-        p += `. Upozornenie: časť obdobia zahŕňa súčet viacerých e-shopov (${eshop.combinedShops.join(' + ')})`
-      }
-      paragraphs.push(`${p}.`)
+    if (hasMoney(eshop?.netRevenue) && hasMoney(adValue) && eshop.netRevenue > adValue) {
+      const adShare = agg.adShareOfRevenue ?? (adValue / eshop.netRevenue * 100)
+      paragraphs.push([
+        sp('Len '),
+        sb(fmtPct(adShare)),
+        sp(' tržieb e-shopu je v tomto reporte priradených priamo plateným reklamám. Zvyšok prichádza z '),
+        sb('organickej návštevnosti'),
+        sp(', priameho vstupu na web, e-mailov, opakovaných zákazníkov alebo iných kanálov. To je bežné: zákazník môže reklamu vidieť, ale nakúpiť až neskôr cez vyhľadávanie alebo priamo na doméne.'),
+      ])
     }
 
-    if (paragraphs.length) {
-      paragraphs.push(
-        'Report spája dáta z reklamných účtov, Google Analytics, Mailchimpu a WooCommerce. '
-        + 'E-shopové rebríčky a niektoré metriky sú ručne exportované — nemusia zodpovedať 1:1 kompletnej analytike v administrácii. '
-        + 'Atribúcia nákupov k reklamám závisí od meracích modelov platformy.',
-      )
+    if (ctx.hasGa4 && ctx.topProducts?.[0]) {
+      const top = ctx.topProducts[0]
+      paragraphs.push([
+        sp('Najpredávanejší produkt podľa GA4 e-commerce dát: '),
+        sb(`„${top.name}"`),
+        sp(' ('),
+        sb(`${fmtEur(top.revenue)} tržieb`),
+        sp(').'),
+      ])
     }
 
-    return paragraphs
-  }
-
-  const fallback = buildSummary(months, profile, agg, buildHighlights(months, profile, agg))
-  return fallback ? [fallback] : []
-}
-
-function buildSummary(months, profile, agg, highlights) {
-  const parts = []
-  const email = aggregateEmail(months)
-
-  if (profile === 'eshop') {
-    if (hasMoney(agg.adSpend)) parts.push(`Do online reklám sme za zvolené obdobie investovali ${fmtEur(agg.adSpend)}.`)
-    const hasEshopAds = hasMoney(agg.adValue) || hasCount(agg.adPurchases)
-    if (hasEshopAds && hasMoney(agg.adValue)) {
-      parts.push(
-        `Reklamy priniesli nákupy v hodnote ${fmtEur(agg.adValue)}`
-        + (hasCount(agg.adPurchases) ? ` (${fmtSkCount(agg.adPurchases, 'nakup')})` : '')
-        + '.',
-      )
-    }
-    if (hasEshopAds && agg.roas != null) {
-      parts.push(`Na každé 1 € investované do reklám pripadá približne ${fmtRoas(agg.roas)} € v hodnote nákupov.`)
-    }
-    if (hasMoney(agg.eshopRevenue)) parts.push(`Celkové tržby e-shopu boli ${fmtEur(agg.eshopRevenue)}.`)
-    if (hasMoney(email?.revenue)) {
-      parts.push(
-        `E-mail marketing (Mailchimp) priniesol tržby ${fmtEur(email.revenue)}`
-        + (hasCount(email.orders) ? ` z ${fmtSkCount(email.orders, 'objednavka')}` : '')
-        + '.',
-      )
+    if (eshop?.combinedShops?.length) {
+      paragraphs.push([
+        sb('Upozornenie:'),
+        sp(` časť obdobia zahŕňa súhrnné dáta z viacerých e-shopov (${eshop.combinedShops.join(' + ')}).`),
+      ])
     }
   } else if (profile === 'dual') {
-    const totalSpend = (metaSum(months, 'spend') ?? 0) + (googleSum(months, 'spend') ?? 0)
+    const metaSpend = metaSum(months, 'spend')
+    const googleSpend = googleSum(months, 'spend')
+    const totalSpend = (metaSpend ?? 0) + (googleSpend ?? 0) || null
     const lpv = metaSum(months, 'landingPageViews')
     const conversions = googleSum(months, 'conversions')
-    if (hasMoney(totalSpend)) parts.push(`Do online reklám sme investovali ${fmtEur(totalSpend)} (Meta + Google).`)
-    const lpvSentence = skNavstevyZReklam(lpv, 'Meta reklám')
-    if (lpvSentence) parts.push(lpvSentence)
-    const convSentence = skKonverzieSummary(conversions)
-    if (convSentence) parts.push(convSentence)
+    const googleClicks = googleSum(months, 'clicks')
+    const ga = aggregateGa(months)
+    const ctx = getGaReportContext(months)
+
+    const introParts = [
+      sp('Report za obdobie '),
+      sb(period),
+      sp(' spája '),
+      sb('Meta Ads'),
+      sp(' a '),
+      sb('Google Ads'),
+      sp('. '),
+    ]
+    if (hasMoney(totalSpend)) {
+      introParts.push(
+        sp('Do reklám ste investovali spolu '),
+        sb(fmtEur(totalSpend)),
+      )
+      const split = []
+      if (hasMoney(metaSpend)) split.push(sb(`Meta ${fmtEur(metaSpend)}`))
+      if (hasMoney(googleSpend)) split.push(sb(`Google ${fmtEur(googleSpend)}`))
+      if (split.length) {
+        introParts.push(sp(' ('))
+        split.forEach((part, i) => {
+          if (i > 0) introParts.push(sp(', '))
+          introParts.push(part)
+        })
+        introParts.push(sp(')'))
+      }
+      introParts.push(sp('.'))
+    }
+    paragraphs.push(introParts)
+
+    if (hasCount(lpv)) {
+      let meta = skNavstevyZReklam(lpv, 'reklám na sociálnych sieťach (Meta Ads)')
+      if (meta && hasMoney(metaSpend) && lpv > 0) {
+        meta += ` Pri investícii ${fmtEur(metaSpend)} (priemer ${fmtEur(metaSpend / lpv)} / návštevu).`
+      } else if (meta) {
+        meta += '.'
+      }
+      if (meta) paragraphs.push([sb(meta)])
+    }
+
+    if (hasCount(conversions) || hasCount(googleClicks)) {
+      const googleParts = [sb('Google Ads')]
+      if (hasCount(googleClicks)) {
+        googleParts.push(sp(' zaznamenali '), sb(skPhrase(googleClicks, 'kliknutie', 'acc')))
+      }
+      if (hasCount(conversions)) {
+        googleParts.push(hasCount(googleClicks) ? sp(' a ') : sp(' zaznamenali '))
+        googleParts.push(sb(skPhrase(conversions, 'konverzia', 'acc')))
+        if (hasMoney(googleSpend) && conversions > 0) {
+          googleParts.push(
+            sp(' pri investícii '),
+            sb(fmtEur(googleSpend)),
+            sp(' (priemer '),
+            sb(`${fmtEur(googleSpend / conversions)} / konverziu`),
+            sp(')'),
+          )
+        }
+      } else if (hasMoney(googleSpend)) {
+        googleParts.push(sp(' pri investícii '), sb(fmtEur(googleSpend)))
+      }
+      googleParts.push(sp('.'))
+      paragraphs.push(googleParts)
+    }
+
+    if (hasCount(ga.totalSessions)) {
+      paragraphs.push([
+        sp('Web mal '),
+        sb(skPhrase(ga.totalSessions, ctx.hasGa4 ? 'relacia' : 'navsteva', 'acc')),
+        sp(' podľa '),
+        sb('Google Analytics'),
+        sp(ctx.hasGa4 ? ' (GA4).' : '.'),
+      ])
+    }
   } else {
     const spend = metaSum(months, 'spend')
     const reach = metaSum(months, 'reach')
     const lpv = metaSum(months, 'landingPageViews')
     const clicks = metaSum(months, 'clicks')
     const engagements = metaSum(months, 'engagements')
-    if (hasMoney(spend)) parts.push(`Do reklám na Meta sme investovali ${fmtEur(spend)}.`)
-    const reachSentence = skReachSummary(reach)
-    if (reachSentence) parts.push(reachSentence)
-    const lpvSentence = skNavstevyZReklam(lpv, 'reklám')
-    if (lpvSentence) parts.push(lpvSentence)
-    const interSentence = skInterakcieSummary(engagements)
-    if (interSentence) parts.push(interSentence)
-    const clicksSentence = skClicksSummary(clicks)
-    if (clicksSentence) parts.push(clicksSentence)
-  }
+    const ga = aggregateGa(months)
+    const ctx = getGaReportContext(months)
 
-  if (!parts.length) {
-    return highlights.length
-      ? 'Nižšie nájdete prehľad kľúčových čísel za zvolené obdobie.'
-      : 'Za zvolené obdobie zatiaľ nemáme kompletné dáta pre zhrnutie.'
-  }
-
-  return parts.join(' ')
-}
-
-function monthAdRoas(m) {
-  const spend = (m.meta?.spend ?? 0) + (m.google?.spend ?? 0) + (m.boosting?.spend ?? 0)
-  const value = (m.meta?.purchaseValue ?? 0) + (m.google?.purchaseValue ?? 0) + (m.boosting?.value ?? 0)
-  return spend > 0 ? value / spend : null
-}
-
-function detectGaAnomalyMonth(months) {
-  for (const m of months) {
-    const paid = m.ga?.paid?.sessions ?? 0
-    const organic = m.ga?.organic?.sessions ?? 0
-    const engagement = m.ga?.paid?.engagementRate
-    if (paid > 50000 && paid > organic * 2.5 && engagement != null && engagement < 15) {
-      return monthLabel(m)
+    const introParts = [
+      sp('Report za obdobie '),
+      sb(period),
+      sp(' sumarizuje výsledky reklám na '),
+      sb('Meta (Facebook a Instagram)'),
+      sp('. '),
+    ]
+    if (hasMoney(spend)) {
+      introParts.push(sp('Investícia do reklám bola '), sb(fmtEur(spend)), sp('.'))
     }
-  }
-  return null
-}
+    paragraphs.push(introParts)
 
-function topCategoryShare(months) {
-  const categories = mergeCategoryRows(months.flatMap((m) => m.eshop?.categories ?? []))
-  const total = sum(categories, (c) => c.netRevenue)
-  if (!total || !categories.length) return null
-  const top = categories[0]
-  return { name: top.name, share: top.netRevenue / total, revenue: top.netRevenue }
-}
-
-function buildEshopInsights(months, agg) {
-  const strengths = []
-  const watchouts = []
-  const recommendations = []
-  const verdict = []
-
-  const metaSpend = agg.metaSpend ?? 0
-  const googleSpend = agg.googleSpend ?? 0
-  const metaRoas = metaSpend > 0 && agg.metaValue != null ? agg.metaValue / metaSpend : null
-  const googleRoas = googleSpend > 0 && agg.googleValue != null ? agg.googleValue / googleSpend : null
-  const email = aggregateEmail(months)
-  const eshop = aggregateEshop(months)
-  const ga = aggregateGa(months)
-  const ctx = getGaReportContext(months)
-
-  if (agg.roas != null) {
-    if (agg.roas >= 2) {
-      verdict.push(
-        summaryPart('Reklama sa '),
-        summaryPart('vypláca', true),
-        summaryPart(` (ROAS ${fmtRoas(agg.roas)}). `),
-      )
-    } else if (agg.roas >= 1) {
-      verdict.push(
-        summaryPart('Reklama je '),
-        summaryPart('na hranici rentability', true),
-        summaryPart(` (ROAS ${fmtRoas(agg.roas)}). `),
-      )
-    } else {
-      verdict.push(
-        summaryPart('Reklama v atribúcii '),
-        summaryPart('nevracia investíciu', true),
-        summaryPart(` (ROAS ${fmtRoas(agg.roas)}). `),
-      )
+    if (hasCount(reach)) {
+      paragraphs.push([
+        sb(skOsloviliLudi(reach)),
+        sp(' ('),
+        sb('dosah'),
+        sp('). To ukazuje, koľko unikátnych ľudí videlo vašu značku v tomto období.'),
+      ])
     }
-  }
-
-  if (metaRoas != null && googleRoas != null && metaSpend >= 100 && googleSpend >= 100) {
-    if (googleRoas >= metaRoas * 1.25) {
-      verdict.push(
-        summaryPart('Najsilnejší kanál je '),
-        summaryPart('Google Ads', true),
-        summaryPart(` (ROAS ${fmtRoas(googleRoas)} vs Meta ${fmtRoas(metaRoas)}). `),
-      )
-      strengths.push(`Google Ads má ROAS ${fmtRoas(googleRoas)} — výrazne lepší než Meta (${fmtRoas(metaRoas)}).`)
-      if (metaSpend > googleSpend * 1.5) {
-        recommendations.push('Google prináša lepšiu návratnosť — zvážiť posun časti rozpočtu z Meta na Google Ads.')
+    if (hasCount(lpv)) {
+      const lpvParts = [sb(skNavstevyNaWeb(lpv))]
+      if (hasMoney(spend) && lpv > 0) {
+        lpvParts.push(sp(' pri priemernej cene '), sb(`${fmtEur(spend / lpv)} / návštevu`))
       }
-    } else if (metaRoas >= googleRoas * 1.25) {
-      verdict.push(
-        summaryPart('Najsilnejší kanál je '),
-        summaryPart('Meta Ads', true),
-        summaryPart(` (ROAS ${fmtRoas(metaRoas)} vs Google ${fmtRoas(googleRoas)}). `),
-      )
-      strengths.push(`Meta Ads má ROAS ${fmtRoas(metaRoas)} — lepší než Google (${fmtRoas(googleRoas)}).`)
+      lpvParts.push(sp('.'))
+      paragraphs.push(lpvParts)
     }
-  } else if (googleRoas != null && googleRoas >= 3 && googleSpend >= 100) {
-    strengths.push(`Google Ads dosahuje ROAS ${fmtRoas(googleRoas)} pri investícii ${fmtEur(googleSpend)}.`)
-  } else if (metaRoas != null && metaRoas >= 3 && metaSpend >= 100) {
-    strengths.push(`Meta Ads dosahuje ROAS ${fmtRoas(metaRoas)} pri investícii ${fmtEur(metaSpend)}.`)
-  }
-
-  if (hasMoney(eshop?.netRevenue) && hasMoney(agg.adValue) && eshop.netRevenue > agg.adValue * 1.2) {
-    const organicShare = agg.adShareOfRevenue != null ? 100 - agg.adShareOfRevenue : null
-    verdict.push(
-      summaryPart('Väčšina tržieb e-shopu prichádza '),
-      summaryPart('mimo priamej atribúcie reklám', true),
-      summaryPart('.'),
-    )
-    if (organicShare != null && organicShare >= 50) {
-      strengths.push(`Len ${fmtPct(agg.adShareOfRevenue)} tržieb e-shopu ide z reklám — silná organická a priama návštevnosť.`)
+    if (hasCount(engagements)) {
+      paragraphs.push([
+        sb(skPhrase(engagements, 'interakcia', 'acc')),
+        sp(' s príspevkami a reklamami (lajky, komentáre, zdieľania).'),
+      ])
     }
-  }
-
-  if (agg.roas != null && agg.roas >= 2.5) {
-    if (!strengths.some((s) => s.includes('ROAS'))) {
-      strengths.push(`Celkový ROAS ${fmtRoas(agg.roas)} — reklama prináša merateľné tržby nad investíciou.`)
+    if (hasCount(clicks)) {
+      paragraphs.push([
+        sb(skPhrase(clicks, 'kliknutie', 'acc')),
+        sp(' na odkazy v reklamách.'),
+      ])
+    }
+    if (hasCount(ga.totalSessions)) {
+      paragraphs.push([
+        sb('Google Analytics'),
+        sp(ctx.hasGa4 ? ' (GA4) zaznamenal ' : ' zaznamenal '),
+        sb(skPhrase(ga.totalSessions, ctx.hasGa4 ? 'relacia' : 'navsteva', 'acc')),
+        sp(' na webe za rovnaké obdobie.'),
+      ])
     }
   }
 
-  if (hasCount(ga.totalSessions) && hasCount(ga.organicSessions)) {
-    const organicPct = (ga.organicSessions / ga.totalSessions) * 100
-    const organicLabel = ctx.hasGa4 ? 'Organické kanály' : 'Organická návštevnosť'
-    if (organicPct >= 45) {
-      strengths.push(`${organicLabel} tvorí ${fmtPct(organicPct)} relácií — značka má dosah aj mimo platených kanálov.`)
-    } else if (organicPct <= 25 && ga.paidSessions > ga.organicSessions) {
-      watchouts.push(`Platené kanály dominujú (${fmtPct(100 - organicPct)} relácií) — vysoká závislosť od reklám.`)
-    }
-  }
+  paragraphs.push([
+    sp('Report spája dáta z reklamných účtov, Google Analytics, Mailchimpu a prípadne e-shopu. E-shopové metriky vychádzajú z ručného exportu a nemusia sa zhodovať 1:1 s analytikou v administrácii. Atribúcia konverzií a nákupov k reklamám závisí od meracích modelov jednotlivých platforiem (Meta, Google).'),
+  ])
 
-  if (email && hasMoney(email.revenue) && email.revenue >= 200) {
-    const hint = email.avgOpen != null ? ` pri open rate ${fmtPct(email.avgOpen)}` : ''
-    strengths.push(`E-mail marketing priniesol ${fmtEur(email.revenue)} tržieb${hint}.`)
-  } else if (email && email.avgOpen != null && email.avgOpen >= 18 && (!email.revenue || email.revenue < 200)) {
-    watchouts.push(`Open rate ${fmtPct(email.avgOpen)} je solídny, ale tržby z e-mailov sú nízke — priestor pre lepšie CTA a produktové bloky.`)
-    recommendations.push('Posilniť predajné výzvy a produktové sekcie v newslettri — otvorenosť je dobrá, chýba konverzia.')
-  }
-
-  if (months.length >= 3) {
-    const roasByMonth = months
-      .map((m) => ({ label: monthLabel(m), roas: monthAdRoas(m) }))
-      .filter((r) => r.roas != null)
-    if (roasByMonth.length >= 2) {
-      const best = roasByMonth.reduce((a, b) => (b.roas > a.roas ? b : a))
-      const avg = roasByMonth.reduce((s, r) => s + r.roas, 0) / roasByMonth.length
-      if (best.roas >= avg * 1.4 && best.roas >= 2) {
-        strengths.push(`${best.label}: ROAS ${fmtRoas(best.roas)} — najlepší mesiac v zvolenom období.`)
-      }
-      const last = roasByMonth[roasByMonth.length - 1]
-      if (last.roas < avg * 0.7 && avg >= 1.5) {
-        watchouts.push(`${last.label} mal ROAS ${fmtRoas(last.roas)} vs priemer ${fmtRoas(avg)} — skontrolovať kampane a sezónnosť.`)
-      }
-    }
-  }
-
-  if (agg.pno != null && agg.pno > 40) {
-    watchouts.push(`PNO ${fmtPct(agg.pno)} — vysoký podiel nákladov voči tržbám z reklám.`)
-  }
-
-  if (metaRoas != null && metaRoas < 1.5 && metaSpend >= 300) {
-    watchouts.push(`Meta Ads ROAS ${fmtRoas(metaRoas)} — pod cieľom; skontrolovať cielenie a produktové sety.`)
-    if (!recommendations.some((r) => r.includes('Meta'))) {
-      recommendations.push('Optimalizovať Meta kampane (creatives, audience, produktové katalógy) pred ďalším zvyšovaním rozpočtu.')
-    }
-  }
-
-  const catShare = topCategoryShare(months)
-  if (catShare && catShare.share >= 0.35) {
-    watchouts.push(`Kategória „${catShare.name}" tvorí ${fmtPct(catShare.share * 100)} predaja — vysoká koncentrácia.`)
-  }
-
-  const gaAnomaly = detectGaAnomalyMonth(months)
-  if (gaAnomaly) {
-    watchouts.push(`${gaAnomaly}: extrémna platená návštevnosť s nízkou interakciou — pravdepodobne bot traffic, nepočítať ako reálny rast.`)
-  }
-
-  if (hasCount(ga.totalSessions) && hasCount(ga.organicSessions)) {
-    const organicPct = (ga.organicSessions / ga.totalSessions) * 100
-    if (organicPct >= 50 && !recommendations.length) {
-      recommendations.push('Organická návštevnosť je silná — investovať do obsahu a SEO, nie len do PPC.')
-    }
-  }
-
-  if (ctx.hasGa4 && ctx.topProducts[0] && !strengths.some((s) => s.includes('produkt'))) {
-    const top = ctx.topProducts[0]
-    strengths.push(`Najpredávanejší produkt v GA4: „${top.name}" (${fmtEur(top.revenue)}).`)
-  }
-
-  if (catShare && catShare.share >= 0.35 && !recommendations.some((r) => r.includes('kategóri'))) {
-    recommendations.push(`Rozšíriť kampane aj mimo kategórie „${catShare.name}" — znížiť závislosť od jedného segmentu.`)
-  }
+  const contentParagraphs = paragraphs.slice(0, -1)
+  if (!contentParagraphs.length) return null
 
   return {
-    verdict: verdict.length ? verdict : null,
-    strengths: strengths.slice(0, 3),
-    watchouts: watchouts.slice(0, 2),
-    recommendations: recommendations.slice(0, 2),
+    title: 'Zhrnutie za obdobie',
+    paragraphs,
   }
 }
 
-function buildLeadgenInsights(months, profile, agg) {
-  const strengths = []
-  const watchouts = []
-  const recommendations = []
-  const verdict = []
-
-  const metaSpend = metaSum(months, 'spend')
-  const googleSpend = googleSum(months, 'spend')
-  const totalSpend = (metaSpend ?? 0) + (googleSpend ?? 0)
-  const lpv = metaSum(months, 'landingPageViews')
-  const conversions = googleSum(months, 'conversions')
-  const clicks = (metaSum(months, 'clicks') ?? 0) + (googleSum(months, 'clicks') ?? 0)
-
-  if (hasMoney(totalSpend) && hasCount(conversions)) {
-    verdict.push(
-      summaryPart('Investícia '),
-      summaryPart(fmtEur(totalSpend), true),
-      summaryPart(` priniesla ${fmtSkCount(conversions, 'konverzia')}. `),
-    )
-  } else if (hasMoney(totalSpend)) {
-    verdict.push(summaryPart(`Do reklám investované ${fmtEur(totalSpend)} za zvolené obdobie.`))
-  }
-
-  if (hasCount(lpv) && totalSpend > 0) {
-    const cpl = totalSpend / lpv
-    strengths.push(`${fmtSkCount(lpv, 'navsteva')} z reklám pri cene ${fmtEur(cpl)} / návštevu.`)
-  }
-
-  if (hasCount(conversions) && totalSpend > 0) {
-    strengths.push(`${fmtSkCount(conversions, 'konverzia')} pri priemernej cene ${fmtEur(totalSpend / conversions)} / konverziu.`)
-  }
-
-  if (profile === 'dual' && metaSpend > 0 && googleSpend > 0) {
-    const metaClicks = metaSum(months, 'clicks') ?? 0
-    const googleClicks = googleSum(months, 'clicks') ?? 0
-    if (googleClicks > metaClicks * 1.5 && conversions > 0) {
-      strengths.push('Google Ads generuje viac kliknutí a konverzií — silnejší performance kanál.')
-    } else if (metaClicks > googleClicks * 1.5 && hasCount(lpv)) {
-      strengths.push('Meta Ads prináša dosah a návštevy cieľovej stránky — silný horný lievik.')
-    }
-  }
-
-  if (hasMoney(totalSpend) && !hasCount(conversions) && !hasCount(lpv)) {
-    watchouts.push('Reklama beží, ale chýbajú merateľné konverzie alebo návštevy — skontrolovať tracking.')
-    recommendations.push('Overiť meranie konverzií a UTM parametre na cieľových stránkach.')
-  }
-
-  return {
-    verdict: verdict.length ? verdict : null,
-    strengths: strengths.slice(0, 3),
-    watchouts: watchouts.slice(0, 2),
-    recommendations: recommendations.slice(0, 2),
-  }
-}
-
-function buildInsights(months, profile, agg) {
-  if (!months.length) return null
-
-  const insights = profile === 'eshop'
-    ? buildEshopInsights(months, agg)
-    : buildLeadgenInsights(months, profile, agg)
-
-  const hasContent = insights.verdict
-    || insights.strengths.length
-    || insights.watchouts.length
-    || insights.recommendations.length
-
-  return hasContent ? insights : null
-}
-
-function buildOverview(months, profile, agg, client) {
+function buildOverview(months, profile, agg) {
   const highlights = buildHighlights(months, profile, agg)
-  const callout = buildSummaryCallout(months, profile, agg, client)
-  const insights = buildInsights(months, profile, agg)
+  const charts = buildOverviewCharts(months, agg)
 
-  if (!highlights.length && !callout && !insights) return null
+  if (!highlights.length && !charts.length) return null
 
   return {
     title: 'Celkový prehľad',
     highlights,
-    insights,
-    callout,
-    charts: buildOverviewCharts(months, agg),
+    charts,
   }
 }
 
@@ -1449,14 +1213,15 @@ export function buildClientReport(client, months) {
   const period = rangeLabel(months)
   const agg = profile === 'eshop' ? aggregate(months) : {}
   const sections = buildSections(months, profile, agg, client)
-  const overview = buildOverview(months, profile, agg, client)
+  const overview = buildOverview(months, profile, agg)
+  const summary = buildReportSummary(months, profile, agg)
 
   return {
     profile,
     period,
     clientName: client.name,
-    hook: buildReportHook(months, profile, agg),
     sections,
     overview,
+    summary,
   }
 }

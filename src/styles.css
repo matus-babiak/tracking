@@ -1782,8 +1782,8 @@ tr.total.compare-row td {
 .client-report-doc {
   position: relative;
   width: 100%;
-  max-width: 820px;
-  margin: 0 auto;
+  max-width: none;
+  margin: 0;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
@@ -1823,10 +1823,34 @@ tr.total.compare-row td {
 
 .client-report-doc--exporting {
   width: 186mm;
-  max-width: none;
+  max-width: 186mm;
+  margin: 0 auto;
   border: none;
+  border-radius: 0;
+  box-shadow: none;
   print-color-adjust: exact;
   -webkit-print-color-adjust: exact;
+}
+
+.client-report-doc--exporting .client-report-cover {
+  padding: 14mm 14mm 10mm;
+  padding-right: 14mm;
+}
+
+.client-report-doc--exporting .client-report-body {
+  padding: 10mm 14mm 12mm;
+}
+
+.client-report-doc--exporting .client-report-footer {
+  padding: 8mm 14mm 12mm;
+}
+
+.client-report-doc--exporting .client-report-kpi-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.client-report-doc--exporting .client-report-charts--double {
+  grid-template-columns: 1fr 1fr;
 }
 
 .client-report-pdf-avoid {
@@ -1834,9 +1858,13 @@ tr.total.compare-row td {
   page-break-inside: avoid;
 }
 
+.client-report-body {
+  padding: 36px clamp(24px, 3vw, 56px) 48px;
+}
+
 .client-report-cover {
-  padding: 48px 56px 32px;
-  padding-right: 120px;
+  padding: 48px clamp(24px, 3vw, 56px) 32px;
+  padding-right: clamp(96px, 10vw, 120px);
   border-bottom: 2px solid #111;
 }
 
@@ -1867,10 +1895,6 @@ tr.total.compare-row td {
   margin: 0;
   font-size: 13px;
   color: var(--text-secondary);
-}
-
-.client-report-body {
-  padding: 36px 56px 48px;
 }
 
 .client-report-section {
@@ -2022,6 +2046,12 @@ tr.total.compare-row td {
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   margin: 0 0 32px;
+}
+
+@media (min-width: 1280px) {
+  .client-report-doc:not(.client-report-doc--exporting) .client-report-kpi-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 
 .client-report-kpi {
@@ -2218,8 +2248,31 @@ tr.total.compare-row td {
   color: var(--text-secondary);
 }
 
+.client-report-section--summary {
+  margin-top: 8px;
+}
+
+.client-report-summary-p {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.client-report-summary-p strong {
+  font-weight: 700;
+}
+
+.client-report-summary-p:last-child {
+  margin-bottom: 0;
+  padding-top: 14px;
+  border-top: 1px solid #e8e8e8;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
 .client-report-footer {
-  padding: 20px 56px 32px;
+  padding: 20px clamp(24px, 3vw, 56px) 32px;
   border-top: 1px solid #e0e0e0;
 }
 
