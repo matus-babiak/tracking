@@ -2005,6 +2005,15 @@ tr.total.compare-row td {
   font-weight: 600;
   text-align: right;
   white-space: nowrap;
+  color: var(--text);
+}
+
+.metric-tone-spend {
+  color: #dc2626;
+}
+
+.metric-tone-revenue {
+  color: #16a34a;
 }
 
 /* Celkový prehľad — 6 samostatných kariet 3 × 2 */
@@ -2029,6 +2038,15 @@ tr.total.compare-row td {
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
+  color: var(--text);
+}
+
+.client-report-kpi-value.metric-tone-spend {
+  color: #dc2626;
+}
+
+.client-report-kpi-value.metric-tone-revenue {
+  color: #16a34a;
 }
 
 .client-report-kpi-label {

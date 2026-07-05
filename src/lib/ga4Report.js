@@ -162,6 +162,7 @@ export function pickTopGaProducts(ctx, limit = 5) {
     name: p.name,
     value: fmtEur(p.revenue),
     detail: p.purchased > 0 ? `${fmtNum(p.purchased)} ks` : null,
+    tone: 'revenue',
   }))
   return { heading: `Top ${items.length} produktov (GA4 tržby)`, items }
 }

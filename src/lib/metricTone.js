@@ -10,7 +10,8 @@ export function metricToneFromLabel(label) {
 
   if (
     l.includes('tržb')
-    || l.includes('čisté predaje')
+    || l.includes('trz')
+    || l.includes('predaj')
     || l.includes('hodnota nákupov')
     || l.includes('hodnota z reklám')
     || l.includes('zisk')
@@ -25,4 +26,8 @@ export function metricToneClass(tone) {
   if (tone === 'spend') return 'metric-tone-spend'
   if (tone === 'revenue') return 'metric-tone-revenue'
   return ''
+}
+
+export function resolveMetricTone({ tone, label } = {}) {
+  return tone ?? metricToneFromLabel(label) ?? null
 }

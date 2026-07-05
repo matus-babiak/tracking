@@ -159,6 +159,7 @@ function formatTopCampaign(c, mode) {
     name: c.name,
     value: hasMoney(c.spend) ? fmtEur(c.spend) : '–',
     detail: parts.length ? parts.join(' · ') : null,
+    tone: hasMoney(c.spend) ? 'spend' : null,
   }
 }
 
@@ -679,6 +680,7 @@ function buildHighlights(months, profile, agg) {
         label: 'Investícia do reklám',
         value: fmtEur(adSpend),
         hint: `Meta ${fmtEur(spend)} · Google ${fmtEur(googleSpend)}`,
+        tone: 'spend',
       })
     }
     if (hasEshopAds && hasMoney(adValue)) {
@@ -686,6 +688,7 @@ function buildHighlights(months, profile, agg) {
         label: 'Hodnota nákupov z reklám',
         value: fmtEur(adValue),
         hint: hasCount(agg.adPurchases) ? fmtSkCount(agg.adPurchases, 'nakup') : null,
+        tone: 'revenue',
       })
     }
     if (hasEshopAds && agg.roas != null) {
@@ -696,12 +699,14 @@ function buildHighlights(months, profile, agg) {
         label: 'Čisté predaje e-shopu',
         value: fmtEur(eshop.netRevenue),
         hint: hasMoney(eshop.revenue) ? `Celkom ${fmtEur(eshop.revenue)}` : null,
+        tone: 'revenue',
       })
     } else if (hasMoney(agg.eshopRevenue)) {
       highlights.push({
         label: 'Tržby e-shopu',
         value: fmtEur(agg.eshopRevenue),
         hint: agg.adShareOfRevenue != null ? `${fmtPct(agg.adShareOfRevenue)} z reklám` : null,
+        tone: 'revenue',
       })
     }
     if (hasCount(eshop?.orders)) {
@@ -727,6 +732,7 @@ function buildHighlights(months, profile, agg) {
         label: 'Tržby z e-mailov',
         value: fmtEur(email.revenue),
         hint: hasCount(email.orders) ? fmtSkCount(email.orders, 'objednavka') : 'Mailchimp',
+        tone: 'revenue',
       })
     }
     return highlights.slice(0, 6)

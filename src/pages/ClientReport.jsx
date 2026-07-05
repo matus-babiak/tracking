@@ -5,7 +5,12 @@ import {
 import { MonthBarChart, MonthLineChart, SpendRoasChart } from '../components/ui'
 import { buildClientReport } from '../lib/clientReport'
 import { downloadReportPdf, reportPdfFilename } from '../lib/downloadReportPdf'
+import { metricToneClass, resolveMetricTone } from '../lib/metricTone'
 import { skZaObdobieMesiace } from '../lib/skGrammar'
+
+function toneClass(item) {
+  return metricToneClass(resolveMetricTone(item))
+}
 
 function RichParts({ parts }) {
   if (!parts?.length) return null
@@ -26,7 +31,7 @@ function ReportRows({ rows }) {
             {r.label}
             {r.hint && <span className="client-report-row-hint">{r.hint}</span>}
           </dt>
-          <dd className="client-report-row-value">{r.value}</dd>
+          <dd className={`client-report-row-value ${toneClass(r)}`.trim()}>{r.value}</dd>
         </div>
       ))}
     </dl>
@@ -122,7 +127,7 @@ function ReportSection({ title, intro, rows, topCampaigns, topProducts, charts, 
                   {c.name}
                   {c.detail && <span className="client-report-row-hint">{c.detail}</span>}
                 </dt>
-                <dd className="client-report-row-value">{c.value}</dd>
+                <dd className={`client-report-row-value ${toneClass(c)}`.trim()}>{c.value}</dd>
               </div>
             ))}
           </dl>
@@ -138,7 +143,7 @@ function ReportSection({ title, intro, rows, topCampaigns, topProducts, charts, 
                   {c.name}
                   {c.detail && <span className="client-report-row-hint">{c.detail}</span>}
                 </dt>
-                <dd className="client-report-row-value">{c.value}</dd>
+                <dd className={`client-report-row-value ${toneClass(c)}`.trim()}>{c.value}</dd>
               </div>
             ))}
           </dl>
@@ -238,7 +243,7 @@ function ReportOverview({ overview }) {
         <div className="client-report-kpi-grid">
           {metrics.map((m) => (
             <div key={m.label} className="client-report-kpi">
-              <div className="client-report-kpi-value">{m.value}</div>
+              <div className={`client-report-kpi-value ${toneClass(m)}`.trim()}>{m.value}</div>
               <div className="client-report-kpi-label">{m.label}</div>
               {m.hint && <div className="client-report-kpi-hint">{m.hint}</div>}
             </div>
