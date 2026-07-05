@@ -1,10 +1,15 @@
 import { Kpi, Section, MonthLineChart, MonthBarChart, SortableTable } from '../components/ui'
-import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtPct, sum, pctChange } from '../lib/helpers'
+import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtPct, sum, pctChange, hasEshopTab } from '../lib/helpers'
 import { fmtSkCount } from '../lib/skGrammar'
 import AnalyticsGa4 from './AnalyticsGa4'
 
 function hasGa4Export(months) {
-  return months.some((m) => m.ga?.snapshot)
+  const withGa = months.filter((m) => m.ga)
+  if (!withGa.length) return false
+  const hasLegacy = withGa.some((m) => m.ga.paid && !m.ga.snapshot && !m.ga.trafficAcquisition)
+  const hasNew = withGa.some((m) => m.ga.snapshot || m.ga.trafficAcquisition)
+  if (hasLegacy && hasNew) return false
+  return hasNew
 }
 
 function durationSec(s) {
@@ -49,10 +54,12 @@ const eshopColumns = [
   { key: 'ency', label: 'z toho Encyklopédia (ks)', align: 'num', sort: (m) => m.eshop?.encyItems, render: (m) => fmtNum(m.eshop?.encyItems) },
 ]
 
-export default function Analytics({ months, compare }) {
+export default function Analytics({ months, compare, client }) {
   if (hasGa4Export(months)) {
     return <AnalyticsGa4 months={months} compare={compare} />
   }
+
+  const showEshopInGa = !hasEshopTab(client)
 
   const rows = months.filter((m) => m.ga)
   const cur = gaStats(months)
@@ -77,8 +84,12 @@ export default function Analytics({ months, compare }) {
         <Kpi label="Relácie bez kampaní" value={fmtNum(cur.organicSessions)} sub={fmtSkCount(cur.organicUsers, 'navstevnik')}
           delta={d('organicSessions')} />
         <Kpi label="Relácie spolu" value={fmtNum(cur.totalSessions)} delta={d('totalSessions')} />
-        <Kpi label="Tržby e-shopu (GA4)" value={fmtEur(cur.eshopRevenue)} delta={d('eshopRevenue')} />
-        <Kpi label="Predané položky" value={fmtNum(cur.eshopItems)} delta={d('eshopItems')} />
+        {showEshopInGa && (
+          <>
+            <Kpi label="Tržby e-shopu (GA4)" value={fmtEur(cur.eshopRevenue)} delta={d('eshopRevenue')} />
+            <Kpi label="Predané položky" value={fmtNum(cur.eshopItems)} delta={d('eshopItems')} />
+          </>
+        )}
       </div>
 
       <Section title="Návštevnosť webu" hint="relácie mesačne">
@@ -100,12 +111,14 @@ export default function Analytics({ months, compare }) {
             ]} />
           </div>
         </div>
-        <div>
-          <div className="section-title">Tržby e-shopu <span className="hint">GA4 – všetky predaje</span></div>
-          <div className="card">
-            <MonthBarChart data={chartData} series={[{ key: 'revenue', name: 'Tržby', color: '#8b5cf6', eur: true }]} />
+        {showEshopInGa && (
+          <div>
+            <div className="section-title">Tržby e-shopu <span className="hint">GA4 – všetky predaje</span></div>
+            <div className="card">
+              <MonthBarChart data={chartData} series={[{ key: 'revenue', name: 'Tržby', color: '#8b5cf6', eur: true }]} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <Section title="Mesačný detail">
@@ -118,15 +131,17 @@ export default function Analytics({ months, compare }) {
         />
       </Section>
 
-      <Section title="E-shop (GA4)" hint="tržby, položky a objednávky podľa reportov">
-        <SortableTable
-          columns={eshopColumns}
-          rows={rows}
-          rowKey={(m) => `${m.year}-${m.month}`}
-          defaultSortKey="month"
-          defaultSortDir="desc"
-        />
-      </Section>
+      {showEshopInGa && (
+        <Section title="E-shop (GA4)" hint="tržby, položky a objednávky podľa reportov">
+          <SortableTable
+            columns={eshopColumns}
+            rows={rows}
+            rowKey={(m) => `${m.year}-${m.month}`}
+            defaultSortKey="month"
+            defaultSortDir="desc"
+          />
+        </Section>
+      )}
     </>
   )
 }

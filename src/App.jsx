@@ -4,7 +4,7 @@ import clients from './data'
 import { clientBySlug, isImportOverviewSlug, isGuidesSlug, isSuperAdminRoute, IMPORT_OVERVIEW_SLUG, GUIDES_SLUG } from './lib/routes'
 import { monthKey, resolvePeriod, resolveCompare, rangeLabel, COMPARE_MODES, clientTabs } from './lib/helpers'
 import { resolveClientUiState, saveClientUiState, loadSidebarCollapsed, saveSidebarCollapsed } from './lib/uiState'
-import { isAppUnlocked, isClientUnlocked, lockApp, lockClient, getAuthRole, getAccessUserName, clientsForRole, isGuestAllowedClient, isSuperAdmin } from './lib/auth'
+import { isAppUnlocked, isClientUnlocked, lockApp, lockClient, getAuthRole, getAccessUserName, clientsForRole, isGuestAllowedClient, isSuperAdmin, GUEST_DEFAULT_CLIENT_ID } from './lib/auth'
 import { PeriodPicker, ClientDropdown } from './components/ui'
 import AuthGate from './components/AuthGate'
 import NotFound from './pages/NotFound'
@@ -15,6 +15,7 @@ import MetaAdsLeadgen from './pages/MetaAdsLeadgen'
 import GoogleAds from './pages/GoogleAds'
 import GoogleAdsLeadgen from './pages/GoogleAdsLeadgen'
 import Analytics from './pages/Analytics'
+import Eshop from './pages/Eshop'
 import Email from './pages/Email'
 import ImportOverview from './pages/ImportOverview'
 import GuidesOverview from './pages/GuidesOverview'
@@ -26,6 +27,7 @@ const ICONS = {
   google: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
   ga: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
   email: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>,
+  eshop: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>,
   import: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>,
   guides: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>,
   clientReport: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
@@ -36,6 +38,7 @@ const TABS = [
   { id: 'meta', label: 'Meta Ads', icon: ICONS.meta },
   { id: 'google', label: 'Google Ads', icon: ICONS.google },
   { id: 'ga', label: 'Google Analytics', icon: ICONS.ga },
+  { id: 'eshop', label: 'E-shop', icon: ICONS.eshop },
   { id: 'email', label: 'Email marketing', icon: ICONS.email },
 ]
 
@@ -44,6 +47,7 @@ const TAB_SUBTITLES = {
   meta: 'Kampane, boosting a výsledky na platforme Meta',
   google: 'Search, Display a Performance Max kampane',
   ga: 'Návštevnosť webu a predaje e-shopu (GA4)',
+  eshop: 'Predaje, objednávky a produkty z WooCommerce',
   email: 'Výsledky e-mailových kampaní (Mailchimp)',
 }
 
@@ -64,6 +68,7 @@ const TAB_SUBTITLES_ESHOP = {
   meta: 'Investícia, nákupy, ROAS a pridania do košíka',
   google: 'Investícia, nákupy, ROAS a cena za nákup',
   ga: 'Návštevnosť webu a predaje e-shopu (GA4)',
+  eshop: 'Predaje, objednávky a produkty z WooCommerce',
 }
 
 function resolvePage(client, tab) {
@@ -71,12 +76,17 @@ function resolvePage(client, tab) {
   if (tab === 'overview') return leadgen ? OverviewLeadgen : Overview
   if (tab === 'meta') return leadgen ? MetaAdsLeadgen : MetaAds
   if (tab === 'google') return leadgen ? GoogleAdsLeadgen : GoogleAds
-  return { overview: Overview, meta: MetaAds, google: GoogleAds, ga: Analytics, email: Email }[tab]
+  if (tab === 'eshop') return Eshop
+  return { overview: Overview, meta: MetaAds, google: GoogleAds, ga: Analytics, eshop: Eshop, email: Email }[tab]
 }
 
 function defaultClientSlug() {
-  if (isAppUnlocked() && getAuthRole() === 'guest') return 'chillix'
+  if (isAppUnlocked() && getAuthRole() === 'guest') return GUEST_DEFAULT_CLIENT_ID
   return null
+}
+
+function guestHomePath() {
+  return `/${GUEST_DEFAULT_CLIENT_ID}`
 }
 
 function AuthBadge({ userName }) {
@@ -148,13 +158,13 @@ export default function App() {
   const accessUserName = getAccessUserName({ direct: lockedToClient, clientName: client?.name })
   useEffect(() => {
     if (isSuperAdminPage && authRole !== 'admin') {
-      navigate('/chillix', { replace: true })
+      navigate(guestHomePath(), { replace: true })
     }
   }, [isSuperAdminPage, authRole, navigate])
 
   useEffect(() => {
     if (!clientSlug && appUnlocked && authRole === 'guest') {
-      navigate('/chillix', { replace: true })
+      navigate(guestHomePath(), { replace: true })
     }
   }, [clientSlug, appUnlocked, authRole, navigate])
 
@@ -202,7 +212,7 @@ export default function App() {
   useEffect(() => {
     if (!urlClient || lockedToClient || authRole !== 'guest') return
     if (!isGuestAllowedClient(urlClient.id)) {
-      navigate('/chillix', { replace: true })
+      navigate(guestHomePath(), { replace: true })
     }
   }, [urlClient, lockedToClient, authRole, navigate])
 
@@ -307,7 +317,7 @@ export default function App() {
       <AuthGate
         onUnlock={(role) => {
           setAppUnlocked(true)
-          if (role === 'guest') navigate('/chillix', { replace: true })
+          if (role === 'guest') navigate(guestHomePath(), { replace: true })
         }}
       />
     )

@@ -1,9 +1,16 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   ResponsiveContainer, BarChart, Bar, LineChart, Line, ComposedChart,
-  XAxis, YAxis, Tooltip, CartesianGrid, Legend,
+  XAxis, YAxis, Tooltip, CartesianGrid, Legend, PieChart, Pie, Cell,
 } from 'recharts'
 import { fmtEur, fmtNum, PRESETS, COMPARE_MODES, monthKey, monthFull, presetRange } from '../lib/helpers'
+import {
+  buildMockRow,
+  computeTableTotals,
+  firstLabelColumnIndex,
+  getColumnTotalType,
+  hasTotalRow,
+} from '../lib/tableTotals'
 
 function compareSortValues(a, b, dir) {
   const mul = dir === 'asc' ? 1 : -1
@@ -46,7 +53,50 @@ function cellClass(col, columns, colIndex, isLastSticky) {
   return parts.join(' ')
 }
 
-export function SortableTable({ columns, rows, rowKey, footer, defaultSortKey, defaultSortDir = 'desc', limit = TABLE_ROW_LIMIT }) {
+function TotalCell({ col, totals }) {
+  const type = getColumnTotalType(col)
+  if (type === 'label' || type === 'none') return '–'
+  const v = totals[col.key]
+  if (v == null) return '–'
+  if (col.key === 'roas') return <RoasBadge value={v} />
+  return col.render(buildMockRow(totals))
+}
+
+function TableTotalRow({ columns, rows, label, lastStickyIndex, labelColIndex, rowClass = 'total' }) {
+  const totals = useMemo(() => computeTableTotals(columns, rows), [columns, rows])
+  return (
+    <tr className={rowClass}>
+      {columns.map((col, colIndex) => (
+        <td
+          key={col.key}
+          className={cellClass(col, columns, colIndex, colIndex === lastStickyIndex)}
+          style={col.sticky ? { left: stickyLeft(columns, colIndex) } : undefined}
+          data-sticky-idx={stickyIndex(columns, colIndex) ?? undefined}
+        >
+          {colIndex === labelColIndex
+            ? label
+            : getColumnTotalType(col) === 'label'
+              ? ''
+              : <TotalCell col={col} totals={totals} />}
+        </td>
+      ))}
+    </tr>
+  )
+}
+
+export function SortableTable({
+  columns,
+  rows,
+  rowKey,
+  footer,
+  compareRows,
+  compareLabel,
+  totalLabel = 'Celkom',
+  defaultSortKey,
+  defaultSortDir = 'desc',
+  limit = TABLE_ROW_LIMIT,
+  expandable = true,
+}) {
   const [sortKey, setSortKey] = useState(defaultSortKey || columns.find((c) => c.sort)?.key)
   const [sortDir, setSortDir] = useState(defaultSortDir)
   const [expanded, setExpanded] = useState(false)
@@ -61,8 +111,8 @@ export function SortableTable({ columns, rows, rowKey, footer, defaultSortKey, d
     setExpanded(false)
   }, [rows, sortKey, sortDir])
 
-  const canExpand = sorted.length > limit
-  const visibleRows = expanded || !canExpand ? sorted : sorted.slice(0, limit)
+  const canExpand = expandable && sorted.length > limit
+  const visibleRows = expandable && expanded ? sorted : sorted.slice(0, limit)
   const hiddenCount = sorted.length - limit
 
   const onSort = (col) => {
@@ -76,9 +126,33 @@ export function SortableTable({ columns, rows, rowKey, footer, defaultSortKey, d
 
   const hasSticky = columns.some((c) => c.sticky)
   const lastStickyIndex = columns.reduce((acc, c, i) => (c.sticky ? i : acc), -1)
+  const labelColIndex = firstLabelColumnIndex(columns)
+  const showAutoFooter = footer === undefined && hasTotalRow(columns, rows)
+  const autoFooter = showAutoFooter && (
+    <>
+      <TableTotalRow
+        columns={columns}
+        rows={rows}
+        label={totalLabel}
+        lastStickyIndex={lastStickyIndex}
+        labelColIndex={labelColIndex}
+      />
+      {compareRows?.length > 0 && compareLabel && (
+        <TableTotalRow
+          columns={columns}
+          rows={compareRows}
+          label={compareLabel}
+          lastStickyIndex={lastStickyIndex}
+          labelColIndex={labelColIndex}
+          rowClass="total compare-row"
+        />
+      )}
+    </>
+  )
 
   return (
     <div className="sortable-table">
+      {hasSticky && <p className="table-scroll-hint">Posuňte tabuľku do strán pre ďalšie stĺpce.</p>}
       <div className={`table-wrap${hasSticky ? ' table-sticky-cols' : ''}`}>
         <table>
           <thead>
@@ -123,7 +197,7 @@ export function SortableTable({ columns, rows, rowKey, footer, defaultSortKey, d
                 ))}
               </tr>
             ))}
-            {footer}
+            {footer ?? autoFooter}
           </tbody>
         </table>
       </div>
@@ -301,6 +375,41 @@ export function MonthLineChart({ data, series, height = 240, unit }) {
             strokeDasharray={s.dashed ? '5 4' : undefined} isAnimationActive={false} />
         ))}
       </LineChart>
+    </ResponsiveContainer>
+  )
+}
+
+const PIE_COLORS = ['#4285f4', '#1877F2', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444', '#64748b', '#06b6d4', '#ec4899', '#94a3b8']
+
+// Koláčový graf — data: [{ name, value, color? }], eur = formát hodnoty
+export function CategoryPieChart({ data, height = 240, eur = false }) {
+  const slices = (data ?? []).filter((d) => (d.value ?? 0) > 0)
+  if (slices.length < 2) return null
+  const colored = slices.map((d, i) => ({ ...d, color: d.color ?? PIE_COLORS[i % PIE_COLORS.length] }))
+  return (
+    <ResponsiveContainer width="100%" height={height}>
+      <PieChart>
+        <Pie
+          data={colored}
+          dataKey="value"
+          nameKey="name"
+          cx="50%"
+          cy="50%"
+          innerRadius={height * 0.22}
+          outerRadius={height * 0.32}
+          paddingAngle={1}
+          isAnimationActive={false}
+        >
+          {colored.map((entry) => (
+            <Cell key={entry.name} fill={entry.color} />
+          ))}
+        </Pie>
+        <Tooltip
+          contentStyle={tooltipStyle}
+          formatter={(val) => [eur ? eurFmt(val) : numFmt(val)]}
+        />
+        <Legend wrapperStyle={{ fontSize: 12 }} iconType="circle" iconSize={8} />
+      </PieChart>
     </ResponsiveContainer>
   )
 }

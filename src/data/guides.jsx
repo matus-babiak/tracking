@@ -17,7 +17,19 @@ const guideExport = {
   ),
   sanaplant: (
     <>
-      <p><strong>Meta + Google + GA4 + Mailchimp + e-shop:</strong> mesačné PDF reporty a CSV exporty. E-shop metriky (tržby, položky) podľa dostupnosti v reporte.</p>
+      <p><strong>Meta Ads:</strong> export na úrovni reklám — investícia, dosah, zobrazenia, kliknutia, nákupy, ROAS, pridané do košíka, LPV, engagement.</p>
+      <p><strong>Google Ads:</strong> export kampaní — investícia, zobrazenia, kliknutia, konverzie (nákup, košík, checkout), hodnota konverzií, ROAS.</p>
+      <p><strong>GA4 (máj + jún 2026):</strong> CSV exporty z Google Analytics — importované za tieto mesiace:</p>
+      <ul>
+        <li><em>Traffic acquisition</em> — Session primary channel group (Default channel group)</li>
+        <li><em>User acquisition</em> — First user primary channel group (Default channel group)</li>
+        <li><em>Landing page</em> — Landing page (top 50 podľa relácií)</li>
+        <li><em>E-commerce purchases</em> — Item name (top 50 podľa tržieb)</li>
+        <li><em>Reports snapshot</em> — voliteľný súhrn (máj 2026)</li>
+      </ul>
+      <p>Ostatné mesiace: platená vs. organická návštevnosť z PDF reportu.</p>
+      <p><strong>Mailchimp:</strong> mesačný report — odoslané, open rate, click rate, tržby z e-mailov.</p>
+      <p><strong>E-shop (WooCommerce):</strong> manuálne skopírované dáta z administrácie — tržby, objednávky, kategórie, produkty (sanaplant.sk + novy).</p>
     </>
   ),
   rentcarslovakia: (

@@ -58,6 +58,9 @@ export const GUEST_CLIENT_IDS = [
   'hagard-hal',
 ]
 
+/** Po prihlásení guest heslom (chillix) otvorí sa tento klient. */
+export const GUEST_DEFAULT_CLIENT_ID = 'sanaplant'
+
 export function isGuestAllowedClient(clientId) {
   return GUEST_CLIENT_IDS.includes(clientId)
 }

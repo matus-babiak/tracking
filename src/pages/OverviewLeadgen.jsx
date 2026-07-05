@@ -153,38 +153,8 @@ function DualOverview({ months, compare }) {
           rowKey={(m) => `${m.year}-${m.month}`}
           defaultSortKey="month"
           defaultSortDir="desc"
-          footer={(
-            <>
-              <tr className="total">
-                <td>Spolu</td>
-                <td className="num">{fmtEur(agg.totalSpend)}</td>
-                <td className="num">{fmtEur(agg.metaSpend)}</td>
-                <td className="num">{fmtEur(agg.googleSpend)}</td>
-                <td className="num">{fmtNum(agg.lpv)}</td>
-                <td className="num">{fmtNum(agg.metaClicks)}</td>
-                <td className="num">{fmtNum(agg.googleClicks)}</td>
-                <td className="num">{fmtDec(agg.conversions)}</td>
-                {RENTCAR_CONVS.map((key) => (
-                  <td key={key} className="num">{fmtDec(agg.convActions[key])}</td>
-                ))}
-              </tr>
-              {prev && (
-                <tr className="total compare-row">
-                  <td>{compare.label}</td>
-                  <td className="num">{fmtEur(prev.totalSpend)}</td>
-                  <td className="num">{fmtEur(prev.metaSpend)}</td>
-                  <td className="num">{fmtEur(prev.googleSpend)}</td>
-                  <td className="num">{fmtNum(prev.lpv)}</td>
-                  <td className="num">{fmtNum(prev.metaClicks)}</td>
-                  <td className="num">{fmtNum(prev.googleClicks)}</td>
-                  <td className="num">{fmtDec(prev.conversions)}</td>
-                  {RENTCAR_CONVS.map((key) => (
-                    <td key={key} className="num">{fmtDec(prev.convActions[key])}</td>
-                  ))}
-                </tr>
-              )}
-            </>
-          )}
+          compareRows={compare?.months}
+          compareLabel={compare?.label}
         />
       </Section>
     </>
@@ -273,38 +243,8 @@ export default function OverviewLeadgen({ months, compare, client }) {
           rowKey={(m) => `${m.year}-${m.month}`}
           defaultSortKey="month"
           defaultSortDir="desc"
-          footer={(
-            <>
-              <tr className="total">
-                <td>Spolu</td>
-                <td className="num">{fmtEur(agg.spend)}</td>
-                <td className="num">{fmtNum(agg.reach)}</td>
-                <td className="num">{fmtNum(agg.impressions)}</td>
-                <td className="num">{fmtEur(agg.cpm, 2)}</td>
-                <td className="num">{fmtDec(agg.frequency)}</td>
-                <td className="num">{fmtNum(agg.clicks)}</td>
-                <td className="num">{fmtNum(agg.lpv)}</td>
-                <td className="num">{fmtNum(agg.engagements)}</td>
-                <td className="num">{fmtEur(agg.costPerEngagement)}</td>
-                <td className="num">{fmtNum(agg.saves)}</td>
-              </tr>
-              {prev && (
-                <tr className="total compare-row">
-                  <td>{compare.label}</td>
-                  <td className="num">{fmtEur(prev.spend)}</td>
-                  <td className="num">{fmtNum(prev.reach)}</td>
-                  <td className="num">{fmtNum(prev.impressions)}</td>
-                  <td className="num">{fmtEur(prev.cpm, 2)}</td>
-                  <td className="num">{fmtDec(prev.frequency)}</td>
-                  <td className="num">{fmtNum(prev.clicks)}</td>
-                  <td className="num">{fmtNum(prev.lpv)}</td>
-                  <td className="num">{fmtNum(prev.engagements)}</td>
-                  <td className="num">{fmtEur(prev.costPerEngagement)}</td>
-                  <td className="num">{fmtNum(prev.saves)}</td>
-                </tr>
-              )}
-            </>
-          )}
+          compareRows={compare?.months}
+          compareLabel={compare?.label}
         />
       </Section>
     </>

@@ -72,6 +72,8 @@ const METRIC_LABELS = {
   pages: 'GA4 stránky',
   trafficAcquisition: 'GA4 traffic acquisition',
   userAcquisition: 'GA4 user acquisition',
+  landingPages: 'GA4 vstupné stránky',
+  ecommerceItems: 'GA4 e-commerce produkty',
   pageviews: 'Zobrazenia stránok',
   visits: 'Návštevy',
   sessions: 'Relácie',
@@ -139,6 +141,7 @@ const TAB_LABELS = {
   meta: 'Meta Ads',
   google: 'Google Ads',
   ga: 'Google Analytics',
+  eshop: 'E-shop (WooCommerce)',
   email: 'Email marketing',
 }
 

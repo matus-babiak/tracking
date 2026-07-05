@@ -81,6 +81,11 @@ export function presetRange(client, presetId) {
   return { from: monthKey(months[0]), to: monthKey(months[months.length - 1]) }
 }
 
+export function hasEshopTab(client) {
+  return client.eshopTab === 'woocommerce'
+    || client.months.some((x) => x.eshop?.woocommerce)
+}
+
 // Ktoré taby má klient k dispozícii podľa dostupných dát
 export function clientTabs(client) {
   const m = client.months
@@ -89,6 +94,7 @@ export function clientTabs(client) {
     meta: m.some((x) => x.meta),
     google: m.some((x) => x.google),
     ga: m.some((x) => x.ga),
+    eshop: hasEshopTab(client),
     email: m.some((x) => x.email),
   }
   return Object.entries(has).filter(([, ok]) => ok).map(([id]) => id)

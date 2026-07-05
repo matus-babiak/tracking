@@ -96,30 +96,8 @@ export default function Overview({ months, compare }) {
           rowKey={(m) => `${m.year}-${m.month}`}
           defaultSortKey="month"
           defaultSortDir="desc"
-          footer={(
-            <>
-              <tr className="total">
-                <td>Spolu</td>
-                <td className="num">{fmtEur(agg.adSpend)}</td>
-                <td className="num">{fmtEur(agg.adValue)}</td>
-                <td className="num"><RoasBadge value={agg.roas} /></td>
-                <td className="num">{fmtNum(agg.adPurchases)}</td>
-                <td className="num">{fmtEur(agg.eshopRevenue)}</td>
-                <td className="num">{agg.adShareOfRevenue != null ? fmtPct(agg.adShareOfRevenue) : '–'}</td>
-              </tr>
-              {prev && (
-                <tr className="total compare-row">
-                  <td>{compare.label}</td>
-                  <td className="num">{fmtEur(prev.adSpend)}</td>
-                  <td className="num">{fmtEur(prev.adValue)}</td>
-                  <td className="num"><RoasBadge value={prev.roas} /></td>
-                  <td className="num">{fmtNum(prev.adPurchases)}</td>
-                  <td className="num">{fmtEur(prev.eshopRevenue)}</td>
-                  <td className="num">{prev.adShareOfRevenue != null ? fmtPct(prev.adShareOfRevenue) : '–'}</td>
-                </tr>
-              )}
-            </>
-          )}
+          compareRows={compare?.months}
+          compareLabel={compare?.label}
         />
       </Section>
     </>

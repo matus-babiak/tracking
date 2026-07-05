@@ -31,6 +31,18 @@ const METRIC_DEFS = {
   comments: { key: 'comments', label: 'Komentáre', align: 'num', sort: (r) => r.comments, render: (r) => fmtNum(r.comments) },
 }
 
+const METRIC_TOTALS = {
+  spend: 'sum', value: 'sum', purchases: 'sum', clicks: 'sum', impressions: 'sum', reach: 'sum',
+  addToCart: 'sum', landingPageViews: 'sum', engagements: 'sum', saves: 'sum', shares: 'sum', comments: 'sum',
+  roas: 'derived', costPerPurchase: 'derived', aov: 'derived', cpm: 'derived', frequency: 'derived',
+  cpc: 'derived', ctr: 'derived', costPerAddToCart: 'derived', costPerLandingPageView: 'derived',
+  costPerEngagement: 'derived',
+}
+
+for (const [key, total] of Object.entries(METRIC_TOTALS)) {
+  if (METRIC_DEFS[key]) METRIC_DEFS[key].total = total
+}
+
 /** Poradie stĺpcov pre e-shop Meta tabuľky. */
 export const META_TABLE_ESHOP_ORDER = [
   'spend', 'value', 'roas', 'purchases', 'costPerPurchase', 'aov',
@@ -96,7 +108,7 @@ export function buildMetaBreakdownColumns(rows, { profile = 'eshop', useAds = fa
   const idCols = useAds ? ID_COLUMNS_ADS : ID_COLUMNS_CAMPAIGNS
   const metrics = buildMetricColumns(data, profile)
   const tail = showMonths && hasMetric(data, 'months')
-    ? [{ key: 'months', label: 'Aktívna (mes.)', align: 'num', sort: (r) => r.months, render: (r) => r.months }]
+    ? [{ key: 'months', label: 'Aktívna (mes.)', align: 'num', total: 'sum', sort: (r) => r.months, render: (r) => r.months }]
     : []
   return [...idCols, ...metrics, ...tail]
 }

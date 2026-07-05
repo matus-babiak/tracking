@@ -13,10 +13,15 @@ export function reportPdfFilename(clientName, period) {
 
 const PDF_AVOID_SELECTORS = [
   '.client-report-cover',
-  '.client-report-summary-block',
-  '.client-report-highlights-wrap',
-  '.client-report-highlight',
-  '.client-report-section-head',
+  '.client-report-footer',
+  '.client-report-callout',
+  '.client-report-kpi',
+  '.client-report-kpi-grid',
+  '.client-report-insights',
+  '.client-report-charts',
+  '.client-report-figure',
+  '.client-report-subsection',
+  '.client-report-section',
   '.client-report-row',
 ].join(', ')
 
