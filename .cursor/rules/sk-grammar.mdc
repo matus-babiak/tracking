@@ -1,0 +1,20 @@
+---
+description: Slovenčina — skloňovanie podľa čísla v UI a reportoch
+globs: src/**/*.{js,jsx}
+alwaysApply: true
+---
+
+# Slovenčina — skloňovanie
+
+Pri textoch s **číslom + podstatné meno** vždy používaj `src/lib/skGrammar.js`:
+
+- `skCount(n, SK.nakup)` → „2 nákupy“, „5 nákupov“
+- `fmtSkCount(n, 'objednavka')` → skratka cez kľúč v `SK`
+- `topReklamy(n)` → „Top 2 reklamy“ (nie „Top 2 reklám“)
+- `skZaObdobieMesiace(n)` → „Súhrn za 3 mesiace“
+
+Pravidlo: **1** tvar `one`, **2–4** (okrem 12–14) tvar `few`, inak `many`.
+
+Vety v reportoch: `skReachSummary`, `skNavstevyZReklam`, `skInterakcieSummary`, `skKonverzieSummary`.
+
+Nepíš natvrdo „5 nákupov“ ani „Top 3 reklám“ — vždy cez helper.

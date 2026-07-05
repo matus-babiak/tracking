@@ -1,5 +1,7 @@
+import { useMemo } from 'react'
 import { Kpi, Section, MonthBarChart, SortableTable } from '../components/ui'
-import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, sum, pctChange } from '../lib/helpers'
+import { monthLabel, fmtEur, fmtNum, sum, pctChange, aggregateMetaBreakdown, computeMetaDerived } from '../lib/helpers'
+import { buildMetaBreakdownColumns, buildMetaMonthColumns } from '../lib/metaTableColumns.jsx'
 
 function fmtDec(v, digits = 2) {
   if (v == null) return '–'
@@ -30,61 +32,13 @@ function metaStats(months) {
 }
 
 function campaignMetrics(c) {
-  return {
+  return computeMetaDerived({
     ...c,
     cpm: c.impressions && c.spend != null ? (c.spend / c.impressions) * 1000 : null,
     frequency: c.reach ? c.impressions / c.reach : null,
     costPerEngagement: c.engagements && c.spend != null ? c.spend / c.engagements : null,
-  }
+  })
 }
-
-const campaignColumnsFull = [
-  { key: 'name', label: 'Reklama', sort: (c) => c.name, render: (c) => c.name },
-  { key: 'spend', label: 'Investícia', align: 'num', sort: (c) => c.spend, render: (c) => fmtEur(c.spend) },
-  { key: 'reach', label: 'Dosah', align: 'num', sort: (c) => c.reach, render: (c) => fmtNum(c.reach) },
-  { key: 'impressions', label: 'Zobrazenia', align: 'num', sort: (c) => c.impressions, render: (c) => fmtNum(c.impressions) },
-  { key: 'cpm', label: 'CPM', align: 'num', sort: (c) => c.cpm, render: (c) => fmtEur(c.cpm, 2) },
-  { key: 'frequency', label: 'Frekvencia', align: 'num', sort: (c) => c.frequency, render: (c) => fmtDec(c.frequency) },
-  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (c) => c.clicks, render: (c) => fmtNum(c.clicks) },
-  { key: 'lpv', label: 'Návštevy', align: 'num', sort: (c) => c.landingPageViews, render: (c) => fmtNum(c.landingPageViews) },
-  { key: 'engagements', label: 'Post engagement', align: 'num', sort: (c) => c.engagements, render: (c) => fmtNum(c.engagements) },
-  { key: 'costPerEngagement', label: 'Cena / interakciu', align: 'num', sort: (c) => c.costPerEngagement, render: (c) => fmtEur(c.costPerEngagement, 3) },
-  { key: 'saves', label: 'Uloženia', align: 'num', sort: (c) => c.saves, render: (c) => fmtNum(c.saves) },
-  { key: 'months', label: 'Aktívna (mes.)', align: 'num', sort: (c) => c.months, render: (c) => c.months },
-]
-
-const campaignColumnsDual = [
-  { key: 'name', label: 'Reklama', sort: (c) => c.name, render: (c) => c.name },
-  { key: 'spend', label: 'Investícia', align: 'num', sort: (c) => c.spend, render: (c) => fmtEur(c.spend) },
-  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (c) => c.clicks, render: (c) => fmtNum(c.clicks) },
-  { key: 'lpv', label: 'Návštevy', align: 'num', sort: (c) => c.landingPageViews, render: (c) => fmtNum(c.landingPageViews) },
-  { key: 'engagements', label: 'Post engagement', align: 'num', sort: (c) => c.engagements, render: (c) => fmtNum(c.engagements) },
-  { key: 'costPerEngagement', label: 'Cena / interakciu', align: 'num', sort: (c) => c.costPerEngagement, render: (c) => fmtEur(c.costPerEngagement, 3) },
-  { key: 'months', label: 'Aktívna (mes.)', align: 'num', sort: (c) => c.months, render: (c) => c.months },
-]
-
-const monthColumnsFull = [
-  { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
-  { key: 'spend', label: 'Investícia', align: 'num', sort: (m) => m.meta.spend, render: (m) => fmtEur(m.meta.spend) },
-  { key: 'reach', label: 'Dosah', align: 'num', sort: (m) => m.meta.reach, render: (m) => fmtNum(m.meta.reach) },
-  { key: 'impressions', label: 'Zobrazenia', align: 'num', sort: (m) => m.meta.impressions, render: (m) => fmtNum(m.meta.impressions) },
-  { key: 'cpm', label: 'CPM', align: 'num', sort: (m) => m.meta.cpm, render: (m) => fmtEur(m.meta.cpm, 2) },
-  { key: 'frequency', label: 'Frekvencia', align: 'num', sort: (m) => m.meta.frequency, render: (m) => fmtDec(m.meta.frequency) },
-  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (m) => m.meta.clicks, render: (m) => fmtNum(m.meta.clicks) },
-  { key: 'lpv', label: 'Návštevy', align: 'num', sort: (m) => m.meta.landingPageViews, render: (m) => fmtNum(m.meta.landingPageViews) },
-  { key: 'engagements', label: 'Post engagement', align: 'num', sort: (m) => m.meta.engagements, render: (m) => fmtNum(m.meta.engagements) },
-  { key: 'costPerEngagement', label: 'Cena / interakciu', align: 'num', sort: (m) => m.meta.costPerEngagement, render: (m) => fmtEur(m.meta.costPerEngagement, 3) },
-  { key: 'saves', label: 'Uloženia', align: 'num', sort: (m) => m.meta.saves, render: (m) => fmtNum(m.meta.saves) },
-]
-
-const monthColumnsDual = [
-  { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
-  { key: 'spend', label: 'Investícia', align: 'num', sort: (m) => m.meta.spend, render: (m) => fmtEur(m.meta.spend) },
-  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (m) => m.meta.clicks, render: (m) => fmtNum(m.meta.clicks) },
-  { key: 'lpv', label: 'Návštevy', align: 'num', sort: (m) => m.meta.landingPageViews, render: (m) => fmtNum(m.meta.landingPageViews) },
-  { key: 'engagements', label: 'Post engagement', align: 'num', sort: (m) => m.meta.engagements, render: (m) => fmtNum(m.meta.engagements) },
-  { key: 'costPerEngagement', label: 'Cena / interakciu', align: 'num', sort: (m) => m.meta.costPerEngagement, render: (m) => fmtEur(m.meta.costPerEngagement, 3) },
-]
 
 export default function MetaAdsLeadgen({ months, compare, client }) {
   const rows = months.filter((m) => m.meta)
@@ -131,9 +85,19 @@ export default function MetaAdsLeadgen({ months, compare, client }) {
     }
   }
   const campaigns = [...campaignMap.values()].map(campaignMetrics)
+  const breakdown = aggregateMetaBreakdown(rows, client)
+  const useAds = client?.metaBreakdown === 'ads' && breakdown.length > 0
+  const tableRows = useAds ? breakdown : campaigns
   const dual = client?.leadgenProfile === 'dual'
-  const campaignColumns = dual ? campaignColumnsDual : campaignColumnsFull
-  const monthColumns = dual ? monthColumnsDual : monthColumnsFull
+
+  const adColumns = useMemo(
+    () => buildMetaBreakdownColumns(tableRows, { profile: 'leadgen', useAds }),
+    [tableRows, useAds],
+  )
+  const monthColumns = useMemo(
+    () => buildMetaMonthColumns(rows, { profile: 'leadgen' }),
+    [rows],
+  )
 
   return (
     <>
@@ -145,7 +109,7 @@ export default function MetaAdsLeadgen({ months, compare, client }) {
             <Kpi label="Návštevy" value={fmtNum(cur.lpv)} delta={d('lpv')}
               sub="Pozretia cieľovej stránky" />
             <Kpi label="Post engagement" value={fmtNum(cur.engagements)} delta={d('engagements')} />
-            <Kpi label="Cena za interakciu" value={fmtEur(cur.costPerEngagement, 3)} delta={d('costPerEngagement')} deltaGood="neutral" />
+            <Kpi label="Cena za interakciu" value={fmtEur(cur.costPerEngagement)} delta={d('costPerEngagement')} deltaGood="neutral" />
           </>
         ) : (
           <>
@@ -156,7 +120,7 @@ export default function MetaAdsLeadgen({ months, compare, client }) {
             <Kpi label="Kliknutia" value={fmtNum(cur.clicks)} delta={d('clicks')} />
             <Kpi label="Návštevy" value={fmtNum(cur.lpv)} delta={d('lpv')} />
             <Kpi label="Post engagement" value={fmtNum(cur.engagements)} delta={d('engagements')} />
-            <Kpi label="Cena za interakciu" value={fmtEur(cur.costPerEngagement, 3)} delta={d('costPerEngagement')} deltaGood="neutral" />
+            <Kpi label="Cena za interakciu" value={fmtEur(cur.costPerEngagement)} delta={d('costPerEngagement')} deltaGood="neutral" />
             <Kpi label="Uloženia" value={fmtNum(cur.saves)} delta={d('saves')} />
           </>
         )}
@@ -211,12 +175,12 @@ export default function MetaAdsLeadgen({ months, compare, client }) {
       </div>
       )}
 
-      {campaigns.length > 0 && (
+      {tableRows.length > 0 && (
         <Section title="Reklamy" hint="súčet za vybrané obdobie">
           <SortableTable
-            columns={campaignColumns}
-            rows={campaigns}
-            rowKey={(c) => c.name}
+            columns={adColumns}
+            rows={tableRows}
+            rowKey={(c) => (c.campaign ? `${c.campaign}::${c.name}` : c.name)}
             defaultSortKey="spend"
           />
         </Section>

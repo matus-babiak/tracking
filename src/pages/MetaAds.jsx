@@ -1,5 +1,8 @@
-import { Kpi, Section, SpendRoasChart, MonthBarChart, RoasBadge, SortableTable } from '../components/ui'
-import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtRoas, sum, pctChange } from '../lib/helpers'
+import { useMemo } from 'react'
+import { Kpi, Section, SpendRoasChart, MonthBarChart, SortableTable } from '../components/ui'
+import { monthLabel, monthKey, fmtEur, fmtNum, fmtRoas, sum, pctChange, aggregateMetaBreakdown } from '../lib/helpers'
+import { buildMetaBreakdownColumns, buildMetaMonthColumns } from '../lib/metaTableColumns.jsx'
+import { skNakupySub } from '../lib/skGrammar'
 
 function metaStats(months) {
   const rows = months.filter((m) => m.meta)
@@ -18,53 +21,11 @@ function metaStats(months) {
   }
 }
 
-const campaignColumnsFull = [
-  { key: 'name', label: 'Kampaň', sort: (c) => c.name, render: (c) => c.name },
-  { key: 'spend', label: 'Investícia', align: 'num', sort: (c) => c.spend, render: (c) => fmtEur(c.spend) },
-  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (c) => c.clicks, render: (c) => fmtNum(c.clicks || null) },
-  { key: 'purchases', label: 'Nákupy', align: 'num', sort: (c) => c.purchases, render: (c) => fmtNum(c.purchases) },
-  { key: 'value', label: 'Hodnota', align: 'num', sort: (c) => c.value, render: (c) => fmtEur(c.value) },
-  { key: 'roas', label: 'ROAS', align: 'num', sort: (c) => (c.spend > 0 ? c.value / c.spend : null), render: (c) => <RoasBadge value={c.spend > 0 ? c.value / c.spend : null} /> },
-  { key: 'months', label: 'Aktívna (mes.)', align: 'num', sort: (c) => c.months, render: (c) => c.months },
-]
-
-const campaignColumnsEshop = [
-  { key: 'name', label: 'Reklama', sort: (c) => c.name, render: (c) => c.name },
-  { key: 'spend', label: 'Investícia', align: 'num', sort: (c) => c.spend, render: (c) => fmtEur(c.spend) },
-  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (c) => c.clicks, render: (c) => fmtNum(c.clicks || null) },
-  { key: 'purchases', label: 'Nákupy', align: 'num', sort: (c) => c.purchases, render: (c) => fmtNum(c.purchases) },
-  { key: 'value', label: 'Hodnota nákupov', align: 'num', sort: (c) => c.value, render: (c) => fmtEur(c.value) },
-  { key: 'roas', label: 'ROAS', align: 'num', sort: (c) => (c.spend > 0 ? c.value / c.spend : null), render: (c) => <RoasBadge value={c.spend > 0 ? c.value / c.spend : null} /> },
-  { key: 'cpp', label: 'Cena / nákup', align: 'num', sort: (c) => (c.purchases > 0 ? c.spend / c.purchases : null), render: (c) => fmtEur(c.purchases > 0 ? c.spend / c.purchases : null, 2) },
-  { key: 'months', label: 'Aktívna (mes.)', align: 'num', sort: (c) => c.months, render: (c) => c.months },
-]
-
-const monthColumnsFull = [
-  { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
-  { key: 'spend', label: 'Investícia', align: 'num', sort: (m) => m.meta.spend, render: (m) => fmtEur(m.meta.spend) },
-  { key: 'impressions', label: 'Zobrazenia', align: 'num', sort: (m) => m.meta.impressions, render: (m) => fmtNum(m.meta.impressions) },
-  { key: 'reach', label: 'Dosah', align: 'num', sort: (m) => m.meta.reach, render: (m) => fmtNum(m.meta.reach) },
-  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (m) => m.meta.clicks, render: (m) => fmtNum(m.meta.clicks) },
-  { key: 'atc', label: 'Do košíka', align: 'num', sort: (m) => m.meta.addToCart, render: (m) => fmtNum(m.meta.addToCart) },
-  { key: 'purchases', label: 'Nákupy', align: 'num', sort: (m) => m.meta.purchases, render: (m) => fmtNum(m.meta.purchases) },
-  { key: 'value', label: 'Hodnota', align: 'num', sort: (m) => m.meta.purchaseValue, render: (m) => fmtEur(m.meta.purchaseValue) },
-  { key: 'roas', label: 'ROAS', align: 'num', sort: (m) => m.meta.roas, render: (m) => <RoasBadge value={m.meta.roas} /> },
-]
-
-const monthColumnsEshop = [
-  { key: 'month', label: 'Mesiac', sort: (m) => monthKey(m), render: (m) => monthFull(m) },
-  { key: 'spend', label: 'Investícia', align: 'num', sort: (m) => m.meta.spend, render: (m) => fmtEur(m.meta.spend) },
-  { key: 'clicks', label: 'Kliknutia', align: 'num', sort: (m) => m.meta.clicks, render: (m) => fmtNum(m.meta.clicks) },
-  { key: 'atc', label: 'Do košíka', align: 'num', sort: (m) => m.meta.addToCart, render: (m) => fmtNum(m.meta.addToCart) },
-  { key: 'purchases', label: 'Nákupy', align: 'num', sort: (m) => m.meta.purchases, render: (m) => fmtNum(m.meta.purchases) },
-  { key: 'value', label: 'Hodnota nákupov', align: 'num', sort: (m) => m.meta.purchaseValue, render: (m) => fmtEur(m.meta.purchaseValue) },
-  { key: 'roas', label: 'ROAS', align: 'num', sort: (m) => m.meta.roas, render: (m) => <RoasBadge value={m.meta.roas} /> },
-  { key: 'cpp', label: 'Cena / nákup', align: 'num', sort: (m) => m.meta.costPerPurchase, render: (m) => fmtEur(m.meta.costPerPurchase, 2) },
-]
-
 export default function MetaAds({ months, compare, client }) {
   const rows = months.filter((m) => m.meta)
-  const eshop = client?.adsProfile === 'eshop'
+  const eshopKpis = client?.adsProfile === 'eshop' || client?.metaAdsProfile === 'eshop'
+  const useAds = client?.metaBreakdown === 'ads'
+  const tableProfile = eshopKpis ? 'eshop' : 'leadgen'
   const cur = metaStats(months)
   const prev = compare ? metaStats(compare.months) : null
   const d = (key) => (prev ? pctChange(cur[key], prev[key]) : null)
@@ -84,28 +45,26 @@ export default function MetaAds({ months, compare, client }) {
     atc: m.meta.addToCart,
   }))
 
-  const campaignMap = new Map()
-  for (const m of rows) {
-    for (const c of m.meta.campaigns || []) {
-      const curC = campaignMap.get(c.name) || { name: c.name, spend: 0, purchases: 0, value: 0, clicks: 0, months: 0 }
-      curC.spend += c.spend ?? 0
-      curC.purchases += c.purchases ?? 0
-      curC.value += c.value ?? 0
-      curC.clicks += c.clicks ?? 0
-      curC.months += 1
-      campaignMap.set(c.name, curC)
-    }
-  }
-  const campaigns = [...campaignMap.values()]
+  const breakdown = aggregateMetaBreakdown(rows, client)
+
+  const adColumns = useMemo(
+    () => buildMetaBreakdownColumns(breakdown, { profile: tableProfile, useAds }),
+    [breakdown, tableProfile, useAds],
+  )
+
+  const monthColumns = useMemo(
+    () => buildMetaMonthColumns(rows, { profile: tableProfile }),
+    [rows, tableProfile],
+  )
 
   return (
     <>
       <div className="kpi-grid">
         <Kpi label="Investícia" value={fmtEur(cur.spend)} delta={d('spend')} deltaGood="neutral" />
-        <Kpi label="Hodnota nákupov" value={fmtEur(cur.value)} sub={`${fmtNum(cur.purchases)} nákupov`} delta={d('value')} />
+        <Kpi label="Hodnota nákupov" value={fmtEur(cur.value)} sub={skNakupySub(cur.purchases)} delta={d('value')} />
         <Kpi label="ROAS" value={fmtRoas(cur.roas)} delta={d('roas')}
           subClass={cur.roas >= 3 ? 'up' : cur.roas < 1 ? 'down' : ''} />
-        {eshop ? (
+        {eshopKpis ? (
           <>
             <Kpi label="Nákupy" value={fmtNum(cur.purchases)} delta={d('purchases')} />
             <Kpi label="Cena za nákup" value={fmtEur(cur.cpp, 2)} delta={d('cpp')} deltaGood="down" />
@@ -130,7 +89,7 @@ export default function MetaAds({ months, compare, client }) {
       </Section>
 
       <div className="chart-grid section">
-        {eshop ? (
+        {eshopKpis ? (
           <>
             <div>
               <div className="section-title">Nákupy <span className="hint">mesačne</span></div>
@@ -163,11 +122,11 @@ export default function MetaAds({ months, compare, client }) {
         )}
       </div>
 
-      <Section title={eshop ? 'Reklamy' : 'Kampane'} hint="súčet za vybrané obdobie">
+      <Section title={useAds ? 'Reklamy' : 'Kampane'} hint="súčet za vybrané obdobie">
         <SortableTable
-          columns={eshop ? campaignColumnsEshop : campaignColumnsFull}
-          rows={campaigns}
-          rowKey={(c) => c.name}
+          columns={adColumns}
+          rows={breakdown}
+          rowKey={(c) => (c.campaign ? `${c.campaign}::${c.name}` : c.name)}
           defaultSortKey="spend"
         />
       </Section>
@@ -184,7 +143,7 @@ export default function MetaAds({ months, compare, client }) {
 
       <Section title="Mesačný detail">
         <SortableTable
-          columns={eshop ? monthColumnsEshop : monthColumnsFull}
+          columns={monthColumns}
           rows={rows}
           rowKey={(m) => `${m.year}-${m.month}`}
           defaultSortKey="month"

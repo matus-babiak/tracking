@@ -1,0 +1,29 @@
+---
+description: Formátovanie súm v EUR — vždy 2 desatinné miesta
+globs: src/**/*.{js,jsx}
+alwaysApply: true
+---
+
+# Sumy v EUR — 2 desatinné miesta
+
+Všetky **peňažné sumy** (investícia, tržby, hodnota nákupov, CPC, CPM, cena za konverziu, cena za interakciu, …) formátuj cez `fmtEur()` z `src/lib/helpers.js`.
+
+- Predvolene `fmtEur(v)` = **2 desatinné miesta** (napr. `2,43 €`, `481,33 €`)
+- Nepoužívaj `fmtEur` s 0 alebo 3 desatinnými miestami
+- Nepíš sumy ručne cez `toLocaleString` + `€`
+
+## Čo nie je suma v EUR
+
+- **Počty** (kliknutia, nákupy, konverzie) → `fmtNum()` alebo `fmtDec()` pre desatinné konverzie
+- **Percentá** → `fmtPct()`
+- **ROAS** (pomer) → `fmtRoas()` alebo `RoasBadge`
+- **Frekvencia, CPM ako číslo v dátach** — zobrazovanie stále cez `fmtEur` ak ide o cenu
+
+## Nové metriky
+
+Pri pridávaní stĺpcov/KPI s € vždy:
+
+```js
+render: (m) => fmtEur(m.meta.spend)
+// nie fmtEur(m.meta.spend, 0)
+```

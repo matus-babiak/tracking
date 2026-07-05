@@ -1,5 +1,6 @@
 import { Kpi, Section, SpendRoasChart, MonthBarChart, RoasBadge, SortableTable } from '../components/ui'
 import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtRoas, sum, pctChange } from '../lib/helpers'
+import { skNakupySub } from '../lib/skGrammar'
 
 function googleStats(months) {
   const rows = months.filter((m) => m.google)
@@ -106,7 +107,7 @@ export default function GoogleAds({ months, compare, client }) {
     <>
       <div className="kpi-grid">
         <Kpi label="Investícia" value={fmtEur(cur.spend)} delta={d('spend')} deltaGood="neutral" />
-        <Kpi label="Hodnota nákupov" value={fmtEur(cur.value)} sub={`${fmtNum(cur.purchases)} nákupov`} delta={d('value')} />
+        <Kpi label="Hodnota nákupov" value={fmtEur(cur.value)} sub={skNakupySub(cur.purchases)} delta={d('value')} />
         <Kpi label="ROAS" value={fmtRoas(cur.roas)} delta={d('roas')}
           subClass={cur.roas >= 3 ? 'up' : cur.roas < 1 ? 'down' : ''} />
         {eshop ? (

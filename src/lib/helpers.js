@@ -10,7 +10,8 @@ export const MONTH_SHORT = {
 
 // ---------- formátovanie ----------
 
-export function fmtEur(v, digits = 0) {
+/** Sumy v EUR — vždy 2 desatinné miesta (investícia, tržby, CPC, CPM, …). */
+export function fmtEur(v, digits = 2) {
   if (v == null) return '–'
   return v.toLocaleString('sk-SK', { minimumFractionDigits: digits, maximumFractionDigits: digits }) + ' €'
 }
@@ -156,6 +157,60 @@ export function pctChange(cur, prev) {
 }
 
 // ---------- agregácie ----------
+
+/** Riadky Meta tabuľky — reklamy alebo kampane podľa nastavenia klienta. */
+export function metaBreakdownRows(month, client) {
+  const meta = month?.meta
+  if (!meta) return []
+  if (client?.metaBreakdown === 'ads') {
+    return meta.ads?.length ? meta.ads : (meta.campaigns ?? [])
+  }
+  return meta.campaigns ?? []
+}
+
+/** Odvodené metriky po agregácii riadkov Meta. */
+export function computeMetaDerived(row) {
+  const r = { ...row }
+  if (r.roas == null && r.spend > 0 && r.value != null) r.roas = r.value / r.spend
+  if (r.costPerPurchase == null && r.purchases > 0 && r.spend != null) r.costPerPurchase = r.spend / r.purchases
+  if (r.aov == null && r.purchases > 0 && r.value != null) r.aov = r.value / r.purchases
+  if (r.cpm == null && r.impressions > 0 && r.spend != null) r.cpm = (r.spend / r.impressions) * 1000
+  if (r.frequency == null && r.reach > 0 && r.impressions != null) r.frequency = r.impressions / r.reach
+  if (r.cpc == null && r.clicks > 0 && r.spend != null) r.cpc = r.spend / r.clicks
+  if (r.ctr == null && r.impressions > 0 && r.clicks != null) r.ctr = (r.clicks / r.impressions) * 100
+  if (r.costPerAddToCart == null && r.addToCart > 0 && r.spend != null) r.costPerAddToCart = r.spend / r.addToCart
+  if (r.costPerLandingPageView == null && r.landingPageViews > 0 && r.spend != null) {
+    r.costPerLandingPageView = r.spend / r.landingPageViews
+  }
+  if (r.costPerEngagement == null && r.engagements > 0 && r.spend != null) r.costPerEngagement = r.spend / r.engagements
+  return r
+}
+
+/** Súčet reklám/kampaní Meta za obdobie (podľa mena, príp. kampaň + reklama). */
+export function aggregateMetaBreakdown(months, client) {
+  const sumKeys = [
+    'spend', 'purchases', 'value', 'clicks', 'addToCart', 'impressions', 'reach',
+    'landingPageViews', 'engagements', 'saves', 'shares', 'comments',
+  ]
+  const map = new Map()
+  for (const m of months.filter((x) => x.meta)) {
+    for (const item of metaBreakdownRows(m, client)) {
+      const key = item.campaign ? `${item.campaign}::${item.name}` : item.name
+      const prev = map.get(key) ?? {
+        name: item.name,
+        campaign: item.campaign ?? null,
+        months: 0,
+      }
+      for (const k of sumKeys) {
+        if (item[k] == null) continue
+        prev[k] = (prev[k] ?? 0) + item[k]
+      }
+      prev.months += 1
+      map.set(key, prev)
+    }
+  }
+  return [...map.values()].map(computeMetaDerived)
+}
 
 // súčet s ignorovaním null; vráti null ak nie je žiadna hodnota
 export function sum(rows, get) {

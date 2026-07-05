@@ -1,5 +1,11 @@
 import { Kpi, Section, MonthLineChart, MonthBarChart, SortableTable } from '../components/ui'
 import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtPct, sum, pctChange } from '../lib/helpers'
+import { fmtSkCount } from '../lib/skGrammar'
+import AnalyticsGa4 from './AnalyticsGa4'
+
+function hasGa4Export(months) {
+  return months.some((m) => m.ga?.snapshot)
+}
 
 function durationSec(s) {
   if (!s || s === '–') return null
@@ -44,6 +50,10 @@ const eshopColumns = [
 ]
 
 export default function Analytics({ months, compare }) {
+  if (hasGa4Export(months)) {
+    return <AnalyticsGa4 months={months} compare={compare} />
+  }
+
   const rows = months.filter((m) => m.ga)
   const cur = gaStats(months)
   const prev = compare ? gaStats(compare.months) : null
@@ -62,9 +72,9 @@ export default function Analytics({ months, compare }) {
   return (
     <>
       <div className="kpi-grid">
-        <Kpi label="Relácie z kampaní" value={fmtNum(cur.paidSessions)} sub={`${fmtNum(cur.paidUsers)} návštevníkov`}
+        <Kpi label="Relácie z kampaní" value={fmtNum(cur.paidSessions)} sub={fmtSkCount(cur.paidUsers, 'navstevnik')}
           delta={d('paidSessions')} />
-        <Kpi label="Relácie bez kampaní" value={fmtNum(cur.organicSessions)} sub={`${fmtNum(cur.organicUsers)} návštevníkov`}
+        <Kpi label="Relácie bez kampaní" value={fmtNum(cur.organicSessions)} sub={fmtSkCount(cur.organicUsers, 'navstevnik')}
           delta={d('organicSessions')} />
         <Kpi label="Relácie spolu" value={fmtNum(cur.totalSessions)} delta={d('totalSessions')} />
         <Kpi label="Tržby e-shopu (GA4)" value={fmtEur(cur.eshopRevenue)} delta={d('eshopRevenue')} />

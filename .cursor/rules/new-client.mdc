@@ -1,0 +1,40 @@
+---
+description: Nový klient — jediný register v src/data/index.js, automaticky všade v appke
+globs: src/data/**/*.js
+alwaysApply: true
+---
+
+# Nový klient — jeden register, všade v appke
+
+**Jediný krok registrácie:** `src/data/index.js` (pole `clients`).
+
+Keď pridávaš klienta, urob len toto:
+
+1. Vytvor `src/data/<id>.js` (šablóna: `sanaplant.js` alebo podobný profil klienta).
+2. Import + pridaj objekt do poľa `clients` v `src/data/index.js`.
+
+**Nepridávaj klienta manuálne do:**
+
+- `src/data/guides.jsx` — taby Návody berú zoznam z `clients`; metriky sa auto-generujú z importu; do `guideExport` doplň len postup exportu z platforiem.
+- `src/lib/importOverview.js` — matica Import dát iteruje `clients` z indexu.
+- sidebar / dropdown — `clients` z indexu cez `App.jsx`.
+
+## Voliteľné doplnenia (nie registrácia)
+
+| Čo | Kde |
+|----|-----|
+| Heslo / guest prístup | `scripts/seal-passwords.mjs`, `src/lib/auth.js` ak treba výnimku |
+| Postup exportu z platformy | `guideExport` v `src/data/guides.jsx` |
+| Poznámky k metrikám | pole `notes` v súbore klienta (zobrazí sa v Návody) |
+| Profil dashboardu | `metaProfile`, `leadgenProfile`, `adsProfile` — pozri `.cursor/rules/client-metrics.mdc` |
+
+## Metriky
+
+UI sa prispôsobuje importu — pozri pravidlo `client-metrics.mdc`. Každý klient má individuálny dataset; nekopíruj Sanaplant metriky naslepo.
+
+## Kontrola po pridaní
+
+- Klient v dropdowne v sidebare
+- Riadok v **Import dát** (`/prehlady`)
+- Chip v **Návody** (`/navody`)
+- Route `/<id>` funguje

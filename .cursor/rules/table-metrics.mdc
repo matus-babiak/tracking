@@ -1,0 +1,72 @@
+---
+description: Tabuľky PPC — povinné stĺpce podľa profilu klienta
+globs: src/**/*.{js,jsx}
+alwaysApply: true
+---
+
+# Metriky v tabuľkách
+
+Definície stĺpcov: `src/lib/metaTableColumns.js`.
+
+## Pravidlo zobrazenia
+
+1. **Všetky metriky z importu** musia mať zodpovedajúce pole v datasete (`src/data/<id>.js`).
+2. **Stĺpec v tabuľke** sa zobrazí, ak aspoň jeden riadok vo vybranom období má dané pole **nie null** (0 je platná hodnota).
+3. **Null** = metrika v exporte chýbala — neukladaj ako 0, stĺpec sa nezobrazí.
+4. Identifikačné stĺpce (Kampaň, Reklama, Mesiac) sú vždy; pri horizontálnom scrolli sú **sticky** (Kampaň + Reklama).
+
+## E-shop — kľúčové Meta stĺpce
+
+Poradie metrík v tabuľke (ak sú v dátach):
+
+| Kľúč | Label |
+|------|-------|
+| `spend` | Investícia |
+| `value` | Hodnota nákupov |
+| `roas` | ROAS |
+| `purchases` | Nákupy |
+| `costPerPurchase` | Cena / nákup |
+| `aov` | AOV |
+| `cpm` | CPM |
+| `impressions` | Impresie |
+| `reach` | Dosah |
+| `frequency` | Frekvencia |
+| `clicks` | Kliknutia |
+| `cpc` | CPC |
+| `ctr` | CTR |
+| `addToCart` | Do košíka |
+| `costPerAddToCart` | Cena / do košíka |
+| `landingPageViews` | Návštevy (LPV) |
+| `costPerLandingPageView` | Cena / LPV |
+| `engagements` | Post engagement |
+| `saves` | Uloženia |
+| `shares` | Zdieľania |
+
+Mapovanie Meta CSV → kľúče: `scripts/import-meta-ads-csv.mjs`.
+
+## Služby / leadgen — okrem spoločných
+
+Spoločné s e-shopom: investícia, kliknutia, CPC, CTR, impresie, dosah, frekvencia, CPM.
+
+Doplnkové pre služby:
+
+| Kľúč | Label |
+|------|-------|
+| `landingPageViews` | Návštevy (LPV) |
+| `costPerLandingPageView` | Cena / LPV |
+| `engagements` | Post engagement |
+| `costPerEngagement` | Cena / interakciu |
+| `saves` | Uloženia |
+| `shares` | Zdieľania |
+| `comments` | Komentáre |
+
+## Import Meta Ads (reklamy)
+
+- Klient s `metaBreakdown: 'ads'` → mesačný blok `meta.ads[]`, každá položka: `name`, `campaign`, metriky.
+- Agregácia cez `aggregateMetaBreakdown()` — kľúč `kampaň::reklama`.
+- Odvodené metriky dopočítaj cez `computeMetaDerived()` (ROAS, CPC, CPM, …).
+
+## Nepridávaj
+
+- Stĺpce, ktoré klient v importe nemá
+- Ručné duplikovanie definícií stĺpcov mimo `metaTableColumns.js`

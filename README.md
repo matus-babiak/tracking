@@ -36,14 +36,14 @@ pri investícii je zmena neutrálna — sivá).
 2. Uprav `id`, `name` a vyplň pole `months` podľa reportov klienta — každý mesiac má
    `year` a `month`, mesiace drž chronologicky zoradené
    (metrika, ktorá v reporte nie je, sa nastaví na `null` — appka ju zobrazí ako „–“)
-3. Zaregistruj klienta v `src/data/index.js`:
+3. Zaregistruj klienta v `src/data/index.js` (jediný register — stačí len tu):
 
 ```js
 import novyKlient from './novyKlient'
 const clients = [sanaplant, novyKlient]
 ```
 
-Klient sa hneď objaví vo výbere v ľavom menu.
+Klient sa automaticky objaví vo výbere v menu, v **Import dát** (`/prehlady`), v **Návody** (`/navody`) a na route `/<id>`. Obsah návodu doplníš neskôr do `guideContent` v `src/data/guides.js` — registrácia klienta sa tam neopakuje.
 
 ## Ako pridať ďalšie mesiace
 

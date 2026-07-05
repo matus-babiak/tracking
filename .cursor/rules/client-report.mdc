@@ -1,0 +1,43 @@
+---
+description: Report pre klienta — vždy podľa dát klienta, nie jedna šablóna
+globs: src/**/*.{js,jsx}
+alwaysApply: true
+---
+
+# Report pre klienta = dáta klienta
+
+**Prehľad pre klienta** (`buildClientReport` v `src/lib/clientReport.js`) nie je jedna šablóna.
+Každý klient dostane report zostavený z **jeho importu a výsledkov** za zvolené obdobie.
+
+Príklad: **Blumeria** (Meta leadgen, engagement) ≠ **Sanaplant** (e-shop, ROAS, Mailchimp).
+
+## Ako report vzniká
+
+1. **Zdroje** — sekcie (Meta, Google, GA4, e-mail, e-shop) len ak klient má daný blok v mesačných dátach za obdobie.
+2. **Metriky** — riadok/KPI len ak má hodnotu v dátach (null = chýba v exporte; 0 u počtov sa neukazuje).
+3. **Profil** — určuje tón a prioritu (`eshop`, `leadgen`, `dual`), nie fixný zoznam riadkov:
+   - `metaProfile: 'leadgen'` → dosah, engagement, LPV — **nie** nákupy/ROAS, ak v dátach nie sú
+   - default / `adsProfile: 'eshop'` → nákupy, ROAS, tržby — ak sú v importe
+   - `leadgenProfile: 'dual'` → Meta + Google konverzie podľa akcií
+4. **Zhrnutie a kľúčové čísla** — vety a highlighty len z metrík, ktoré report skutočne obsahuje.
+5. **Top reklamy** — max. `TOP_CAMPAIGNS_LIMIT` (5) na platformu; nadpis cez `topReklamy(n)` (skloňovanie).
+
+## Sanaplant (e-shop) — čo report obsahuje ak sú dáta
+
+- Meta + Google: investícia, nákupy, ROAS, dosah, kliknutia, CPC
+- Boosting (do 12/2025): samostatná sekcia
+- Web/e-shop: tržby, objednávky, položky, GA návštevnosť
+- Mailchimp: odoslané, open/click rate, kliknutia, tržby, objednávky
+- Top 5 reklám na Meta a Google
+
+## Pri zmene klienta / importu
+
+1. Ulož dáta do `src/data/<id>.js` — report sa prispôsobí automaticky.
+2. Skontroluj **Reporty → Prehľad pre klienta** pre dané obdobie.
+3. Nepridávaj do reportu metriky, ktoré klient nemá (napr. ROAS pre Blumeriu).
+4. Nový typ metriky = rozšír `buildMetaSection` / `buildGoogleSection` / … v `clientReport.js` podľa zdroja, nie kopírovaním Sanaplant bloku.
+
+## Súvisiace pravidlá
+
+- Metriky v analytike: `client-metrics.mdc`
+- Registrácia klienta: `new-client.mdc`

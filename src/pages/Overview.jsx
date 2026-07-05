@@ -1,5 +1,6 @@
 import { Kpi, Section, SpendRoasChart, MonthBarChart, RoasBadge, SortableTable } from '../components/ui'
 import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtPct, fmtRoas, aggregate, pctChange } from '../lib/helpers'
+import { skNakupySub } from '../lib/skGrammar'
 
 function monthMetrics(m) {
   const spend = (m.meta?.spend ?? 0) + (m.google?.spend ?? 0) + (m.boosting?.spend ?? 0)
@@ -51,16 +52,16 @@ export default function Overview({ months, compare }) {
       <div className="kpi-grid">
         <Kpi label="Investícia do reklám" value={fmtEur(agg.adSpend)} sub="Meta + Google + boosting"
           delta={d('adSpend')} deltaGood="neutral" />
-        <Kpi label="Hodnota nákupov z reklám" value={fmtEur(agg.adValue)} sub={`${fmtNum(agg.adPurchases)} nákupov`}
+        <Kpi label="Hodnota nákupov z reklám" value={fmtEur(agg.adValue)} sub={skNakupySub(agg.adPurchases)}
           delta={d('adValue')} />
         <Kpi label="Celkový ROAS" value={fmtRoas(agg.roas)} sub={agg.pno != null ? `PNO ${fmtPct(agg.pno)}` : null}
           subClass={agg.roas >= 3 ? 'up' : agg.roas < 1 ? 'down' : ''} delta={d('roas')} />
         <Kpi label="Tržby e-shopu" value={fmtEur(agg.eshopRevenue)}
           sub={agg.adShareOfRevenue != null ? `${fmtPct(agg.adShareOfRevenue)} priamo z reklám` : null}
           delta={d('eshopRevenue')} />
-        <Kpi label="Meta Ads" value={fmtEur(agg.metaSpend)} sub={`${fmtNum(agg.metaPurchases)} nákupov · ${fmtEur(agg.metaValue)}`}
+        <Kpi label="Meta Ads" value={fmtEur(agg.metaSpend)} sub={skNakupySub(agg.metaPurchases, fmtEur(agg.metaValue))}
           delta={d('metaValue')} />
-        <Kpi label="Google Ads" value={fmtEur(agg.googleSpend)} sub={`${fmtNum(agg.googlePurchases)} nákupov · ${fmtEur(agg.googleValue)}`}
+        <Kpi label="Google Ads" value={fmtEur(agg.googleSpend)} sub={skNakupySub(agg.googlePurchases, fmtEur(agg.googleValue))}
           delta={d('googleValue')} />
       </div>
 

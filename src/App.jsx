@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import clients from './data'
-import { clientBySlug, isImportOverviewSlug, IMPORT_OVERVIEW_SLUG } from './lib/routes'
+import { clientBySlug, isImportOverviewSlug, isGuidesSlug, isSuperAdminRoute, IMPORT_OVERVIEW_SLUG, GUIDES_SLUG } from './lib/routes'
 import { monthKey, resolvePeriod, resolveCompare, rangeLabel, COMPARE_MODES, clientTabs } from './lib/helpers'
 import { resolveClientUiState, saveClientUiState, loadSidebarCollapsed, saveSidebarCollapsed } from './lib/uiState'
 import { isAppUnlocked, isClientUnlocked, lockApp, lockClient, getAuthRole, getAccessUserName, clientsForRole, isGuestAllowedClient, isSuperAdmin } from './lib/auth'
@@ -17,6 +17,7 @@ import GoogleAdsLeadgen from './pages/GoogleAdsLeadgen'
 import Analytics from './pages/Analytics'
 import Email from './pages/Email'
 import ImportOverview from './pages/ImportOverview'
+import GuidesOverview from './pages/GuidesOverview'
 import ClientReport from './pages/ClientReport'
 
 const ICONS = {
@@ -26,6 +27,7 @@ const ICONS = {
   ga: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
   email: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>,
   import: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>,
+  guides: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="14" y2="11"/></svg>,
   clientReport: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
 }
 
@@ -113,7 +115,9 @@ export default function App() {
   const navigate = useNavigate()
   const { clientSlug } = useParams()
   const isImportDashboard = isImportOverviewSlug(clientSlug)
-  const urlClient = clientSlug && !isImportDashboard ? clientBySlug(clientSlug) : null
+  const isGuidesDashboard = isGuidesSlug(clientSlug)
+  const isSuperAdminPage = isSuperAdminRoute(clientSlug)
+  const urlClient = clientSlug && !isSuperAdminPage ? clientBySlug(clientSlug) : null
   const showSuperAdminNav = isSuperAdmin()
 
   const [clientId, setClientId] = useState(urlClient?.id ?? defaultClientSlug() ?? '')
@@ -143,10 +147,10 @@ export default function App() {
   const client = selectedClientId ? (clients.find((c) => c.id === selectedClientId) ?? null) : null
   const accessUserName = getAccessUserName({ direct: lockedToClient, clientName: client?.name })
   useEffect(() => {
-    if (isImportDashboard && authRole !== 'admin') {
+    if (isSuperAdminPage && authRole !== 'admin') {
       navigate('/chillix', { replace: true })
     }
-  }, [isImportDashboard, authRole, navigate])
+  }, [isSuperAdminPage, authRole, navigate])
 
   useEffect(() => {
     if (!clientSlug && appUnlocked && authRole === 'guest') {
@@ -156,7 +160,7 @@ export default function App() {
 
   // Sync stavu pri zmene URL (späť/vpred, prepínač klientov) — obnoví uložený filter alebo default
   useEffect(() => {
-    if (isImportOverviewSlug(clientSlug)) return
+    if (isSuperAdminRoute(clientSlug)) return
     if (!urlClient) {
       if (authRole === 'admin') setClientId('')
       return
@@ -188,6 +192,11 @@ export default function App() {
       reportPeriodTo,
     })
   }, [client?.id, periodFrom, periodTo, compareMode, tab, reportPeriodFrom, reportPeriodTo])
+
+  // Presmerovanie zrušeného klienta JS
+  useEffect(() => {
+    if (clientSlug === 'js') navigate('/', { replace: true })
+  }, [clientSlug, navigate])
 
   // Guest nemá prístup k ostatným klientom (napr. /muse)
   useEffect(() => {
@@ -221,6 +230,11 @@ export default function App() {
 
   const openImportDashboard = () => {
     navigate(`/${IMPORT_OVERVIEW_SLUG}`)
+    setMenuOpen(false)
+  }
+
+  const openGuidesDashboard = () => {
+    navigate(`/${GUIDES_SLUG}`)
     setMenuOpen(false)
   }
 
@@ -271,8 +285,8 @@ export default function App() {
   }, [menuOpen])
 
   const clientReady = useMemo(
-    () => isAdminHub || isImportDashboard || (client && isClientUnlocked(client.id, { direct: lockedToClient })),
-    [client, clientId, clientUnlockTick, lockedToClient, isAdminHub, isImportDashboard],
+    () => isAdminHub || isSuperAdminPage || (client && isClientUnlocked(client.id, { direct: lockedToClient })),
+    [client, clientId, clientUnlockTick, lockedToClient, isAdminHub, isSuperAdminPage],
   )
 
   const handleLogout = () => {
@@ -286,7 +300,7 @@ export default function App() {
     }
   }
 
-  if (clientSlug && !urlClient && !isImportDashboard) return <NotFound />
+  if (clientSlug && !urlClient && !isSuperAdminPage) return <NotFound />
 
   if (!clientSlug && !appUnlocked) {
     return (
@@ -301,7 +315,7 @@ export default function App() {
 
   if (!clientSlug && !isAdminHub) return null
 
-  if (isImportDashboard && !showSuperAdminNav) return null
+  if (isSuperAdminPage && !showSuperAdminNav) return null
 
   if (!clientReady && client) {
     return (
@@ -322,7 +336,7 @@ export default function App() {
         <div className="logo"><span className="logo-dot" />Analytika</div>
         <div className="mobile-header-right">
           <span className="mobile-current-tab">
-            {isImportDashboard ? 'Import dát' : isAdminHub ? 'Výber klienta' : activeTab?.label}
+            {isGuidesDashboard ? 'Návody' : isImportDashboard ? 'Import dát' : isAdminHub ? 'Výber klienta' : activeTab?.label}
           </span>
           <button
             className={`hamburger ${menuOpen ? 'open' : ''}`}
@@ -347,6 +361,10 @@ export default function App() {
                   {ICONS.import}
                   Import dát
                 </button>
+                <button type="button" className={`nav-item ${isGuidesDashboard ? 'active' : ''}`} onClick={openGuidesDashboard}>
+                  {ICONS.guides}
+                  Návody
+                </button>
               </>
             )}
             <div className="nav-label">Klient</div>
@@ -360,7 +378,7 @@ export default function App() {
             ) : (
               <div className="client-locked-name">{client?.name}</div>
             )}
-            {!isAdminHub && !isImportDashboard && (
+            {!isAdminHub && !isSuperAdminPage && (
               <>
                 <div className="nav-label">Nástroje</div>
                 {visibleTabs.map((t) => (
@@ -398,6 +416,10 @@ export default function App() {
               {ICONS.import}
               <span className="nav-item-label sidebar-hide-collapsed">Import dát</span>
             </button>
+            <button type="button" className={`nav-item ${isGuidesDashboard ? 'active' : ''}`} onClick={openGuidesDashboard} title="Návody">
+              {ICONS.guides}
+              <span className="nav-item-label sidebar-hide-collapsed">Návody</span>
+            </button>
           </>
         )}
 
@@ -422,7 +444,7 @@ export default function App() {
           </div>
         )}
 
-        {!isAdminHub && !isImportDashboard && (
+        {!isAdminHub && !isSuperAdminPage && (
           <>
             <div className="nav-label">Nástroje</div>
             {visibleTabs.map((t) => (
@@ -441,9 +463,8 @@ export default function App() {
 
         <div className="sidebar-footer">
           <p className="sidebar-footer-text sidebar-hide-collapsed">
-            Offline analytika z mesačných reportov.
             <span className="sidebar-footer-meta">
-              {isAdminHub ? 'Vyberte klienta v menu.' : isImportDashboard ? 'Matbab · import dát' : <>{client?.name} · {rangeLabel(client?.months ?? [])}</>}
+              {isAdminHub ? 'Vyberte klienta v menu.' : isGuidesDashboard ? 'Matbab · návody' : isImportDashboard ? 'Matbab · import dát' : <>{client?.name} · {rangeLabel(client?.months ?? [])}</>}
             </span>
           </p>
           <button type="button" className="auth-lock-btn" onClick={handleLogout} title="Odhlásiť">
@@ -459,7 +480,17 @@ export default function App() {
       </aside>
 
       <main className="main">
-        {isImportDashboard ? (
+        {isGuidesDashboard ? (
+          <>
+            <div className="page-header">
+              <div>
+                <div className="page-title">Návody</div>
+                <div className="page-subtitle">Export dát z platforiem a metriky podľa klienta</div>
+              </div>
+            </div>
+            <GuidesOverview />
+          </>
+        ) : isImportDashboard ? (
           <>
             <div className="page-header">
               <div>
@@ -475,7 +506,8 @@ export default function App() {
             <p className="hub-subtitle">Vyberte klienta v ľavom menu a zobrazia sa reporty.</p>
           </div>
         ) : client ? (
-          tab === 'client-report' ? (
+          <>
+          {tab === 'client-report' ? (
             <>
               <div className="page-header">
                 <div>
@@ -516,17 +548,13 @@ export default function App() {
             </div>
 
             {Page && <Page months={months} compare={compare} client={client} />}
-
-            {client?.notes?.length > 0 && (
-              <div className="notes">
-                <strong>Poznámky k dátam</strong>
-                <ul>
-                  {client.notes.map((n, i) => <li key={i}>{n}</li>)}
-                </ul>
-              </div>
-            )}
           </>
-          )
+          )}
+
+          <p className="main-disclaimer">
+            Analytika zobrazuje mesačné exporty z reklamných a analytických platforiem.
+          </p>
+          </>
         ) : null}
       </main>
     </div>

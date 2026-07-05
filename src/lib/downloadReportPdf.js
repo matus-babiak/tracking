@@ -18,7 +18,6 @@ const PDF_AVOID_SELECTORS = [
   '.client-report-highlight',
   '.client-report-section-head',
   '.client-report-row',
-  '.client-report-footer',
 ].join(', ')
 
 export async function downloadReportPdf(element, filename) {

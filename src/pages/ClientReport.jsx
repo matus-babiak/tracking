@@ -1,18 +1,25 @@
 import { useMemo, useRef, useState } from 'react'
 import { buildClientReport } from '../lib/clientReport'
 import { downloadReportPdf, reportPdfFilename } from '../lib/downloadReportPdf'
+import { metricToneClass, metricToneFromLabel } from '../lib/metricTone'
+import { skZaObdobieMesiace } from '../lib/skGrammar'
 
-function ReportHighlight({ label, value, hint }) {
+function valueToneClass(tone, label) {
+  return metricToneClass(tone ?? metricToneFromLabel(label))
+}
+
+function ReportHighlight({ label, value, hint, tone }) {
+  const toneCls = valueToneClass(tone, label)
   return (
     <div className="client-report-highlight client-report-pdf-avoid">
-      <div className="client-report-highlight-value">{value}</div>
+      <div className={`client-report-highlight-value${toneCls ? ` ${toneCls}` : ''}`}>{value}</div>
       <div className="client-report-highlight-label">{label}</div>
       {hint && <div className="client-report-highlight-hint">{hint}</div>}
     </div>
   )
 }
 
-function ReportSection({ title, intro, rows }) {
+function ReportSection({ title, intro, rows, topCampaigns }) {
   if (!rows.length) return null
   return (
     <section className="client-report-section">
@@ -21,16 +28,38 @@ function ReportSection({ title, intro, rows }) {
         {intro && <p className="client-report-section-intro">{intro}</p>}
       </div>
       <dl className="client-report-rows">
-        {rows.map((r) => (
+        {rows.map((r) => {
+          const toneCls = valueToneClass(r.tone, r.label)
+          return (
           <div key={r.label} className="client-report-row client-report-pdf-avoid">
             <dt className="client-report-row-label">
               {r.label}
               {r.hint && <span className="client-report-row-hint">{r.hint}</span>}
             </dt>
-            <dd className="client-report-row-value">{r.value}</dd>
+            <dd className={`client-report-row-value${toneCls ? ` ${toneCls}` : ''}`}>{r.value}</dd>
           </div>
-        ))}
+          )
+        })}
       </dl>
+      {topCampaigns?.items?.length > 0 && (
+        <div className="client-report-top-campaigns client-report-pdf-avoid">
+          <h4 className="client-report-top-heading">{topCampaigns.heading}</h4>
+          <dl className="client-report-rows client-report-top-rows">
+            {topCampaigns.items.map((c) => {
+              const toneCls = valueToneClass(c.tone)
+              return (
+              <div key={c.name} className="client-report-row client-report-top-row">
+                <dt className="client-report-row-label">
+                  {c.name}
+                  {c.detail && <span className="client-report-row-hint">{c.detail}</span>}
+                </dt>
+                <dd className={`client-report-row-value${toneCls ? ` ${toneCls}` : ''}`}>{c.value}</dd>
+              </div>
+              )
+            })}
+          </dl>
+        </div>
+      )}
     </section>
   )
 }
@@ -88,7 +117,7 @@ export default function ClientReport({ client, months }) {
         <h2 className="client-report-title">{report.clientName}</h2>
         <p className="client-report-period">{report.period}</p>
         <p className="client-report-meta">
-          {isSingleMonth ? 'Mesačný prehľad' : `Súhrn za ${months.length} mesiacov`}
+          {isSingleMonth ? 'Mesačný prehľad' : skZaObdobieMesiace(months.length)}
           {' · '}
           {new Date().toLocaleDateString('sk-SK', { day: 'numeric', month: 'long', year: 'numeric' })}
         </p>
@@ -116,13 +145,6 @@ export default function ClientReport({ client, months }) {
         {report.sections.map((section) => (
           <ReportSection key={section.title} {...section} />
         ))}
-
-        <footer className="client-report-footer client-report-pdf-avoid">
-          <p>
-            Údaje pochádzajú z mesačných reportov reklamných platforiem a analytiky webu.
-            Čísla sa môžu mierne líšiť od skutočných predajov kvôli spôsobu merania (atribúcia, cookies).
-          </p>
-        </footer>
       </div>
     </article>
   )

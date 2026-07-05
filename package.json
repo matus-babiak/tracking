@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "import:meta-ads": "node scripts/import-meta-ads-csv.mjs",
     "seal-passwords": "node scripts/seal-passwords.mjs"
   },
   "dependencies": {

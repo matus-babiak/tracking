@@ -244,7 +244,7 @@ export default function OverviewLeadgen({ months, compare, client }) {
         <Kpi label="Kliknutia" value={fmtNum(agg.clicks)} delta={d('clicks')} />
         <Kpi label="Návštevy" value={fmtNum(agg.lpv)} delta={d('lpv')} />
         <Kpi label="Post engagement" value={fmtNum(agg.engagements)} delta={d('engagements')} />
-        <Kpi label="Cena za interakciu" value={fmtEur(agg.costPerEngagement, 3)} delta={d('costPerEngagement')} deltaGood="neutral" />
+        <Kpi label="Cena za interakciu" value={fmtEur(agg.costPerEngagement)} delta={d('costPerEngagement')} deltaGood="neutral" />
         <Kpi label="Uloženia" value={fmtNum(agg.saves)} delta={d('saves')} />
       </div>
 
@@ -285,7 +285,7 @@ export default function OverviewLeadgen({ months, compare, client }) {
                 <td className="num">{fmtNum(agg.clicks)}</td>
                 <td className="num">{fmtNum(agg.lpv)}</td>
                 <td className="num">{fmtNum(agg.engagements)}</td>
-                <td className="num">{fmtEur(agg.costPerEngagement, 3)}</td>
+                <td className="num">{fmtEur(agg.costPerEngagement)}</td>
                 <td className="num">{fmtNum(agg.saves)}</td>
               </tr>
               {prev && (
@@ -299,7 +299,7 @@ export default function OverviewLeadgen({ months, compare, client }) {
                   <td className="num">{fmtNum(prev.clicks)}</td>
                   <td className="num">{fmtNum(prev.lpv)}</td>
                   <td className="num">{fmtNum(prev.engagements)}</td>
-                  <td className="num">{fmtEur(prev.costPerEngagement, 3)}</td>
+                  <td className="num">{fmtEur(prev.costPerEngagement)}</td>
                   <td className="num">{fmtNum(prev.saves)}</td>
                 </tr>
               )}

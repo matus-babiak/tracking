@@ -1,0 +1,42 @@
+---
+description: Metriky klienta — individuálny dataset, UI podľa importu
+globs: src/**/*.{js,jsx}
+alwaysApply: true
+---
+
+# Metriky klienta = metriky importu
+
+Každý klient je **individuálny**. Nemá spoločnú šablónu metrík so Sanaplantom.
+
+## Jeden klient = jeden dataset
+
+- Súbor `src/data/<id>.js` — jediný zdroj pravdy pre dáta aj dostupné metriky klienta.
+- Registrácia len v `src/data/index.js`.
+- Pole `notes` v súbore klienta = interné poznámky k metrikám (zobrazujú sa v **Návody**).
+
+## UI sa prispôsobuje importu
+
+1. **Taby** — `clientTabs()` v `helpers.js`: zobraz len zdroje, ktoré klient v `months` má (`meta`, `google`, `ga`, `email`).
+2. **Profil dashboardu** — voliteľné príznaky na objekte klienta:
+   - `metaProfile: 'leadgen'` → leadgen variant Meta/Prehľadu
+   - `leadgenProfile: 'dual'` → Meta + Google konverzie (RentCarSlovakia)
+   - `adsProfile: 'eshop'` → zjednodušené PPC stĺpce (Hagardhal)
+   - default → e-shop (nákupy, ROAS, tržby)
+3. **Stĺpce a KPI** — zobrazuj len metriky, ktoré v dátach klienta existujú. Pri novom importe pridaj polia do mesačného objektu; nepredpokladaj, že každý klient má `purchases`, `landingPageViews`, `eshop.revenue` atď.
+4. **Null** = metrika v danom mesiaci nebola v exporte — nezobrazuj ju ako 0.
+5. **Report pre klienta** — rovnaký princíp: `buildClientReport()` skladá report z dát klienta za obdobie, nie zo Sanaplant šablóny. Pozri `client-report.mdc`.
+6. **Tabuľky PPC** — povinné stĺpce podľa profilu (e-shop / leadgen), pozri `table-metrics.mdc` a `src/lib/metaTableColumns.js`.
+
+## Nový klient / nový import
+
+1. Skopíruj štruktúru od **podobného profilu** (leadgen → `blumeria.js` / `chillix.js`, eshop → `sanaplant.js`).
+2. Ulož **presne polia z CSV/exportu** — názvy kľúčov zodpovedajú stĺpcom v analytike.
+3. Skontroluj **Import dát** (`/prehlady`) — zdroje M/G/A/E/Em musia sedieť s mesačnými blokmi.
+4. Skontroluj **Návody** (`/navody`) — auto-zoznam metrík z `describeClientMetrics()`.
+5. Voliteľne dopln `guideExport` v `src/data/guides.jsx` — postup exportu z platformy.
+
+## Nepridávaj
+
+- Spoločný „default“ zoznam metrík pre všetkých klientov
+- Manuálnu registráciu klienta mimo `index.js`
+- Metriky do UI, ktoré klient v importe nemá

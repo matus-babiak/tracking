@@ -15,15 +15,55 @@ function compareSortValues(a, b, dir) {
 }
 
 // Tabuľka s triedením stĺpcov (klik na hlavičku: najprv zostupne, potom vzostupne)
-export function SortableTable({ columns, rows, rowKey, footer, defaultSortKey, defaultSortDir = 'desc' }) {
+const TABLE_ROW_LIMIT = 10
+const STICKY_WIDTHS = [160, 220, 120]
+
+function stickyLeft(columns, colIndex) {
+  const col = columns[colIndex]
+  if (!col?.sticky) return null
+  let left = 0
+  for (let i = 0; i < colIndex; i++) {
+    if (columns[i].sticky) {
+      const idx = columns.slice(0, i + 1).filter((c) => c.sticky).length - 1
+      left += STICKY_WIDTHS[idx] ?? 140
+    }
+  }
+  return left
+}
+
+function stickyIndex(columns, colIndex) {
+  if (!columns[colIndex]?.sticky) return null
+  return columns.slice(0, colIndex + 1).filter((c) => c.sticky).length - 1
+}
+
+function cellClass(col, columns, colIndex, isLastSticky) {
+  const parts = []
+  if (col.align === 'num') parts.push('num')
+  if (col.sticky) {
+    parts.push('sticky-col')
+    if (isLastSticky) parts.push('sticky-col-edge')
+  }
+  return parts.join(' ')
+}
+
+export function SortableTable({ columns, rows, rowKey, footer, defaultSortKey, defaultSortDir = 'desc', limit = TABLE_ROW_LIMIT }) {
   const [sortKey, setSortKey] = useState(defaultSortKey || columns.find((c) => c.sort)?.key)
   const [sortDir, setSortDir] = useState(defaultSortDir)
+  const [expanded, setExpanded] = useState(false)
 
   const sorted = useMemo(() => {
     const col = columns.find((c) => c.key === sortKey)
     if (!col?.sort) return rows
     return [...rows].sort((a, b) => compareSortValues(col.sort(a), col.sort(b), sortDir))
   }, [rows, columns, sortKey, sortDir])
+
+  useEffect(() => {
+    setExpanded(false)
+  }, [rows, sortKey, sortDir])
+
+  const canExpand = sorted.length > limit
+  const visibleRows = expanded || !canExpand ? sorted : sorted.slice(0, limit)
+  const hiddenCount = sorted.length - limit
 
   const onSort = (col) => {
     if (!col.sort) return
@@ -34,39 +74,75 @@ export function SortableTable({ columns, rows, rowKey, footer, defaultSortKey, d
     }
   }
 
+  const hasSticky = columns.some((c) => c.sticky)
+  const lastStickyIndex = columns.reduce((acc, c, i) => (c.sticky ? i : acc), -1)
+
   return (
-    <div className="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            {columns.map((col) => (
-              <th
-                key={col.key}
-                className={[col.align === 'num' ? 'num' : '', col.sort ? 'sortable' : ''].filter(Boolean).join(' ')}
-                onClick={() => onSort(col)}
-                aria-sort={col.sort && sortKey === col.key ? (sortDir === 'asc' ? 'ascending' : 'descending') : undefined}
-              >
-                <span className="th-label">{col.label}</span>
-                {col.sort && sortKey === col.key && (
-                  <span className="sort-indicator" aria-hidden>{sortDir === 'desc' ? '↓' : '↑'}</span>
-                )}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {sorted.map((row) => (
-            <tr key={rowKey(row)}>
-              {columns.map((col) => (
-                <td key={col.key} className={col.align === 'num' ? 'num' : ''}>
-                  {col.render(row)}
-                </td>
-              ))}
+    <div className="sortable-table">
+      <div className={`table-wrap${hasSticky ? ' table-sticky-cols' : ''}`}>
+        <table>
+          <thead>
+            <tr>
+              {columns.map((col, colIndex) => {
+                const sIdx = stickyIndex(columns, colIndex)
+                return (
+                <th
+                  key={col.key}
+                  className={[
+                    col.align === 'num' ? 'num' : '',
+                    col.sort ? 'sortable' : '',
+                    col.sticky ? 'sticky-col' : '',
+                    colIndex === lastStickyIndex ? 'sticky-col-edge' : '',
+                  ].filter(Boolean).join(' ')}
+                  style={col.sticky ? { left: stickyLeft(columns, colIndex) } : undefined}
+                  data-sticky-idx={sIdx ?? undefined}
+                  onClick={() => onSort(col)}
+                  aria-sort={col.sort && sortKey === col.key ? (sortDir === 'asc' ? 'ascending' : 'descending') : undefined}
+                >
+                  <span className="th-label">{col.label}</span>
+                  {col.sort && sortKey === col.key && (
+                    <span className="sort-indicator" aria-hidden>{sortDir === 'desc' ? '↓' : '↑'}</span>
+                  )}
+                </th>
+                )
+              })}
             </tr>
-          ))}
-          {footer}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {visibleRows.map((row) => (
+              <tr key={rowKey(row)}>
+                {columns.map((col, colIndex) => (
+                  <td
+                    key={col.key}
+                    className={cellClass(col, columns, colIndex, colIndex === lastStickyIndex)}
+                    style={col.sticky ? { left: stickyLeft(columns, colIndex) } : undefined}
+                    data-sticky-idx={stickyIndex(columns, colIndex) ?? undefined}
+                  >
+                    {col.render(row)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+            {footer}
+          </tbody>
+        </table>
+      </div>
+      {canExpand && !expanded && (
+        <div
+          className="table-show-more"
+          role="button"
+          tabIndex={0}
+          onClick={() => setExpanded(true)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              setExpanded(true)
+            }
+          }}
+        >
+          Zobraziť viac ({hiddenCount})
+        </div>
+      )}
     </div>
   )
 }
