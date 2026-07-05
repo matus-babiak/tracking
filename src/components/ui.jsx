@@ -111,7 +111,7 @@ export function Section({ title, hint, children }) {
 }
 
 // GA4-style výber obdobia: od–do + rýchle predvoľby
-export function PeriodPicker({ client, from, to, onFrom, onTo, compare, onCompare }) {
+export function PeriodPicker({ client, from, to, onFrom, onTo, compare, onCompare, showCompare = true }) {
   const all = client.months
 
   const setFrom = (key) => {
@@ -158,9 +158,11 @@ export function PeriodPicker({ client, from, to, onFrom, onTo, compare, onCompar
             </button>
           ))}
         </div>
-        <select className="period-select compare" value={compare} onChange={(e) => onCompare(e.target.value)} aria-label="Porovnanie">
-          {COMPARE_MODES.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
-        </select>
+        {showCompare && (
+          <select className="period-select compare" value={compare} onChange={(e) => onCompare(e.target.value)} aria-label="Porovnanie">
+            {COMPARE_MODES.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
+          </select>
+        )}
       </div>
     </div>
   )
@@ -255,7 +257,7 @@ export function RoasBadge({ value }) {
   return <span className={`badge ${cls}`}>{value.toLocaleString('sk-SK', { maximumFractionDigits: 2 })}</span>
 }
 
-export function ClientDropdown({ value, clients, onChange, placeholder, className = '' }) {
+export function ClientDropdown({ value, clients, onChange, placeholder, className = '', compact = false }) {
   const [open, setOpen] = useState(false)
   const rootRef = useRef(null)
 
@@ -279,18 +281,30 @@ export function ClientDropdown({ value, clients, onChange, placeholder, classNam
   const options = placeholder ? [{ id: '', name: placeholder }, ...clients] : clients
 
   return (
-    <div ref={rootRef} className={`client-dropdown ${className}`.trim()}>
+    <div ref={rootRef} className={`client-dropdown ${compact ? 'compact' : ''} ${className}`.trim()}>
       <button
         type="button"
-        className={`client-dropdown-trigger ${!selected && placeholder ? 'placeholder' : ''} ${open ? 'open' : ''}`}
+        className={`client-dropdown-trigger ${!selected && placeholder ? 'placeholder' : ''} ${open ? 'open' : ''} ${compact ? 'compact' : ''}`}
         aria-haspopup="listbox"
         aria-expanded={open}
+        title={compact ? label : undefined}
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="client-dropdown-label">{label}</span>
-        <svg className="client-dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-          <path d="M6 9l6 6 6-6" />
-        </svg>
+        {compact ? (
+          <svg className="client-dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+        ) : (
+          <>
+            <span className="client-dropdown-label">{label}</span>
+            <svg className="client-dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </>
+        )}
       </button>
       {open && (
         <ul className="client-dropdown-menu" role="listbox">

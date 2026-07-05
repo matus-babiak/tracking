@@ -121,6 +121,11 @@ export function getAuthRole() {
   return readRole()
 }
 
+/** Matbab (globálne admin heslo) — nie Chillix guest. */
+export function isSuperAdmin() {
+  return getAuthRole() === 'admin'
+}
+
 /** Meno prihláseného používateľa pre UI (sidebar). */
 export function getAccessUserName({ direct = false, clientName = null } = {}) {
   if (direct && !readAppUnlocked()) return clientName

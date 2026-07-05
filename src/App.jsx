@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import clients from './data'
-import { clientBySlug } from './lib/routes'
+import { clientBySlug, isImportOverviewSlug, IMPORT_OVERVIEW_SLUG } from './lib/routes'
 import { monthKey, resolvePeriod, resolveCompare, rangeLabel, COMPARE_MODES, clientTabs } from './lib/helpers'
-import { resolveClientUiState, saveClientUiState } from './lib/uiState'
-import { isAppUnlocked, isClientUnlocked, lockApp, lockClient, getAuthRole, getAccessUserName, clientsForRole, isGuestAllowedClient } from './lib/auth'
+import { resolveClientUiState, saveClientUiState, loadSidebarCollapsed, saveSidebarCollapsed } from './lib/uiState'
+import { isAppUnlocked, isClientUnlocked, lockApp, lockClient, getAuthRole, getAccessUserName, clientsForRole, isGuestAllowedClient, isSuperAdmin } from './lib/auth'
 import { PeriodPicker, ClientDropdown } from './components/ui'
 import AuthGate from './components/AuthGate'
 import NotFound from './pages/NotFound'
@@ -16,6 +16,8 @@ import GoogleAds from './pages/GoogleAds'
 import GoogleAdsLeadgen from './pages/GoogleAdsLeadgen'
 import Analytics from './pages/Analytics'
 import Email from './pages/Email'
+import ImportOverview from './pages/ImportOverview'
+import ClientReport from './pages/ClientReport'
 
 const ICONS = {
   overview: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>,
@@ -23,6 +25,8 @@ const ICONS = {
   google: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
   ga: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
   email: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>,
+  import: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>,
+  clientReport: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>,
 }
 
 const TABS = [
@@ -78,17 +82,39 @@ function AuthBadge({ userName }) {
   return (
     <div className="auth-badge">
       <span className="auth-badge-dot" aria-hidden />
-      <span className="auth-badge-text">
+      <span className="auth-badge-text sidebar-hide-collapsed">
         Prihlásený <strong>{userName}</strong>
       </span>
     </div>
   )
 }
 
+function SidebarEdgeToggle({ collapsed, onClick }) {
+  return (
+    <button
+      type="button"
+      className="sidebar-edge-toggle"
+      onClick={onClick}
+      aria-expanded={!collapsed}
+      aria-label={collapsed ? 'Rozbaliť bočný panel' : 'Zbaliť bočný panel'}
+    >
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.25" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        {collapsed ? (
+          <polyline points="9 18 15 12 9 6" />
+        ) : (
+          <polyline points="15 18 9 12 15 6" />
+        )}
+      </svg>
+    </button>
+  )
+}
+
 export default function App() {
   const navigate = useNavigate()
   const { clientSlug } = useParams()
-  const urlClient = clientSlug ? clientBySlug(clientSlug) : null
+  const isImportDashboard = isImportOverviewSlug(clientSlug)
+  const urlClient = clientSlug && !isImportDashboard ? clientBySlug(clientSlug) : null
+  const showSuperAdminNav = isSuperAdmin()
 
   const [clientId, setClientId] = useState(urlClient?.id ?? defaultClientSlug() ?? '')
   const [tab, setTab] = useState('overview')
@@ -98,7 +124,10 @@ export default function App() {
   const [clientUnlockTick, setClientUnlockTick] = useState(0)
   const [periodFrom, setPeriodFrom] = useState(0)
   const [periodTo, setPeriodTo] = useState(0)
+  const [reportPeriodFrom, setReportPeriodFrom] = useState(0)
+  const [reportPeriodTo, setReportPeriodTo] = useState(0)
   const skipSaveRef = useRef(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => loadSidebarCollapsed())
 
   const lockedToClient = Boolean(clientSlug && !isAppUnlocked())
 
@@ -114,6 +143,12 @@ export default function App() {
   const client = selectedClientId ? (clients.find((c) => c.id === selectedClientId) ?? null) : null
   const accessUserName = getAccessUserName({ direct: lockedToClient, clientName: client?.name })
   useEffect(() => {
+    if (isImportDashboard && authRole !== 'admin') {
+      navigate('/chillix', { replace: true })
+    }
+  }, [isImportDashboard, authRole, navigate])
+
+  useEffect(() => {
     if (!clientSlug && appUnlocked && authRole === 'guest') {
       navigate('/chillix', { replace: true })
     }
@@ -121,6 +156,7 @@ export default function App() {
 
   // Sync stavu pri zmene URL (späť/vpred, prepínač klientov) — obnoví uložený filter alebo default
   useEffect(() => {
+    if (isImportOverviewSlug(clientSlug)) return
     if (!urlClient) {
       if (authRole === 'admin') setClientId('')
       return
@@ -132,6 +168,8 @@ export default function App() {
     setPeriodTo(ui.periodTo)
     setCompareMode(ui.compareMode)
     setTab(ui.tab)
+    setReportPeriodFrom(ui.reportPeriodFrom)
+    setReportPeriodTo(ui.reportPeriodTo)
   }, [clientSlug])
 
   // Uloženie filtra pri zmene (prežije refresh, reset až pri novom prihlásení)
@@ -141,8 +179,15 @@ export default function App() {
       skipSaveRef.current = false
       return
     }
-    saveClientUiState(client.id, { periodFrom, periodTo, compareMode, tab })
-  }, [client?.id, periodFrom, periodTo, compareMode, tab])
+    saveClientUiState(client.id, {
+      periodFrom,
+      periodTo,
+      compareMode,
+      tab,
+      reportPeriodFrom,
+      reportPeriodTo,
+    })
+  }, [client?.id, periodFrom, periodTo, compareMode, tab, reportPeriodFrom, reportPeriodTo])
 
   // Guest nemá prístup k ostatným klientom (napr. /muse)
   useEffect(() => {
@@ -151,6 +196,13 @@ export default function App() {
       navigate('/chillix', { replace: true })
     }
   }, [urlClient, lockedToClient, authRole, navigate])
+
+  const reportMonths = useMemo(() => {
+    if (!client?.months.length) return []
+    const from = reportPeriodFrom || monthKey(client.months[0])
+    const to = reportPeriodTo || monthKey(client.months[client.months.length - 1])
+    return resolvePeriod(client, 'custom', from, to)
+  }, [client, reportPeriodFrom, reportPeriodTo])
 
   const months = useMemo(() => {
     if (!client?.months.length) return []
@@ -167,6 +219,19 @@ export default function App() {
     navigate(id ? `/${id}` : '/')
   }
 
+  const openImportDashboard = () => {
+    navigate(`/${IMPORT_OVERVIEW_SLUG}`)
+    setMenuOpen(false)
+  }
+
+  const toggleSidebar = () => {
+    setSidebarCollapsed((v) => {
+      const next = !v
+      saveSidebarCollapsed(next)
+      return next
+    })
+  }
+
   const visibleTabs = useMemo(() => {
     if (!client) return []
     const ids = clientTabs(client)
@@ -174,12 +239,15 @@ export default function App() {
   }, [client])
 
   useEffect(() => {
+    if (tab === 'client-report') return
     if (!visibleTabs.some((t) => t.id === tab)) setTab('overview')
   }, [visibleTabs, tab])
 
   const Page = client ? resolvePage(client, tab) : null
   const compareLabel = COMPARE_MODES.find((c) => c.id === compareMode)?.label
-  const activeTab = visibleTabs.find((t) => t.id === tab) || visibleTabs[0]
+  const activeTab = tab === 'client-report'
+    ? { id: 'client-report', label: 'Prehľad pre klienta' }
+    : visibleTabs.find((t) => t.id === tab) || visibleTabs[0]
   const tabSubtitle = client
     ? ((client.leadgenProfile === 'dual'
         ? TAB_SUBTITLES_DUAL
@@ -195,14 +263,16 @@ export default function App() {
     setMenuOpen(false)
   }
 
+  const selectClientReport = () => selectTab('client-report')
+
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
   const clientReady = useMemo(
-    () => isAdminHub || (client && isClientUnlocked(client.id, { direct: lockedToClient })),
-    [client, clientId, clientUnlockTick, lockedToClient, isAdminHub],
+    () => isAdminHub || isImportDashboard || (client && isClientUnlocked(client.id, { direct: lockedToClient })),
+    [client, clientId, clientUnlockTick, lockedToClient, isAdminHub, isImportDashboard],
   )
 
   const handleLogout = () => {
@@ -216,7 +286,7 @@ export default function App() {
     }
   }
 
-  if (clientSlug && !urlClient) return <NotFound />
+  if (clientSlug && !urlClient && !isImportDashboard) return <NotFound />
 
   if (!clientSlug && !appUnlocked) {
     return (
@@ -230,6 +300,8 @@ export default function App() {
   }
 
   if (!clientSlug && !isAdminHub) return null
+
+  if (isImportDashboard && !showSuperAdminNav) return null
 
   if (!clientReady && client) {
     return (
@@ -245,11 +317,13 @@ export default function App() {
   }
 
   return (
-    <div className="app">
+    <div className={`app${menuOpen ? ' menu-open' : ''}${sidebarCollapsed ? ' sidebar-collapsed' : ''}`}>
       <header className="mobile-header">
         <div className="logo"><span className="logo-dot" />Analytika</div>
         <div className="mobile-header-right">
-          <span className="mobile-current-tab">{isAdminHub ? 'Výber klienta' : activeTab?.label}</span>
+          <span className="mobile-current-tab">
+            {isImportDashboard ? 'Import dát' : isAdminHub ? 'Výber klienta' : activeTab?.label}
+          </span>
           <button
             className={`hamburger ${menuOpen ? 'open' : ''}`}
             aria-label="Menu"
@@ -266,6 +340,15 @@ export default function App() {
           <div className="mobile-menu-backdrop" onClick={() => setMenuOpen(false)} />
           <nav className="mobile-menu">
             <AuthBadge userName={accessUserName} />
+            {showSuperAdminNav && (
+              <>
+                <div className="nav-label">Prehľady</div>
+                <button type="button" className={`nav-item ${isImportDashboard ? 'active' : ''}`} onClick={openImportDashboard}>
+                  {ICONS.import}
+                  Import dát
+                </button>
+              </>
+            )}
             <div className="nav-label">Klient</div>
             {!lockedToClient ? (
               <ClientDropdown
@@ -277,7 +360,7 @@ export default function App() {
             ) : (
               <div className="client-locked-name">{client?.name}</div>
             )}
-            {!isAdminHub && (
+            {!isAdminHub && !isImportDashboard && (
               <>
                 <div className="nav-label">Nástroje</div>
                 {visibleTabs.map((t) => (
@@ -286,6 +369,11 @@ export default function App() {
                     {t.label}
                   </button>
                 ))}
+                <div className="nav-label">Reporty</div>
+                <button type="button" className={`nav-item ${tab === 'client-report' ? 'active' : ''}`} onClick={selectClientReport}>
+                  {ICONS.clientReport}
+                  Prehľad pre klienta
+                </button>
               </>
             )}
           </nav>
@@ -293,9 +381,25 @@ export default function App() {
       )}
 
       <aside className="sidebar">
-        <div className="logo"><span className="logo-dot" />Analytika</div>
+        <SidebarEdgeToggle collapsed={sidebarCollapsed} onClick={toggleSidebar} />
+
+        <div className="sidebar-inner">
+        <div className="logo">
+          <span className="logo-dot" />
+          <span className="sidebar-hide-collapsed">Analytika</span>
+        </div>
 
         <AuthBadge userName={accessUserName} />
+
+        {showSuperAdminNav && (
+          <>
+            <div className="nav-label">Prehľady</div>
+            <button type="button" className={`nav-item ${isImportDashboard ? 'active' : ''}`} onClick={openImportDashboard} title="Import dát">
+              {ICONS.import}
+              <span className="nav-item-label sidebar-hide-collapsed">Import dát</span>
+            </button>
+          </>
+        )}
 
         <div className="nav-label">Klient</div>
         {!lockedToClient ? (
@@ -304,39 +408,95 @@ export default function App() {
             clients={availableClients}
             placeholder={authRole === 'admin' ? 'Vybrať klienta' : undefined}
             onChange={changeClient}
+            compact={sidebarCollapsed}
           />
         ) : (
-          <div className="client-locked-name">{client?.name}</div>
+          <div className="client-locked-name" title={client?.name}>
+            <span className="sidebar-hide-collapsed">{client?.name}</span>
+            <span className="client-locked-icon" aria-hidden>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </span>
+          </div>
         )}
 
-        {!isAdminHub && (
+        {!isAdminHub && !isImportDashboard && (
           <>
             <div className="nav-label">Nástroje</div>
             {visibleTabs.map((t) => (
-              <button key={t.id} className={`nav-item ${tab === t.id ? 'active' : ''}`} onClick={() => selectTab(t.id)}>
+              <button key={t.id} className={`nav-item ${tab === t.id ? 'active' : ''}`} onClick={() => selectTab(t.id)} title={t.label}>
                 {t.icon}
-                {t.label}
+                <span className="nav-item-label sidebar-hide-collapsed">{t.label}</span>
               </button>
             ))}
+            <div className="nav-label">Reporty</div>
+            <button type="button" className={`nav-item ${tab === 'client-report' ? 'active' : ''}`} onClick={selectClientReport} title="Prehľad pre klienta">
+              {ICONS.clientReport}
+              <span className="nav-item-label sidebar-hide-collapsed">Prehľad pre klienta</span>
+            </button>
           </>
         )}
 
         <div className="sidebar-footer">
-          Offline analytika z mesačných reportov.<br />
-          {isAdminHub ? 'Vyberte klienta v menu.' : <>{client?.name} · {rangeLabel(client?.months ?? [])}</>}
-          <button type="button" className="auth-lock-btn" onClick={handleLogout}>
-            Odhlásiť
+          <p className="sidebar-footer-text sidebar-hide-collapsed">
+            Offline analytika z mesačných reportov.
+            <span className="sidebar-footer-meta">
+              {isAdminHub ? 'Vyberte klienta v menu.' : isImportDashboard ? 'Matbab · import dát' : <>{client?.name} · {rangeLabel(client?.months ?? [])}</>}
+            </span>
+          </p>
+          <button type="button" className="auth-lock-btn" onClick={handleLogout} title="Odhlásiť">
+            <svg className="auth-lock-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+            <span className="sidebar-hide-collapsed">Odhlásiť</span>
           </button>
+        </div>
         </div>
       </aside>
 
       <main className="main">
-        {isAdminHub ? (
+        {isImportDashboard ? (
+          <>
+            <div className="page-header">
+              <div>
+                <div className="page-title">Import dát</div>
+                <div className="page-subtitle">Prehľad mesiacov so importovanými dátami podľa klienta</div>
+              </div>
+            </div>
+            <ImportOverview />
+          </>
+        ) : isAdminHub ? (
           <div className="hub-welcome">
             <div className="page-title">Marketingová analytika</div>
             <p className="hub-subtitle">Vyberte klienta v ľavom menu a zobrazia sa reporty.</p>
           </div>
         ) : client ? (
+          tab === 'client-report' ? (
+            <>
+              <div className="page-header">
+                <div>
+                  <div className="page-title">Prehľad pre klienta</div>
+                  <div className="page-subtitle">{client.name} · report pre klienta</div>
+                  <div className="period-info">
+                    <strong>{rangeLabel(reportMonths)}</strong>
+                  </div>
+                </div>
+                <PeriodPicker
+                  client={client}
+                  from={reportPeriodFrom}
+                  to={reportPeriodTo}
+                  onFrom={setReportPeriodFrom}
+                  onTo={setReportPeriodTo}
+                  showCompare={false}
+                />
+              </div>
+              <ClientReport client={client} months={reportMonths} />
+            </>
+          ) : (
           <>
             <div className="page-header">
               <div>
@@ -366,6 +526,7 @@ export default function App() {
               </div>
             )}
           </>
+          )
         ) : null}
       </main>
     </div>
