@@ -5,8 +5,6 @@
  */
 import fs from 'fs'
 
-const TRACKED = ['add_to_cart', 'begin_checkout', 'purchase']
-
 function parseLine(line) {
   const vals = []
   let cur = ''
@@ -43,27 +41,66 @@ function r2(n) {
   return n == null ? null : Math.round(n * 100) / 100
 }
 
-/** Iba presné názvy akcií — nie Sanaplant.sk (web) purchase, purchase_frigomax atď. */
-function normalizeAction(raw) {
+/** Funnel akcie — bez purchase variant (tie rieši pickPurchaseMetrics). */
+function funnelAction(raw) {
   if (!raw || raw === '--' || raw === ' --') return null
   const s = raw.trim().toLowerCase()
-  return TRACKED.includes(s) ? s : null
+  if (s === 'add_to_cart' || s === 'add_to_cart_book') return 'add_to_cart'
+  if (s === 'begin_checkout' || s === 'begin_checkout_book') return 'begin_checkout'
+  return null
+}
+
+function purchaseSourceKind(raw) {
+  if (!raw || raw === '--' || raw === ' --') return null
+  const s = raw.trim().toLowerCase()
+  if (s.includes('woocommerce purchase')) return 'woo'
+  if (s.includes('(web) purchase')) return 'web'
+  if (s === 'purchase') return 'purchase'
+  return null
+}
+
+/** Jedna purchase metrika — bez sčítania duplicitných WooCommerce / GA4 / generic riadkov. */
+function pickPurchaseMetrics(rows) {
+  const candidates = []
+  for (const r of rows) {
+    const kind = purchaseSourceKind(r['Conversion action'])
+    if (!kind) continue
+    candidates.push({
+      kind,
+      conv: num(r['Conversions']) ?? 0,
+      val: num(r['Conv. value']) ?? 0,
+    })
+  }
+  const exact = candidates.find((c) => c.kind === 'purchase')
+  const woo = candidates.find((c) => c.kind === 'woo')
+  const web = candidates.find((c) => c.kind === 'web')
+
+  let source = null
+  if (woo?.conv > 0 && (!exact?.conv || woo.conv >= exact.conv)) source = woo
+  else if (exact?.conv > 0) source = exact
+  else if (web?.conv > 0) source = web
+  if (!source) return { purchases: 0, purchaseValue: 0 }
+
+  let purchaseValue = source.val
+  if (purchaseValue === 0) {
+    const fallback = [woo, exact, web].filter((c) => c && c.val > 0).sort((a, b) => b.val - a.val)[0]
+    purchaseValue = fallback?.val ?? 0
+  }
+
+  return { purchases: r2(source.conv), purchaseValue: r2(purchaseValue) }
 }
 
 function pickConvRows(rows) {
   const actions = {}
-  let purchaseValue = null
   for (const r of rows) {
-    const key = normalizeAction(r['Conversion action'])
+    const key = funnelAction(r['Conversion action'])
     if (!key) continue
     const conv = num(r['Conversions'])
     if (conv == null || conv <= 0) continue
     actions[key] = r2((actions[key] ?? 0) + conv)
-    if (key === 'purchase') {
-      const val = num(r['Conv. value'] ?? r['Conv. value / cost'])
-      if (val != null) purchaseValue = r2((purchaseValue ?? 0) + val)
-    }
   }
+  const { purchases, purchaseValue } = pickPurchaseMetrics(rows)
+  if (purchases > 0) actions.purchase = purchases
   return { actions, purchaseValue }
 }
 
@@ -148,7 +185,7 @@ export function importGoogleAdsCsv(text) {
     ctr: base.ctr,
     interactionRate: base.interactionRate,
     convRate: base.convRate,
-    costPerConv: base.costPerConv,
+    costPerConv: trackedTotal > 0 && spend != null ? r2(spend / trackedTotal) : null,
     purchases,
     purchaseValue: purchaseValue ?? 0,
     roas: spend > 0 && purchaseValue ? r2(purchaseValue / spend) : null,

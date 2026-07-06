@@ -1,5 +1,5 @@
 import { Kpi, Section, MonthBarChart, SortableTable } from '../components/ui'
-import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, sum, pctChange } from '../lib/helpers'
+import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, sum, pctChange, absChange } from '../lib/helpers'
 
 const RENTCAR_CONVS = ['click_tel', 'form_start', 'form_submit']
 
@@ -191,14 +191,18 @@ export default function GoogleAdsLeadgen({ months, compare, client }) {
     total: sum(rows, (m) => m.google.conversionActions?.[key] ?? 0),
   }))
 
-  const convTotals = Object.fromEntries(
-    RENTCAR_CONVS.map((key) => [key, sum(rows, (m) => m.google.conversionActions?.[key] ?? 0)]),
-  )
-  const dc = (key) => {
+  const convCompare = (key) => {
     if (!compare?.months.some((m) => m.google)) return null
-    const prevTotal = sum(compare.months.filter((m) => m.google), (m) => m.google.conversionActions?.[key] ?? 0)
-    return pctChange(convTotals[key], prevTotal)
+    const curVal = sum(rows, (m) => m.google.conversionActions?.[key] ?? 0)
+    const prevVal = sum(compare.months.filter((m) => m.google), (m) => m.google.conversionActions?.[key] ?? 0)
+    return {
+      prev: prevVal,
+      pct: pctChange(curVal, prevVal),
+      abs: absChange(curVal, prevVal),
+    }
   }
+
+  const fmtConvSub = (prevVal) => (prevVal != null ? `oproti ${fmtDec(prevVal)}` : null)
 
   return (
     <>
@@ -208,13 +212,7 @@ export default function GoogleAdsLeadgen({ months, compare, client }) {
           sub={cur.cpc != null ? `CPC ${fmtEur(cur.cpc, 2)}` : null} />
         <Kpi label="Konverzie" value={fmtDec(cur.conversions)} delta={d('conversions')}
           sub={cur.costPerConv != null ? `Cena / konv. ${fmtEur(cur.costPerConv, 2)}` : null} />
-        {dual ? (
-          <>
-            <Kpi label="click_tel" value={fmtDec(convTotals.click_tel)} delta={dc('click_tel')} />
-            <Kpi label="form_start" value={fmtDec(convTotals.form_start)} delta={dc('form_start')} />
-            <Kpi label="form_submit" value={fmtDec(convTotals.form_submit)} delta={dc('form_submit')} />
-          </>
-        ) : (
+        {!dual && (
           <>
             <Kpi label="Zobrazenia" value={fmtNum(cur.impressions)} delta={d('impressions')} />
             <Kpi label="CTR" value={fmtPct(cur.ctr != null ? Math.round(cur.ctr * 100) / 100 : null)} delta={d('ctr')} />
@@ -243,17 +241,23 @@ export default function GoogleAdsLeadgen({ months, compare, client }) {
       </div>
 
       {convRows.length > 0 && (
-        <Section title="Konverzie podľa akcie" hint="súčet za vybrané obdobie">
-          <SortableTable
-            columns={[
-              { key: 'name', label: 'Konverzná akcia', sort: (r) => r.name, render: (r) => r.name },
-              { key: 'total', label: 'Počet', align: 'num', sort: (r) => r.total, render: (r) => fmtDec(r.total) },
-            ]}
-            rows={convRows}
-            rowKey={(r) => r.key}
-            defaultSortKey="total"
-            defaultSortDir="desc"
-          />
+        <Section title="Konverzie podľa akcie">
+          <div className={`kpi-grid${convRows.length === 3 ? ' kpi-grid--3' : ''}`}>
+            {convRows.map((r) => {
+              const cmp = convCompare(r.key)
+              return (
+                <Kpi
+                  key={r.key}
+                  label={r.name}
+                  value={fmtDec(r.total)}
+                  sub={cmp ? fmtConvSub(cmp.prev) : null}
+                  delta={cmp?.pct}
+                  deltaAbs={cmp?.pct == null ? cmp?.abs : null}
+                  deltaFmt={(v) => fmtDec(v)}
+                />
+              )
+            })}
+          </div>
         </Section>
       )}
 

@@ -423,6 +423,25 @@ body {
   margin-bottom: 28px;
 }
 
+.kpi-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.kpi-rows .kpi-grid {
+  margin-bottom: 0;
+}
+
+.kpi-grid--5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.kpi-grid--3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .kpi {
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -706,6 +725,17 @@ tr.total.compare-row td {
 
 .eshop-alert-sep {
   opacity: 0.55;
+}
+
+.eshop-alert-link {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.eshop-alert-link:hover {
+  color: #8a3f3f;
 }
 
 /* ---------- Mobile header (skrytý na desktope) ---------- */
@@ -1103,6 +1133,14 @@ tr.total.compare-row td {
   .kpi-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
+  }
+
+  .kpi-grid--5 {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+
+  .kpi-grid--3 {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 }
 

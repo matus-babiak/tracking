@@ -222,8 +222,10 @@ export function SortableTable({
 }
 
 // delta: % zmena voči porovnávaciemu obdobiu (null = neukázať)
+// deltaAbs: absolútna zmena (zobrazí sa, ak % nie je k dispozícii — napr. predtým 0)
 // deltaGood: 'up' (rast = dobrý, zelený), 'down' (pokles = dobrý), 'neutral'
-export function Kpi({ label, value, sub, subClass, delta, deltaGood = 'up' }) {
+export function Kpi({ label, value, sub, subClass, delta, deltaAbs, deltaGood = 'up', deltaFmt }) {
+  const fmtDelta = deltaFmt ?? ((v) => v.toLocaleString('sk-SK', { maximumFractionDigits: 2 }))
   let deltaEl = null
   if (delta != null && Number.isFinite(delta)) {
     const up = delta >= 0
@@ -233,6 +235,17 @@ export function Kpi({ label, value, sub, subClass, delta, deltaGood = 'up' }) {
     deltaEl = (
       <span className={`kpi-delta ${cls}`}>
         {arrow} {Math.abs(delta).toLocaleString('sk-SK', { maximumFractionDigits: 1 })} %
+      </span>
+    )
+  } else if (deltaAbs != null && Number.isFinite(deltaAbs)) {
+    const up = deltaAbs >= 0
+    const good = deltaGood === 'neutral' ? null : (deltaGood === 'up') === up
+    const cls = good == null ? '' : good ? 'up' : 'down'
+    const arrow = up ? '↑' : '↓'
+    const sign = deltaAbs > 0 ? '+' : ''
+    deltaEl = (
+      <span className={`kpi-delta ${cls}`}>
+        {arrow} {sign}{fmtDelta(deltaAbs)}
       </span>
     )
   }

@@ -1,4 +1,4 @@
-// Klient: Sanaplant — dáta extrahované z mesačných reportov 2/2025 – 6/2026.
+// Klient: Sanaplant — dáta extrahované z mesačných reportov 2/2025 – 7/2026.
 // Hodnoty null = metrika v danom mesiaci nebola v reporte dostupná
 // (napr. Google Ads bežali až od apríla 2025, v decembri 2025 boli vypnuté).
 
@@ -8,6 +8,7 @@ const sanaplant = {
   businessType: 'ecommerce',
   currency: '€',
   metaBreakdown: 'ads',
+  metaShowCampaigns: true,
   googleConversionKeys: ['add_to_cart', 'begin_checkout', 'purchase'],
   metaAdsProfile: 'eshop',
   eshopTab: 'woocommerce',
@@ -21,21 +22,56 @@ const sanaplant = {
     'GA4 CSV exporty (traffic/user acquisition, landing page, e-commerce) — január až jún 2026. Staršie mesiace majú platenú vs. organickú návštevnosť z PDF reportu.',
   ],
 
-  // Mesiace zoradené chronologicky: 2/2025 … 6/2026
+  // Mesiace zoradené chronologicky: 1/2025 … 6/2026
   months: [
+    {
+      year: 2025, month: 1,
+      meta: {
+        spend: 24.99, impressions: 22871, reach: 10346, clicks: 498,
+        purchases: 0, purchaseValue: 0, roas: 0,
+        cpc: 0.05, costPerPurchase: null,
+        ads: [
+          { name: "Príspevok: „SPOĽAHLIVÁ OCHRANA VAŠICH OVOCNÝCH STROMOV PRED...“", campaign: "Príspevok: „SPOĽAHLIVÁ OCHRANA VAŠICH OVOCNÝCH STROMOV PRED...“", spend: 24.99, purchases: 0, cpm: 1.09, impressions: 22871, reach: 10346, frequency: 2.21, clicks: 498, cpc: 0.05, ctr: 2.18, landingPageViews: 277, costPerLandingPageView: 0.09, engagements: 569, costPerEngagement: 0.04, saves: 25, shares: 17 }
+        ],
+      },
+    },
     {
       year: 2025, month: 2,
       meta: {
-        spend: 765.95, impressions: 464448, reach: 125115, clicks: 8877,
-        purchases: 88, purchaseValue: 2730.58, roas: 3.56, addToCart: 346,
-        cpc: 0.09, costPerPurchase: 8.7,
-        campaigns: [
-          { name: 'Frigomax', spend: 517.11, clicks: 7907, purchases: 81, value: 2463.08, roas: 4.76 },
-          { name: 'Minigarden', spend: 96.15, clicks: 748, purchases: 0, value: 0, roas: 0 },
-          { name: 'HydroHumat', spend: 42.37, clicks: 222, purchases: 2, value: 121.05, roas: 2.86 },
+        spend: 765.94, impressions: 464443, reach: 282620, clicks: 9270,
+        purchases: 88, purchaseValue: 2730.58, roas: 3.57, addToCart: 346,
+        cpc: 0.08, costPerPurchase: 8.7,
+        ads: [
+          { name: "Ochráňte svoje stromy pred jarnými mrazmi", campaign: "sanaplant_traffic_frigomax", spend: 281.8, value: 1015.37, roas: 13.61, purchases: 30, costPerPurchase: 52.81, aov: 145.02, cpm: 5.09, impressions: 244550, reach: 132689, frequency: 8.41, clicks: 5538, cpc: 0.21, ctr: 9.73, addToCart: 148, costPerAddToCart: 7.44, landingPageViews: 2514, costPerLandingPageView: 0.48, engagements: 6009, costPerEngagement: 0.19, saves: 97, shares: 112, comments: 15 },
+          { name: "Ochráňte svoje stromy pred jarnými mrazmi", campaign: "sanaplant_conversion_frigomax", spend: 87.44, value: 830.66, roas: 20.8, purchases: 27, costPerPurchase: 15.76, aov: 83.83, cpm: 12.19, impressions: 30450, reach: 17830, frequency: 5.82, clicks: 714, cpc: 0.63, ctr: 8.43, addToCart: 84, costPerAddToCart: 4.93, landingPageViews: 478, costPerLandingPageView: 0.55, engagements: 810, costPerEngagement: 0.4, saves: 14, shares: 23, comments: 1 },
+          { name: "Sezóna predpestovania sa začína - cena", campaign: "sanaplant_traffic_minigarden", spend: 60.32, purchases: 0, cpm: 7.96, impressions: 30437, reach: 23754, frequency: 5.38, clicks: 530, cpc: 0.49, ctr: 6.66, addToCart: 2, costPerAddToCart: 10.06, landingPageViews: 153, costPerLandingPageView: 1.68, engagements: 545, costPerEngagement: 0.47, saves: 1 },
+          { name: "Frigomax chat", campaign: "sanaplant_conversion_frigomax", spend: 44.07, value: 285.04, roas: 14.51, purchases: 11, costPerPurchase: 7.44, aov: 51.97, cpm: 11.6, impressions: 13274, reach: 7849, frequency: 5.46, clicks: 316, cpc: 0.44, ctr: 11.46, addToCart: 38, costPerAddToCart: 2.64, landingPageViews: 171, costPerLandingPageView: 0.75, engagements: 379, costPerEngagement: 0.39, saves: 10, shares: 11, comments: 6 },
+          { name: "Frigomax chat", campaign: "sanaplant_traffic_frigomax", spend: 34.63, value: 102, roas: 5.74, purchases: 4, costPerPurchase: 18.36, aov: 49.98, cpm: 8.84, impressions: 24916, reach: 19896, frequency: 5.95, clicks: 674, cpc: 0.22, ctr: 13.31, addToCart: 21, costPerAddToCart: 6.7, landingPageViews: 198, costPerLandingPageView: 0.66, engagements: 733, costPerEngagement: 0.19, saves: 17, shares: 10, comments: 2 },
+          { name: "Zdravá pôda, silné rastliny", campaign: "sanaplant_conversion_hydrohumat", spend: 24.76, value: 103.24, roas: 12.68, purchases: 1, costPerPurchase: 8.14, aov: 103.24, cpm: 13.09, impressions: 6928, reach: 4820, frequency: 5.41, clicks: 122, cpc: 0.76, ctr: 6.99, addToCart: 1, costPerAddToCart: 8.14, landingPageViews: 84, costPerLandingPageView: 1.1, engagements: 142, costPerEngagement: 0.63, saves: 1, shares: 2 },
+          { name: "Sezóna predpestovania sa začína", campaign: "sanaplant_traffic_minigarden", spend: 20.25, purchases: 0, cpm: 6.05, impressions: 12855, reach: 9261, frequency: 5.36, clicks: 160, cpc: 0.51, ctr: 4.69, landingPageViews: 57, costPerLandingPageView: 1.1, engagements: 180, costPerEngagement: 0.43, shares: 2 },
+          { name: "Sezóna predpestovania sa začína", campaign: "sanaplant_boosting", spend: 20, purchases: 0, cpm: 2.21, impressions: 9063, reach: 5406, frequency: 1.68, clicks: 51, cpc: 0.39, ctr: 0.56, landingPageViews: 17, costPerLandingPageView: 1.18, engagements: 213, costPerEngagement: 0.09, shares: 9, comments: 1 },
+          { name: "Šikovný gazda", campaign: "sanaplant_boosting", spend: 20, purchases: 0, cpm: 2.24, impressions: 8943, reach: 7629, frequency: 1.17, clicks: 37, cpc: 0.54, ctr: 0.41, addToCart: 5, costPerAddToCart: 4, landingPageViews: 20, costPerLandingPageView: 1, engagements: 165, costPerEngagement: 0.12, saves: 2, shares: 4, comments: 1 },
+          { name: "Prvá pomoc pre pestovateľov", campaign: "sanaplant_boosting", spend: 19.91, value: 26.01, roas: 1.31, purchases: 1, costPerPurchase: 19.91, aov: 26.01, cpm: 1.56, impressions: 12765, reach: 6195, frequency: 2.06, clicks: 92, cpc: 0.22, ctr: 0.72, addToCart: 1, costPerAddToCart: 19.91, landingPageViews: 9, costPerLandingPageView: 2.21, engagements: 355, costPerEngagement: 0.06, saves: 15, shares: 16 },
+          { name: "Ochrana ovocných stromov pred jarnými mrazmi", campaign: "sanaplant_boosting", spend: 19.9, value: 120.44, roas: 6.05, purchases: 4, costPerPurchase: 4.97, aov: 30.11, cpm: 1.43, impressions: 13922, reach: 7819, frequency: 1.78, clicks: 190, cpc: 0.1, ctr: 1.36, addToCart: 12, costPerAddToCart: 1.66, landingPageViews: 112, costPerLandingPageView: 0.18, engagements: 367, costPerEngagement: 0.05, saves: 7, shares: 32, comments: 1 },
+          { name: "Hustý, zelený trávnik?", campaign: "sanaplant_boosting", spend: 19.82, purchases: 0, cpm: 2.16, impressions: 9174, reach: 6358, frequency: 1.44, clicks: 23, cpc: 0.86, ctr: 0.25, landingPageViews: 14, costPerLandingPageView: 1.42, engagements: 130, costPerEngagement: 0.15, shares: 3, comments: 1 },
+          { name: "Ochrana stromov pred mrazmi REM", campaign: "sanaplant_traffic_frigomax", spend: 17.46, purchases: 0, cpm: 5.06, impressions: 4814, reach: 4388, frequency: 3.22, clicks: 37, cpc: 0.58, ctr: 3.9, landingPageViews: 9, costPerLandingPageView: 2.57, engagements: 44, costPerEngagement: 0.5, saves: 2, shares: 1 },
+          { name: "Nedovoľte, aby jarné mrazy zničili vaše stromy REM", campaign: "sanaplant_traffic_frigomax", spend: 12.96, value: 75.99, roas: 5.96, purchases: 3, costPerPurchase: 4.25, aov: 25.33, cpm: 4.56, impressions: 8241, reach: 3760, frequency: 4.48, clicks: 200, cpc: 0.23, ctr: 3.04, addToCart: 11, costPerAddToCart: 1.16, landingPageViews: 94, costPerLandingPageView: 0.31, engagements: 239, costPerEngagement: 0.26, saves: 4, shares: 11 },
+          { name: "Nedovoľte, aby jarné mrazy zničili vaše stromy REM", campaign: "sanaplant_conversion_frigomax", spend: 12.4, value: 26.01, roas: 3.28, purchases: 1, costPerPurchase: 7.93, aov: 26.01, cpm: 10.84, impressions: 4171, reach: 2842, frequency: 5.05, clicks: 90, cpc: 0.43, ctr: 6.98, addToCart: 5, costPerAddToCart: 11.36, landingPageViews: 49, costPerLandingPageView: 0.87, engagements: 105, costPerEngagement: 0.38, saves: 3, shares: 2 },
+          { name: "Hydrohumat aktivuje pôdu cena", campaign: "sanaplant_conversion_hydrohumat", spend: 12.4, value: 17.81, roas: 1.96, purchases: 1, costPerPurchase: 9.09, aov: 17.81, cpm: 13.86, impressions: 3563, reach: 2435, frequency: 5.06, clicks: 79, cpc: 0.79, ctr: 9.09, addToCart: 3, costPerAddToCart: 3.03, landingPageViews: 44, costPerLandingPageView: 1.89, engagements: 89, costPerEngagement: 0.62, saves: 1 },
+          { name: "Sezóna predpestovania sa začína - cena", campaign: "sanaplant_conversion_minigarden", spend: 11.36, purchases: 0, cpm: 10.47, impressions: 3099, reach: 2461, frequency: 3.65, clicks: 42, cpc: 0.91, ctr: 3.65, landingPageViews: 25, costPerLandingPageView: 1.28, engagements: 49, costPerEngagement: 0.83 },
+          { name: "Vyhrajte frigomax", campaign: "sanaplant_boosting", spend: 10.69, purchases: 0, cpm: 2.49, impressions: 4288, reach: 2511, frequency: 1.71, engagements: 245, costPerEngagement: 0.04, shares: 31, comments: 89 },
+          { name: "Jarné mrazy môžu zničiť úrodu", campaign: "sanaplant_traffic_frigomax", spend: 8.55, purchases: 0, cpm: 1.18, impressions: 7222, reach: 5230, frequency: 1.38, clicks: 130, cpc: 0.07, ctr: 1.8, addToCart: 1, costPerAddToCart: 8.55, landingPageViews: 40, costPerLandingPageView: 0.21, engagements: 141, costPerEngagement: 0.06, saves: 1, shares: 1 },
+          { name: "Spoľahlivá ochrana ovocných stromov", campaign: "sanaplant_conversion_frigomax", spend: 8.53, value: 78.03, roas: 12.31, purchases: 3, costPerPurchase: 2.11, aov: 26.01, cpm: 12.28, impressions: 2419, reach: 1874, frequency: 4.63, clicks: 61, cpc: 0.34, ctr: 12.78, addToCart: 2, costPerAddToCart: 3.17, landingPageViews: 36, costPerLandingPageView: 0.62, engagements: 70, costPerEngagement: 0.29, saves: 1 },
+          { name: "Prírodná sila pre zdravú pôdu", campaign: "sanaplant_conversion_hydrohumat", spend: 5.21, purchases: 0, cpm: 15, impressions: 1381, reach: 1202, frequency: 4.57, clicks: 21, cpc: 1.23, ctr: 5.8, addToCart: 1, costPerAddToCart: 1.4, landingPageViews: 11, costPerLandingPageView: 2.24, engagements: 26, costPerEngagement: 0.98, shares: 1 },
+          { name: "Spoľahlivá ochrana ovocných stromov", campaign: "sanaplant_traffic_frigomax", spend: 4.93, value: 23.97, roas: 12.48, purchases: 1, costPerPurchase: 1.92, aov: 23.97, cpm: 4.25, impressions: 4204, reach: 3476, frequency: 4.67, clicks: 91, cpc: 0.19, ctr: 8.71, addToCart: 4, costPerAddToCart: 0.48, landingPageViews: 30, costPerLandingPageView: 0.48, engagements: 108, costPerEngagement: 0.18, saves: 4, shares: 1 },
+          { name: "Sezóna predpestovania sa začína", campaign: "sanaplant_conversion_minigarden", spend: 4.22, purchases: 0, cpm: 7.49, impressions: 1780, reach: 1468, frequency: 3.62, clicks: 16, cpc: 0.98, ctr: 3.05, addToCart: 1, costPerAddToCart: 2.01, landingPageViews: 12, costPerLandingPageView: 1.21, engagements: 18, costPerEngagement: 0.92 },
+          { name: "Sú vaše stromy pripravené na jarné mrazy? REM", campaign: "sanaplant_traffic_frigomax", spend: 1.62, purchases: 0, cpm: 4.27, impressions: 1020, reach: 705, frequency: 3.76, clicks: 35, cpc: 0.04, ctr: 3.76, addToCart: 4, costPerAddToCart: 0.37, landingPageViews: 19, costPerLandingPageView: 0.08, engagements: 44, costPerEngagement: 0.03, saves: 1, shares: 3 },
+          { name: "Ochrana stromov pred mrazmi REM", campaign: "sanaplant_conversion_frigomax", spend: 1.56, value: 26.01, roas: 26.27, purchases: 1, costPerPurchase: 0.99, aov: 26.01, cpm: 10.33, impressions: 524, reach: 420, frequency: 4.76, clicks: 11, cpc: 0.66, ctr: 9.24, addToCart: 2, costPerAddToCart: 1.1, landingPageViews: 8, costPerLandingPageView: 0.61, engagements: 12, costPerEngagement: 0.64 },
+          { name: "Jarné mrazy môžu zničiť úrodu", campaign: "sanaplant_conversion_frigomax", spend: 0.69, purchases: 0, cpm: 5.58, impressions: 253, reach: 174, frequency: 2.66, clicks: 6, cpc: 0.11, ctr: 2.59, landingPageViews: 4, costPerLandingPageView: 0.16, engagements: 7, costPerEngagement: 0.09 },
+          { name: "Sú vaše stromy pripravené na jarné mrazy? REM", campaign: "sanaplant_conversion_frigomax", spend: 0.46, purchases: 0, cpm: 10.01, impressions: 187, reach: 168, frequency: 4.46, clicks: 4, cpc: 0.16, ctr: 7.44, landingPageViews: 2, costPerLandingPageView: 0.06, engagements: 4, costPerEngagement: 0.16 }
         ],
       },
-      boosting: { spend: 110.32, interactions: 1475, purchases: 5, value: 146.45 },
+
       google: null,
       ga: {
         paid: { sessions: 6751, users: 6032, engagementRate: 41.28, avgDuration: '00:15:25' },
@@ -50,18 +86,42 @@ const sanaplant = {
     {
       year: 2025, month: 3,
       meta: {
-        spend: 1525.26, impressions: 491576, reach: 118649, clicks: 6896,
-        purchases: 188, purchaseValue: 7147.18, roas: 4.69, addToCart: null,
-        cpc: 0.22, costPerPurchase: 8.11,
-        campaigns: [
-          { name: 'Frigomax', spend: 928.07, clicks: 4748, purchases: 153, value: 4839.39, roas: 5.21 },
-          { name: 'HydroHumat', spend: 217.8, clicks: 728, purchases: 13, value: 674.86, roas: 3.1 },
-          { name: 'Sadbové zemiaky', spend: 65.74, clicks: 806, purchases: 17, value: 991.57, roas: 15.08 },
-          { name: 'Všeobecná Sanaplant', spend: 105.6, clicks: 246, purchases: 1, value: 32.13, roas: 0.3 },
-          { name: 'Katalóg produktov', spend: 208.05, clicks: 368, purchases: 4, value: 609.23, roas: 2.93 },
+        spend: 1668.44, impressions: 577247, reach: 258339, clicks: 7331,
+        purchases: 191, purchaseValue: 7259.39, roas: 4.35, addToCart: 798,
+        cpc: 0.23, costPerPurchase: 8.74,
+        ads: [
+          { name: "Ochráňte svoje stromy pred jarnými mrazmi", campaign: "sanaplant_conversion_frigomax", spend: 524.98, value: 2456.81, roas: 20.12, purchases: 77, costPerPurchase: 71.72, aov: 169.76, cpm: 13, impressions: 204999, reach: 79655, frequency: 9.68, clicks: 3228, cpc: 0.96, ctr: 8.14, addToCart: 307, costPerAddToCart: 18.02, landingPageViews: 1950, costPerLandingPageView: 1.67, engagements: 3540, costPerEngagement: 0.84, saves: 44, shares: 57, comments: 10 },
+          { name: "Nedovoľte, aby jarné mrazy zničili vaše stromy REM", campaign: "sanaplant_conversion_frigomax", spend: 143.67, value: 962.35, roas: 16.8, purchases: 25, costPerPurchase: 9.89, aov: 79.92, cpm: 11.54, impressions: 49587, reach: 17778, frequency: 7.77, clicks: 587, cpc: 0.94, ctr: 4.99, addToCart: 93, costPerAddToCart: 3.46, landingPageViews: 344, costPerLandingPageView: 1.67, engagements: 688, costPerEngagement: 0.79, saves: 7, shares: 21, comments: 4 },
+          { name: "Sú vaše stromy pripravené na jarné mrazy? REM", campaign: "sanaplant_conversion_frigomax", spend: 82.82, value: 429.34, roas: 19.65, purchases: 18, costPerPurchase: 15.76, aov: 68.56, cpm: 14.94, impressions: 27648, reach: 12053, frequency: 9.09, clicks: 322, cpc: 1.17, ctr: 5.05, addToCart: 69, costPerAddToCart: 5.98, landingPageViews: 207, costPerLandingPageView: 1.63, engagements: 368, costPerEngagement: 0.99, saves: 1, shares: 5, comments: 1 },
+          { name: "Ochrana stromov pred mrazmi REM", campaign: "sanaplant_conversion_frigomax", spend: 80.91, value: 365.74, roas: 9.24, purchases: 14, costPerPurchase: 11.3, aov: 52.14, cpm: 12.55, impressions: 15979, reach: 2847, frequency: 12.67, clicks: 232, cpc: 0.88, ctr: 3.84, addToCart: 58, costPerAddToCart: 2.77, landingPageViews: 166, costPerLandingPageView: 1.17, engagements: 259, costPerEngagement: 0.69, saves: 1, shares: 1, comments: 2 },
+          { name: "Frigomax chat", campaign: "sanaplant_conversion_frigomax", spend: 74.47, value: 466.93, roas: 16.08, purchases: 16, costPerPurchase: 8.5, aov: 58.55, cpm: 10.48, impressions: 23200, reach: 11702, frequency: 5.79, clicks: 323, cpc: 0.42, ctr: 3.13, addToCart: 52, costPerAddToCart: 2.8, landingPageViews: 176, costPerLandingPageView: 0.78, engagements: 369, costPerEngagement: 0.44, saves: 4, shares: 9, comments: 11 },
+          { name: "exkluzivne_produkty", campaign: "sanaplant_product_catalog", spend: 69.95, value: 408.87, roas: 5.85, purchases: 1, costPerPurchase: 69.95, aov: 408.87, cpm: 3.71, impressions: 18832, reach: 8495, frequency: 2.22, clicks: 103, cpc: 0.68, ctr: 0.55, addToCart: 13, costPerAddToCart: 5.38, landingPageViews: 111, costPerLandingPageView: 0.63, engagements: 195, costPerEngagement: 0.36, shares: 4 },
+          { name: "zahradkari", campaign: "sanaplant_product_catalog", spend: 69.16, value: 135.98, roas: 1.97, purchases: 2, costPerPurchase: 34.58, aov: 67.99, cpm: 3.34, impressions: 20677, reach: 10855, frequency: 1.9, clicks: 121, cpc: 0.57, ctr: 0.59, addToCart: 8, costPerAddToCart: 8.65, landingPageViews: 88, costPerLandingPageView: 0.79, engagements: 204, costPerEngagement: 0.34, saves: 1 },
+          { name: "sikovny_gazda", campaign: "sanaplant_product_catalog", spend: 68.94, value: 64.38, roas: 0.93, purchases: 1, costPerPurchase: 68.94, aov: 64.38, cpm: 3.54, impressions: 19498, reach: 10609, frequency: 1.84, clicks: 144, cpc: 0.48, ctr: 0.74, addToCart: 21, costPerAddToCart: 3.28, landingPageViews: 124, costPerLandingPageView: 0.56, engagements: 216, costPerEngagement: 0.32 },
+          { name: "🥔 Nová pestovateľská sezóna začína", campaign: "conversion_sadbove_zemiaky", spend: 65.74, value: 991.57, roas: 15.08, purchases: 17, costPerPurchase: 3.87, aov: 58.33, cpm: 2.05, impressions: 32101, reach: 13464, frequency: 2.38, clicks: 806, cpc: 0.08, ctr: 2.51, addToCart: 90, costPerAddToCart: 0.73, landingPageViews: 532, costPerLandingPageView: 0.12, engagements: 921, costPerEngagement: 0.07, saves: 1, shares: 2, comments: 2 },
+          { name: "Pestujte ako profesionál", campaign: "sanaplant_general_sales", spend: 53.48, value: 32.13, roas: 0.6, purchases: 1, costPerPurchase: 53.48, aov: 32.13, cpm: 5.27, impressions: 10157, reach: 5457, frequency: 1.86, clicks: 121, cpc: 0.44, ctr: 1.19, addToCart: 9, costPerAddToCart: 5.94, landingPageViews: 70, costPerLandingPageView: 0.76, engagements: 133, costPerEngagement: 0.4, saves: 3, shares: 1 },
+          { name: "HydroHumát - doprajte rastlinám správnu výživu", campaign: "sanaplant_conversion_hydrohumat_new", spend: 52.63, value: 240.67, roas: 9.01, purchases: 5, costPerPurchase: 19.33, aov: 87.02, cpm: 12.34, impressions: 13449, reach: 7578, frequency: 4.91, clicks: 192, cpc: 0.96, ctr: 3.99, addToCart: 21, costPerAddToCart: 6.12, landingPageViews: 120, costPerLandingPageView: 1.7, engagements: 1301, costPerEngagement: 0.12, saves: 4, shares: 1 },
+          { name: "10 produktov Sanaplant", campaign: "sanaplant_general_sales", spend: 52.12, purchases: 0, cpm: 5.08, impressions: 10260, reach: 5773, frequency: 1.78, clicks: 125, cpc: 0.42, ctr: 1.22, addToCart: 3, costPerAddToCart: 17.37, landingPageViews: 74, costPerLandingPageView: 0.7, engagements: 131, costPerEngagement: 0.4 },
+          { name: "Prírodná sila pre zdravú pôdu", campaign: "sanaplant_conversion_hydrohumat", spend: 50.41, value: 36.56, roas: 52.99, purchases: 1, costPerPurchase: 0.69, aov: 36.56, cpm: 60.06, impressions: 10060, reach: 5770, frequency: 7.27, clicks: 164, cpc: 1.57, ctr: 5.84, addToCart: 3, costPerAddToCart: 42.15, landingPageViews: 102, costPerLandingPageView: 2.13, engagements: 194, costPerEngagement: 1.11, saves: 4, shares: 2 },
+          { name: "Hydrohumat aktivuje pôdu cena", campaign: "sanaplant_conversion_hydrohumat", spend: 41.15, value: 223.87, roas: 13.02, purchases: 5, costPerPurchase: 18.84, aov: 75.48, cpm: 14.89, impressions: 9555, reach: 5114, frequency: 6.87, clicks: 159, cpc: 0.77, ctr: 5.04, addToCart: 13, costPerAddToCart: 5.57, landingPageViews: 93, costPerLandingPageView: 1.3, engagements: 178, costPerEngagement: 0.68, shares: 1 },
+          { name: "Chcete zdravšiu, úrodnejšiu pôdu a silnejšie rastliny?", campaign: "sanaplant_conversion_hydrohumat_new", spend: 32.64, purchases: 0, cpm: 9.09, impressions: 10179, reach: 6481, frequency: 4.03, clicks: 81, cpc: 1.88, ctr: 1.82, addToCart: 4, costPerAddToCart: 7.03, landingPageViews: 53, costPerLandingPageView: 2.66, engagements: 2461, costPerEngagement: 0.03, shares: 1 },
+          { name: "Vyhrajte frigomax", campaign: "sanaplant_boosting", spend: 29.3, purchases: 0, cpm: 2.59, impressions: 11332, reach: 5753, frequency: 1.97, engagements: 335, costPerEngagement: 0.09, saves: 4, shares: 30, comments: 76 },
+          { name: "Ideálny pomocník pre milovníkov záhrad", campaign: "sanaplant_boosting", spend: 20, purchases: 0, cpm: 1.55, impressions: 12878, reach: 6361, frequency: 2.02, clicks: 90, cpc: 0.22, ctr: 0.7, landingPageViews: 41, costPerLandingPageView: 0.49, engagements: 206, costPerEngagement: 0.1, saves: 3, shares: 8 },
+          { name: "Môžu rastlinné vírusy nakaziť človeka?", campaign: "sanaplant_boosting", spend: 19.99, purchases: 0, cpm: 2.04, impressions: 9797, reach: 5170, frequency: 1.89, clicks: 4, cpc: 5, ctr: 0.04, landingPageViews: 3, costPerLandingPageView: 6.66, engagements: 176, costPerEngagement: 0.11, saves: 1, shares: 4, comments: 27 },
+          { name: "Jar je tu", campaign: "sanaplant_boosting", spend: 19.99, purchases: 0, cpm: 1.72, impressions: 11646, reach: 6085, frequency: 1.91, clicks: 34, cpc: 0.59, ctr: 0.29, landingPageViews: 8, costPerLandingPageView: 2.5, engagements: 181, costPerEngagement: 0.11, saves: 1, shares: 1 },
+          { name: "POCAHONTAS", campaign: "sanaplant_boosting", spend: 19.95, value: 112.21, roas: 5.62, purchases: 3, costPerPurchase: 6.65, aov: 37.4, cpm: 1.23, impressions: 16279, reach: 8554, frequency: 1.9, clicks: 149, cpc: 0.13, ctr: 0.92, addToCart: 12, costPerAddToCart: 1.66, landingPageViews: 81, costPerLandingPageView: 0.25, engagements: 365, costPerEngagement: 0.05, saves: 5, shares: 7, comments: 1 },
+          { name: "ROSARA", campaign: "sanaplant_boosting", spend: 19.94, purchases: 0, cpm: 1.36, impressions: 14707, reach: 8197, frequency: 1.79, clicks: 16, cpc: 1.25, ctr: 0.11, addToCart: 4, costPerAddToCart: 4.99, landingPageViews: 7, costPerLandingPageView: 2.85, engagements: 275, costPerEngagement: 0.07, saves: 5, shares: 7, comments: 1 },
+          { name: "Už viete, prečo vaša pôda potrebuje Hydruhumat", campaign: "sanaplant_conversion_hydrohumat_new", spend: 18.04, value: 31.5, roas: 20.72, purchases: 1, costPerPurchase: 1.52, aov: 31.5, cpm: 13.9, impressions: 3750, reach: 2432, frequency: 4.28, clicks: 58, cpc: 1.33, ctr: 3.65, addToCart: 3, costPerAddToCart: 0.51, landingPageViews: 31, costPerLandingPageView: 2.03, engagements: 721, costPerEngagement: 0.08, saves: 3, shares: 2 },
+          { name: "Spoľahlivá ochrana ovocných stromov", campaign: "sanaplant_conversion_frigomax", spend: 14.75, value: 158.22, roas: 14.83, purchases: 3, costPerPurchase: 3.56, aov: 52.74, cpm: 5.34, impressions: 5586, reach: 4199, frequency: 2.57, clicks: 50, cpc: 0.6, ctr: 1.77, addToCart: 9, costPerAddToCart: 1.19, landingPageViews: 31, costPerLandingPageView: 1.11, engagements: 61, costPerEngagement: 0.5, shares: 2 },
+          { name: "5 dôvodov, prečo je HydroHumat", campaign: "sanaplant_boosting", spend: 14.01, purchases: 0, cpm: 1.55, impressions: 9032, reach: 4417, frequency: 2.04, clicks: 142, cpc: 0.1, ctr: 1.57, addToCart: 2, costPerAddToCart: 7.01, landingPageViews: 39, costPerLandingPageView: 0.36, engagements: 153, costPerEngagement: 0.09, saves: 2, shares: 1 },
+          { name: "Zdravá pôda, silné rastliny", campaign: "sanaplant_conversion_hydrohumat", spend: 11.26, value: 142.26, roas: 24.07, purchases: 1, costPerPurchase: 5.91, aov: 142.26, cpm: 16.82, impressions: 2207, reach: 1557, frequency: 3.89, clicks: 23, cpc: 1, ctr: 2.08, addToCart: 2, costPerAddToCart: 2.96, landingPageViews: 15, costPerLandingPageView: 1.53, engagements: 31, costPerEngagement: 0.73, saves: 2, shares: 1 },
+          { name: "Zdravá pôda, silné rastliny", campaign: "sanaplant_conversion_hydrohumat_new", spend: 6.09, purchases: 0, cpm: 4.69, impressions: 1298, reach: 669, frequency: 1.94, clicks: 18, cpc: 0.34, ctr: 1.39, landingPageViews: 9, costPerLandingPageView: 0.68, engagements: 20, costPerEngagement: 0.3 },
+          { name: "Ochráňte svoje stromy pred jarnými mrazmi REM", campaign: "sanaplant_conversion_frigomax", spend: 5.96, purchases: 0, cpm: 49.17, impressions: 1117, reach: 475, frequency: 3.81, clicks: 4, cpc: 2.79, ctr: 3.98, landingPageViews: 4, costPerLandingPageView: 2.79, engagements: 10, costPerEngagement: 1.08, shares: 1 },
+          { name: "Hydrohumat aktivuje pôdu cena", campaign: "sanaplant_conversion_hydrohumat_new", spend: 5.58, purchases: 0, cpm: 4.38, impressions: 1273, reach: 704, frequency: 1.81, clicks: 33, cpc: 0.17, ctr: 2.59, addToCart: 1, costPerAddToCart: 5.58, landingPageViews: 26, costPerLandingPageView: 0.21, engagements: 40, costPerEngagement: 0.14, shares: 1 },
+          { name: "Jarné mrazy môžu zničiť úrodu", campaign: "sanaplant_conversion_frigomax", spend: 0.51, purchases: 0, cpm: 6.39, impressions: 164, reach: 135, frequency: 2.46, clicks: 2, cpc: 0.51, ctr: 2.59, addToCart: 1, costPerAddToCart: 0.22, landingPageViews: 1, costPerLandingPageView: 0.22, engagements: 2, costPerEngagement: 0.51 }
         ],
       },
-      boosting: { spend: 143.18, interactions: 1691, purchases: 3, value: 112.21 },
+
       google: null,
       ga: {
         paid: { sessions: 6587, users: 5520, engagementRate: 52.92, avgDuration: '00:22:00' },
@@ -76,29 +136,46 @@ const sanaplant = {
     {
       year: 2025, month: 4,
       meta: {
-        spend: 1310.61, impressions: 513862, reach: 141787, clicks: 6360,
-        purchases: 33, purchaseValue: 2449.47, roas: 1.87, addToCart: 267,
-        cpc: 0.21, costPerPurchase: 39.72,
-        campaigns: [
-          { name: 'Katalóg produktov', spend: 566.98, clicks: 2238, purchases: 19, value: 1545.65, roas: 2.73 },
-          { name: 'Všeobecná Sanaplant', spend: 184.51, clicks: 467, purchases: 5, value: 441.48, roas: 2.39 },
-          { name: 'Vybrané produkty', spend: 168.64, clicks: 1419, purchases: 1, value: 91.96, roas: 0.55 },
-          { name: 'Šikovný gazda', spend: 97.2, clicks: 523, purchases: 0, value: 0, roas: 0 },
-          { name: 'Silva Tabs', spend: 97.0, clicks: 442, purchases: 3, value: 255.46, roas: 2.63 },
-          { name: 'Gunner', spend: 97.0, clicks: 672, purchases: 1, value: 136.74, roas: 1.41 },
-          { name: 'HydroHumat', spend: 96.45, clicks: 656, purchases: 3, value: 46.17, roas: 0.48 },
-          { name: 'Sanaplant (dosah)', spend: 50.72, clicks: null, purchases: 2, value: 23.97, roas: 0.47 },
-          { name: 'Manychat (zber e-mailov)', spend: 27.11, clicks: null, purchases: null, value: null, roas: null },
-          { name: 'Sadbové zemiaky', spend: 1.84, clicks: 16, purchases: 0, value: 0, roas: 0 },
+        spend: 1431.77, impressions: 580207, reach: 289946, clicks: 6778,
+        purchases: 34, purchaseValue: 2473.44, roas: 1.73, addToCart: 272,
+        cpc: 0.21, costPerPurchase: 42.11,
+        ads: [
+          { name: "exkluzivne_produkty", campaign: "sanaplant_product_catalog", spend: 244.79, value: 1446.88, roas: 5.91, purchases: 15, costPerPurchase: 16.32, aov: 96.46, cpm: 1.94, impressions: 126297, reach: 34041, frequency: 3.71, clicks: 1056, cpc: 0.23, ctr: 0.84, addToCart: 94, costPerAddToCart: 2.6, landingPageViews: 1041, costPerLandingPageView: 0.24, engagements: 1837, costPerEngagement: 0.13, saves: 6, shares: 2, comments: 2 },
+          { name: "zahradkari", campaign: "sanaplant_product_catalog", spend: 171.45, value: 98.77, roas: 0.58, purchases: 3, costPerPurchase: 57.15, aov: 32.92, cpm: 2.23, impressions: 76950, reach: 34923, frequency: 2.2, clicks: 732, cpc: 0.23, ctr: 0.95, addToCart: 32, costPerAddToCart: 5.36, landingPageViews: 803, costPerLandingPageView: 0.21, engagements: 1357, costPerEngagement: 0.13, saves: 8, shares: 9, comments: 1 },
+          { name: "sikovny_gazda", campaign: "sanaplant_product_catalog", spend: 150.74, purchases: 1, costPerPurchase: 150.74, cpm: 3.34, impressions: 45118, reach: 18006, frequency: 2.51, clicks: 450, cpc: 0.33, ctr: 1, addToCart: 16, costPerAddToCart: 9.42, landingPageViews: 375, costPerLandingPageView: 0.4, engagements: 637, costPerEngagement: 0.24, saves: 4, shares: 4 },
+          { name: "Pestujte ako profesionál", campaign: "sanaplant_general_sales", spend: 134.78, value: 349.52, roas: 2.59, purchases: 4, costPerPurchase: 33.7, aov: 87.38, cpm: 4.21, impressions: 31997, reach: 9310, frequency: 3.44, clicks: 341, cpc: 0.4, ctr: 1.07, addToCart: 26, costPerAddToCart: 5.18, landingPageViews: 180, costPerLandingPageView: 0.75, engagements: 368, costPerEngagement: 0.37, saves: 2, shares: 1 },
+          { name: "10 produktov Sanaplant", campaign: "sanaplant_products_conv", spend: 80.75, purchases: 0, cpm: 9.44, impressions: 17098, reach: 8754, frequency: 3.93, clicks: 571, cpc: 0.28, ctr: 6.73, addToCart: 10, costPerAddToCart: 26.36, landingPageViews: 376, costPerLandingPageView: 0.44, engagements: 600, costPerEngagement: 0.28, saves: 3, shares: 5, comments: 1 },
+          { name: "Gunner", campaign: "sanaplant_products_conv", spend: 79.03, value: 136.74, roas: 3.32, purchases: 1, costPerPurchase: 41.24, aov: 136.74, cpm: 8.96, impressions: 17630, reach: 8611, frequency: 4.14, clicks: 415, cpc: 0.44, ctr: 4.74, addToCart: 7, costPerAddToCart: 47.54, landingPageViews: 267, costPerLandingPageView: 0.67, engagements: 457, costPerEngagement: 0.39, saves: 4, shares: 6, comments: 1 },
+          { name: "HydroHumat - apríl a máj v záhrade?", campaign: "sanaplant_products_conv", spend: 78.59, value: 46.17, roas: 1.18, purchases: 3, costPerPurchase: 58.32, aov: 37.22, cpm: 8.09, impressions: 19546, reach: 10226, frequency: 3.81, clicks: 358, cpc: 0.45, ctr: 3.63, addToCart: 15, costPerAddToCart: 13.2, landingPageViews: 218, costPerLandingPageView: 0.76, engagements: 398, costPerEngagement: 0.4, saves: 6, shares: 6 },
+          { name: "SilvaTabs", campaign: "sanaplant_products_conv", spend: 78.38, value: 255.46, roas: 6.84, purchases: 3, costPerPurchase: 12.45, aov: 85.15, cpm: 12.09, impressions: 12986, reach: 7267, frequency: 3.57, clicks: 230, cpc: 0.7, ctr: 3.53, addToCart: 41, costPerAddToCart: 41.95, landingPageViews: 138, costPerLandingPageView: 1.23, engagements: 3460, costPerEngagement: 0.05, saves: 1, shares: 6 },
+          { name: "Všetko, čo potrebuje šikovný pestovateľ", campaign: "sikovny_gazda_traffic", spend: 53.88, purchases: 0, cpm: 1.95, impressions: 27644, reach: 13057, frequency: 2.12, clicks: 419, cpc: 0.13, ctr: 1.52, addToCart: 2, costPerAddToCart: 26.94, landingPageViews: 119, costPerLandingPageView: 0.45, engagements: 436, costPerEngagement: 0.12, saves: 2 },
+          { name: "Pestujte ako profesionál", campaign: "sanaplant_brand", spend: 50.72, value: 23.97, roas: 2.94, purchases: 2, costPerPurchase: 4.07, aov: 11.99, cpm: 2.42, impressions: 64895, reach: 52765, frequency: 4.05, clicks: 53, cpc: 3.16, ctr: 0.24, addToCart: 2, costPerAddToCart: 4.07, landingPageViews: 1, costPerLandingPageView: 39.31, engagements: 68, costPerEngagement: 2.36, saves: 1 },
+          { name: "10 produktov Sanaplant", campaign: "sanaplant_general_sales", spend: 49.73, value: 91.96, roas: 1.85, purchases: 1, costPerPurchase: 49.73, aov: 91.96, cpm: 5.4, impressions: 9208, reach: 4863, frequency: 1.89, clicks: 126, cpc: 0.39, ctr: 1.37, addToCart: 8, costPerAddToCart: 6.22, landingPageViews: 68, costPerLandingPageView: 0.73, engagements: 136, costPerEngagement: 0.37, saves: 1, shares: 2 },
+          { name: "Všetko, čo potrebuje šikovný pestovateľ", campaign: "sikovny_gazda_sales", spend: 40.7, purchases: 0, cpm: 5.28, impressions: 7704, reach: 3697, frequency: 2.08, clicks: 84, cpc: 0.48, ctr: 1.09, addToCart: 2, costPerAddToCart: 20.35, landingPageViews: 51, costPerLandingPageView: 0.8, engagements: 101, costPerEngagement: 0.4, shares: 2 },
+          { name: "10 produktov Sanaplant", campaign: "sanaplant_products_traffic", spend: 38.16, purchases: 0, cpm: 3.07, impressions: 24898, reach: 18445, frequency: 2.7, clicks: 722, cpc: 0.1, ctr: 5.8, addToCart: 3, costPerAddToCart: 28.58, landingPageViews: 300, costPerLandingPageView: 0.26, engagements: 777, costPerEngagement: 0.1, saves: 3, shares: 6 },
+          { name: "Malý praktický balíček", campaign: "sanaplant_boosting", spend: 29.97, purchases: 0, cpm: 2.97, impressions: 10074, reach: 5962, frequency: 1.69, clicks: 66, cpc: 0.45, ctr: 0.66, landingPageViews: 8, costPerLandingPageView: 3.75, engagements: 250, costPerEngagement: 0.12, saves: 1, shares: 4 },
+          { name: "Manychat - kalendar zadarmo", campaign: "sanaplant_boosting", spend: 27.11, purchases: 0, cpm: 1.97, impressions: 13730, reach: 9494, frequency: 1.45, clicks: 3, cpc: 9.04, ctr: 0.02, addToCart: 2, costPerAddToCart: 13.56, landingPageViews: 3, costPerLandingPageView: 9.04, engagements: 229, costPerEngagement: 0.12, shares: 7, comments: 95 },
+          { name: "Zdravé rastliny = BOHATÁ ÚRODA", campaign: "sanaplant_boosting", spend: 19.96, purchases: 0, cpm: 3.02, impressions: 6602, reach: 4001, frequency: 1.65, clicks: 117, cpc: 0.17, ctr: 1.77, landingPageViews: 18, costPerLandingPageView: 1.11, engagements: 179, costPerEngagement: 0.11, saves: 1, shares: 1 },
+          { name: "Jahody", campaign: "sanaplant_boosting", spend: 19.94, purchases: 0, cpm: 0.9, impressions: 22036, reach: 15680, frequency: 1.41, clicks: 36, cpc: 0.55, ctr: 0.16, landingPageViews: 6, costPerLandingPageView: 3.32, engagements: 7343, costPerEngagement: 0, saves: 1, shares: 4 },
+          { name: "RED ANNA", campaign: "sanaplant_boosting", spend: 19.91, value: 23.97, roas: 1.2, purchases: 1, costPerPurchase: 19.91, aov: 23.97, cpm: 1.72, impressions: 11572, reach: 6367, frequency: 1.82, clicks: 179, cpc: 0.11, ctr: 1.55, addToCart: 3, costPerAddToCart: 6.64, landingPageViews: 76, costPerLandingPageView: 0.26, engagements: 321, costPerEngagement: 0.06, shares: 3, comments: 3 },
+          { name: "SilvaTabs", campaign: "sanaplant_products_traffic", spend: 18.62, purchases: 0, cpm: 2.02, impressions: 9209, reach: 6302, frequency: 1.46, clicks: 212, cpc: 0.09, ctr: 2.3, landingPageViews: 50, costPerLandingPageView: 0.37, engagements: 3104, costPerEngagement: 0.01, saves: 1, shares: 1 },
+          { name: "Gunner", campaign: "sanaplant_products_traffic", spend: 17.97, purchases: 0, cpm: 1.92, impressions: 9336, reach: 5949, frequency: 1.57, clicks: 257, cpc: 0.07, ctr: 2.75, addToCart: 2, costPerAddToCart: 8.99, landingPageViews: 129, costPerLandingPageView: 0.14, engagements: 270, costPerEngagement: 0.07, saves: 2 },
+          { name: "HydroHumat - apríl a máj v záhrade?", campaign: "sanaplant_products_traffic", spend: 17.86, purchases: 0, cpm: 1.82, impressions: 9828, reach: 7255, frequency: 1.35, clicks: 298, cpc: 0.06, ctr: 3.03, addToCart: 6, costPerAddToCart: 2.98, landingPageViews: 121, costPerLandingPageView: 0.15, engagements: 308, costPerEngagement: 0.06 },
+          { name: "blog hrdze", campaign: "sanaplant_boosting", spend: 4.27, purchases: 0, cpm: 1.83, impressions: 2331, reach: 1973, frequency: 1.18, clicks: 17, cpc: 0.25, ctr: 0.73, engagements: 46, costPerEngagement: 0.09, shares: 3 },
+          { name: "Profesionálne riešenia pre malých pestovateľov", campaign: "sikovny_gazda_traffic", spend: 2.39, purchases: 0, cpm: 0.94, impressions: 2532, reach: 2102, frequency: 1.2, clicks: 20, cpc: 0.12, ctr: 0.79, landingPageViews: 3, costPerLandingPageView: 0.8, engagements: 27, costPerEngagement: 0.09 },
+          { name: "🥔 Nová pestovateľská sezóna začína", campaign: "conversion_sadbove_zemiaky", spend: 1.84, purchases: 0, cpm: 2.12, impressions: 867, reach: 804, frequency: 1.08, clicks: 16, cpc: 0.12, ctr: 1.85, addToCart: 1, costPerAddToCart: 1.84, landingPageViews: 11, costPerLandingPageView: 0.17, engagements: 19, costPerEngagement: 0.1 },
+          { name: "Profesionálne riešenia pre malých pestovateľov", campaign: "sikovny_gazda_sales", spend: 0.23, purchases: 0, cpm: 1.93, impressions: 119, reach: 92, frequency: 1.29, engagements: 1, costPerEngagement: 0.23 }
         ],
       },
-      boosting: { spend: 94.05, interactions: 8139, purchases: 1, value: 23.97 },
+
       google: {
         spend: 79.2, impressions: 40342, clicks: 387, cpc: 0.2, ctr: 0.96,
-        purchases: 1, purchaseValue: 105.38, conversions: 94,
+        interactions: 465, interactionRate: 1.15, convRate: 20.23, costPerConv: 0.84,
+        purchases: 1, purchaseValue: 105.38, conversions: 17, roas: 1.33,
+        conversionActions: { add_to_cart: 16, purchase: 1 },
         campaigns: [
-          { name: 'Search (brand)', spend: 33.87, clicks: 102, purchases: 1, value: 105.38 },
-          { name: 'Display – Remarketing', spend: 45.32, clicks: 285, purchases: 0, value: 0 },
+          { name: "SE_brand", type: "Search", status: "Paused", purchases: 1, value: 105.38, conversionActions: { add_to_cart: 15, purchase: 1 } },
+          { name: "GD remarketing", type: "Display", status: "Paused", purchases: 0, value: 0, conversionActions: { add_to_cart: 1 } }
         ],
       },
       ga: {
@@ -114,28 +191,48 @@ const sanaplant = {
     {
       year: 2025, month: 5,
       meta: {
-        spend: 1479.91, impressions: 659328, reach: 195510, clicks: 11374,
-        purchases: 78, purchaseValue: 2784.83, roas: 1.88, addToCart: 369,
-        cpc: 0.13, costPerPurchase: 18.97,
-        campaigns: [
-          { name: 'Katalóg produktov', spend: 596.39, clicks: 2190, purchases: 41, value: 1724.34, roas: 2.26 },
-          { name: 'Šikovný gazda', spend: 258.76, clicks: 5618, purchases: 19, value: 523.11, roas: 0.87 },
-          { name: 'Vybrané produkty', spend: 170.73, clicks: 702, purchases: 6, value: 163.08, roas: 0.96 },
-          { name: 'HydroHumat', spend: 139.57, clicks: 1997, purchases: 0, value: 0, roas: 0 },
-          { name: 'Silva Tabs', spend: 137.74, clicks: 254, purchases: 10, value: 239.88, roas: 2.72 },
-          { name: 'QUANTUM', spend: 97.27, clicks: 250, purchases: 2, value: 134.42, roas: 1.38 },
-          { name: 'Gunner', spend: 41.47, clicks: 293, purchases: 0, value: 0, roas: 0 },
-          { name: 'Všeobecná Sanaplant', spend: 37.98, clicks: 70, purchases: 0, value: 0, roas: 0 },
-          { name: 'Manychat (zber e-mailov)', spend: 26.32, clicks: null, purchases: null, value: null, roas: null },
+        spend: 1661.89, impressions: 729402, reach: 276970, clicks: 11537,
+        purchases: 78, purchaseValue: 2784.83, roas: 1.68, addToCart: 373,
+        cpc: 0.14, costPerPurchase: 21.31,
+        ads: [
+          { name: "exkluzivne_produkty", campaign: "sanaplant_product_catalog", spend: 575.4, value: 1691.05, roas: 2.94, purchases: 39, costPerPurchase: 14.75, aov: 43.36, cpm: 2.36, impressions: 243868, reach: 51510, frequency: 4.73, clicks: 2013, cpc: 0.29, ctr: 0.83, addToCart: 133, costPerAddToCart: 4.33, landingPageViews: 1437, costPerLandingPageView: 0.4, engagements: 2784, costPerEngagement: 0.21, saves: 6, shares: 13, comments: 1 },
+          { name: "Prípravky na ochranu rastlín (Šikovný gazda)", campaign: "sanaplant_boosting_traffic", spend: 207.88, value: 500.16, roas: 2.41, purchases: 17, costPerPurchase: 12.23, aov: 29.42, cpm: 1.21, impressions: 172161, reach: 60739, frequency: 2.83, clicks: 5440, cpc: 0.04, ctr: 3.16, addToCart: 51, costPerAddToCart: 4.08, landingPageViews: 2386, costPerLandingPageView: 0.09, engagements: 5725, costPerEngagement: 0.04, saves: 87, shares: 61, comments: 3 },
+          { name: "10 produktov Sanaplant", campaign: "sanaplant_products_conv", spend: 170.73, value: 163.08, roas: 0.96, purchases: 6, costPerPurchase: 28.46, aov: 27.18, cpm: 4.9, impressions: 34878, reach: 11865, frequency: 2.94, clicks: 702, cpc: 0.24, ctr: 2.01, addToCart: 45, costPerAddToCart: 3.79, landingPageViews: 482, costPerLandingPageView: 0.35, engagements: 798, costPerEngagement: 0.21, saves: 12, shares: 4, comments: 1 },
+          { name: "Zdravé rastliny = bohatá úroda", campaign: "sanaplant_products_conv", spend: 97.27, value: 134.42, roas: 1.38, purchases: 2, costPerPurchase: 48.64, aov: 67.21, cpm: 5.69, impressions: 17086, reach: 5085, frequency: 3.36, clicks: 250, cpc: 0.39, ctr: 1.46, addToCart: 19, costPerAddToCart: 5.12, landingPageViews: 168, costPerLandingPageView: 0.58, engagements: 272, costPerEngagement: 0.36, saves: 3, shares: 1 },
+          { name: "SilvaTabs", campaign: "sanaplant_products_conv", spend: 91.91, value: 239.88, roas: 2.72, purchases: 10, costPerPurchase: 8.82, aov: 23.99, cpm: 17.46, impressions: 10564, reach: 5464, frequency: 3.76, clicks: 183, cpc: 0.78, ctr: 5.02, addToCart: 69, costPerAddToCart: 1.28, landingPageViews: 138, costPerLandingPageView: 1.01, engagements: 2706, costPerEngagement: 0.06, shares: 8, comments: 1 },
+          { name: "HydroHumat - prírodná sila pre zdravú pôdu", campaign: "sanaplant_products_traffic", spend: 58.33, purchases: 0, cpm: 1.89, impressions: 30822, reach: 11916, frequency: 2.59, clicks: 839, cpc: 0.07, ctr: 2.72, addToCart: 2, costPerAddToCart: 29.17, landingPageViews: 389, costPerLandingPageView: 0.15, engagements: 884, costPerEngagement: 0.07, saves: 5, shares: 3 },
+          { name: "silva_tabs", campaign: "sanaplant_product_catalog", spend: 45.83, purchases: 0, cpm: 4.25, impressions: 10771, reach: 5119, frequency: 2.1, clicks: 71, cpc: 0.65, ctr: 0.66, addToCart: 7, costPerAddToCart: 6.55, landingPageViews: 40, costPerLandingPageView: 1.15, engagements: 91, costPerEngagement: 0.5, saves: 1 },
+          { name: "HydroHumat - apríl a máj v záhrade?", campaign: "sanaplant_products_traffic", spend: 37.08, purchases: 0, cpm: 1.67, impressions: 22261, reach: 9802, frequency: 2.27, clicks: 880, cpc: 0.04, ctr: 3.95, addToCart: 4, costPerAddToCart: 9.27, landingPageViews: 394, costPerLandingPageView: 0.09, engagements: 932, costPerEngagement: 0.04, saves: 4, shares: 3 },
+          { name: "HydroHumat - apríl a máj v záhrade?", campaign: "sanaplant_products_conv", spend: 29.25, purchases: 0, cpm: 3.64, impressions: 8026, reach: 3691, frequency: 2.17, clicks: 150, cpc: 0.2, ctr: 1.87, addToCart: 9, costPerAddToCart: 3.25, landingPageViews: 96, costPerLandingPageView: 0.3, engagements: 166, costPerEngagement: 0.18, saves: 1, shares: 1 },
+          { name: "Gunner", campaign: "sanaplant_products_conv", spend: 28.81, purchases: 0, cpm: 4.75, impressions: 6067, reach: 2817, frequency: 2.15, clicks: 83, cpc: 0.35, ctr: 1.37, addToCart: 5, costPerAddToCart: 5.76, landingPageViews: 51, costPerLandingPageView: 0.56, engagements: 92, costPerEngagement: 0.31, saves: 1 },
+          { name: "Všetko, čo potrebuje šikovný pestovateľ", campaign: "sikovny_gazda_sales", spend: 28.45, purchases: 0, cpm: 5.45, impressions: 5219, reach: 2564, frequency: 2.04, clicks: 85, cpc: 0.33, ctr: 1.63, landingPageViews: 60, costPerLandingPageView: 0.47, engagements: 97, costPerEngagement: 0.29, comments: 1 },
+          { name: "Manychat - kalendar zadarmo", campaign: "sanaplant_boosting", spend: 26.32, purchases: 0, cpm: 1.34, impressions: 19658, reach: 12528, frequency: 1.57, clicks: 1, cpc: 26.32, ctr: 0.01, engagements: 311, costPerEngagement: 0.08, shares: 17, comments: 122 },
+          { name: "Pestujte ako profesionál", campaign: "sanaplant_brand", spend: 23.38, purchases: 0, cpm: 0.9, impressions: 56393, reach: 30053, frequency: 3.5, clicks: 18, cpc: 2.84, ctr: 0.06, engagements: 26, costPerEngagement: 1.93 },
+          { name: "sikovny_gazda", campaign: "sanaplant_product_catalog", spend: 21.63, value: 22.95, roas: 1.06, purchases: 2, costPerPurchase: 10.82, aov: 11.48, cpm: 2.82, impressions: 7680, reach: 5856, frequency: 1.31, clicks: 93, cpc: 0.23, ctr: 1.21, addToCart: 4, costPerAddToCart: 5.41, landingPageViews: 65, costPerLandingPageView: 0.33, engagements: 105, costPerEngagement: 0.21 },
+          { name: "zahradkari", campaign: "sanaplant_product_catalog", spend: 20.99, value: 33.29, roas: 1.59, purchases: 2, costPerPurchase: 10.5, aov: 16.65, cpm: 1.73, impressions: 12101, reach: 9917, frequency: 1.22, clicks: 177, cpc: 0.12, ctr: 1.46, addToCart: 7, costPerAddToCart: 3, landingPageViews: 117, costPerLandingPageView: 0.18, engagements: 215, costPerEngagement: 0.1 },
+          { name: "Deviz 90", campaign: "sanaplant_boosting", spend: 20, purchases: 0, cpm: 2.26, impressions: 8844, reach: 5193, frequency: 1.7, clicks: 24, cpc: 0.83, ctr: 0.27, addToCart: 4, costPerAddToCart: 5, landingPageViews: 11, costPerLandingPageView: 1.82, engagements: 184, costPerEngagement: 0.11, saves: 3, shares: 9 },
+          { name: "IG Gunner", campaign: "sanaplant_boosting", spend: 20, purchases: 0, cpm: 21.25, impressions: 941, reach: 658, frequency: 1.43, clicks: 3, cpc: 6.67, ctr: 0.32, engagements: 146, costPerEngagement: 0.14 },
+          { name: "FB Molica skleníková", campaign: "sanaplant_boosting", spend: 20, purchases: 0, cpm: 1.99, impressions: 10047, reach: 6060, frequency: 1.66, clicks: 4, cpc: 5, ctr: 0.04, landingPageViews: 1, costPerLandingPageView: 20, engagements: 312, costPerEngagement: 0.06, saves: 8, shares: 72, comments: 6 },
+          { name: "IG Molica skleníková", campaign: "sanaplant_boosting", spend: 20, purchases: 0, cpm: 13.12, impressions: 1524, reach: 1039, frequency: 1.47, engagements: 129, costPerEngagement: 0.16, saves: 2 },
+          { name: "FB Malý motýľ, veľký problém", campaign: "sanaplant_boosting", spend: 20, purchases: 0, cpm: 2.44, impressions: 8193, reach: 7236, frequency: 1.13, clicks: 5, cpc: 4, ctr: 0.06, landingPageViews: 2, costPerLandingPageView: 10, engagements: 196, costPerEngagement: 0.1, saves: 4, shares: 21, comments: 4 },
+          { name: "IG Malý motýľ, veľký problém", campaign: "sanaplant_boosting", spend: 19.99, purchases: 0, cpm: 9.85, impressions: 2030, reach: 1424, frequency: 1.43, clicks: 19, cpc: 1.05, ctr: 0.94, landingPageViews: 8, costPerLandingPageView: 2.5, engagements: 137, costPerEngagement: 0.15, saves: 2 },
+          { name: "IG Deviz 90", campaign: "sanaplant_boosting", spend: 19.95, purchases: 0, cpm: 10.78, impressions: 1850, reach: 1341, frequency: 1.38, clicks: 21, cpc: 0.95, ctr: 1.14, landingPageViews: 5, costPerLandingPageView: 3.99, engagements: 127, costPerEngagement: 0.16, comments: 1 },
+          { name: "blog hrdze", campaign: "sanaplant_boosting", spend: 15.72, purchases: 0, cpm: 0.93, impressions: 16987, reach: 11987, frequency: 1.42, clicks: 86, cpc: 0.18, ctr: 0.51, landingPageViews: 1, costPerLandingPageView: 15.72, engagements: 241, costPerEngagement: 0.07, saves: 1, shares: 7 },
+          { name: "HydroHumat - doprajte rastlinám správnu výživu", campaign: "sanaplant_products_traffic", spend: 14.91, purchases: 0, cpm: 1.62, impressions: 9191, reach: 5727, frequency: 1.6, clicks: 128, cpc: 0.12, ctr: 1.39, addToCart: 6, costPerAddToCart: 2.49, landingPageViews: 31, costPerLandingPageView: 0.48, engagements: 129, costPerEngagement: 0.12 },
+          { name: "Pestujte ako profesionál", campaign: "sanaplant_general_sales", spend: 14.6, purchases: 0, cpm: 3.56, impressions: 4105, reach: 2126, frequency: 1.93, clicks: 52, cpc: 0.28, ctr: 1.27, addToCart: 8, costPerAddToCart: 1.83, landingPageViews: 29, costPerLandingPageView: 0.5, engagements: 57, costPerEngagement: 0.26 },
+          { name: "Gunner", campaign: "sanaplant_products_traffic", spend: 12.66, purchases: 0, cpm: 1.6, impressions: 7896, reach: 5084, frequency: 1.55, clicks: 210, cpc: 0.06, ctr: 2.66, landingPageViews: 107, costPerLandingPageView: 0.12, engagements: 219, costPerEngagement: 0.06, saves: 1, shares: 1, comments: 1 },
+          { name: "Profesionálne riešenia pre malých pestovateľov", campaign: "sikovny_gazda_sales", spend: 0.8, purchases: 0, cpm: 3.35, impressions: 239, reach: 169, frequency: 1.41, engagements: 3, costPerEngagement: 0.27 }
         ],
       },
-      boosting: { spend: 155.66, interactions: 1472, purchases: 0, value: 0 },
+
       google: {
         spend: 68.36, impressions: 18127, clicks: 273, cpc: 0.25, ctr: 1.51,
-        purchases: 8, purchaseValue: 661.4, conversions: 41.91,
+        interactions: 562, interactionRate: 3.1, convRate: 9.24, costPerConv: 1.32,
+        purchases: 10, purchaseValue: 892.94, conversions: 13, roas: 13.06,
+        conversionActions: { add_to_cart: 3, purchase: 10 },
         campaigns: [
-          { name: 'Search (brand)', spend: 51.22, clicks: 141, purchases: 8, value: 661.4 },
-          { name: 'Display – Remarketing', spend: 17.14, clicks: 132, purchases: 0, value: 0 },
+          { name: "SE_brand", type: "Search", status: "Paused", purchases: 10, value: 892.94, conversionActions: { add_to_cart: 3, purchase: 10 } },
+          { name: "GD remarketing", type: "Display", status: "Paused", purchases: 0, value: 0 }
         ],
       },
       ga: {
@@ -151,22 +248,40 @@ const sanaplant = {
     {
       year: 2025, month: 6,
       meta: {
-        spend: 1396.71, impressions: 438012, reach: 124906, clicks: 5129,
-        purchases: 43, purchaseValue: 2640.79, roas: 1.89, addToCart: 209,
-        cpc: 0.27, costPerPurchase: 32.48,
-        campaigns: [
-          { name: 'Katalóg produktov', spend: 793.41, clicks: 2463, purchases: 28, value: 1576.79, roas: 1.99 },
-          { name: 'Vybrané produkty', spend: 477.91, clicks: 782, purchases: 13, value: 998.37, roas: 2.09 },
-          { name: 'Traffic kampane', spend: 125.39, clicks: 1884, purchases: 2, value: 65.63, roas: 0.52 },
-          { name: 'Manychat (zber e-mailov)', spend: 60.99, clicks: null, purchases: null, value: null, roas: null },
+        spend: 1599.54, impressions: 543899, reach: 189316, clicks: 5759,
+        purchases: 45, purchaseValue: 2930.3, roas: 1.83, addToCart: 219,
+        cpc: 0.28, costPerPurchase: 35.55,
+        ads: [
+          { name: "exkluzivne_produkty", campaign: "sanaplant_product_catalog", spend: 646.82, value: 1441.24, roas: 2.23, purchases: 24, costPerPurchase: 26.95, aov: 60.05, cpm: 3.14, impressions: 206018, reach: 48390, frequency: 4.26, clicks: 1775, cpc: 0.36, ctr: 0.86, addToCart: 113, costPerAddToCart: 5.72, landingPageViews: 1088, costPerLandingPageView: 0.59, engagements: 2330, costPerEngagement: 0.28, saves: 6, shares: 6, comments: 2 },
+          { name: "10 produktov Sanaplant - novy", campaign: "sanaplant_products_conv", spend: 244.84, value: 159.47, roas: 0.87, purchases: 7, costPerPurchase: 26.04, aov: 22.78, cpm: 10.28, impressions: 46264, reach: 10595, frequency: 10.89, clicks: 354, cpc: 1.39, ctr: 1.48, addToCart: 43, costPerAddToCart: 10.89, landingPageViews: 172, costPerLandingPageView: 2.83, engagements: 2303, costPerEngagement: 0.2, saves: 2, shares: 1, comments: 1 },
+          { name: "sanaplant_vybrane_produkty", campaign: "sanaplant_product_catalog_2", spend: 125.49, value: 135.55, roas: 1.11, purchases: 4, costPerPurchase: 30.58, aov: 33.89, cpm: 6.91, impressions: 52490, reach: 16482, frequency: 6.05, clicks: 643, cpc: 0.46, ctr: 2.94, addToCart: 20, costPerAddToCart: 6.12, landingPageViews: 451, costPerLandingPageView: 0.6, engagements: 798, costPerEngagement: 0.36, saves: 2, shares: 1, comments: 2 },
+          { name: "Zdravé rastliny = bohatá úroda", campaign: "sanaplant_products_conv", spend: 117.87, purchases: 0, cpm: 5.11, impressions: 23050, reach: 6539, frequency: 3.53, clicks: 214, cpc: 0.55, ctr: 0.93, addToCart: 5, costPerAddToCart: 23.57, landingPageViews: 127, costPerLandingPageView: 0.93, engagements: 230, costPerEngagement: 0.51, saves: 2, shares: 2 },
+          { name: "Prípravky na ochranu rastlín (Šikovný gazda)", campaign: "sanaplant_boosting_traffic", spend: 104.19, value: 65.63, roas: 0.63, purchases: 2, costPerPurchase: 52.1, aov: 32.82, cpm: 1.49, impressions: 70123, reach: 33446, frequency: 2.1, clicks: 1577, cpc: 0.07, ctr: 2.25, addToCart: 12, costPerAddToCart: 8.68, landingPageViews: 587, costPerLandingPageView: 0.18, engagements: 2551, costPerEngagement: 0.04, saves: 18, shares: 14 },
+          { name: "10 produktov Sanaplant - novy 2", campaign: "sanaplant_products_conv", spend: 64.35, purchases: 0, cpm: 5.57, impressions: 11556, reach: 4906, frequency: 2.36, clicks: 122, cpc: 0.53, ctr: 1.06, addToCart: 5, costPerAddToCart: 12.87, landingPageViews: 67, costPerLandingPageView: 0.96, engagements: 137, costPerEngagement: 0.47, saves: 2 },
+          { name: "Manychat - kalendar zadarmo", campaign: "sanaplant_boosting", spend: 60.99, purchases: 0, cpm: 1.53, impressions: 39953, reach: 19288, frequency: 2.07, clicks: 5, cpc: 12.2, ctr: 0.01, landingPageViews: 4, costPerLandingPageView: 15.25, engagements: 545, costPerEngagement: 0.11, saves: 2, shares: 13, comments: 191 },
+          { name: "FB Rajčiny už máte vysadené?", campaign: "sanaplant_boosting", spend: 30, purchases: 0, cpm: 2.22, impressions: 13487, reach: 5923, frequency: 2.28, clicks: 330, cpc: 0.09, ctr: 2.45, addToCart: 2, costPerAddToCart: 15, landingPageViews: 57, costPerLandingPageView: 0.53, engagements: 353, costPerEngagement: 0.08, saves: 2 },
+          { name: "Laudis – spoľahlivý pomocník v boji s burinou", campaign: "sanaplant_boosting", spend: 30, value: 289.51, roas: 9.65, purchases: 2, costPerPurchase: 15, aov: 144.76, cpm: 1.84, impressions: 16309, reach: 6340, frequency: 2.57, clicks: 220, cpc: 0.14, ctr: 1.35, addToCart: 8, costPerAddToCart: 3.75, landingPageViews: 94, costPerLandingPageView: 0.32, engagements: 285, costPerEngagement: 0.11, saves: 3, shares: 6 },
+          { name: "Odborná poradňa Sanaplant", campaign: "sanaplant_boosting", spend: 30, purchases: 0, cpm: 3.04, impressions: 9869, reach: 6448, frequency: 1.53, clicks: 18, cpc: 1.67, ctr: 0.18, landingPageViews: 3, costPerLandingPageView: 10, engagements: 207, costPerEngagement: 0.14, shares: 1 },
+          { name: "Chrastavitosť čerešní a višní", campaign: "sanaplant_boosting", spend: 29.97, purchases: 0, cpm: 2.23, impressions: 13450, reach: 8478, frequency: 1.59, clicks: 5, cpc: 5.99, ctr: 0.04, engagements: 182, costPerEngagement: 0.16, saves: 3, shares: 11, comments: 2 },
+          { name: "SilvaTabs", campaign: "sanaplant_products_conv", spend: 21.61, purchases: 0, cpm: 6.81, impressions: 3171, reach: 1917, frequency: 1.65, clicks: 43, cpc: 0.5, ctr: 1.36, landingPageViews: 17, costPerLandingPageView: 1.27, engagements: 673, costPerEngagement: 0.03, saves: 1, shares: 1 },
+          { name: "Silva Tabs sú hnojivá novej generácie", campaign: "sanaplant_boosting", spend: 19.99, purchases: 0, cpm: 1.57, impressions: 12693, reach: 5727, frequency: 2.22, clicks: 51, cpc: 0.39, ctr: 0.4, landingPageViews: 23, costPerLandingPageView: 0.87, engagements: 106, costPerEngagement: 0.19, saves: 1, shares: 4 },
+          { name: "HydroHumat - prírodná sila pre zdravú pôdu", campaign: "sanaplant_products_traffic", spend: 19.41, purchases: 0, cpm: 1.6, impressions: 12142, reach: 7052, frequency: 1.72, clicks: 286, cpc: 0.07, ctr: 2.36, addToCart: 1, costPerAddToCart: 19.41, landingPageViews: 129, costPerLandingPageView: 0.15, engagements: 313, costPerEngagement: 0.06, saves: 2, shares: 1 },
+          { name: "10 produktov Sanaplant", campaign: "sanaplant_products_conv", spend: 15.02, value: 172.36, roas: 11.48, purchases: 2, costPerPurchase: 7.51, aov: 86.18, cpm: 4.75, impressions: 3159, reach: 2361, frequency: 1.34, clicks: 35, cpc: 0.43, ctr: 1.11, addToCart: 4, costPerAddToCart: 3.76, landingPageViews: 27, costPerLandingPageView: 0.56, engagements: 40, costPerEngagement: 0.38, saves: 1, shares: 2 },
+          { name: "Pestujte ako profesionál", campaign: "sanaplant_products_conv", spend: 14.22, value: 666.54, roas: 46.87, purchases: 4, costPerPurchase: 3.56, aov: 166.64, cpm: 3.67, impressions: 3878, reach: 985, frequency: 3.94, clicks: 14, cpc: 1.02, ctr: 0.36, addToCart: 6, costPerAddToCart: 2.37, landingPageViews: 7, costPerLandingPageView: 2.03, engagements: 15, costPerEngagement: 0.95 },
+          { name: "silva_tabs", campaign: "sanaplant_product_catalog", spend: 11.45, purchases: 0, cpm: 4.07, impressions: 2812, reach: 1907, frequency: 1.47, clicks: 13, cpc: 0.88, ctr: 0.46, landingPageViews: 9, costPerLandingPageView: 1.27, engagements: 21, costPerEngagement: 0.55 },
+          { name: "sanaplant_vybrane_produkty_cards", campaign: "sanaplant_product_catalog_2", spend: 9.65, purchases: 0, cpm: 4.48, impressions: 2152, reach: 1450, frequency: 1.48, clicks: 32, cpc: 0.3, ctr: 1.49, landingPageViews: 16, costPerLandingPageView: 0.6, engagements: 36, costPerEngagement: 0.27 },
+          { name: "IG Rajčiny už máte vysadené?", campaign: "sanaplant_boosting", spend: 1.88, purchases: 0, cpm: 14.92, impressions: 126, reach: 123, frequency: 1.02, clicks: 1, cpc: 1.88, ctr: 0.79, engagements: 17, costPerEngagement: 0.11 },
+          { name: "HydroHumat - doprajte rastlinám správnu výživu", campaign: "sanaplant_products_traffic", spend: 1.79, purchases: 0, cpm: 1.5, impressions: 1197, reach: 959, frequency: 1.25, clicks: 21, cpc: 0.09, ctr: 1.75, landingPageViews: 5, costPerLandingPageView: 0.36, engagements: 21, costPerEngagement: 0.09 }
         ],
       },
-      boosting: { spend: 141.84, interactions: 1150, purchases: 2, value: 289.51 },
+
       google: {
         spend: 8.48, impressions: 75, clicks: 32, cpc: 0.27, ctr: 42.67,
-        purchases: 4, purchaseValue: 1230.46, conversions: 14,
+        interactions: 32, interactionRate: 42.67, convRate: 43.75, costPerConv: 0.61,
+        purchases: 4, purchaseValue: 1230.46, conversions: 4, roas: 145.1,
+        conversionActions: { purchase: 4 },
         campaigns: [
-          { name: 'Search (brand)', spend: 8.48, clicks: 32, purchases: 4, value: 1230.46 },
+          { name: "SE_brand", type: "Search", status: "Paused", purchases: 4, value: 1230.46, conversionActions: { purchase: 4 } }
         ],
       },
       ga: {
@@ -182,21 +297,33 @@ const sanaplant = {
     {
       year: 2025, month: 7,
       meta: {
-        spend: 668.28, impressions: 287163, reach: 70920, clicks: 3224,
+        spend: 668.28, impressions: 287163, reach: 106654, clicks: 3224,
         purchases: 23, purchaseValue: 1073.36, roas: 1.61, addToCart: 146,
         cpc: 0.21, costPerPurchase: 29.06,
-        campaigns: [
-          { name: 'Katalóg produktov', spend: 462.37, clicks: 2093, purchases: 19, value: 894.48, roas: 1.93 },
-          { name: 'Vybrané produkty', spend: 141.19, clicks: 296, purchases: 4, value: 178.88, roas: 1.27 },
-          { name: 'Traffic kampane', spend: 39.99, clicks: 630, purchases: 0, value: 0, roas: 0 },
+        ads: [
+          { name: "exkluzivne_produkty", campaign: "sanaplant_product_catalog", spend: 294.31, value: 758.7, roas: 2.58, purchases: 15, costPerPurchase: 19.62, aov: 50.58, cpm: 2.9, impressions: 101520, reach: 24334, frequency: 4.17, clicks: 953, cpc: 0.31, ctr: 0.94, addToCart: 70, costPerAddToCart: 4.2, landingPageViews: 573, costPerLandingPageView: 0.51, engagements: 1178, costPerEngagement: 0.25, saves: 7, shares: 1, comments: 2 },
+          { name: "sanaplant_vybrane_produkty", campaign: "sanaplant_product_catalog_2", spend: 136.14, value: 67.24, roas: 0.55, purchases: 2, costPerPurchase: 61.03, aov: 33.62, cpm: 6.79, impressions: 53924, reach: 18079, frequency: 8.63, clicks: 998, cpc: 0.29, ctr: 4.77, addToCart: 33, costPerAddToCart: 6.87, landingPageViews: 675, costPerLandingPageView: 0.38, engagements: 1189, costPerEngagement: 0.23, saves: 4, shares: 1 },
+          { name: "Jedna aplikácia. Rok výživy.", campaign: "sanaplant_products_conv", spend: 46.83, value: 17.39, roas: 0.43, purchases: 2, costPerPurchase: 20.31, aov: 8.7, cpm: 10.68, impressions: 9607, reach: 1930, frequency: 8.18, clicks: 71, cpc: 1.12, ctr: 2.34, addToCart: 6, costPerAddToCart: 6.77, landingPageViews: 46, costPerLandingPageView: 1.71, engagements: 88, costPerEngagement: 0.9, saves: 2 },
+          { name: "sanaplant_vybrane_produkty_cards", campaign: "sanaplant_product_catalog_2", spend: 31.92, value: 68.54, roas: 2.15, purchases: 2, costPerPurchase: 15.96, aov: 34.27, cpm: 2.15, impressions: 14845, reach: 6303, frequency: 2.36, clicks: 142, cpc: 0.22, ctr: 0.96, addToCart: 9, costPerAddToCart: 3.55, landingPageViews: 110, costPerLandingPageView: 0.29, engagements: 213, costPerEngagement: 0.15 },
+          { name: "Laudis – spoľahlivý pomocník v boji s burinou", campaign: "sanaplant_products_conv", spend: 25.51, purchases: 0, cpm: 5.15, impressions: 10014, reach: 4352, frequency: 4.71, clicks: 66, cpc: 0.79, ctr: 1.31, landingPageViews: 38, costPerLandingPageView: 1.35, engagements: 79, costPerEngagement: 0.65, shares: 1 },
+          { name: "10 produktov Sanaplant - novy", campaign: "sanaplant_products_conv", spend: 23.28, value: 161.49, roas: 12.21, purchases: 2, costPerPurchase: 6.62, aov: 80.75, cpm: 7.25, impressions: 6406, reach: 3021, frequency: 4.24, clicks: 54, cpc: 0.86, ctr: 1.68, addToCart: 13, costPerAddToCart: 1.02, landingPageViews: 26, costPerLandingPageView: 1.83, engagements: 372, costPerEngagement: 0.12, saves: 1 },
+          { name: "Dvojitá ochrana, ktorú porast skutočne potrebuje", campaign: "sanaplant_products_conv", spend: 20.17, purchases: 0, cpm: 5.33, impressions: 7559, reach: 3133, frequency: 4.92, clicks: 38, cpc: 1.1, ctr: 1.01, addToCart: 4, costPerAddToCart: 10.08, landingPageViews: 19, costPerLandingPageView: 2.3, engagements: 48, costPerEngagement: 0.85, shares: 1 },
+          { name: "Chcete mať dokonalý trávnik za pár dní? Grasstex - netkaná geotextília s trávnym osivom", campaign: "sanaplant_boosting_traffic", spend: 20, purchases: 0, cpm: 1.04, impressions: 19318, reach: 9912, frequency: 1.95, clicks: 468, cpc: 0.04, ctr: 2.42, addToCart: 4, costPerAddToCart: 5, landingPageViews: 226, costPerLandingPageView: 0.09, engagements: 474, costPerEngagement: 0.04, saves: 3, comments: 1 },
+          { name: "Oživte pôdu prirodzene. Zlepšite úrodu ekologicky", campaign: "sanaplant_boosting_traffic", spend: 19.99, purchases: 0, cpm: 0.8, impressions: 25022, reach: 14226, frequency: 1.76, clicks: 162, cpc: 0.12, ctr: 0.65, addToCart: 4, costPerAddToCart: 5, landingPageViews: 47, costPerLandingPageView: 0.43, engagements: 205, costPerEngagement: 0.1, comments: 1 },
+          { name: "Bledohnedé škvrny rôznych tvarov na paprike", campaign: "sanaplant_boosting", spend: 19.95, purchases: 0, cpm: 0.85, impressions: 23341, reach: 12415, frequency: 1.88, clicks: 127, cpc: 0.16, ctr: 0.54, landingPageViews: 1, costPerLandingPageView: 19.95, engagements: 438, costPerEngagement: 0.05, saves: 11, shares: 8, comments: 1 },
+          { name: "Pestujte ako profesionál", campaign: "sanaplant_products_conv", spend: 18.22, purchases: 0, cpm: 3.17, impressions: 5745, reach: 1852, frequency: 3.1, clicks: 60, cpc: 0.3, ctr: 1.04, addToCart: 3, costPerAddToCart: 6.07, landingPageViews: 37, costPerLandingPageView: 0.49, engagements: 67, costPerEngagement: 0.27 },
+          { name: "Oživte pôdu prirodzene. Zlepšite úrodu ekologicky", campaign: "sanaplant_products_conv", spend: 7.18, purchases: 0, cpm: 2.7, impressions: 2664, reach: 1209, frequency: 2.2, clicks: 7, cpc: 1.03, ctr: 0.26, landingPageViews: 4, costPerLandingPageView: 1.8, engagements: 19, costPerEngagement: 0.38, shares: 1 },
+          { name: "Sanaplant poradňa - Hortenzie", campaign: "sanaplant_boosting", spend: 4.78, purchases: 0, cpm: 0.66, impressions: 7198, reach: 5888, frequency: 1.22, clicks: 78, cpc: 0.06, ctr: 1.08, landingPageViews: 2, costPerLandingPageView: 2.39, engagements: 236, costPerEngagement: 0.02, saves: 4, shares: 2, comments: 2 }
         ],
       },
-      boosting: { spend: 24.73, interactions: 674, purchases: 0, value: 0 },
+
       google: {
         spend: 359.34, impressions: 105255, clicks: 2745, cpc: 0.13, ctr: 2.61,
-        purchases: 30, purchaseValue: 1518.92, conversions: 30,
+        interactions: 3516, interactionRate: 3.34, convRate: 3.19, costPerConv: 3.2,
+        purchases: 30.01, purchaseValue: 1518.92, conversions: 30.01, roas: 4.23,
+        conversionActions: { purchase: 30.01 },
         campaigns: [
-          { name: 'PMax – produkty', spend: 359.34, clicks: 2745, purchases: 30, value: 1518.92 },
+          { name: "PMax_sales_products", type: "Performance Max", status: "Enabled", purchases: 30.01, value: 1518.92, conversionActions: { purchase: 30.01 } }
         ],
       },
       ga: {
@@ -212,20 +339,28 @@ const sanaplant = {
     {
       year: 2025, month: 8,
       meta: {
-        spend: 223.96, impressions: 134802, reach: 47126, clicks: 1795,
-        purchases: 6, purchaseValue: 461.57, roas: 2.06, addToCart: 48,
+        spend: 223.96, impressions: 134802, reach: 64151, clicks: 1795,
+        purchases: 6, purchaseValue: 461.57, roas: 2.06, addToCart: 45,
         cpc: 0.12, costPerPurchase: 37.33,
-        campaigns: [
-          { name: 'Katalóg produktov', spend: 101.83, clicks: 560, purchases: 4, value: 375.92, roas: 3.69 },
-          { name: 'Traffic kampane', spend: 59.94, clicks: 887, purchases: 0, value: 0, roas: 0 },
+        ads: [
+          { name: "All Products", campaign: "sanaplant_product_catalog", spend: 53.14, value: 115.62, roas: 2.18, purchases: 2, costPerPurchase: 26.57, aov: 57.81, cpm: 2.73, impressions: 19487, reach: 4825, frequency: 4.04, clicks: 280, cpc: 0.19, ctr: 1.44, addToCart: 8, costPerAddToCart: 6.64, landingPageViews: 184, costPerLandingPageView: 0.29, engagements: 355, costPerEngagement: 0.15, saves: 2, shares: 1 },
+          { name: "sanaplant_vybrane_produkty", campaign: "sanaplant_product_catalog_2", spend: 37.24, value: 260.3, roas: 6.99, purchases: 2, costPerPurchase: 18.62, aov: 130.15, cpm: 3.42, impressions: 10887, reach: 4125, frequency: 2.64, clicks: 250, cpc: 0.15, ctr: 2.3, addToCart: 12, costPerAddToCart: 3.1, landingPageViews: 155, costPerLandingPageView: 0.24, engagements: 279, costPerEngagement: 0.13, saves: 1 },
+          { name: "Planstar BCX – nové mikrogranulované štartovacie hnojivo", campaign: "sanaplant_boosting_traffic", spend: 29.97, purchases: 0, cpm: 1.51, impressions: 19843, reach: 7571, frequency: 2.62, clicks: 550, cpc: 0.05, ctr: 2.77, addToCart: 10, costPerAddToCart: 3, landingPageViews: 266, costPerLandingPageView: 0.11, engagements: 569, costPerEngagement: 0.05, saves: 3 },
+          { name: "ROOTFiX", campaign: "sanaplant_boosting_traffic", spend: 29.97, purchases: 0, cpm: 1.93, impressions: 15520, reach: 10068, frequency: 1.54, clicks: 337, cpc: 0.09, ctr: 2.17, addToCart: 2, costPerAddToCart: 14.99, landingPageViews: 22, costPerLandingPageView: 1.36, engagements: 379, costPerEngagement: 0.08, shares: 1 },
+          { name: "Pleseň sivá na viniči", campaign: "sanaplant_boosting", spend: 29.95, purchases: 0, cpm: 1.04, impressions: 28692, reach: 15511, frequency: 1.85, landingPageViews: 4, costPerLandingPageView: 7.49, engagements: 684, costPerEngagement: 0.04, saves: 32, shares: 31, comments: 3 },
+          { name: "Sanaplant poradňa - Hortenzie", campaign: "sanaplant_boosting", spend: 20.22, value: 85.65, roas: 4.24, purchases: 2, costPerPurchase: 10.11, aov: 42.83, cpm: 0.59, impressions: 34236, reach: 18491, frequency: 1.85, clicks: 348, cpc: 0.06, ctr: 1.02, addToCart: 9, costPerAddToCart: 2.25, landingPageViews: 34, costPerLandingPageView: 0.59, engagements: 784, costPerEngagement: 0.03, saves: 10, shares: 6, comments: 7 },
+          { name: "Aký bol váš najväčší pestovateľský objav v tejto sezóne?", campaign: "sanaplant_boosting", spend: 12.02, purchases: 0, cpm: 2.68, impressions: 4490, reach: 3385, frequency: 1.33, engagements: 128, costPerEngagement: 0.09, shares: 1, comments: 1 },
+          { name: "All Products – Sales", campaign: "sanaplant_product_catalog_2", spend: 11.45, purchases: 0, cpm: 6.95, impressions: 1647, reach: 175, frequency: 9.41, clicks: 30, cpc: 0.38, ctr: 1.82, addToCart: 4, costPerAddToCart: 2.86, landingPageViews: 20, costPerLandingPageView: 0.57, engagements: 33, costPerEngagement: 0.35 }
         ],
       },
-      boosting: { spend: 62.19, interactions: 1596, purchases: 2, value: 85.65 },
+
       google: {
-        spend: 615.48, impressions: 177911, clicks: 3550, cpc: 0.17, ctr: 2.0,
-        purchases: 11, purchaseValue: 1725.29, conversions: 11,
+        spend: 615.48, impressions: 177911, clicks: 3550, cpc: 0.17, ctr: 2,
+        interactions: 6257, interactionRate: 3.52, convRate: 0.74, costPerConv: 13.38,
+        purchases: 27.99, purchaseValue: 1116.33, conversions: 27.99, roas: 1.81,
+        conversionActions: { purchase: 27.99 },
         campaigns: [
-          { name: 'PMax – produkty', spend: 615.48, clicks: 3550, purchases: 11, value: 1725.29 },
+          { name: "PMax_sales_products", type: "Performance Max", status: "Enabled", purchases: 27.99, value: 1116.33, conversionActions: { purchase: 27.99 } }
         ],
       },
       ga: {
@@ -241,21 +376,29 @@ const sanaplant = {
     {
       year: 2025, month: 9,
       meta: {
-        spend: 323.82, impressions: 178693, reach: 54399, clicks: 2390,
+        spend: 323.82, impressions: 178693, reach: 69658, clicks: 2390,
         purchases: 21, purchaseValue: 697.29, roas: 2.15, addToCart: 102,
         cpc: 0.14, costPerPurchase: 15.42,
-        campaigns: [
-          { name: 'Katalóg produktov', spend: 216.02, clicks: 1473, purchases: 21, value: 697.29, roas: 3.23 },
-          { name: 'Traffic kampane', spend: 59.91, clicks: 662, purchases: 0, value: 0, roas: 0 },
+        ads: [
+          { name: "All Products", campaign: "sanaplant_product_catalog", spend: 204.67, value: 681.19, roas: 6.35, purchases: 19, costPerPurchase: 38.06, aov: 78.43, cpm: 4.22, impressions: 97140, reach: 22183, frequency: 10.36, clicks: 1410, cpc: 0.3, ctr: 2.89, addToCart: 95, costPerAddToCart: 4.82, landingPageViews: 849, costPerLandingPageView: 0.49, engagements: 1569, costPerEngagement: 0.27, saves: 8, shares: 1 },
+          { name: "LeoHumin Organic", campaign: "sanaplant_boosting_traffic", spend: 29.98, purchases: 0, cpm: 1.06, impressions: 28255, reach: 15505, frequency: 1.82, clicks: 234, cpc: 0.13, ctr: 0.83, addToCart: 1, costPerAddToCart: 29.98, landingPageViews: 100, costPerLandingPageView: 0.3, engagements: 265, costPerEngagement: 0.11, saves: 1, shares: 2 },
+          { name: "Aký bol váš najväčší pestovateľský objav v tejto sezóne?", campaign: "sanaplant_boosting", spend: 17.94, purchases: 0, cpm: 2.06, impressions: 8711, reach: 4787, frequency: 1.82, clicks: 1, cpc: 17.94, ctr: 0.01, landingPageViews: 1, costPerLandingPageView: 17.94, engagements: 215, costPerEngagement: 0.08, comments: 2 },
+          { name: "September v záhrade", campaign: "sanaplant_boosting_traffic", spend: 14.99, purchases: 0, cpm: 1.14, impressions: 13154, reach: 8249, frequency: 1.59, clicks: 304, cpc: 0.05, ctr: 2.31, addToCart: 2, costPerAddToCart: 7.5, landingPageViews: 153, costPerLandingPageView: 0.1, engagements: 309, costPerEngagement: 0.05, saves: 1 },
+          { name: "Živá pôda = zdravá úroda", campaign: "sanaplant_boosting", spend: 14.99, purchases: 0, cpm: 4.24, impressions: 3535, reach: 2273, frequency: 1.56, clicks: 5, cpc: 3, ctr: 0.14, addToCart: 2, costPerAddToCart: 7.5, landingPageViews: 2, costPerLandingPageView: 7.5, engagements: 193, costPerEngagement: 0.08, shares: 1, comments: 1 },
+          { name: "September v záhrade", campaign: "sanaplant_boosting", spend: 14.96, purchases: 0, cpm: 1.31, impressions: 11398, reach: 7130, frequency: 1.6, clicks: 249, cpc: 0.06, ctr: 2.18, landingPageViews: 41, costPerLandingPageView: 0.36, engagements: 269, costPerEngagement: 0.06, saves: 4, shares: 1, comments: 1 },
+          { name: "Septembrový tip pre silnejšie rastliny?", campaign: "sanaplant_boosting_traffic", spend: 14.94, purchases: 0, cpm: 1.27, impressions: 11740, reach: 7230, frequency: 1.62, clicks: 124, cpc: 0.12, ctr: 1.06, landingPageViews: 58, costPerLandingPageView: 0.26, engagements: 133, costPerEngagement: 0.11, saves: 2 },
+          { name: "exkluzivne_produkty", campaign: "sanaplant_product_catalog", spend: 11.35, value: 16.1, roas: 1.42, purchases: 2, costPerPurchase: 5.68, aov: 8.05, cpm: 2.38, impressions: 4760, reach: 2301, frequency: 2.07, clicks: 63, cpc: 0.18, ctr: 1.32, addToCart: 2, costPerAddToCart: 5.68, landingPageViews: 33, costPerLandingPageView: 0.34, engagements: 70, costPerEngagement: 0.16 }
         ],
       },
-      boosting: { spend: 47.89, interactions: 677, purchases: 0, value: 0 },
+
       google: {
         spend: 730.95, impressions: 193457, clicks: 4310, cpc: 0.17, ctr: 2.23,
-        purchases: 36, purchaseValue: 3221.99, conversions: 36,
+        interactions: 4547, interactionRate: 2.35, convRate: 1.67, costPerConv: 9.64,
+        purchases: 4.98, purchaseValue: 434.84, conversions: 4.98, roas: 0.59,
+        conversionActions: { purchase: 4.98 },
         campaigns: [
-          { name: 'PMax – produkty', spend: 685.67, clicks: 4073, purchases: 35, value: 3077.15 },
-          { name: 'PMax – remarketing', spend: 45.28, clicks: 237, purchases: 1, value: 144.84 },
+          { name: "PMax_sales_products", type: "Performance Max", status: "Enabled", purchases: 4.98, value: 434.84, conversionActions: { purchase: 4.98 } },
+          { name: "PMax_REM_sales_products", type: "Performance Max", status: "Paused", purchases: 0.51, value: 5.19, conversionActions: { purchase: 0.51 } }
         ],
       },
       ga: {
@@ -271,22 +414,34 @@ const sanaplant = {
     {
       year: 2025, month: 10,
       meta: {
-        spend: 464.03, impressions: 224148, reach: 76211, clicks: 3027,
+        spend: 464.03, impressions: 224148, reach: 111654, clicks: 3027,
         purchases: 54, purchaseValue: 2457.05, roas: 5.3, addToCart: 299,
-        cpc: 0.15, costPerPurchase: 8.59, purchaseBook: 19,
-        campaigns: [
-          { name: 'Katalóg produktov', spend: 153.64, clicks: 1021, purchases: 36, value: 1794.05, roas: 11.68 },
-          { name: 'Encyklopédia', spend: 198.98, clicks: 734, purchases: 18, value: 663.0, roas: 3.33 },
-          { name: 'Traffic kampane', spend: 34.46, clicks: 1023, purchases: 0, value: 0, roas: 0 },
+        cpc: 0.15, costPerPurchase: 8.59,
+        ads: [
+          { name: "All Products", campaign: "sanaplant_product_catalog", spend: 90.74, value: 453.36, roas: 6.89, purchases: 14, costPerPurchase: 11.62, aov: 43.73, cpm: 4.75, impressions: 46535, reach: 13991, frequency: 6.02, clicks: 690, cpc: 0.29, ctr: 3.29, addToCart: 38, costPerAddToCart: 4.82, landingPageViews: 386, costPerLandingPageView: 0.49, engagements: 721, costPerEngagement: 0.27, saves: 1, shares: 2 },
+          { name: "encyklopedia_video", campaign: "sanaplant_book_conv _2025", spend: 81.09, value: 463.5, roas: 5.72, purchases: 12, costPerPurchase: 6.76, aov: 38.63, cpm: 2.92, impressions: 27730, reach: 15102, frequency: 1.84, clicks: 434, cpc: 0.19, ctr: 1.57, addToCart: 51, costPerAddToCart: 1.59, landingPageViews: 248, costPerLandingPageView: 0.33, engagements: 7589, costPerEngagement: 0.01, saves: 6, shares: 10, comments: 2 },
+          { name: "Najpraktickejšia kniha do každej záhrady", campaign: "sanaplant_book_conv _2025", spend: 63.7, value: 133, roas: 2.11, purchases: 4, costPerPurchase: 15.72, aov: 33.25, cpm: 10.82, impressions: 12648, reach: 6626, frequency: 4.45, clicks: 175, cpc: 0.65, ctr: 8.12, addToCart: 15, costPerAddToCart: 4.19, landingPageViews: 85, costPerLandingPageView: 1.18, engagements: 3232, costPerEngagement: 0.07 },
+          { name: "exkluzivne_produkty", campaign: "sanaplant_product_catalog", spend: 62.9, value: 1340.69, roas: 21.31, purchases: 22, costPerPurchase: 2.86, aov: 60.94, cpm: 2.43, impressions: 25913, reach: 7334, frequency: 3.53, clicks: 331, cpc: 0.19, ctr: 1.28, addToCart: 163, costPerAddToCart: 0.39, landingPageViews: 184, costPerLandingPageView: 0.34, engagements: 362, costPerEngagement: 0.17, saves: 2 },
+          { name: "Vaša záhrada si zaslúži byť zdravá", campaign: "sanaplant_book_conv _2025", spend: 37.05, purchases: 0, cpm: 4.47, impressions: 16906, reach: 10828, frequency: 2.95, clicks: 91, cpc: 0.82, ctr: 1.08, addToCart: 3, costPerAddToCart: 21.07, landingPageViews: 36, costPerLandingPageView: 1.74, engagements: 147, costPerEngagement: 0.49, shares: 1 },
+          { name: "Kompletný sprievodca pre všetkých záhradkárov", campaign: "sanaplant_boosting", spend: 36.74, purchases: 0, cpm: 4.39, impressions: 18515, reach: 12321, frequency: 3.02, clicks: 109, cpc: 0.68, ctr: 1.4, addToCart: 1, costPerAddToCart: 16.16, landingPageViews: 30, costPerLandingPageView: 3.2, engagements: 461, costPerEngagement: 0.16, saves: 5, shares: 11 },
+          { name: "Všetko, čo potrebuje šikovný pestovateľ", campaign: "sanaplant_boosting_traffic", spend: 29.96, purchases: 0, cpm: 1.17, impressions: 25634, reach: 11646, frequency: 2.2, clicks: 965, cpc: 0.03, ctr: 3.76, addToCart: 3, costPerAddToCart: 9.99, landingPageViews: 456, costPerLandingPageView: 0.07, engagements: 987, costPerEngagement: 0.03, saves: 1, shares: 1 },
+          { name: "encyklopedia_video", campaign: "sanaplant_boosting", spend: 25.29, purchases: 0, cpm: 1.05, impressions: 24151, reach: 16316, frequency: 1.48, clicks: 114, cpc: 0.22, ctr: 0.47, addToCart: 14, costPerAddToCart: 1.81, landingPageViews: 49, costPerLandingPageView: 0.52, engagements: 11519, costPerEngagement: 0, saves: 1, shares: 11 },
+          { name: "Kompletný sprievodca pre všetkých záhradkárov", campaign: "sanaplant_book_conv _2025", spend: 16.55, value: 66.5, roas: 7.05, purchases: 2, costPerPurchase: 4.72, aov: 33.25, cpm: 8.61, impressions: 3865, reach: 2681, frequency: 2.94, clicks: 33, cpc: 1.02, ctr: 1.72, addToCart: 7, costPerAddToCart: 1.35, landingPageViews: 8, costPerLandingPageView: 5.13, engagements: 55, costPerEngagement: 0.67, saves: 1 },
+          { name: "Deformované zrelé plody hrušky", campaign: "sanaplant_boosting", spend: 14.92, purchases: 0, cpm: 0.75, impressions: 20021, reach: 13461, frequency: 1.49, clicks: 26, cpc: 0.57, ctr: 0.13, addToCart: 4, costPerAddToCart: 3.73, landingPageViews: 1, costPerLandingPageView: 14.92, engagements: 765, costPerEngagement: 0.02, saves: 1, shares: 3, comments: 3 },
+          { name: "Virkon S", campaign: "sanaplant_boosting_traffic", spend: 4.5, purchases: 0, cpm: 2.14, impressions: 2099, reach: 1232, frequency: 1.7, clicks: 58, cpc: 0.08, ctr: 2.76, landingPageViews: 43, costPerLandingPageView: 0.1, engagements: 65, costPerEngagement: 0.07 },
+          { name: "Objednajte ešte dnes", campaign: "sanaplant_book_conv _2025", spend: 0.59, purchases: 0, cpm: 9.57, impressions: 131, reach: 116, frequency: 2.16, clicks: 1, cpc: 0.12, ctr: 4.35, landingPageViews: 1, costPerLandingPageView: 0.12, engagements: 3, costPerEngagement: 0.36, comments: 1 }
         ],
       },
-      boosting: { spend: 76.95, interactions: 12745, purchases: 0, value: 0 },
+
       google: {
         spend: 795.45, impressions: 178644, clicks: 4441, cpc: 0.18, ctr: 2.49,
-        purchases: 35, purchaseValue: 2754.23, conversions: 35, roas: 3.46, purchaseBook: 9,
+        interactions: 9956, interactionRate: 5.57, convRate: 1.71, costPerConv: 4.66,
+        purchases: 1.5, purchaseValue: 104.83, conversions: 88.41, roas: 0.13,
+        conversionActions: { add_to_cart: 72.96, begin_checkout: 13.95, purchase: 1.5 },
         campaigns: [
-          { name: 'PMax – produkty', spend: 610.04, clicks: 3189, purchases: 27, value: 2229.97 },
-          { name: 'Encyklopédia (Demand Gen + PMax)', spend: 185.4, clicks: 1252, purchases: 7, value: 0 },
+          { name: "PMax_sales_products", type: "Performance Max", status: "Enabled", purchases: 1.5, value: 104.83, conversionActions: { add_to_cart: 34.99, begin_checkout: 13.95, purchase: 1.5 } },
+          { name: "PM_akv_book_2025", type: "Performance Max", status: "Paused", purchases: 0, value: 0, conversionActions: { add_to_cart: 23.99 } },
+          { name: "Demand Gen - book", type: "Demand Gen", status: "Paused", purchases: 0, value: 0, conversionActions: { add_to_cart: 13.98 } }
         ],
       },
       ga: {
@@ -302,22 +457,39 @@ const sanaplant = {
     {
       year: 2025, month: 11,
       meta: {
-        spend: 1449.04, impressions: 423678, reach: 123673, clicks: 4877,
+        spend: 1449.04, impressions: 423678, reach: 190537, clicks: 4877,
         purchases: 87, purchaseValue: 3940.94, roas: 2.72, addToCart: 256,
-        cpc: 0.3, costPerPurchase: 16.66, purchaseBook: 48,
-        campaigns: [
-          { name: 'Encyklopédia', spend: 921.18, clicks: 2479, purchases: 75, value: 3209.27, roas: 3.48 },
-          { name: 'Black Friday 2025', spend: 392.42, clicks: 1329, purchases: 12, value: 731.67, roas: 1.86 },
-          { name: 'Katalóg produktov', spend: 95.09, clicks: 705, purchases: 0, value: 0, roas: 0 },
+        cpc: 0.3, costPerPurchase: 16.66,
+        ads: [
+          { name: "encyklopedia_video", campaign: "sanaplant_book_conv _2025", spend: 727.65, value: 2976.67, roas: 8.28, purchases: 64, costPerPurchase: 33.12, aov: 137.7, cpm: 7.36, impressions: 219103, reach: 97669, frequency: 3.88, clicks: 1932, cpc: 0.98, ctr: 1.56, addToCart: 158, costPerAddToCart: 12.77, landingPageViews: 1059, costPerLandingPageView: 1.85, engagements: 48458, costPerEngagement: 0.03, saves: 35, shares: 49, comments: 16 },
+          { name: "BLACK FRIDAY - cena", campaign: "BF25_sales", spend: 243.05, value: 492.67, roas: 3.2, purchases: 8, costPerPurchase: 19.26, aov: 61.58, cpm: 10.6, impressions: 55654, reach: 13275, frequency: 7.8, clicks: 986, cpc: 0.58, ctr: 3.65, addToCart: 30, costPerAddToCart: 18.12, landingPageViews: 191, costPerLandingPageView: 2.71, engagements: 7444, costPerEngagement: 0.07, saves: 4, shares: 5, comments: 1 },
+          { name: "encyklopedia_video_najnizsia_cena", campaign: "sanaplant_book_conv _2025", spend: 97.64, value: 167.1, roas: 1.71, purchases: 3, costPerPurchase: 32.55, aov: 55.7, cpm: 3.54, impressions: 27607, reach: 17103, frequency: 1.61, clicks: 260, cpc: 0.38, ctr: 0.94, addToCart: 5, costPerAddToCart: 19.53, landingPageViews: 85, costPerLandingPageView: 1.15, engagements: 311, costPerEngagement: 0.31, saves: 3, shares: 1, comments: 1 },
+          { name: "BF2025 - doprava zadarmo", campaign: "BF25_sales", spend: 65.48, value: 70.9, roas: 1.08, purchases: 1, costPerPurchase: 65.48, aov: 70.9, cpm: 4.54, impressions: 14409, reach: 6784, frequency: 2.12, clicks: 117, cpc: 0.56, ctr: 0.81, addToCart: 5, costPerAddToCart: 13.1, landingPageViews: 43, costPerLandingPageView: 1.52, engagements: 135, costPerEngagement: 0.49, comments: 1 },
+          { name: "All Products", campaign: "sanaplant_product_catalog", spend: 62.47, purchases: 0, cpm: 2.44, impressions: 25646, reach: 9946, frequency: 2.58, clicks: 570, cpc: 0.11, ctr: 2.22, addToCart: 16, costPerAddToCart: 3.9, landingPageViews: 343, costPerLandingPageView: 0.18, engagements: 594, costPerEngagement: 0.11, saves: 1, shares: 1 },
+          { name: "Objednajte ešte dnes", campaign: "sanaplant_book_conv _2025", spend: 48.96, purchases: 6, costPerPurchase: 18.12, cpm: 9.76, impressions: 10046, reach: 4707, frequency: 4.34, clicks: 157, cpc: 0.66, ctr: 3.15, addToCart: 15, costPerAddToCart: 8.19, landingPageViews: 80, costPerLandingPageView: 1.26, engagements: 174, costPerEngagement: 0.59, saves: 1, shares: 1, comments: 1 },
+          { name: "Najpraktickejšia kniha do každej záhrady", campaign: "sanaplant_book_conv _2025", spend: 44.93, value: 65.5, roas: 2.28, purchases: 2, costPerPurchase: 44.93, aov: 65.5, cpm: 10.4, impressions: 8588, reach: 4317, frequency: 3.96, clicks: 123, cpc: 0.83, ctr: 2.69, addToCart: 12, costPerAddToCart: 8.6, landingPageViews: 39, costPerLandingPageView: 2.26, engagements: 1920, costPerEngagement: 0.04, saves: 1, shares: 4 },
+          { name: "BF2025 - 1000+ zakaznikov", campaign: "BF25_sales", spend: 40.52, value: 111.4, roas: 2.75, purchases: 2, costPerPurchase: 20.26, aov: 55.7, cpm: 5.22, impressions: 7764, reach: 3696, frequency: 2.1, clicks: 77, cpc: 0.53, ctr: 0.99, addToCart: 4, costPerAddToCart: 10.13, landingPageViews: 18, costPerLandingPageView: 2.25, engagements: 84, costPerEngagement: 0.48, saves: 1 },
+          { name: "exkluzivne_produkty", campaign: "sanaplant_product_catalog", spend: 32.62, purchases: 0, cpm: 2.7, impressions: 12074, reach: 6041, frequency: 2, clicks: 135, cpc: 0.24, ctr: 1.12, addToCart: 2, costPerAddToCart: 16.31, landingPageViews: 93, costPerLandingPageView: 0.35, engagements: 146, costPerEngagement: 0.22, shares: 1 },
+          { name: "Zľavy BLACK FRIDAY", campaign: "BF25_sales", spend: 31.86, value: 56.7, roas: 1.78, purchases: 1, costPerPurchase: 31.86, aov: 56.7, cpm: 4.19, impressions: 7598, reach: 3077, frequency: 2.47, clicks: 127, cpc: 0.25, ctr: 1.67, addToCart: 6, costPerAddToCart: 5.31, landingPageViews: 56, costPerLandingPageView: 0.57, engagements: 130, costPerEngagement: 0.25 },
+          { name: "Malá muška, veľký problém", campaign: "sanaplant_boosting", spend: 14.97, purchases: 0, cpm: 1.01, impressions: 14800, reach: 11027, frequency: 1.34, engagements: 575, costPerEngagement: 0.03, saves: 41, shares: 115, comments: 21 },
+          { name: "MACHOŽRÚT", campaign: "sanaplant_boosting_traffic", spend: 14.91, purchases: 0, cpm: 1.42, impressions: 10499, reach: 6767, frequency: 1.55, clicks: 247, cpc: 0.06, ctr: 2.35, addToCart: 1, costPerAddToCart: 14.91, landingPageViews: 171, costPerLandingPageView: 0.09, engagements: 301, costPerEngagement: 0.05, saves: 19, shares: 11, comments: 1 },
+          { name: "BLACK FRIDAY - zlava", campaign: "BF25_sales", spend: 11.51, purchases: 0, cpm: 3.68, impressions: 3125, reach: 1985, frequency: 1.57, clicks: 22, cpc: 0.52, ctr: 0.7, addToCart: 1, costPerAddToCart: 11.51, landingPageViews: 14, costPerLandingPageView: 0.82, engagements: 163, costPerEngagement: 0.07, saves: 1 },
+          { name: "Virkon S", campaign: "sanaplant_boosting_traffic", spend: 10.47, purchases: 0, cpm: 1.73, impressions: 6042, reach: 3528, frequency: 1.71, clicks: 117, cpc: 0.09, ctr: 1.94, landingPageViews: 92, costPerLandingPageView: 0.11, engagements: 132, costPerEngagement: 0.08, saves: 2, shares: 2 },
+          { name: "BF2025 - doprava zadarmo", campaign: "sanaplant_book_conv _2025", spend: 1.22, purchases: 0, cpm: 2.52, impressions: 484, reach: 385, frequency: 1.26, clicks: 3, cpc: 0.41, ctr: 0.62, landingPageViews: 1, costPerLandingPageView: 1.22, engagements: 5, costPerEngagement: 0.24 },
+          { name: "BF2025 - 1000+ zakaznikov", campaign: "sanaplant_book_conv _2025", spend: 0.78, purchases: 0, cpm: 3.26, impressions: 239, reach: 230, frequency: 1.04, clicks: 4, cpc: 0.2, ctr: 1.67, addToCart: 1, costPerAddToCart: 0.78, landingPageViews: 2, costPerLandingPageView: 0.39, engagements: 5, costPerEngagement: 0.16 }
         ],
       },
-      boosting: { spend: 14.97, interactions: 575, purchases: 0, value: 0 },
+
       google: {
         spend: 151.29, impressions: 38503, clicks: 817, cpc: 0.19, ctr: 2.12,
-        purchases: 2, purchaseValue: 166.59, conversions: 2, roas: 1.1,
+        interactions: 1398, interactionRate: 3.63, convRate: 2.32, costPerConv: 4.66,
+        purchases: 0.5, purchaseValue: 27.85, conversions: 31.49, roas: 0.18,
+        conversionActions: { add_to_cart: 20.99, begin_checkout: 10, purchase: 0.5 },
         campaigns: [
-          { name: 'PMax – produkty', spend: 133.84, clicks: 732, purchases: 2, value: 166.59 },
-          { name: 'Encyklopédia (Demand Gen + PMax)', spend: 17.45, clicks: 85, purchases: 0, value: 0 },
+          { name: "PMax_sales_products", type: "Performance Max", status: "Enabled", purchases: 0.5, value: 27.85, conversionActions: { add_to_cart: 20, begin_checkout: 10, purchase: 0.5 } },
+          { name: "Demand Gen - book", type: "Demand Gen", status: "Paused", purchases: 0, value: 0, conversionActions: { add_to_cart: 0.99 } },
+          { name: "PMax_sales_products #2", type: "Performance Max", status: "Paused", purchases: 0, value: 0 },
+          { name: "PM_akv_book_2025", type: "Performance Max", status: "Paused", purchases: 0, value: 0 }
         ],
       },
       ga: {
@@ -333,14 +505,24 @@ const sanaplant = {
     {
       year: 2025, month: 12,
       meta: {
-        spend: 1264.27, impressions: 337407, reach: 116928, clicks: 3821,
+        spend: 1264.27, impressions: 337407, reach: 190353, clicks: 3820,
         purchases: 68, purchaseValue: 4504.87, roas: 3.56, addToCart: 174,
-        cpc: 0.33, costPerPurchase: 18.59, purchaseBook: 60,
-        campaigns: [
-          { name: 'Encyklopédia', spend: 1148.57, clicks: 3113, purchases: 61, value: 4011.57, roas: 3.49 },
+        cpc: 0.33, costPerPurchase: 18.59,
+        ads: [
+          { name: "encyklopedia_video", campaign: "sanaplant_book_conv _2025", spend: 590.97, value: 1573.01, roas: 11.58, purchases: 24, costPerPurchase: 99.53, aov: 266.76, cpm: 15.74, impressions: 150117, reach: 90121, frequency: 6.42, clicks: 1717, cpc: 2.05, ctr: 3.76, addToCart: 73, costPerAddToCart: 36.76, landingPageViews: 579, costPerLandingPageView: 4.56, engagements: 31208, costPerEngagement: 0.08, saves: 13, shares: 25, comments: 5 },
+          { name: "encyklopedia_promo", campaign: "sanaplant_book_conv _2025", spend: 421.15, value: 1643.85, roas: 8.56, purchases: 25, costPerPurchase: 80.19, aov: 187.24, cpm: 19.37, impressions: 84539, reach: 44424, frequency: 6.61, clicks: 1145, cpc: 2.07, ctr: 5.38, addToCart: 61, costPerAddToCart: 41.41, landingPageViews: 398, costPerLandingPageView: 4.6, engagements: 16326, costPerEngagement: 0.11, saves: 8, shares: 11, comments: 4 },
+          { name: "darcek_pre_zahradkara", campaign: "sanaplant_book_conv _2025", spend: 125.09, value: 734.81, roas: 19.09, purchases: 11, costPerPurchase: 32.07, aov: 190.54, cpm: 18.97, impressions: 30243, reach: 12511, frequency: 7.43, clicks: 223, cpc: 2.3, ctr: 1.98, addToCart: 20, costPerAddToCart: 20.12, landingPageViews: 65, costPerLandingPageView: 6.17, engagements: 270, costPerEngagement: 3.21, saves: 4, shares: 2, comments: 4 },
+          { name: "BLACK FRIDAY - cena", campaign: "BF25_sales", spend: 28.86, purchases: 0, cpm: 11.43, impressions: 5061, reach: 2706, frequency: 3.79, clicks: 33, cpc: 1.72, ctr: 1.31, addToCart: 2, costPerAddToCart: 28.86, landingPageViews: 14, costPerLandingPageView: 4.36, engagements: 524, costPerEngagement: 0.11 },
+          { name: "BF2025 - doprava zadarmo", campaign: "BF25_sales", spend: 17.3, purchases: 0, cpm: 3.48, impressions: 4976, reach: 3444, frequency: 1.44, clicks: 22, cpc: 0.79, ctr: 0.44, addToCart: 1, costPerAddToCart: 17.3, landingPageViews: 9, costPerLandingPageView: 1.92, engagements: 28, costPerEngagement: 0.62 },
+          { name: "Repka, slnečnica, mak, sója", campaign: "sanaplant_boosting_traffic", spend: 14.98, value: 493.3, roas: 32.93, purchases: 7, costPerPurchase: 2.14, aov: 70.47, cpm: 1.41, impressions: 10607, reach: 4763, frequency: 2.23, clicks: 170, cpc: 0.09, ctr: 1.6, addToCart: 11, costPerAddToCart: 1.36, landingPageViews: 132, costPerLandingPageView: 0.11, engagements: 194, costPerEngagement: 0.08, saves: 2 },
+          { name: "Ďakujeme, že ste boli s nami po celý rok 2025", campaign: "sanaplant_boosting", spend: 14.98, purchases: 0, cpm: 0.6, impressions: 25031, reach: 14772, frequency: 1.69, engagements: 2599, costPerEngagement: 0.01, shares: 53, comments: 34 },
+          { name: "Fuzarióza cesnaku", campaign: "sanaplant_boosting", spend: 14.97, purchases: 0, cpm: 1.7, impressions: 8784, reach: 5555, frequency: 1.58, clicks: 159, cpc: 0.09, ctr: 1.81, addToCart: 3, costPerAddToCart: 4.99, landingPageViews: 52, costPerLandingPageView: 0.29, engagements: 270, costPerEngagement: 0.06, saves: 1, shares: 8, comments: 1 },
+          { name: "Zlaté žltnutie viniča", campaign: "sanaplant_boosting_traffic", spend: 14.96, purchases: 0, cpm: 1.1, impressions: 13542, reach: 8745, frequency: 1.55, clicks: 312, cpc: 0.05, ctr: 2.3, landingPageViews: 222, costPerLandingPageView: 0.07, engagements: 2222, costPerEngagement: 0.01, saves: 11, shares: 6, comments: 1 },
+          { name: "Fuzarióza cesnaku", campaign: "sanaplant_book_conv _2025", spend: 11.36, value: 59.9, roas: 5.27, purchases: 1, costPerPurchase: 11.36, aov: 59.9, cpm: 4.41, impressions: 2577, reach: 1982, frequency: 1.3, clicks: 28, cpc: 0.41, ctr: 1.09, addToCart: 2, costPerAddToCart: 5.68, landingPageViews: 12, costPerLandingPageView: 0.95, engagements: 32, costPerEngagement: 0.36, saves: 2 },
+          { name: "BF2025 - 1000+ zakaznikov", campaign: "BF25_sales", spend: 9.65, purchases: 0, cpm: 5, impressions: 1930, reach: 1330, frequency: 1.45, clicks: 11, cpc: 0.88, ctr: 0.57, addToCart: 1, costPerAddToCart: 9.65, landingPageViews: 3, costPerLandingPageView: 3.22, engagements: 12, costPerEngagement: 0.8 }
         ],
       },
-      boosting: { spend: 29.95, interactions: 2869, purchases: 0, value: 0 },
+
       google: null,
       ga: {
         paid: { sessions: 4398, users: 4067, engagementRate: 31.4, avgDuration: '00:14:07' },
@@ -8258,6 +8440,59 @@ const sanaplant = {
           { name: 'Ďatelina purpurová - Kardinal', sku: '82a8abd537d3', items: 7, netRevenue: 29.19, orders: 3, variants: 2 },
           { name: 'Bellis', sku: '2285', items: 6, netRevenue: 14.1, orders: 3, variants: 2 },
           { name: 'Bofix', sku: '2309', items: 6, netRevenue: 427.6, orders: 2, variants: 4 },
+        ],
+      },
+    },
+    {
+      year: 2026, month: 7,
+      meta: null,
+      google: null,
+      ga: null,
+      email: null,
+      eshop: {
+        woocommerce: true,
+        revenue: 3577.73,
+        netRevenue: 2836.75,
+        grossSales: 2836.75,
+        orders: 35,
+        items: 92,
+        variants: 65,
+        refunds: 0,
+        coupons: 0,
+        taxes: 669.03,
+        shipping: 71.95,
+        categories: [
+          { name: 'Ochrana rastlín', items: 57, netRevenue: 2369.18 },
+          { name: 'Osivá', items: 23, netRevenue: 118.78 },
+          { name: 'Hnojivá a výživa rastlín', items: 11, netRevenue: 155.53 },
+          { name: 'Pomôcky a doplnky', items: 2, netRevenue: 22.07 },
+        ],
+        products: [
+          { name: 'Facélia vratičolistá - Factotum', sku: 'SP17975', items: 13, netRevenue: 68.7, orders: 3, variants: 2 },
+          { name: 'Starane Forte', sku: 'SP18584', items: 10, netRevenue: 53.25, orders: 1, variants: 2 },
+          { name: 'Horčica biela', sku: 'SP18090', items: 6, netRevenue: 13.66, orders: 1, variants: 2 },
+          { name: 'Bora NEW, 3x10 g', sku: 'SP19019', items: 5, netRevenue: 21.22, orders: 2, variants: 0 },
+          { name: 'Wuxal Calcium, 250 ml', sku: 'SP19108', items: 5, netRevenue: 20.41, orders: 2, variants: 0 },
+          { name: 'Mospilan 20 SP - VF', sku: 'SP18305', items: 4, netRevenue: 6.76, orders: 3, variants: 5 },
+          { name: 'Spintor', sku: 'SP18570', items: 4, netRevenue: 221.72, orders: 3, variants: 3 },
+          { name: 'Bofix', sku: 'SP18839', items: 4, netRevenue: 93.96, orders: 3, variants: 3 },
+          { name: 'Ďatelina plazivá - Romena', sku: 'SP17897', items: 3, netRevenue: 29.27, orders: 1, variants: 2 },
+          { name: 'Meligator, 1 l', sku: 'SP18257', items: 3, netRevenue: 280.44, orders: 1, variants: 0 },
+          { name: 'Askon', sku: 'SP17706', items: 2, netRevenue: 18.57, orders: 1, variants: 3 },
+          { name: 'Azaka, 5 l', sku: 'SP17724', items: 2, netRevenue: 549.28, orders: 1, variants: 0 },
+          { name: 'Folicit', sku: 'SP18024', items: 2, netRevenue: 6.84, orders: 2, variants: 2 },
+          { name: 'Champion 50 WG', sku: 'SP18107', items: 2, netRevenue: 14.36, orders: 2, variants: 5 },
+          { name: 'Sivanto Prime', sku: 'SP18553', items: 2, netRevenue: 55.35, orders: 1, variants: 2 },
+          { name: 'CH-Jazierka JAZ 3, 500 g', sku: 'SP19142', items: 2, netRevenue: 22.07, orders: 1, variants: 0 },
+          { name: 'Harmavit', sku: 'SP19463', items: 2, netRevenue: 6.29, orders: 1, variants: 2 },
+          { name: 'Airone SC, 5 l', sku: 'SP17668', items: 1, netRevenue: 91.63, orders: 1, variants: 0 },
+          { name: 'Atonik', sku: 'SP17715', items: 1, netRevenue: 35.08, orders: 1, variants: 4 },
+          { name: 'Cantus', sku: 'SP17822', items: 1, netRevenue: 13.59, orders: 1, variants: 3 },
+          { name: 'Combi-Protect', sku: 'SP17852', items: 1, netRevenue: 41.51, orders: 1, variants: 2 },
+          { name: 'Cupromix, 5 l', sku: 'SP17872', items: 1, netRevenue: 91.2, orders: 1, variants: 0 },
+          { name: 'Cyperfor 100 EC', sku: 'SP17881', items: 1, netRevenue: 18.86, orders: 1, variants: 3 },
+          { name: 'Ďatelina lúčna - Rozeta', sku: 'SP17891', items: 1, netRevenue: 7.15, orders: 1, variants: 2 },
+          { name: 'Dynali', sku: 'SP17950', items: 1, netRevenue: 23.93, orders: 1, variants: 3 },
         ],
       },
     },

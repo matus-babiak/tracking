@@ -183,10 +183,16 @@ export function resolveCompare(client, selected, mode) {
   return null
 }
 
-// % zmena; null keď sa nedá spočítať
+// % zmena; null keď sa nedá spočítať (predtým 0 a teraz > 0 → použite absChange)
 export function pctChange(cur, prev) {
-  if (cur == null || prev == null || prev === 0) return null
+  if (cur == null || prev == null) return null
+  if (prev === 0) return cur === 0 ? 0 : null
   return ((cur - prev) / Math.abs(prev)) * 100
+}
+
+export function absChange(cur, prev) {
+  if (cur == null || prev == null) return null
+  return cur - prev
 }
 
 // ---------- agregácie ----------

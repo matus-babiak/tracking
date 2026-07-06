@@ -1,9 +1,13 @@
 import { Kpi, Section, SpendRoasChart, MonthBarChart, RoasBadge, SortableTable } from '../components/ui'
-import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtRoas, sum, pctChange } from '../lib/helpers'
+import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtRoas, sum, pctChange, absChange } from '../lib/helpers'
 import { skNakupySub } from '../lib/skGrammar'
 import {
   ESHOP_GOOGLE_CONV_LABELS,
   getGoogleConvKeys,
+  monthTrackedConversions,
+  monthTrackedCostPerConv,
+  sumGoogleConvAction,
+  sumGoogleTrackedConversions,
   sumTrackedConversions,
 } from '../lib/googleConversions'
 
@@ -16,10 +20,12 @@ function googleStats(months, convKeys) {
   const rows = months.filter((m) => m.google)
   const spend = sum(rows, (m) => m.google.spend)
   const value = sum(rows, (m) => m.google.purchaseValue)
-  const purchases = sum(rows, (m) => m.google.purchases)
+  const purchases = convKeys
+    ? sumGoogleConvAction(months, 'purchase')
+    : sum(rows, (m) => m.google.purchases)
   const clicks = sum(rows, (m) => m.google.clicks)
   const conversions = convKeys
-    ? sum(rows, (m) => sumTrackedConversions(m.google.conversionActions, convKeys))
+    ? sumGoogleTrackedConversions(months, convKeys)
     : sum(rows, (m) => m.google.conversions ?? m.google.purchases)
   return {
     spend, value, purchases, clicks, conversions,
@@ -100,8 +106,8 @@ function buildMonthColumns(eshop, convKeys) {
       { key: 'convRate', label: 'Miera konverzií', align: 'num', sort: (m) => m.google.convRate, render: (m) => fmtPct(m.google.convRate) },
       {
         key: 'conversions', label: 'Konverzie', align: 'num',
-        sort: (m) => sumTrackedConversions(m.google.conversionActions, convKeys),
-        render: (m) => fmtDec(sumTrackedConversions(m.google.conversionActions, convKeys)),
+        sort: (m) => monthTrackedConversions(m.google, convKeys),
+        render: (m) => fmtDec(monthTrackedConversions(m.google, convKeys)),
       },
       ...convColumns(convKeys, (m) => m.google.conversionActions),
       { key: 'purchases', label: 'Nákupy', align: 'num', sort: (m) => m.google.purchases, render: (m) => fmtDec(m.google.purchases) },
@@ -111,7 +117,7 @@ function buildMonthColumns(eshop, convKeys) {
         sort: (m) => (m.google.spend > 0 ? m.google.purchaseValue / m.google.spend : null),
         render: (m) => <RoasBadge value={m.google.spend > 0 ? m.google.purchaseValue / m.google.spend : null} />,
       },
-      { key: 'costPerConv', label: 'Cena / konverziu', align: 'num', sort: (m) => m.google.costPerConv, render: (m) => fmtEur(m.google.costPerConv, 2) },
+      { key: 'costPerConv', label: 'Cena / konverziu', align: 'num', sort: (m) => monthTrackedCostPerConv(m.google, convKeys), render: (m) => fmtEur(monthTrackedCostPerConv(m.google, convKeys), 2) },
       {
         key: 'cpp', label: 'Cena / nákup', align: 'num',
         sort: (m) => (m.google.purchases > 0 ? m.google.spend / m.google.purchases : null),
@@ -175,19 +181,27 @@ export default function GoogleAds({ months, compare, client }) {
   const d = (key) => (prev ? pctChange(cur[key], prev[key]) : null)
 
   const convTotals = convKeys
-    ? Object.fromEntries(convKeys.map((key) => [
-      key,
-      sum(rows, (m) => m.google.conversionActions?.[key] ?? 0),
-    ]))
+    ? Object.fromEntries(convKeys.map((key) => [key, sumGoogleConvAction(months, key)]))
     : null
 
-  const dc = (key) => {
-    if (!convTotals || !compare?.months.some((m) => m.google)) return null
-    const prevTotal = sum(
-      compare.months.filter((m) => m.google),
-      (m) => m.google.conversionActions?.[key] ?? 0,
-    )
-    return pctChange(convTotals[key], prevTotal)
+  const prevGoogleMonths = compare?.months.filter((m) => m.google) ?? []
+
+  const totalConvDelta = prev ? {
+    pct: d('conversions'),
+    abs: absChange(cur.conversions, prev.conversions),
+  } : null
+
+  const fmtConvSub = (prevVal) => (prevVal != null ? `oproti ${fmtDec(prevVal)}` : null)
+
+  const convCompare = (key) => {
+    if (!convTotals || prevGoogleMonths.length === 0) return null
+    const curVal = convTotals[key]
+    const prevVal = sumGoogleConvAction(compare.months, key)
+    return {
+      prev: prevVal,
+      pct: pctChange(curVal, prevVal),
+      abs: absChange(curVal, prevVal),
+    }
   }
 
   const chartData = rows.map((m) => ({
@@ -196,9 +210,11 @@ export default function GoogleAds({ months, compare, client }) {
     value: m.google.purchaseValue,
     roas: m.google.spend > 0 ? Math.round((m.google.purchaseValue / m.google.spend) * 100) / 100 : null,
     clicks: m.google.clicks,
-    purchases: m.google.purchases,
+    purchases: convKeys
+      ? (m.google.conversionActions?.purchase ?? m.google.purchases)
+      : m.google.purchases,
     conversions: convKeys
-      ? sumTrackedConversions(m.google.conversionActions, convKeys)
+      ? monthTrackedConversions(m.google, convKeys)
       : m.google.conversions ?? m.google.purchases,
   }))
 
@@ -231,12 +247,6 @@ export default function GoogleAds({ months, compare, client }) {
   }
   const campaigns = [...campaignMap.values()]
 
-  const convRows = convKeys?.map((key) => ({
-    key,
-    name: ESHOP_GOOGLE_CONV_LABELS[key] ?? key,
-    total: convTotals[key],
-  })) ?? []
-
   return (
     <>
       <div className="kpi-grid">
@@ -249,12 +259,20 @@ export default function GoogleAds({ months, compare, client }) {
         {convKeys ? (
           <>
             <Kpi label="Konverzie" value={fmtDec(cur.conversions)}
-              sub={cur.costPerConv != null ? `Cena / konv. ${fmtEur(cur.costPerConv, 2)}` : null}
-              delta={d('conversions')} />
-            <Kpi label="Nákupy" value={fmtDec(cur.purchases)} delta={d('purchases')} />
-            <Kpi label="Pridanie do košíka" value={fmtDec(convTotals.add_to_cart)} delta={dc('add_to_cart')} />
-            <Kpi label="Začatie checkoutu" value={fmtDec(convTotals.begin_checkout)} delta={dc('begin_checkout')} />
-            <Kpi label="Nákup (purchase)" value={fmtDec(convTotals.purchase)} delta={dc('purchase')} />
+              sub={[
+                cur.costPerConv != null ? `Cena / konv. ${fmtEur(cur.costPerConv, 2)}` : null,
+                prev ? fmtConvSub(prev.conversions) : null,
+              ].filter(Boolean).join(' · ') || null}
+              delta={totalConvDelta?.pct}
+              deltaAbs={totalConvDelta?.pct == null ? totalConvDelta?.abs : null}
+              deltaFmt={(v) => fmtDec(v)}
+            />
+            <Kpi label="Nákupy" value={fmtDec(cur.purchases)}
+              sub={prev ? fmtConvSub(prev.purchases) : null}
+              delta={d('purchases')}
+              deltaAbs={d('purchases') == null && prev ? absChange(cur.purchases, prev.purchases) : null}
+              deltaFmt={(v) => fmtDec(v)}
+            />
           </>
         ) : eshop ? (
           <>
@@ -303,18 +321,24 @@ export default function GoogleAds({ months, compare, client }) {
         </div>
       </div>
 
-      {convRows.length > 0 && (
-        <Section title="Konverzie podľa akcie" hint="add_to_cart · begin_checkout · purchase">
-          <SortableTable
-            columns={[
-              { key: 'name', label: 'Konverzná akcia', sort: (r) => r.name, render: (r) => r.name },
-              { key: 'total', label: 'Počet', align: 'num', sort: (r) => r.total, render: (r) => fmtDec(r.total) },
-            ]}
-            rows={convRows}
-            rowKey={(r) => r.key}
-            defaultSortKey="total"
-            defaultSortDir="desc"
-          />
+      {convKeys && (
+        <Section title="Konverzie podľa akcie">
+          <div className="kpi-grid kpi-grid--3">
+            {convKeys.map((key) => {
+              const cmp = convCompare(key)
+              return (
+                <Kpi
+                  key={key}
+                  label={ESHOP_GOOGLE_CONV_LABELS[key] ?? key}
+                  value={fmtDec(convTotals[key])}
+                  sub={cmp ? fmtConvSub(cmp.prev) : null}
+                  delta={cmp?.pct}
+                  deltaAbs={cmp?.pct == null ? cmp?.abs : null}
+                  deltaFmt={(v) => fmtDec(v)}
+                />
+              )
+            })}
+          </div>
         </Section>
       )}
 

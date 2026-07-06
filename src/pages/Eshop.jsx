@@ -97,7 +97,15 @@ export default function Eshop({ months, compare }) {
     <>
       <div className="eshop-alert" role="status">
         <span>
-          Údaje sú ručne skopírované z WooCommerce a nezobrazujú 1:1 kompletnú analytiku z administrácie e-shopu.
+          Údaje sú ručne skopírované z WooCommerce a nezobrazujú 1:1 kompletnú analytiku z administrácie e-shopu.{' '}
+          <a
+            className="eshop-alert-link"
+            href="https://sanaplant.sk/wp-admin/admin.php?page=wc-admin&path=%2Fanalytics%2Foverview"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Pozrieť dáta v e-shope
+          </a>
         </span>
         {combinedShops.length > 0 && (
           <>

@@ -27,6 +27,32 @@ export function sumTrackedConversions(conversionActions, keys = ESHOP_GOOGLE_CON
   return keys.reduce((s, k) => s + (conversionActions[k] ?? 0), 0)
 }
 
+/** Konverzie mesiaca — vždy súčet sledovaných akcií, nie Google „všetky konverzie“. */
+export function monthTrackedConversions(google, keys = ESHOP_GOOGLE_CONV_KEYS) {
+  if (!google) return 0
+  if (keys?.length && google.conversionActions) {
+    return sumTrackedConversions(google.conversionActions, keys)
+  }
+  return google.conversions ?? google.purchases ?? 0
+}
+
+export function monthTrackedCostPerConv(google, keys = ESHOP_GOOGLE_CONV_KEYS) {
+  const conv = monthTrackedConversions(google, keys)
+  return conv > 0 && google?.spend != null ? google.spend / conv : null
+}
+
+export function sumGoogleConvAction(months, key) {
+  return months
+    .filter((m) => m.google)
+    .reduce((s, m) => s + (m.google.conversionActions?.[key] ?? 0), 0)
+}
+
+export function sumGoogleTrackedConversions(months, keys = ESHOP_GOOGLE_CONV_KEYS) {
+  return months
+    .filter((m) => m.google)
+    .reduce((s, m) => s + monthTrackedConversions(m.google, keys), 0)
+}
+
 export function getGoogleConvKeys(client) {
   return client?.googleConversionKeys ?? null
 }
