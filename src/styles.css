@@ -2127,26 +2127,22 @@ tr.total.compare-row td {
   color: #16a34a;
 }
 
-/* Celkový prehľad — 6 samostatných kariet 3 × 2 */
-.client-report-kpi-grid {
+/* Celkový prehľad — 6 kariet vždy 3 × 2 (celá šírka) */
+.client-report-kpi-grid,
+.client-report-section--overview .client-report-kpi-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
   margin: 0 0 32px;
 }
 
-@media (min-width: 1280px) {
-  .client-report-doc:not(.client-report-doc--exporting) .client-report-kpi-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
 .client-report-kpi {
-  padding: 20px 18px;
+  padding: 22px 20px;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   background: #fafafa;
-  min-height: 88px;
+  min-height: 96px;
 }
 
 .client-report-kpi-value {

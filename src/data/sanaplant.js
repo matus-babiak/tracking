@@ -8193,8 +8193,14 @@ const sanaplant = {
           ]
       },
       email: {
-        sent: null, openRate: 19.94, clickRate: 0.74, uniqueClicks: 154,
+        sent: 16064, openRate: 19.94, clickRate: 0.74, uniqueClicks: 154,
         unsubRate: 0.18, orders: 1, revenue: 68.97, campaignsCount: 4,
+        campaigns: [
+          { name: 'BC: Blumeria Consulting v teréne', sent: 5639, openRate: 28.89, clicks: 28, clickRate: 0.48, unsubRate: 0, revenue: 0 },
+          { name: 'Resend: BC: Blumeria Consulting v teréne', sent: 4165, openRate: 9.66, clicks: 4, clickRate: 0.07, unsubRate: 0, revenue: 0 },
+          { name: 'SP_Zdravá uhorka', sent: 3537, openRate: 25.81, clicks: 126, clickRate: 1.93, unsubRate: 0, revenue: 68.97 },
+          { name: 'Resend: SP_Zdravá uhorka', sent: 2723, openRate: 9.52, clicks: 36, clickRate: 0.74, unsubRate: 0, revenue: 0 },
+        ],
       },
       eshop: {
         woocommerce: true,

@@ -1,5 +1,7 @@
 import { Kpi, Section, MonthLineChart, MonthBarChart, SortableTable } from '../components/ui'
 import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtPct, sum, pctChange } from '../lib/helpers'
+import { aggregateEmailCampaignRollup, flattenEmailCampaignRows } from '../lib/emailCampaigns'
+import { buildEmailCampaignMonthColumns, buildEmailCampaignRollupColumns } from '../lib/emailTableColumns'
 
 function emailStats(months) {
   const rows = months.filter((m) => m.email)
@@ -38,6 +40,12 @@ export default function Email({ months, compare }) {
     sent: m.email.sent,
     revenue: m.email.revenue,
   }))
+
+  const campaignRows = flattenEmailCampaignRows(rows)
+  const campaignRollup = aggregateEmailCampaignRollup(rows)
+  const campaignMonthColumns = buildEmailCampaignMonthColumns()
+  const campaignRollupColumns = buildEmailCampaignRollupColumns()
+  const hasCampaignDetail = rows.some((m) => m.email.campaigns?.length)
 
   return (
     <>
@@ -89,6 +97,33 @@ export default function Email({ months, compare }) {
           defaultSortDir="desc"
         />
       </Section>
+
+      {campaignRows.length > 0 && (
+        <Section
+          title="E-mailové kampane"
+          hint={hasCampaignDetail ? 'Mailchimp · rozklad po kampaniach' : 'Mailchimp · mesačný súhrn (bez rozkladu kampaní)'}
+        >
+          <SortableTable
+            columns={campaignMonthColumns}
+            rows={campaignRows}
+            rowKey={(r) => r.rowKey}
+            defaultSortKey="month"
+            defaultSortDir="desc"
+          />
+        </Section>
+      )}
+
+      {campaignRollup.length > 1 && (
+        <Section title="Kampane za obdobie" hint="súčet rovnako pomenovaných kampaní">
+          <SortableTable
+            columns={campaignRollupColumns}
+            rows={campaignRollup}
+            rowKey={(r) => r.rowKey}
+            defaultSortKey="revenue"
+            defaultSortDir="desc"
+          />
+        </Section>
+      )}
     </>
   )
 }

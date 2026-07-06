@@ -16,7 +16,7 @@ const SUM_KEYS = new Set([
 ])
 
 const AVG_KEYS = new Set([
-  'frequency', 'openRate', 'clickRate', 'unsub', 'paidEng', 'orgEng',
+  'frequency', 'openRate', 'clickRate', 'unsub', 'unsubRate', 'paidEng', 'orgEng',
   'paidDur', 'orgDur', 'avgEngagement', 'eventCountPerActiveUser', 'viewsPerActiveUser',
   'avgEngagementTimePerActiveUser', 'avgEngagementTimePerSession', 'eventsPerSession',
   'engagementRate', 'sessionKeyEventRate', 'interactionRate', 'impressionsTop',

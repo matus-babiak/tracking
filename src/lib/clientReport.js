@@ -25,6 +25,7 @@ import {
   buildMetaCharts,
   buildOverviewCharts,
 } from './clientReportCharts'
+import { aggregateEmailCampaignRollup } from './emailCampaigns'
 import {
   aggregateLegacyGa,
   fmtEngagementRate,
@@ -185,6 +186,30 @@ function pickTopCampaigns(months, sourceKey, mode, client, limit = TOP_CAMPAIGNS
 
   if (!items.length) return null
   return { heading: topReklamy(Math.min(limit, items.length)), items }
+}
+
+function pickTopEmailCampaigns(months, limit = TOP_CAMPAIGNS_LIMIT) {
+  if (!months.some((m) => m.email?.campaigns?.length)) return null
+
+  const items = aggregateEmailCampaignRollup(months)
+    .filter((c) => c.name !== 'Celkom')
+    .sort((a, b) => (b.revenue ?? 0) - (a.revenue ?? 0) || (b.clicks ?? 0) - (a.clicks ?? 0))
+    .slice(0, limit)
+    .map((c) => {
+      const parts = []
+      if (hasCount(c.sent)) parts.push(`${fmtNum(c.sent)} odoslaných`)
+      if (c.openRate != null) parts.push(`open ${fmtPct(c.openRate)}`)
+      if (hasCount(c.clicks)) parts.push(skPhrase(c.clicks, 'kliknutie', 'acc'))
+      return {
+        name: c.name,
+        value: hasMoney(c.revenue) ? fmtEur(c.revenue) : (hasCount(c.clicks) ? fmtNum(c.clicks) : '–'),
+        detail: parts.length ? parts.join(' · ') : null,
+        tone: hasMoney(c.revenue) ? 'revenue' : null,
+      }
+    })
+
+  if (!items.length) return null
+  return { heading: 'Top e-mailové kampane', items }
 }
 
 function aggregateEmail(months) {
@@ -669,6 +694,7 @@ function buildEmailSection(months) {
     metrics,
     rows,
     charts: buildEmailCharts(months),
+    topCampaigns: pickTopEmailCampaigns(months),
   }
 }
 
