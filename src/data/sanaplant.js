@@ -8192,6 +8192,10 @@ const sanaplant = {
             }
           ]
       },
+      email: {
+        sent: null, openRate: 19.94, clickRate: 0.74, uniqueClicks: 154,
+        unsubRate: 0.18, orders: 1, revenue: 68.97, campaignsCount: 4,
+      },
       eshop: {
         woocommerce: true,
         combinedShops: ['sanaplant.sk', 'novy'],
