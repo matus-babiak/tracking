@@ -1,5 +1,6 @@
 import { Kpi, Section, SortableTable, MonthBarChart, MonthLineChart, CategoryPieChart } from '../components/ui'
 import { monthFull, monthKey, monthLabel, fmtNum, fmtPct, fmtEur } from '../lib/helpers'
+import { isEcommerceClient } from '../lib/clientType'
 import { skSucetZaMesiace } from '../lib/skGrammar'
 
 const CHANNEL_COLORS = ['#4285f4', '#1877F2', '#10b981', '#f59e0b', '#8b5cf6', '#ef4444', '#64748b', '#06b6d4', '#ec4899', '#94a3b8']
@@ -36,6 +37,7 @@ function pickTopGa4Charts({
   singleMonth,
   ga4Rows,
   single,
+  ecommerce,
   eshopFormat,
   snapshotChartData,
   legacyChartData,
@@ -57,7 +59,7 @@ function pickTopGa4Charts({
         />
       ),
     })
-    if (snapshotChartData.some((d) => d.revenue > 0)) {
+    if (ecommerce && snapshotChartData.some((d) => d.revenue > 0)) {
       charts.push({
         title: 'Tržby (GA4) mesačne',
         node: (
@@ -82,7 +84,7 @@ function pickTopGa4Charts({
         />
       ),
     })
-    const revenuePie = channelPieData(single.trafficAcquisition, 'totalRevenue')
+    const revenuePie = ecommerce ? channelPieData(single.trafficAcquisition, 'totalRevenue') : []
     if (revenuePie.length >= 2) {
       charts.push({
         title: 'Tržby podľa kanála',
@@ -123,6 +125,20 @@ function pickTopGa4Charts({
   }
 
   if (eshopFormat && landingChartData.length) {
+    charts.push({
+      title: 'Top vstupné stránky',
+      hint: 'relácie',
+      node: (
+        <MonthBarChart
+          data={landingChartData}
+          height={260}
+          series={[{ key: 'sessions', name: 'Relácie', color: '#4285f4' }]}
+        />
+      ),
+    })
+  }
+
+  if (!eshopFormat && landingChartData.length) {
     charts.push({
       title: 'Top vstupné stránky',
       hint: 'relácie',
@@ -188,7 +204,8 @@ function fmtDec(v, digits = 2) {
   return v.toLocaleString('sk-SK', { minimumFractionDigits: digits, maximumFractionDigits: digits })
 }
 
-function isEshopGaFormat(ga) {
+function isEshopGaFormat(ga, client) {
+  if (!isEcommerceClient(client)) return false
   return ga?.landingPages != null || ga?.ecommerceItems != null
 }
 
@@ -197,19 +214,22 @@ function aggregateSnapshot(months) {
   if (!rows.length) return null
   const sessions = rows.reduce((s, m) => s + (m.ga.snapshot.sessions ?? 0), 0)
   const engagedSessions = rows.reduce((s, m) => s + (m.ga.snapshot.engagedSessions ?? 0), 0)
+  const engagementRate = sessions > 0 ? engagedSessions / sessions : null
+  const storedBounce = rows.length === 1 ? rows[0].ga.snapshot.bounceRate : null
   return {
     activeUsers: rows.reduce((s, m) => s + (m.ga.snapshot.activeUsers ?? 0), 0),
     newUsers: rows.reduce((s, m) => s + (m.ga.snapshot.newUsers ?? 0), 0),
     sessions,
     engagedSessions,
-    engagementRate: sessions > 0 ? engagedSessions / sessions : null,
+    engagementRate,
+    bounceRate: storedBounce ?? (engagementRate != null ? 1 - engagementRate : null),
     totalRevenue: rows.reduce((s, m) => s + (m.ga.snapshot.totalRevenue ?? 0), 0),
     keyEvents: rows.reduce((s, m) => s + (m.ga.snapshot.keyEvents ?? 0), 0),
     avgEngagement: rows.length === 1 ? rows[0].ga.snapshot.avgEngagementTimePerActiveUser : null,
   }
 }
 
-function buildTrafficColumns(includeSource) {
+function buildTrafficColumns(includeSource, { services = false } = {}) {
   const cols = [
     { key: 'channelGroup', label: 'Kanál', sort: (r) => r.channelGroup, render: (r) => r.channelGroup },
   ]
@@ -222,15 +242,20 @@ function buildTrafficColumns(includeSource) {
     { key: 'engagementRate', label: 'Engagement rate', align: 'num', sort: (r) => r.engagementRate, render: (r) => fmtRate(r.engagementRate) },
     { key: 'avgEngagementTimePerSession', label: 'Priem. engagement / relácia', align: 'num', sort: (r) => r.avgEngagementTimePerSession, render: (r) => fmtSec(r.avgEngagementTimePerSession) },
     { key: 'eventsPerSession', label: 'Udalostí / relácia', align: 'num', sort: (r) => r.eventsPerSession, render: (r) => fmtDec(r.eventsPerSession) },
-    { key: 'eventCount', label: 'Počet udalostí', align: 'num', sort: (r) => r.eventCount, render: (r) => fmtNum(r.eventCount) },
     { key: 'keyEvents', label: 'Kľúčové udalosti', align: 'num', sort: (r) => r.keyEvents, render: (r) => fmtNum(r.keyEvents) },
-    { key: 'sessionKeyEventRate', label: 'Session key event rate', align: 'num', sort: (r) => r.sessionKeyEventRate, render: (r) => fmtRate(r.sessionKeyEventRate) },
-    { key: 'totalRevenue', label: 'Tržby', align: 'num', sort: (r) => r.totalRevenue, render: (r) => fmtEur(r.totalRevenue) },
+    { key: 'bounceRate', label: 'Bounce rate', align: 'num', sort: (r) => r.bounceRate, render: (r) => fmtRate(r.bounceRate) },
   )
+  if (!services) {
+    cols.push(
+      { key: 'eventCount', label: 'Počet udalostí', align: 'num', sort: (r) => r.eventCount, render: (r) => fmtNum(r.eventCount) },
+      { key: 'sessionKeyEventRate', label: 'Session key event rate', align: 'num', sort: (r) => r.sessionKeyEventRate, render: (r) => fmtRate(r.sessionKeyEventRate) },
+      { key: 'totalRevenue', label: 'Tržby', align: 'num', sort: (r) => r.totalRevenue, render: (r) => fmtEur(r.totalRevenue) },
+    )
+  }
   return cols
 }
 
-function buildUserAcqColumns(includeSource) {
+function buildUserAcqColumns(includeSource, { services = false } = {}) {
   const cols = [
     { key: 'firstUserChannelGroup', label: 'Kanál (first user)', sort: (r) => r.firstUserChannelGroup, render: (r) => r.firstUserChannelGroup },
   ]
@@ -243,10 +268,38 @@ function buildUserAcqColumns(includeSource) {
     { key: 'returningUsers', label: 'Vracajúci sa', align: 'num', sort: (r) => r.returningUsers, render: (r) => fmtNum(r.returningUsers) },
     { key: 'avgEngagementTimePerActiveUser', label: 'Priem. engagement', align: 'num', sort: (r) => r.avgEngagementTimePerActiveUser, render: (r) => fmtSec(r.avgEngagementTimePerActiveUser) },
     { key: 'engagedSessionsPerActiveUser', label: 'Engaged rel. / user', align: 'num', sort: (r) => r.engagedSessionsPerActiveUser, render: (r) => fmtDec(r.engagedSessionsPerActiveUser) },
-    { key: 'eventCount', label: 'Počet udalostí', align: 'num', sort: (r) => r.eventCount, render: (r) => fmtNum(r.eventCount) },
     { key: 'keyEvents', label: 'Kľúčové udalosti', align: 'num', sort: (r) => r.keyEvents, render: (r) => fmtNum(r.keyEvents) },
-    { key: 'userKeyEventRate', label: 'User key event rate', align: 'num', sort: (r) => r.userKeyEventRate, render: (r) => fmtRate(r.userKeyEventRate) },
+    { key: 'bounceRate', label: 'Bounce rate', align: 'num', sort: (r) => r.bounceRate, render: (r) => fmtRate(r.bounceRate) },
   )
+  if (!services) {
+    cols.push(
+      { key: 'eventCount', label: 'Počet udalostí', align: 'num', sort: (r) => r.eventCount, render: (r) => fmtNum(r.eventCount) },
+      { key: 'userKeyEventRate', label: 'User key event rate', align: 'num', sort: (r) => r.userKeyEventRate, render: (r) => fmtRate(r.userKeyEventRate) },
+    )
+  }
+  return cols
+}
+
+const serviceLandingColumns = [
+  { key: 'path', label: 'Vstupná stránka', sort: (r) => r.path, render: (r) => r.path },
+  { key: 'sessions', label: 'Relácie', align: 'num', sort: (r) => r.sessions, render: (r) => fmtNum(r.sessions) },
+  { key: 'activeUsers', label: 'Aktívni useri', align: 'num', sort: (r) => r.activeUsers, render: (r) => fmtNum(r.activeUsers) },
+  { key: 'newUsers', label: 'Noví useri', align: 'num', sort: (r) => r.newUsers, render: (r) => fmtNum(r.newUsers) },
+  { key: 'avgEngagementTimePerSession', label: 'Priem. engagement', align: 'num', sort: (r) => r.avgEngagementTimePerSession, render: (r) => fmtSec(r.avgEngagementTimePerSession) },
+  { key: 'keyEvents', label: 'Kľúčové udalosti', align: 'num', sort: (r) => r.keyEvents, render: (r) => fmtNum(r.keyEvents) },
+  { key: 'bounceRate', label: 'Bounce rate', align: 'num', sort: (r) => r.bounceRate, render: (r) => fmtRate(r.bounceRate) },
+]
+
+function buildEventColumns({ services = false } = {}) {
+  const cols = [
+    { key: 'name', label: 'Udalosť', sort: (r) => r.name, render: (r) => r.name },
+    { key: 'eventCount', label: 'Počet udalostí', align: 'num', sort: (r) => r.eventCount, render: (r) => fmtNum(r.eventCount) },
+    { key: 'totalUsers', label: 'Používatelia', align: 'num', sort: (r) => r.totalUsers, render: (r) => fmtNum(r.totalUsers) },
+    { key: 'eventCountPerActiveUser', label: 'Udalostí / aktívny user', align: 'num', sort: (r) => r.eventCountPerActiveUser, render: (r) => fmtDec(r.eventCountPerActiveUser) },
+  ]
+  if (!services) {
+    cols.push({ key: 'totalRevenue', label: 'Tržby', align: 'num', sort: (r) => r.totalRevenue, render: (r) => fmtEur(r.totalRevenue) })
+  }
   return cols
 }
 
@@ -271,13 +324,7 @@ const ecommerceColumns = [
   { key: 'itemRevenue', label: 'Tržby', align: 'num', sort: (r) => r.itemRevenue, render: (r) => fmtEur(r.itemRevenue) },
 ]
 
-const eventColumns = [
-  { key: 'name', label: 'Udalosť', sort: (r) => r.name, render: (r) => r.name },
-  { key: 'eventCount', label: 'Počet udalostí', align: 'num', sort: (r) => r.eventCount, render: (r) => fmtNum(r.eventCount) },
-  { key: 'totalUsers', label: 'Používatelia', align: 'num', sort: (r) => r.totalUsers, render: (r) => fmtNum(r.totalUsers) },
-  { key: 'eventCountPerActiveUser', label: 'Udalostí / aktívny user', align: 'num', sort: (r) => r.eventCountPerActiveUser, render: (r) => fmtDec(r.eventCountPerActiveUser) },
-  { key: 'totalRevenue', label: 'Tržby', align: 'num', sort: (r) => r.totalRevenue, render: (r) => fmtEur(r.totalRevenue) },
-]
+const eventColumns = buildEventColumns()
 
 const pageColumns = [
   { key: 'path', label: 'Stránka', sort: (r) => r.path, render: (r) => r.path },
@@ -302,7 +349,7 @@ const sourceUserColumns = [
   { key: 'activeUsers', label: 'Aktívni useri', align: 'num', sort: (r) => r.activeUsers, render: (r) => fmtNum(r.activeUsers) },
 ]
 
-export default function AnalyticsGa4({ months }) {
+export default function AnalyticsGa4({ months, client }) {
   const ga4Rows = months.filter((m) => m.ga?.snapshot || m.ga?.trafficAcquisition)
   const legacyRows = months.filter((m) => m.ga?.paid && !m.ga?.snapshot && !m.ga?.trafficAcquisition)
 
@@ -320,13 +367,15 @@ export default function AnalyticsGa4({ months }) {
     sessions: null,
     engagedSessions: null,
     engagementRate: null,
+    bounceRate: null,
     totalRevenue: null,
     keyEvents: null,
     avgEngagement: null,
   }
   const singleMonth = months.length === 1
   const single = singleMonth && ga4Rows.length === 1 ? ga4Rows[0].ga : null
-  const eshopFormat = single && isEshopGaFormat(single)
+  const ecommerce = isEcommerceClient(client)
+  const eshopFormat = ecommerce && single && isEshopGaFormat(single, client)
   const trafficHasSource = single?.trafficAcquisition?.some((r) => r.sourceMedium)
   const userHasSource = single?.userAcquisition?.some((r) => r.sourceMedium)
 
@@ -353,7 +402,7 @@ export default function AnalyticsGa4({ months }) {
   const channelSessions = single?.trafficAcquisition ? channelBarData(single.trafficAcquisition, 'sessions') : []
   const landingChartData = (single?.landingPages ?? [])
     .slice(0, 8)
-    .map((r) => ({ label: shortLabel(r.path), sessions: r.sessions ?? 0, revenue: r.totalRevenue ?? 0 }))
+    .map((r) => ({ label: shortLabel(r.path), sessions: r.sessions ?? 0 }))
   const productChartData = (single?.ecommerceItems ?? [])
     .slice(0, 8)
     .map((r) => ({ label: shortLabel(r.name, 28), revenue: r.itemRevenue ?? 0, purchased: r.itemsPurchased ?? 0 }))
@@ -362,6 +411,7 @@ export default function AnalyticsGa4({ months }) {
     singleMonth,
     ga4Rows,
     single,
+    ecommerce,
     eshopFormat,
     snapshotChartData,
     legacyChartData,
@@ -375,15 +425,14 @@ export default function AnalyticsGa4({ months }) {
       <div className="kpi-grid">
         <Kpi label="Relácie" value={fmtNum(snap.sessions)} sub={ga4Rows.length > 1 ? skSucetZaMesiace(ga4Rows.length) : null} />
         <Kpi label="Aktívni useri" value={fmtNum(snap.activeUsers)} />
-        <Kpi label="Noví useri" value={fmtNum(snap.newUsers)} />
-        {snap.totalRevenue > 0 && (
+        {ecommerce && snap.totalRevenue > 0 && (
           <Kpi label="Tržby (GA4)" value={fmtEur(snap.totalRevenue)} />
-        )}
-        {snap.keyEvents > 0 && (
-          <Kpi label="Kľúčové udalosti" value={fmtNum(snap.keyEvents)} />
         )}
         {snap.engagementRate != null && (
           <Kpi label="Engagement rate" value={fmtRate(snap.engagementRate)} sub="engaged relácie / relácie" />
+        )}
+        {snap.bounceRate != null && (
+          <Kpi label="Bounce rate" value={fmtRate(snap.bounceRate)} sub="neengaged relácie / relácie" />
         )}
         {snap.avgEngagement != null && (
           <Kpi
@@ -413,7 +462,7 @@ export default function AnalyticsGa4({ months }) {
           {eshopFormat && single.trafficAcquisition?.length > 0 && (
             <Section title="Návštevnosť podľa kanála" hint="Traffic acquisition — Session primary channel group">
               <SortableTable
-                columns={buildTrafficColumns(trafficHasSource)}
+                columns={buildTrafficColumns(trafficHasSource, { services: false })}
                 rows={single.trafficAcquisition}
                 rowKey={(r) => r.channelGroup + (r.sourceMedium ?? '')}
                 defaultSortKey="sessions"
@@ -425,7 +474,7 @@ export default function AnalyticsGa4({ months }) {
           {eshopFormat && single.userAcquisition?.length > 0 && (
             <Section title="Získanie používateľov" hint="User acquisition — First user primary channel group">
               <SortableTable
-                columns={buildUserAcqColumns(userHasSource)}
+                columns={buildUserAcqColumns(userHasSource, { services: false })}
                 rows={single.userAcquisition}
                 rowKey={(r) => r.firstUserChannelGroup + (r.sourceMedium ?? '')}
                 defaultSortKey="totalUsers"
@@ -485,10 +534,22 @@ export default function AnalyticsGa4({ months }) {
           {!eshopFormat && single.events?.length > 0 && (
             <Section title="Udalosti" hint="Events: Event name">
               <SortableTable
-                columns={eventColumns}
+                columns={buildEventColumns({ services: true })}
                 rows={single.events}
                 rowKey={(r) => r.name}
                 defaultSortKey="eventCount"
+                defaultSortDir="desc"
+              />
+            </Section>
+          )}
+
+          {!eshopFormat && single.landingPages?.length > 0 && (
+            <Section title="Vstupné stránky" hint="Landing page — podľa relácií">
+              <SortableTable
+                columns={serviceLandingColumns}
+                rows={single.landingPages}
+                rowKey={(r) => r.path}
+                defaultSortKey="sessions"
                 defaultSortDir="desc"
               />
             </Section>
@@ -509,9 +570,9 @@ export default function AnalyticsGa4({ months }) {
           {!eshopFormat && single.trafficAcquisition?.length > 0 && (
             <Section title="Traffic acquisition" hint="Session primary channel group">
               <SortableTable
-                columns={buildTrafficColumns(true)}
+                columns={buildTrafficColumns(false, { services: true })}
                 rows={single.trafficAcquisition}
-                rowKey={(r) => `${r.channelGroup}-${r.sourceMedium}`}
+                rowKey={(r) => r.channelGroup}
                 defaultSortKey="sessions"
                 defaultSortDir="desc"
               />
@@ -521,9 +582,9 @@ export default function AnalyticsGa4({ months }) {
           {!eshopFormat && single.userAcquisition?.length > 0 && (
             <Section title="User acquisition" hint="First user primary channel group">
               <SortableTable
-                columns={buildUserAcqColumns(true)}
+                columns={buildUserAcqColumns(false, { services: true })}
                 rows={single.userAcquisition}
-                rowKey={(r) => `${r.firstUserChannelGroup}-${r.sourceMedium}`}
+                rowKey={(r) => r.firstUserChannelGroup}
                 defaultSortKey="totalUsers"
                 defaultSortDir="desc"
               />
@@ -541,8 +602,9 @@ export default function AnalyticsGa4({ months }) {
               { key: 'activeUsers', label: 'Aktívni useri', align: 'num', sort: (m) => m.ga.snapshot?.activeUsers, render: (m) => fmtNum(m.ga.snapshot?.activeUsers) },
               { key: 'newUsers', label: 'Noví useri', align: 'num', sort: (m) => m.ga.snapshot?.newUsers, render: (m) => fmtNum(m.ga.snapshot?.newUsers) },
               { key: 'totalRevenue', label: 'Tržby', align: 'num', sort: (m) => m.ga.snapshot?.totalRevenue, render: (m) => fmtEur(m.ga.snapshot?.totalRevenue) },
-              { key: 'keyEvents', label: 'Kľúčové udalosti', align: 'num', sort: (m) => m.ga.snapshot?.keyEvents, render: (m) => fmtNum(m.ga.snapshot?.keyEvents) },
               { key: 'engagementRate', label: 'Engagement rate', align: 'num', sort: (m) => m.ga.snapshot?.engagementRate, render: (m) => fmtRate(m.ga.snapshot?.engagementRate) },
+              { key: 'bounceRate', label: 'Bounce rate', align: 'num', sort: (m) => (m.ga.snapshot?.engagementRate != null ? 1 - m.ga.snapshot.engagementRate : null), render: (m) => fmtRate(m.ga.snapshot?.engagementRate != null ? 1 - m.ga.snapshot.engagementRate : null) },
+              { key: 'keyEvents', label: 'Kľúčové udalosti', align: 'num', sort: (m) => m.ga.snapshot?.keyEvents, render: (m) => fmtNum(m.ga.snapshot?.keyEvents) },
             ]}
             rows={ga4Rows.filter((m) => m.ga?.snapshot)}
             rowKey={(m) => `${m.year}-${m.month}`}

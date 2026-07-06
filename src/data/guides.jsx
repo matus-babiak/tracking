@@ -19,7 +19,7 @@ const guideExport = {
     <>
       <p><strong>Meta Ads:</strong> export na úrovni reklám — investícia, dosah, zobrazenia, kliknutia, nákupy, ROAS, pridané do košíka, LPV, engagement.</p>
       <p><strong>Google Ads:</strong> export kampaní — investícia, zobrazenia, kliknutia, konverzie (nákup, košík, checkout), hodnota konverzií, ROAS.</p>
-      <p><strong>GA4 (máj + jún 2026):</strong> CSV exporty z Google Analytics — importované za tieto mesiace:</p>
+      <p><strong>GA4 (január–jún 2026):</strong> CSV exporty z Google Analytics — importované za všetky mesiace 1–6/2026:</p>
       <ul>
         <li><em>Traffic acquisition</em> — Session primary channel group (Default channel group)</li>
         <li><em>User acquisition</em> — First user primary channel group (Default channel group)</li>

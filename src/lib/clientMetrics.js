@@ -1,12 +1,22 @@
 import { IMPORT_SOURCES, getMonthSources } from './importOverview'
 import { clientTabs } from './helpers'
+import {
+  getClientBusinessType,
+  getClientBusinessTypeLabel,
+  isEcommerceClient,
+  isServicesClient,
+} from './clientType'
+
+export { isEcommerceClient, isServicesClient, getClientBusinessType, getClientBusinessTypeLabel }
 
 /** Typ dashboardu — určuje variant stránok (KPI, stĺpce), nie samotné dáta. */
 export function getClientUiProfile(client) {
+  if (isEcommerceClient(client)) {
+    return client.adsProfile === 'eshop' ? 'ads-eshop' : 'eshop'
+  }
   if (client.leadgenProfile === 'dual') return 'dual'
   if (client.metaProfile === 'leadgen') return 'leadgen'
-  if (client.adsProfile === 'eshop') return 'ads-eshop'
-  return 'eshop'
+  return 'leadgen'
 }
 
 const PROFILE_LABELS = {
@@ -153,6 +163,8 @@ export function describeClientMetrics(client) {
     sources.map((s) => [s.key, getImportedMetricKeys(client, s.key)]),
   )
   return {
+    businessType: getClientBusinessType(client),
+    businessTypeLabel: getClientBusinessTypeLabel(client),
     profile: getClientUiProfile(client),
     profileLabel: getClientProfileLabel(client),
     tabs,

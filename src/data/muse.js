@@ -3,6 +3,7 @@
 const muse = {
   id: 'muse',
   name: 'MUSE',
+  businessType: 'services',
   metaProfile: 'leadgen',
   currency: '€',
   notes: [

@@ -5,6 +5,7 @@
 const sanaplant = {
   id: 'sanaplant',
   name: 'Sanaplant',
+  businessType: 'ecommerce',
   currency: '€',
   metaBreakdown: 'ads',
   googleConversionKeys: ['add_to_cart', 'begin_checkout', 'purchase'],
@@ -17,7 +18,7 @@ const sanaplant = {
     'Od roku 2026 je boosting súčasťou Meta Ads kampaní (v prehľade Meta je už započítaný), samostatná metrika boostingu sa preto od 1/2026 nevykazuje.',
     'Vo februári 2026 report vykazuje extrémnu platenú návštevnosť (242 tis. relácií s mierou interakcie 2 %) — pravdepodobne nekvalitná/bot návštevnosť z kampaní.',
     'Od 2026 Mailchimp tržby nezahŕňajú publikum Blumeria Consulting (Alchem) — reálne tržby z e-mailov môžu byť vyššie.',
-    'GA4 CSV exporty (traffic/user acquisition, landing page, e-commerce) — máj a jún 2026. Ostatné mesiace majú platenú vs. organickú návštevnosť z PDF reportu.',
+    'GA4 CSV exporty (traffic/user acquisition, landing page, e-commerce) — január až jún 2026. Staršie mesiace majú platenú vs. organickú návštevnosť z PDF reportu.',
   ],
 
   // Mesiace zoradené chronologicky: 2/2025 … 6/2026
@@ -383,9 +384,1239 @@ const sanaplant = {
         ],
       },
       ga: {
-        paid: { sessions: 3759, users: 3174, engagementRate: 46.45, avgDuration: '00:17:49' },
-        organic: { sessions: 3975, users: 3718, engagementRate: 28.88, avgDuration: '00:05:40' },
-      },
+          paid: {
+            sessions: 3759,
+            users: 3174,
+            engagementRate: 46.45,
+            avgDuration: "00:17:49"
+          },
+          organic: {
+            sessions: 3975,
+            users: 3718,
+            engagementRate: 28.88,
+            avgDuration: "00:05:40"
+          },
+          snapshot: {
+            activeUsers: 6762,
+            newUsers: 6198,
+            sessions: 7733,
+            engagedSessions: 2891,
+            engagementRate: 0.3738523212207423,
+            totalRevenue: 4362.7100009999995,
+            keyEvents: 513
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Paid Social",
+              sessions: 2787,
+              engagedSessions: 538,
+              engagementRate: 0.19303911015428776,
+              avgEngagementTimePerSession: 11.70075349838536,
+              eventsPerSession: 4.031933979189092,
+              eventCount: 11237,
+              keyEvents: 59,
+              sessionKeyEventRate: 0.009329027628274129,
+              totalRevenue: 407.45
+            },
+            {
+              channelGroup: "Direct",
+              sessions: 1486,
+              engagedSessions: 666,
+              engagementRate: 0.44818304172274565,
+              avgEngagementTimePerSession: 29.376177658142666,
+              eventsPerSession: 6.397711978465679,
+              eventCount: 9507,
+              keyEvents: 58,
+              sessionKeyEventRate: 0.02220726783310902,
+              totalRevenue: 538.11
+            },
+            {
+              channelGroup: "Organic Search",
+              sessions: 1420,
+              engagedSessions: 744,
+              engagementRate: 0.523943661971831,
+              avgEngagementTimePerSession: 48.957042253521124,
+              eventsPerSession: 6.545070422535211,
+              eventCount: 9294,
+              keyEvents: 124,
+              sessionKeyEventRate: 0.02323943661971831,
+              totalRevenue: 1782.94
+            },
+            {
+              channelGroup: "Cross-network",
+              sessions: 1228,
+              engagedSessions: 604,
+              engagementRate: 0.49185667752442996,
+              avgEngagementTimePerSession: 53.94951140065147,
+              eventsPerSession: 6.513029315960912,
+              eventCount: 7998,
+              keyEvents: 141,
+              sessionKeyEventRate: 0.03257328990228013,
+              totalRevenue: 1010.830001
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 378,
+              engagedSessions: 132,
+              engagementRate: 0.3492063492063492,
+              avgEngagementTimePerSession: 30.03174603174603,
+              eventsPerSession: 6.616402116402116,
+              eventCount: 2501,
+              keyEvents: 43,
+              sessionKeyEventRate: 0.03439153439153439,
+              totalRevenue: 88.34
+            },
+            {
+              channelGroup: "Email",
+              sessions: 225,
+              engagedSessions: 101,
+              engagementRate: 0.4488888888888889,
+              avgEngagementTimePerSession: 39.72888888888889,
+              eventsPerSession: 7.373333333333333,
+              eventCount: 1659,
+              keyEvents: 19,
+              sessionKeyEventRate: 0.022222222222222223,
+              totalRevenue: 69.9
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 91,
+              engagedSessions: 40,
+              engagementRate: 0.43956043956043955,
+              avgEngagementTimePerSession: 131.12087912087912,
+              eventsPerSession: 11.868131868131869,
+              eventCount: 1080,
+              keyEvents: 19,
+              sessionKeyEventRate: 0.08791208791208792,
+              totalRevenue: 212.26
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 84,
+              engagedSessions: 41,
+              engagementRate: 0.4880952380952381,
+              avgEngagementTimePerSession: 67.57142857142857,
+              eventsPerSession: 9.785714285714286,
+              eventCount: 822,
+              keyEvents: 11,
+              sessionKeyEventRate: 0.047619047619047616,
+              totalRevenue: 127.65
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 22,
+              engagedSessions: 17,
+              engagementRate: 0.7727272727272727,
+              avgEngagementTimePerSession: 223.5909090909091,
+              eventsPerSession: 32.18181818181818,
+              eventCount: 708,
+              keyEvents: 30,
+              sessionKeyEventRate: 0.13636363636363635,
+              totalRevenue: 125.23
+            },
+            {
+              channelGroup: "Organic Shopping",
+              sessions: 11,
+              engagedSessions: 8,
+              engagementRate: 0.7272727272727273,
+              avgEngagementTimePerSession: 24,
+              eventsPerSession: 8.545454545454545,
+              eventCount: 94,
+              keyEvents: 9,
+              sessionKeyEventRate: 0.18181818181818182,
+              totalRevenue: 0
+            },
+            {
+              channelGroup: "SMS",
+              sessions: 1,
+              engagedSessions: 0,
+              engagementRate: 0,
+              avgEngagementTimePerSession: 0,
+              eventsPerSession: 3,
+              eventCount: 3,
+              keyEvents: 0,
+              sessionKeyEventRate: 0,
+              totalRevenue: 0
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 2524,
+              newUsers: 2290,
+              returningUsers: 107,
+              avgEngagementTimePerActiveUser: 12.738135593220338,
+              engagedSessionsPerActiveUser: 0.21610169491525424,
+              eventCount: 10629,
+              keyEvents: 38,
+              userKeyEventRate: 0.00847457627118644
+            },
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 1445,
+              newUsers: 1381,
+              returningUsers: 104,
+              avgEngagementTimePerActiveUser: 43.01686577652846,
+              engagedSessionsPerActiveUser: 0.5643007730147576,
+              eventCount: 12171,
+              keyEvents: 113,
+              userKeyEventRate: 0.024595924104005622
+            },
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 1096,
+              newUsers: 923,
+              returningUsers: 198,
+              avgEngagementTimePerActiveUser: 58.062380038387715,
+              engagedSessionsPerActiveUser: 0.6717850287907869,
+              eventCount: 8418,
+              keyEvents: 103,
+              userKeyEventRate: 0.02399232245681382
+            },
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 1067,
+              newUsers: 1036,
+              returningUsers: 72,
+              avgEngagementTimePerActiveUser: 56.12547169811321,
+              engagedSessionsPerActiveUser: 0.5254716981132076,
+              eventCount: 7712,
+              keyEvents: 143,
+              userKeyEventRate: 0.0330188679245283
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 356,
+              newUsers: 340,
+              returningUsers: 8,
+              avgEngagementTimePerActiveUser: 18.109826589595375,
+              engagedSessionsPerActiveUser: 0.35260115606936415,
+              eventCount: 1818,
+              keyEvents: 16,
+              userKeyEventRate: 0.031791907514450865
+            },
+            {
+              firstUserChannelGroup: "Email",
+              totalUsers: 118,
+              newUsers: 95,
+              returningUsers: 23,
+              avgEngagementTimePerActiveUser: 72.16814159292035,
+              engagedSessionsPerActiveUser: 0.7522123893805309,
+              eventCount: 1363,
+              keyEvents: 24,
+              userKeyEventRate: 0.05309734513274336
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 64,
+              newUsers: 48,
+              returningUsers: 17,
+              avgEngagementTimePerActiveUser: 154.7704918032787,
+              engagedSessionsPerActiveUser: 0.819672131147541,
+              eventCount: 1161,
+              keyEvents: 25,
+              userKeyEventRate: 0.13114754098360656
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 61,
+              newUsers: 54,
+              returningUsers: 10,
+              avgEngagementTimePerActiveUser: 200.2,
+              engagedSessionsPerActiveUser: 0.65,
+              eventCount: 809,
+              keyEvents: 9,
+              userKeyEventRate: 0.06666666666666667
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 21,
+              newUsers: 21,
+              returningUsers: 3,
+              avgEngagementTimePerActiveUser: 362.85714285714283,
+              engagedSessionsPerActiveUser: 0.8571428571428571,
+              eventCount: 725,
+              keyEvents: 32,
+              userKeyEventRate: 0.14285714285714285
+            },
+            {
+              firstUserChannelGroup: "Organic Shopping",
+              totalUsers: 9,
+              newUsers: 9,
+              returningUsers: 1,
+              avgEngagementTimePerActiveUser: 39,
+              engagedSessionsPerActiveUser: 1,
+              eventCount: 94,
+              keyEvents: 10,
+              userKeyEventRate: 0.2222222222222222
+            },
+            {
+              firstUserChannelGroup: "SMS",
+              totalUsers: 1,
+              newUsers: 1,
+              returningUsers: 0,
+              avgEngagementTimePerActiveUser: 0,
+              engagedSessionsPerActiveUser: 0,
+              eventCount: 3,
+              keyEvents: 0,
+              userKeyEventRate: 0
+            }
+          ],
+          landingPages: [
+            {
+              path: "/",
+              sessions: 2088,
+              activeUsers: 1801,
+              newUsers: 1671,
+              avgEngagementTimePerSession: 20.579980842911876,
+              totalRevenue: 224.83,
+              bounceRate: 0.8022030651340997,
+              addToCart: 71,
+              checkouts: 7,
+              purchases: 3
+            },
+            {
+              path: "/produkt/kompletny-sprievodca-pestovanim-a-ochranou-repky-slnecnice-maku-a-soje",
+              sessions: 1047,
+              activeUsers: 938,
+              newUsers: 917,
+              avgEngagementTimePerSession: 8.734479465138492,
+              totalRevenue: 493.3,
+              bounceRate: 0.8213944603629417,
+              addToCart: 11,
+              checkouts: 5,
+              purchases: 7
+            },
+            {
+              path: "/produkt/damisol-gold-frigomax-1-l",
+              sessions: 395,
+              activeUsers: 298,
+              newUsers: 268,
+              avgEngagementTimePerSession: 52.063291139240505,
+              totalRevenue: 261.96,
+              bounceRate: 0.4430379746835443,
+              addToCart: 39,
+              checkouts: 9,
+              purchases: 8
+            },
+            {
+              path: "(not set)",
+              sessions: 373,
+              activeUsers: 356,
+              newUsers: 348,
+              avgEngagementTimePerSession: 19.4343163538874,
+              totalRevenue: 0,
+              bounceRate: 0.32439678284182305,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/encyklopedia-chorob-skodcov-a-vyzivy-zahradnickych-rastlin",
+              sessions: 251,
+              activeUsers: 202,
+              newUsers: 187,
+              avgEngagementTimePerSession: 22.179282868525895,
+              totalRevenue: 39.28,
+              bounceRate: 0.5139442231075697,
+              addToCart: 16,
+              checkouts: 3,
+              purchases: 1
+            },
+            {
+              path: "/obchod",
+              sessions: 187,
+              activeUsers: 172,
+              newUsers: 149,
+              avgEngagementTimePerSession: 100.40106951871658,
+              totalRevenue: 0,
+              bounceRate: 0.32620320855614976,
+              addToCart: 17,
+              checkouts: 2,
+              purchases: 0
+            },
+            {
+              path: "/odborna-poradna",
+              sessions: 142,
+              activeUsers: 130,
+              newUsers: 129,
+              avgEngagementTimePerSession: 4.035211267605634,
+              totalRevenue: 0,
+              bounceRate: 0.823943661971831,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/hydrohumat_1l",
+              sessions: 122,
+              activeUsers: 106,
+              newUsers: 92,
+              avgEngagementTimePerSession: 20.65573770491803,
+              totalRevenue: 0,
+              bounceRate: 0.5655737704918032,
+              addToCart: 11,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/predjarny-postrek-na-10-l",
+              sessions: 87,
+              activeUsers: 81,
+              newUsers: 78,
+              avgEngagementTimePerSession: 68.183908045977,
+              totalRevenue: 18.12,
+              bounceRate: 0.41379310344827586,
+              addToCart: 5,
+              checkouts: 3,
+              purchases: 1
+            },
+            {
+              path: "/produkt/pocahontas-premiovy-stolovy-zemiak-28-40-mm",
+              sessions: 55,
+              activeUsers: 31,
+              newUsers: 29,
+              avgEngagementTimePerSession: 7.909090909090909,
+              totalRevenue: 0,
+              bounceRate: 0.5636363636363636,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/fyziologicke-skvrnitosti-jacmena",
+              sessions: 43,
+              activeUsers: 17,
+              newUsers: 16,
+              avgEngagementTimePerSession: 0,
+              totalRevenue: 0,
+              bounceRate: 0.5581395348837209,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/superfosfat-18",
+              sessions: 43,
+              activeUsers: 40,
+              newUsers: 39,
+              avgEngagementTimePerSession: 125.46511627906976,
+              totalRevenue: 124.76,
+              bounceRate: 0.3953488372093023,
+              addToCart: 7,
+              checkouts: 5,
+              purchases: 2
+            },
+            {
+              path: "/produkt/mospilan-20-sp",
+              sessions: 42,
+              activeUsers: 42,
+              newUsers: 40,
+              avgEngagementTimePerSession: 41.80952380952381,
+              totalRevenue: 0,
+              bounceRate: 0.40476190476190477,
+              addToCart: 2,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/special-zemiaky-zahrada-bezchloridove-npk-11-9-2016s15mg005-b",
+              sessions: 42,
+              activeUsers: 36,
+              newUsers: 31,
+              avgEngagementTimePerSession: 80.5,
+              totalRevenue: 0,
+              bounceRate: 0.2619047619047619,
+              addToCart: 3,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/vinovcerit-npk",
+              sessions: 41,
+              activeUsers: 13,
+              newUsers: 11,
+              avgEngagementTimePerSession: 107.1219512195122,
+              totalRevenue: 96.72,
+              bounceRate: 0.6829268292682927,
+              addToCart: 5,
+              checkouts: 3,
+              purchases: 1
+            },
+            {
+              path: "/produkt/sivanto-prime-1-l",
+              sessions: 36,
+              activeUsers: 28,
+              newUsers: 19,
+              avgEngagementTimePerSession: 67.61111111111111,
+              totalRevenue: 136.66,
+              bounceRate: 0.3055555555555556,
+              addToCart: 3,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/biopasy",
+              sessions: 34,
+              activeUsers: 33,
+              newUsers: 32,
+              avgEngagementTimePerSession: 36.61764705882353,
+              totalRevenue: 0,
+              bounceRate: 0.47058823529411764,
+              addToCart: 2,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/liadok-27",
+              sessions: 31,
+              activeUsers: 30,
+              newUsers: 29,
+              avgEngagementTimePerSession: 22.096774193548388,
+              totalRevenue: 0,
+              bounceRate: 0.45161290322580644,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/machozrut",
+              sessions: 29,
+              activeUsers: 29,
+              newUsers: 29,
+              avgEngagementTimePerSession: 107.34482758620689,
+              totalRevenue: 64.27,
+              bounceRate: 0.4827586206896552,
+              addToCart: 12,
+              checkouts: 6,
+              purchases: 1
+            },
+            {
+              path: "/produkt/predjarny-postrek-na-50-l",
+              sessions: 29,
+              activeUsers: 29,
+              newUsers: 28,
+              avgEngagementTimePerSession: 35.89655172413793,
+              totalRevenue: 0,
+              bounceRate: 0.3793103448275862,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/prakticky-balicek-ochrany-rastlin-pre-zahradkara-maly-1-ks",
+              sessions: 28,
+              activeUsers: 25,
+              newUsers: 22,
+              avgEngagementTimePerSession: 43.964285714285715,
+              totalRevenue: 0,
+              bounceRate: 0.5,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/k-othrine-25-sc-1-l",
+              sessions: 27,
+              activeUsers: 25,
+              newUsers: 25,
+              avgEngagementTimePerSession: 39.51851851851852,
+              totalRevenue: 139.74,
+              bounceRate: 0.48148148148148145,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/prakticky-balicek-ochrany-rastlin-pre-zahradkara-velky-1-ks",
+              sessions: 26,
+              activeUsers: 21,
+              newUsers: 21,
+              avgEngagementTimePerSession: 12.346153846153847,
+              totalRevenue: 0,
+              bounceRate: 0.7692307692307693,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/quantum-aminomax-1-l",
+              sessions: 26,
+              activeUsers: 22,
+              newUsers: 20,
+              avgEngagementTimePerSession: 16.692307692307693,
+              totalRevenue: 0,
+              bounceRate: 0.7307692307692307,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/cyperfor-100-ec-1-l",
+              sessions: 25,
+              activeUsers: 23,
+              newUsers: 19,
+              avgEngagementTimePerSession: 66.72,
+              totalRevenue: 125.23,
+              bounceRate: 0.36,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/signum",
+              sessions: 24,
+              activeUsers: 21,
+              newUsers: 20,
+              avgEngagementTimePerSession: 16.166666666666668,
+              totalRevenue: 0,
+              bounceRate: 0.7083333333333334,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/zlate-zltnutie-vinica",
+              sessions: 21,
+              activeUsers: 20,
+              newUsers: 19,
+              avgEngagementTimePerSession: 171.38095238095238,
+              totalRevenue: 0,
+              bounceRate: 0.47619047619047616,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/kontakt",
+              sessions: 20,
+              activeUsers: 20,
+              newUsers: 19,
+              avgEngagementTimePerSession: 71.6,
+              totalRevenue: 0,
+              bounceRate: 0.35,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/neemazal-t-s",
+              sessions: 20,
+              activeUsers: 16,
+              newUsers: 16,
+              avgEngagementTimePerSession: 93.45,
+              totalRevenue: 24.87,
+              bounceRate: 0.3,
+              addToCart: 4,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/airone-sc-5-l",
+              sessions: 19,
+              activeUsers: 17,
+              newUsers: 13,
+              avgEngagementTimePerSession: 151.26315789473685,
+              totalRevenue: 0,
+              bounceRate: 0.21052631578947367,
+              addToCart: 4,
+              checkouts: 2,
+              purchases: 0
+            },
+            {
+              path: "/produkt/champion-50-wg",
+              sessions: 19,
+              activeUsers: 19,
+              newUsers: 18,
+              avgEngagementTimePerSession: 25.157894736842106,
+              totalRevenue: 0,
+              bounceRate: 0.5263157894736842,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/trava-timotejka-lucna-lema-1-kg",
+              sessions: 19,
+              activeUsers: 18,
+              newUsers: 18,
+              avgEngagementTimePerSession: 6.947368421052632,
+              totalRevenue: 0,
+              bounceRate: 0.6842105263157895,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/virkon-s-50-g",
+              sessions: 19,
+              activeUsers: 19,
+              newUsers: 19,
+              avgEngagementTimePerSession: 33.1578947368421,
+              totalRevenue: 0,
+              bounceRate: 0.7368421052631579,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/znacka-produktu/silva-tabs",
+              sessions: 18,
+              activeUsers: 15,
+              newUsers: 14,
+              avgEngagementTimePerSession: 16.833333333333332,
+              totalRevenue: 0,
+              bounceRate: 0.7777777777777778,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/mrlik-celorocny-nepriatel-nasich-poli",
+              sessions: 17,
+              activeUsers: 17,
+              newUsers: 17,
+              avgEngagementTimePerSession: 103.29411764705883,
+              totalRevenue: 0,
+              bounceRate: 0.5294117647058824,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/flipper-ew-4798-1-l",
+              sessions: 17,
+              activeUsers: 16,
+              newUsers: 11,
+              avgEngagementTimePerSession: 25.823529411764707,
+              totalRevenue: 0,
+              bounceRate: 0.7058823529411765,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/draselna-sol",
+              sessions: 16,
+              activeUsers: 16,
+              newUsers: 15,
+              avgEngagementTimePerSession: 72.6875,
+              totalRevenue: 58.02,
+              bounceRate: 0.375,
+              addToCart: 4,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/escort-novy-10-l",
+              sessions: 16,
+              activeUsers: 16,
+              newUsers: 15,
+              avgEngagementTimePerSession: 1.6875,
+              totalRevenue: 0,
+              bounceRate: 0.75,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/redkev-olejna",
+              sessions: 16,
+              activeUsers: 15,
+              newUsers: 9,
+              avgEngagementTimePerSession: 19.25,
+              totalRevenue: 0,
+              bounceRate: 0.5625,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/benevia",
+              sessions: 15,
+              activeUsers: 11,
+              newUsers: 9,
+              avgEngagementTimePerSession: 16.533333333333335,
+              totalRevenue: 0,
+              bounceRate: 0.5333333333333333,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/katalog-pripravky-na-ochranu-rastlin-2025",
+              sessions: 15,
+              activeUsers: 11,
+              newUsers: 10,
+              avgEngagementTimePerSession: 16.4,
+              totalRevenue: 0,
+              bounceRate: 0.7333333333333333,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/kategoria-produktu/sikovny-gazda",
+              sessions: 14,
+              activeUsers: 14,
+              newUsers: 14,
+              avgEngagementTimePerSession: 6.142857142857143,
+              totalRevenue: 0,
+              bounceRate: 0.5714285714285714,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/exirel-1-l",
+              sessions: 14,
+              activeUsers: 12,
+              newUsers: 10,
+              avgEngagementTimePerSession: 83.14285714285714,
+              totalRevenue: 260.89,
+              bounceRate: 0.5,
+              addToCart: 4,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/mustang-forte-5-l",
+              sessions: 14,
+              activeUsers: 11,
+              newUsers: 8,
+              avgEngagementTimePerSession: 35.857142857142854,
+              totalRevenue: 0,
+              bounceRate: 0.5,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/profiler-wg",
+              sessions: 14,
+              activeUsers: 11,
+              newUsers: 9,
+              avgEngagementTimePerSession: 301,
+              totalRevenue: 42.16,
+              bounceRate: 0.35714285714285715,
+              addToCart: 20,
+              checkouts: 4,
+              purchases: 1
+            },
+            {
+              path: "/produkt/sudanska-trava",
+              sessions: 14,
+              activeUsers: 12,
+              newUsers: 12,
+              avgEngagementTimePerSession: 18.285714285714285,
+              totalRevenue: 0,
+              bounceRate: 0.35714285714285715,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/kategoria-produktu/vsetky-fungicidy",
+              sessions: 13,
+              activeUsers: 8,
+              newUsers: 7,
+              avgEngagementTimePerSession: 26.307692307692307,
+              totalRevenue: 0,
+              bounceRate: 0.46153846153846156,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/barbarian-super-1-l",
+              sessions: 12,
+              activeUsers: 10,
+              newUsers: 9,
+              avgEngagementTimePerSession: 76.08333333333333,
+              totalRevenue: 39.33,
+              bounceRate: 0.3333333333333333,
+              addToCart: 1,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/zlte-lepove-dosky",
+              sessions: 12,
+              activeUsers: 6,
+              newUsers: 6,
+              avgEngagementTimePerSession: 26.166666666666668,
+              totalRevenue: 0,
+              bounceRate: 0.6666666666666666,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/wp-login.php",
+              sessions: 12,
+              activeUsers: 3,
+              newUsers: 0,
+              avgEngagementTimePerSession: 6.166666666666667,
+              totalRevenue: 0,
+              bounceRate: 0.5,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "Kompletný  sprievodca pestovaním  a ochranou repky,  slnečnice,  maku a sóje",
+              itemsViewed: 0,
+              itemsAddedToCart: 13,
+              itemsPurchased: 8,
+              itemRevenue: 559.2
+            },
+            {
+              name: "Previcur Energy, 1 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 9,
+              itemsPurchased: 4,
+              itemRevenue: 423.510001
+            },
+            {
+              name: "Sivanto Prime, 1 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 9,
+              itemsPurchased: 3,
+              itemRevenue: 404.34
+            },
+            {
+              name: "Zato 50 WG, 1 kg",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 391.19
+            },
+            {
+              name: "Cyperfor 100 EC, 5 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 5,
+              itemsPurchased: 2,
+              itemRevenue: 248.46
+            },
+            {
+              name: "Pendistar 40 SC, 10 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 231.52
+            },
+            {
+              name: "Rokoaktív, 25 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 160.67
+            },
+            {
+              name: "Ďatelina lúčna - Rozeta",
+              itemsViewed: 0,
+              itemsAddedToCart: 16,
+              itemsPurchased: 9,
+              itemRevenue: 150.51999
+            },
+            {
+              name: "Damisol Gold Frigomax, 1 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 41,
+              itemsPurchased: 8,
+              itemRevenue: 147.52
+            },
+            {
+              name: "K - Othrine 25 SC, 1 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 138.74
+            },
+            {
+              name: "Tofino, 10 kg",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 127.65
+            },
+            {
+              name: "Luna Experience, 1 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 124.23
+            },
+            {
+              name: "Cervacol Extra, 15 kg",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 119.93
+            },
+            {
+              name: "Vin-OVO-cerit",
+              itemsViewed: 0,
+              itemsAddedToCart: 19,
+              itemsPurchased: 15,
+              itemRevenue: 104.050002
+            },
+            {
+              name: "Dacor, 1 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 102.08
+            },
+            {
+              name: "Superfosfát 19 %, 5 kg",
+              itemsViewed: 0,
+              itemsAddedToCart: 17,
+              itemsPurchased: 16,
+              itemRevenue: 83.060003
+            },
+            {
+              name: "Bofix",
+              itemsViewed: 0,
+              itemsAddedToCart: 10,
+              itemsPurchased: 7,
+              itemRevenue: 79.520002
+            },
+            {
+              name: "Encyklopédia chorôb, škodcov a výživy záhradníckych rastlín",
+              itemsViewed: 0,
+              itemsAddedToCart: 31,
+              itemsPurchased: 2,
+              itemRevenue: 65.5
+            },
+            {
+              name: "Touchdown System 4",
+              itemsViewed: 0,
+              itemsAddedToCart: 3,
+              itemsPurchased: 2,
+              itemRevenue: 55.720001
+            },
+            {
+              name: "Hrach siaty (jarný) - GAMBIT",
+              itemsViewed: 0,
+              itemsAddedToCart: 85,
+              itemsPurchased: 1,
+              itemRevenue: 43.05
+            },
+            {
+              name: "Žlté lepové dosky 6ks",
+              itemsViewed: 0,
+              itemsAddedToCart: 8,
+              itemsPurchased: 6,
+              itemRevenue: 40.020001
+            },
+            {
+              name: "Signum",
+              itemsViewed: 0,
+              itemsAddedToCart: 6,
+              itemsPurchased: 6,
+              itemRevenue: 34
+            },
+            {
+              name: "Síran draselný, 5 kg",
+              itemsViewed: 0,
+              itemsAddedToCart: 5,
+              itemsPurchased: 3,
+              itemRevenue: 32.04
+            },
+            {
+              name: "Barbarian Super, 1 l",
+              itemsViewed: 0,
+              itemsAddedToCart: 5,
+              itemsPurchased: 2,
+              itemRevenue: 30.760001
+            },
+            {
+              name: "Profiler WG",
+              itemsViewed: 0,
+              itemsAddedToCart: 7,
+              itemsPurchased: 4,
+              itemRevenue: 30.039999
+            },
+            {
+              name: "Dynali",
+              itemsViewed: 0,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 27.06
+            },
+            {
+              name: "Machožrút",
+              itemsViewed: 0,
+              itemsAddedToCart: 4,
+              itemsPurchased: 2,
+              itemRevenue: 23.72
+            },
+            {
+              name: "Champion 50 WG",
+              itemsViewed: 0,
+              itemsAddedToCart: 7,
+              itemsPurchased: 4,
+              itemRevenue: 22.299999
+            },
+            {
+              name: "Predjarný postrek na 50 l, 500 + 25 ml",
+              itemsViewed: 0,
+              itemsAddedToCart: 6,
+              itemsPurchased: 2,
+              itemRevenue: 22.019999
+            },
+            {
+              name: "Silwet Star",
+              itemsViewed: 0,
+              itemsAddedToCart: 4,
+              itemsPurchased: 3,
+              itemRevenue: 17.75
+            },
+            {
+              name: "NeemAZAL T/S, 100 ml",
+              itemsViewed: 0,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 15.61
+            },
+            {
+              name: "Predjarný postrek na 10 l, 100+5 ml",
+              itemsViewed: 0,
+              itemsAddedToCart: 12,
+              itemsPurchased: 4,
+              itemRevenue: 15.44
+            },
+            {
+              name: "Mospilan 20 SP",
+              itemsViewed: 0,
+              itemsAddedToCart: 17,
+              itemsPurchased: 11,
+              itemRevenue: 15.110002
+            },
+            {
+              name: "BIOPÁSY",
+              itemsViewed: 0,
+              itemsAddedToCart: 9,
+              itemsPurchased: 3,
+              itemRevenue: 14.940001
+            },
+            {
+              name: "Travcerit",
+              itemsViewed: 0,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 13.84
+            },
+            {
+              name: "Draselná soľ, 5 kg",
+              itemsViewed: 0,
+              itemsAddedToCart: 2,
+              itemsPurchased: 2,
+              itemRevenue: 13.52
+            },
+            {
+              name: "Karate Zeon 5 CS",
+              itemsViewed: 0,
+              itemsAddedToCart: 9,
+              itemsPurchased: 2,
+              itemRevenue: 10.71
+            },
+            {
+              name: "Štepársky vosk",
+              itemsViewed: 0,
+              itemsAddedToCart: 2,
+              itemsPurchased: 2,
+              itemRevenue: 10.539999
+            },
+            {
+              name: "Horká soľ - prášková",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 2,
+              itemRevenue: 10.459999
+            },
+            {
+              name: "Vivando",
+              itemsViewed: 0,
+              itemsAddedToCart: 4,
+              itemsPurchased: 2,
+              itemRevenue: 10.32
+            },
+            {
+              name: "Nissorun 10 WP",
+              itemsViewed: 0,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 9.3
+            },
+            {
+              name: "NPK 15-10-10",
+              itemsViewed: 0,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 7.17
+            },
+            {
+              name: "Desimo Duo, 350 g",
+              itemsViewed: 0,
+              itemsAddedToCart: 7,
+              itemsPurchased: 1,
+              itemRevenue: 6.95
+            },
+            {
+              name: "Agrovital",
+              itemsViewed: 0,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 6.31
+            },
+            {
+              name: "Cuproxat SC",
+              itemsViewed: 0,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 6.29
+            },
+            {
+              name: "Liadok 27 %",
+              itemsViewed: 0,
+              itemsAddedToCart: 4,
+              itemsPurchased: 1,
+              itemRevenue: 5.98
+            },
+            {
+              name: "Scala",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 5.83
+            },
+            {
+              name: "Bellis",
+              itemsViewed: 0,
+              itemsAddedToCart: 3,
+              itemsPurchased: 2,
+              itemRevenue: 5.08
+            },
+            {
+              name: "Score 20 EC",
+              itemsViewed: 0,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 4.24
+            },
+            {
+              name: "Wuxal Super, 250 ml",
+              itemsViewed: 0,
+              itemsAddedToCart: 12,
+              itemsPurchased: 1,
+              itemRevenue: 4.059999
+            }
+          ]
+        },
       email: {
         sent: 30460, openRate: 21.52, clickRate: 0.67, uniqueClicks: 231,
         unsubRate: 0.27, orders: 3, revenue: 549.02, campaignsCount: 8,
@@ -483,9 +1714,1216 @@ const sanaplant = {
         ],
       },
       ga: {
-        paid: { sessions: 242171, users: 239528, engagementRate: 2.11, avgDuration: '00:00:26' },
-        organic: { sessions: 11546, users: 9176, engagementRate: 57.07, avgDuration: '00:11:49' },
-      },
+          paid: {
+            sessions: 242171,
+            users: 239528,
+            engagementRate: 2.11,
+            avgDuration: "00:00:26"
+          },
+          organic: {
+            sessions: 11546,
+            users: 9176,
+            engagementRate: 57.07,
+            avgDuration: "00:11:49"
+          },
+          snapshot: {
+            activeUsers: 248077,
+            newUsers: 244486,
+            sessions: 253441,
+            engagedSessions: 11637,
+            engagementRate: 0.04591601201068493,
+            totalRevenue: 12194.450004,
+            keyEvents: 8678
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Direct",
+              sessions: 238344,
+              engagedSessions: 3091,
+              engagementRate: 0.012968650354110026,
+              avgEngagementTimePerSession: 0.42689138388211995,
+              eventsPerSession: 3.7037013728056927,
+              eventCount: 882755,
+              keyEvents: 1700,
+              sessionKeyEventRate: 0.005806733125230759,
+              totalRevenue: 694.280001
+            },
+            {
+              channelGroup: "Cross-network",
+              sessions: 7955,
+              engagedSessions: 4992,
+              engagementRate: 0.6275298554368322,
+              avgEngagementTimePerSession: 64.10949088623508,
+              eventsPerSession: 6.756505342551854,
+              eventCount: 53748,
+              keyEvents: 4578,
+              sessionKeyEventRate: 0.20703959773727215,
+              totalRevenue: 5771.060003
+            },
+            {
+              channelGroup: "Paid Social",
+              sessions: 3711,
+              engagedSessions: 1703,
+              engagementRate: 0.4589059552681218,
+              avgEngagementTimePerSession: 39.52411748854756,
+              eventsPerSession: 6.175424413904608,
+              eventCount: 22917,
+              keyEvents: 981,
+              sessionKeyEventRate: 0.10455402856372946,
+              totalRevenue: 2015.96
+            },
+            {
+              channelGroup: "Organic Search",
+              sessions: 2114,
+              engagedSessions: 1246,
+              engagementRate: 0.5894039735099338,
+              avgEngagementTimePerSession: 53.44087038789026,
+              eventsPerSession: 7.369441816461684,
+              eventCount: 15579,
+              keyEvents: 1017,
+              sessionKeyEventRate: 0.15468306527909176,
+              totalRevenue: 2430.67
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 573,
+              engagedSessions: 257,
+              engagementRate: 0.44851657940663175,
+              avgEngagementTimePerSession: 15.328097731239092,
+              eventsPerSession: 5.37696335078534,
+              eventCount: 3081,
+              keyEvents: 62,
+              sessionKeyEventRate: 0.07504363001745201,
+              totalRevenue: 107.91
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 259,
+              engagedSessions: 63,
+              engagementRate: 0.24324324324324326,
+              avgEngagementTimePerSession: 29.08880308880309,
+              eventsPerSession: 4.374517374517374,
+              eventCount: 1133,
+              keyEvents: 68,
+              sessionKeyEventRate: 0.08494208494208494,
+              totalRevenue: 24.97
+            },
+            {
+              channelGroup: "Email",
+              sessions: 200,
+              engagedSessions: 86,
+              engagementRate: 0.43,
+              avgEngagementTimePerSession: 67.16,
+              eventsPerSession: 7.85,
+              eventCount: 1570,
+              keyEvents: 89,
+              sessionKeyEventRate: 0.105,
+              totalRevenue: 871.23
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 150,
+              engagedSessions: 82,
+              engagementRate: 0.5466666666666666,
+              avgEngagementTimePerSession: 139.76,
+              eventsPerSession: 11.333333333333334,
+              eventCount: 1700,
+              keyEvents: 143,
+              sessionKeyEventRate: 0.13333333333333333,
+              totalRevenue: 278.37
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 113,
+              engagedSessions: 98,
+              engagementRate: 0.8672566371681416,
+              avgEngagementTimePerSession: 55.309734513274336,
+              eventsPerSession: 7.469026548672566,
+              eventCount: 844,
+              keyEvents: 10,
+              sessionKeyEventRate: 0.02654867256637168,
+              totalRevenue: 0
+            },
+            {
+              channelGroup: "Organic Shopping",
+              sessions: 22,
+              engagedSessions: 19,
+              engagementRate: 0.8636363636363636,
+              avgEngagementTimePerSession: 84.27272727272727,
+              eventsPerSession: 11.818181818181818,
+              eventCount: 260,
+              keyEvents: 30,
+              sessionKeyEventRate: 0.3181818181818182,
+              totalRevenue: 0
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 236597,
+              newUsers: 233833,
+              returningUsers: 302,
+              avgEngagementTimePerActiveUser: 0.6014608228118303,
+              engagedSessionsPerActiveUser: 0.014887204696951125,
+              eventCount: 888251,
+              keyEvents: 2204,
+              userKeyEventRate: 0.006200888498133815
+            },
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 5924,
+              newUsers: 5754,
+              returningUsers: 890,
+              avgEngagementTimePerActiveUser: 77.77228731533367,
+              engagedSessionsPerActiveUser: 0.7840040753948039,
+              eventCount: 50082,
+              keyEvents: 4184,
+              userKeyEventRate: 0.1726948548140601
+            },
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 2860,
+              newUsers: 2584,
+              returningUsers: 345,
+              avgEngagementTimePerActiveUser: 49.32228696285506,
+              engagedSessionsPerActiveUser: 0.5797523670793882,
+              eventCount: 21379,
+              keyEvents: 824,
+              userKeyEventRate: 0.08922068463219228
+            },
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 1739,
+              newUsers: 1457,
+              returningUsers: 338,
+              avgEngagementTimePerActiveUser: 81.62589498806683,
+              engagedSessionsPerActiveUser: 0.7834128878281623,
+              eventCount: 15720,
+              keyEvents: 1027,
+              userKeyEventRate: 0.16288782816229117
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 533,
+              newUsers: 505,
+              returningUsers: 29,
+              avgEngagementTimePerActiveUser: 9.669847328244275,
+              engagedSessionsPerActiveUser: 0.45610687022900764,
+              eventCount: 2640,
+              keyEvents: 37,
+              userKeyEventRate: 0.05534351145038168
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 115,
+              newUsers: 110,
+              returningUsers: 22,
+              avgEngagementTimePerActiveUser: 107.84347826086956,
+              engagedSessionsPerActiveUser: 1.1304347826086956,
+              eventCount: 1378,
+              keyEvents: 98,
+              userKeyEventRate: 0.10434782608695652
+            },
+            {
+              firstUserChannelGroup: "Email",
+              totalUsers: 107,
+              newUsers: 78,
+              returningUsers: 26,
+              avgEngagementTimePerActiveUser: 71.86734693877551,
+              engagedSessionsPerActiveUser: 0.8367346938775511,
+              eventCount: 1346,
+              keyEvents: 112,
+              userKeyEventRate: 0.17346938775510204
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 104,
+              newUsers: 81,
+              returningUsers: 35,
+              avgEngagementTimePerActiveUser: 255.30693069306932,
+              engagedSessionsPerActiveUser: 0.9405940594059405,
+              eventCount: 1894,
+              keyEvents: 142,
+              userKeyEventRate: 0.21782178217821782
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 83,
+              newUsers: 70,
+              returningUsers: 13,
+              avgEngagementTimePerActiveUser: 78.88461538461539,
+              engagedSessionsPerActiveUser: 0.717948717948718,
+              eventCount: 721,
+              keyEvents: 37,
+              userKeyEventRate: 0.14102564102564102
+            },
+            {
+              firstUserChannelGroup: "Organic Shopping",
+              totalUsers: 15,
+              newUsers: 14,
+              returningUsers: 3,
+              avgEngagementTimePerActiveUser: 80.93333333333334,
+              engagedSessionsPerActiveUser: 1.0666666666666667,
+              eventCount: 176,
+              keyEvents: 13,
+              userKeyEventRate: 0.3333333333333333
+            }
+          ],
+          landingPages: [
+            {
+              path: "/produkt/damisol-gold-frigomax-1-l",
+              sessions: 6937,
+              activeUsers: 5498,
+              newUsers: 5139,
+              avgEngagementTimePerSession: 64.41848061121522,
+              totalRevenue: 4894.67,
+              bounceRate: 0.37494594204987747,
+              addToCart: 687,
+              checkouts: 171,
+              purchases: 123
+            },
+            {
+              path: "/",
+              sessions: 2324,
+              activeUsers: 2014,
+              newUsers: 1677,
+              avgEngagementTimePerSession: 26.864888123924267,
+              totalRevenue: 459.46,
+              bounceRate: 0.7379518072289156,
+              addToCart: 106,
+              checkouts: 21,
+              purchases: 10
+            },
+            {
+              path: "/produkt/predjarny-postrek-na-10-l",
+              sessions: 473,
+              activeUsers: 435,
+              newUsers: 393,
+              avgEngagementTimePerSession: 51.17547568710359,
+              totalRevenue: 40.1,
+              bounceRate: 0.3953488372093023,
+              addToCart: 47,
+              checkouts: 4,
+              purchases: 2
+            },
+            {
+              path: "(not set)",
+              sessions: 400,
+              activeUsers: 374,
+              newUsers: 233,
+              avgEngagementTimePerSession: 9.6475,
+              totalRevenue: 0,
+              bounceRate: 0.66,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/kompletny-sprievodca-pestovanim-a-ochranou-repky-slnecnice-maku-a-soje",
+              sessions: 295,
+              activeUsers: 275,
+              newUsers: 262,
+              avgEngagementTimePerSession: 9.96271186440678,
+              totalRevenue: 141.8,
+              bounceRate: 0.7864406779661017,
+              addToCart: 5,
+              checkouts: 2,
+              purchases: 2
+            },
+            {
+              path: "/produkt/hydrohumat_1l",
+              sessions: 159,
+              activeUsers: 130,
+              newUsers: 107,
+              avgEngagementTimePerSession: 44.308176100628934,
+              totalRevenue: 109.35,
+              bounceRate: 0.559748427672956,
+              addToCart: 22,
+              checkouts: 6,
+              purchases: 2
+            },
+            {
+              path: "/produkt/prakticky-balicek-ochrany-rastlin-pre-zahradkara-maly-1-ks",
+              sessions: 145,
+              activeUsers: 136,
+              newUsers: 128,
+              avgEngagementTimePerSession: 59.30344827586207,
+              totalRevenue: 31.13,
+              bounceRate: 0.3793103448275862,
+              addToCart: 6,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/predjarny-postrek-na-50-l",
+              sessions: 137,
+              activeUsers: 128,
+              newUsers: 97,
+              avgEngagementTimePerSession: 90.01459854014598,
+              totalRevenue: 193.12,
+              bounceRate: 0.2773722627737226,
+              addToCart: 33,
+              checkouts: 10,
+              purchases: 3
+            },
+            {
+              path: "/produkt/encyklopedia-chorob-skodcov-a-vyzivy-zahradnickych-rastlin",
+              sessions: 115,
+              activeUsers: 82,
+              newUsers: 67,
+              avgEngagementTimePerSession: 40.243478260869566,
+              totalRevenue: 192.72,
+              bounceRate: 0.5739130434782609,
+              addToCart: 8,
+              checkouts: 2,
+              purchases: 3
+            },
+            {
+              path: "/produkt/special-zemiaky-zahrada-bezchloridove-npk-11-9-2016s15mg005-b",
+              sessions: 112,
+              activeUsers: 97,
+              newUsers: 88,
+              avgEngagementTimePerSession: 53.4375,
+              totalRevenue: 42.33,
+              bounceRate: 0.4642857142857143,
+              addToCart: 10,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/quantum-aminomax-1-l",
+              sessions: 103,
+              activeUsers: 81,
+              newUsers: 42,
+              avgEngagementTimePerSession: 49.43689320388349,
+              totalRevenue: 0,
+              bounceRate: 0.24271844660194175,
+              addToCart: 2,
+              checkouts: 2,
+              purchases: 0
+            },
+            {
+              path: "/obchod",
+              sessions: 95,
+              activeUsers: 94,
+              newUsers: 87,
+              avgEngagementTimePerSession: 159.73684210526315,
+              totalRevenue: 33.65,
+              bounceRate: 0.29473684210526313,
+              addToCart: 19,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/signum-1-kg",
+              sessions: 94,
+              activeUsers: 75,
+              newUsers: 55,
+              avgEngagementTimePerSession: 52.42553191489362,
+              totalRevenue: 176.51,
+              bounceRate: 0.3723404255319149,
+              addToCart: 6,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/zlte-lepove-dosky",
+              sessions: 94,
+              activeUsers: 84,
+              newUsers: 75,
+              avgEngagementTimePerSession: 39.04255319148936,
+              totalRevenue: 26.21,
+              bounceRate: 0.574468085106383,
+              addToCart: 5,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/prakticky-balicek-ochrany-rastlin-pre-zahradkara-velky-1-ks",
+              sessions: 88,
+              activeUsers: 82,
+              newUsers: 74,
+              avgEngagementTimePerSession: 55.60227272727273,
+              totalRevenue: 115.49,
+              bounceRate: 0.3977272727272727,
+              addToCart: 6,
+              checkouts: 2,
+              purchases: 2
+            },
+            {
+              path: "/produkt/orgevit-4-3-25",
+              sessions: 85,
+              activeUsers: 72,
+              newUsers: 53,
+              avgEngagementTimePerSession: 91.70588235294117,
+              totalRevenue: 63.96,
+              bounceRate: 0.36470588235294116,
+              addToCart: 10,
+              checkouts: 5,
+              purchases: 1
+            },
+            {
+              path: "/produkt/mospilan-20-sp",
+              sessions: 81,
+              activeUsers: 63,
+              newUsers: 54,
+              avgEngagementTimePerSession: 28.444444444444443,
+              totalRevenue: 0,
+              bounceRate: 0.5679012345679012,
+              addToCart: 3,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/vinovcerit-npk",
+              sessions: 76,
+              activeUsers: 56,
+              newUsers: 44,
+              avgEngagementTimePerSession: 35.96052631578947,
+              totalRevenue: 26.75,
+              bounceRate: 0.40789473684210525,
+              addToCart: 7,
+              checkouts: 4,
+              purchases: 1
+            },
+            {
+              path: "/produkt/superfosfat-18",
+              sessions: 73,
+              activeUsers: 62,
+              newUsers: 51,
+              avgEngagementTimePerSession: 50.95890410958904,
+              totalRevenue: 0,
+              bounceRate: 0.2876712328767123,
+              addToCart: 12,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/liadok-27",
+              sessions: 70,
+              activeUsers: 63,
+              newUsers: 58,
+              avgEngagementTimePerSession: 35.98571428571429,
+              totalRevenue: 0,
+              bounceRate: 0.5571428571428572,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/luna-experience-1-l",
+              sessions: 70,
+              activeUsers: 57,
+              newUsers: 29,
+              avgEngagementTimePerSession: 127.65714285714286,
+              totalRevenue: 374.69,
+              bounceRate: 0.2,
+              addToCart: 5,
+              checkouts: 6,
+              purchases: 3
+            },
+            {
+              path: "/produkt/machozrut",
+              sessions: 69,
+              activeUsers: 65,
+              newUsers: 63,
+              avgEngagementTimePerSession: 38.57971014492754,
+              totalRevenue: 0,
+              bounceRate: 0.43478260869565216,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/znacka-produktu/broskyna-celorocna-ochrana-a-vyziva",
+              sessions: 69,
+              activeUsers: 58,
+              newUsers: 50,
+              avgEngagementTimePerSession: 91.28985507246377,
+              totalRevenue: 35.55,
+              bounceRate: 0.3188405797101449,
+              addToCart: 9,
+              checkouts: 2,
+              purchases: 2
+            },
+            {
+              path: "/produkt/barbarian-super-1-l",
+              sessions: 67,
+              activeUsers: 58,
+              newUsers: 39,
+              avgEngagementTimePerSession: 32.67164179104478,
+              totalRevenue: 0,
+              bounceRate: 0.3880597014925373,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/kategoria-produktu/exkluzivne-produkty",
+              sessions: 62,
+              activeUsers: 60,
+              newUsers: 59,
+              avgEngagementTimePerSession: 4.806451612903226,
+              totalRevenue: 0,
+              bounceRate: 0.8387096774193549,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/predjarny-postrek-na-25-l",
+              sessions: 60,
+              activeUsers: 55,
+              newUsers: 43,
+              avgEngagementTimePerSession: 52.06666666666667,
+              totalRevenue: 0,
+              bounceRate: 0.4666666666666667,
+              addToCart: 8,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/pocahontas-premiovy-stolovy-zemiak-28-40-mm",
+              sessions: 58,
+              activeUsers: 46,
+              newUsers: 43,
+              avgEngagementTimePerSession: 7.482758620689655,
+              totalRevenue: 0,
+              bounceRate: 0.6379310344827587,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/biopasy",
+              sessions: 57,
+              activeUsers: 55,
+              newUsers: 51,
+              avgEngagementTimePerSession: 46.50877192982456,
+              totalRevenue: 0,
+              bounceRate: 0.47368421052631576,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/champion-50-wg",
+              sessions: 56,
+              activeUsers: 50,
+              newUsers: 42,
+              avgEngagementTimePerSession: 34.30357142857143,
+              totalRevenue: 13.91,
+              bounceRate: 0.48214285714285715,
+              addToCart: 6,
+              checkouts: 0,
+              purchases: 1
+            },
+            {
+              path: "/produkt/signum",
+              sessions: 56,
+              activeUsers: 51,
+              newUsers: 38,
+              avgEngagementTimePerSession: 40.017857142857146,
+              totalRevenue: 0,
+              bounceRate: 0.375,
+              addToCart: 2,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/sivanto-prime-1-l",
+              sessions: 52,
+              activeUsers: 44,
+              newUsers: 34,
+              avgEngagementTimePerSession: 56.86538461538461,
+              totalRevenue: 125.14,
+              bounceRate: 0.46153846153846156,
+              addToCart: 2,
+              checkouts: 4,
+              purchases: 1
+            },
+            {
+              path: "/produkt/zlte-moerickeho-misky",
+              sessions: 51,
+              activeUsers: 48,
+              newUsers: 45,
+              avgEngagementTimePerSession: 30.176470588235293,
+              totalRevenue: 28.06,
+              bounceRate: 0.47058823529411764,
+              addToCart: 6,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/virkon-s-50-g",
+              sessions: 49,
+              activeUsers: 46,
+              newUsers: 44,
+              avgEngagementTimePerSession: 62.93877551020408,
+              totalRevenue: 25.35,
+              bounceRate: 0.40816326530612246,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/mustang-forte-5-l",
+              sessions: 46,
+              activeUsers: 44,
+              newUsers: 31,
+              avgEngagementTimePerSession: 72.41304347826087,
+              totalRevenue: 0,
+              bounceRate: 0.3695652173913043,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/quantum-ultra-complex-1-l",
+              sessions: 46,
+              activeUsers: 35,
+              newUsers: 24,
+              avgEngagementTimePerSession: 111.3695652173913,
+              totalRevenue: 0,
+              bounceRate: 0.391304347826087,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/trava-timotejka-lucna-lema-1-kg",
+              sessions: 44,
+              activeUsers: 42,
+              newUsers: 40,
+              avgEngagementTimePerSession: 52.18181818181818,
+              totalRevenue: 0,
+              bounceRate: 0.3409090909090909,
+              addToCart: 3,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/kategoria-produktu/zahradkari",
+              sessions: 42,
+              activeUsers: 33,
+              newUsers: 29,
+              avgEngagementTimePerSession: 85.23809523809524,
+              totalRevenue: 43.41,
+              bounceRate: 0.5476190476190477,
+              addToCart: 3,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/delan-700-wdg-1-kg",
+              sessions: 42,
+              activeUsers: 37,
+              newUsers: 27,
+              avgEngagementTimePerSession: 65.02380952380952,
+              totalRevenue: 201.41,
+              bounceRate: 0.3333333333333333,
+              addToCart: 11,
+              checkouts: 4,
+              purchases: 3
+            },
+            {
+              path: "/produkt/siran-amonny",
+              sessions: 42,
+              activeUsers: 37,
+              newUsers: 32,
+              avgEngagementTimePerSession: 57.07142857142857,
+              totalRevenue: 24.97,
+              bounceRate: 0.38095238095238093,
+              addToCart: 3,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/syllit-544-sc-5-l",
+              sessions: 41,
+              activeUsers: 34,
+              newUsers: 28,
+              avgEngagementTimePerSession: 26.585365853658537,
+              totalRevenue: 227.87,
+              bounceRate: 0.4878048780487805,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/nissorun-10-wp",
+              sessions: 40,
+              activeUsers: 33,
+              newUsers: 30,
+              avgEngagementTimePerSession: 30.775,
+              totalRevenue: 0,
+              bounceRate: 0.525,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/garlon-new-5-l",
+              sessions: 39,
+              activeUsers: 37,
+              newUsers: 36,
+              avgEngagementTimePerSession: 41.46153846153846,
+              totalRevenue: 346.58,
+              bounceRate: 0.41025641025641024,
+              addToCart: 2,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/previcur-energy-1-l",
+              sessions: 39,
+              activeUsers: 37,
+              newUsers: 26,
+              avgEngagementTimePerSession: 47.53846153846154,
+              totalRevenue: 0,
+              bounceRate: 0.38461538461538464,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/sudanska-trava",
+              sessions: 39,
+              activeUsers: 38,
+              newUsers: 35,
+              avgEngagementTimePerSession: 74.74358974358974,
+              totalRevenue: 0,
+              bounceRate: 0.41025641025641024,
+              addToCart: 2,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/thiovit-jet-10-kg",
+              sessions: 38,
+              activeUsers: 34,
+              newUsers: 27,
+              avgEngagementTimePerSession: 49.973684210526315,
+              totalRevenue: 76.98,
+              bounceRate: 0.42105263157894735,
+              addToCart: 4,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/k-othrine-25-sc-1-l",
+              sessions: 37,
+              activeUsers: 33,
+              newUsers: 31,
+              avgEngagementTimePerSession: 43.2972972972973,
+              totalRevenue: 833.46,
+              bounceRate: 0.24324324324324326,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/serenade-aso-5-l",
+              sessions: 37,
+              activeUsers: 32,
+              newUsers: 23,
+              avgEngagementTimePerSession: 121.62162162162163,
+              totalRevenue: 112.24,
+              bounceRate: 0.3783783783783784,
+              addToCart: 4,
+              checkouts: 6,
+              purchases: 1
+            },
+            {
+              path: "/produkt/cuproxat-sc",
+              sessions: 36,
+              activeUsers: 33,
+              newUsers: 30,
+              avgEngagementTimePerSession: 40.05555555555556,
+              totalRevenue: 0,
+              bounceRate: 0.5555555555555556,
+              addToCart: 4,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/darium-5-l",
+              sessions: 36,
+              activeUsers: 29,
+              newUsers: 19,
+              avgEngagementTimePerSession: 37.55555555555556,
+              totalRevenue: 0,
+              bounceRate: 0.4722222222222222,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/flowbrix",
+              sessions: 36,
+              activeUsers: 33,
+              newUsers: 21,
+              avgEngagementTimePerSession: 47.47222222222222,
+              totalRevenue: 40.23,
+              bounceRate: 0.4444444444444444,
+              addToCart: 2,
+              checkouts: 2,
+              purchases: 1
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "Damisol Gold Frigomax, 1 l",
+              itemsViewed: 2042,
+              itemsAddedToCart: 923,
+              itemsPurchased: 160,
+              itemRevenue: 2950.40001
+            },
+            {
+              name: "K - Othrine 25 SC, 1 l",
+              itemsViewed: 15,
+              itemsAddedToCart: 6,
+              itemsPurchased: 6,
+              itemRevenue: 832.439999
+            },
+            {
+              name: "Luna Experience, 1 l",
+              itemsViewed: 75,
+              itemsAddedToCart: 9,
+              itemsPurchased: 5,
+              itemRevenue: 621.150001
+            },
+            {
+              name: "Vaztak Pro, 5 l",
+              itemsViewed: 4,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 426.16
+            },
+            {
+              name: "Maister Power, 5 l",
+              itemsViewed: 12,
+              itemsAddedToCart: 62,
+              itemsPurchased: 1,
+              itemRevenue: 419.18
+            },
+            {
+              name: "Predjarný postrek na 50 l, 500 + 25 ml",
+              itemsViewed: 103,
+              itemsAddedToCart: 59,
+              itemsPurchased: 31,
+              itemRevenue: 363.009993
+            },
+            {
+              name: "Simplia, 5 l",
+              itemsViewed: 5,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 362.39
+            },
+            {
+              name: "Garlon New, 5 l",
+              itemsViewed: 15,
+              itemsAddedToCart: 4,
+              itemsPurchased: 2,
+              itemRevenue: 345.580001
+            },
+            {
+              name: "Encyklopédia chorôb, škodcov a výživy záhradníckych rastlín",
+              itemsViewed: 31,
+              itemsAddedToCart: 25,
+              itemsPurchased: 7,
+              itemRevenue: 327.5
+            },
+            {
+              name: "Kompletný  sprievodca pestovaním  a ochranou repky,  slnečnice,  maku a sóje",
+              itemsViewed: 22,
+              itemsAddedToCart: 9,
+              itemsPurchased: 4,
+              itemRevenue: 279.6
+            },
+            {
+              name: "Delan 700 WDG, 1 kg",
+              itemsViewed: 21,
+              itemsAddedToCart: 14,
+              itemsPurchased: 4,
+              itemRevenue: 265.88
+            },
+            {
+              name: "Sivanto Prime, 1 l",
+              itemsViewed: 24,
+              itemsAddedToCart: 5,
+              itemsPurchased: 2,
+              itemRevenue: 260.8
+            },
+            {
+              name: "Dicopur M 750, 10 l",
+              itemsViewed: 8,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 241.26
+            },
+            {
+              name: "Syllit 544 SC, 5 l",
+              itemsViewed: 25,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 226.87
+            },
+            {
+              name: "Raykat Start, 10 l",
+              itemsViewed: 7,
+              itemsAddedToCart: 4,
+              itemsPurchased: 1,
+              itemRevenue: 214.12
+            },
+            {
+              name: "Champion 50 WG, 10 kg",
+              itemsViewed: 7,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 194.04
+            },
+            {
+              name: "Stabilan 750 SL, 20 l",
+              itemsViewed: 5,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 160.05
+            },
+            {
+              name: "Globaryll 100, 1 l",
+              itemsViewed: 1,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 157.16
+            },
+            {
+              name: "Praktický balíček ochrany rastlín pre záhradkára - Veľký, 1 ks",
+              itemsViewed: 33,
+              itemsAddedToCart: 9,
+              itemsPurchased: 3,
+              itemRevenue: 146.1
+            },
+            {
+              name: "Signum, 1 kg",
+              itemsViewed: 52,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 136.89
+            },
+            {
+              name: "Lucerna siata - Giulia",
+              itemsViewed: 19,
+              itemsAddedToCart: 7,
+              itemsPurchased: 2,
+              itemRevenue: 136.68
+            },
+            {
+              name: "TBM 75 WG, 100 g",
+              itemsViewed: 5,
+              itemsAddedToCart: 3,
+              itemsPurchased: 2,
+              itemRevenue: 123.719999
+            },
+            {
+              name: "Airone SC, 5 l",
+              itemsViewed: 13,
+              itemsAddedToCart: 4,
+              itemsPurchased: 1,
+              itemRevenue: 119.47
+            },
+            {
+              name: "Champion 50 WG",
+              itemsViewed: 93,
+              itemsAddedToCart: 59,
+              itemsPurchased: 18,
+              itemRevenue: 116.540002
+            },
+            {
+              name: "Serenade ASO, 5 l",
+              itemsViewed: 29,
+              itemsAddedToCart: 5,
+              itemsPurchased: 1,
+              itemRevenue: 112.24
+            },
+            {
+              name: "Žlté lepové dosky",
+              itemsViewed: 40,
+              itemsAddedToCart: 61,
+              itemsPurchased: 17,
+              itemRevenue: 83.639996
+            },
+            {
+              name: "Quantum AquaSil, 5 l",
+              itemsViewed: 8,
+              itemsAddedToCart: 4,
+              itemsPurchased: 2,
+              itemRevenue: 78.420001
+            },
+            {
+              name: "Thiovit Jet, 10 kg",
+              itemsViewed: 32,
+              itemsAddedToCart: 5,
+              itemsPurchased: 1,
+              itemRevenue: 75.98
+            },
+            {
+              name: "Signum",
+              itemsViewed: 78,
+              itemsAddedToCart: 41,
+              itemsPurchased: 10,
+              itemRevenue: 72.200002
+            },
+            {
+              name: "Taegro, 0,375 kg",
+              itemsViewed: 7,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 71.19
+            },
+            {
+              name: "Orgevit (4-3-2,5)",
+              itemsViewed: 12,
+              itemsAddedToCart: 28,
+              itemsPurchased: 4,
+              itemRevenue: 63.96
+            },
+            {
+              name: "Quantum Boron Active, 5 l",
+              itemsViewed: 8,
+              itemsAddedToCart: 3,
+              itemsPurchased: 2,
+              itemRevenue: 62.22
+            },
+            {
+              name: "Trávna zmes EXPERT - park",
+              itemsViewed: 13,
+              itemsAddedToCart: 32,
+              itemsPurchased: 8,
+              itemRevenue: 61.120001
+            },
+            {
+              name: "Tegoplant Spu, 1 l",
+              itemsViewed: 2,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 60.86
+            },
+            {
+              name: "Laudis OD, 1 l",
+              itemsViewed: 13,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 58.06
+            },
+            {
+              name: "Špeciál zemiaky, záhrada - bezchloridové NPK 11-9-20+16S+1,5Mg+0,05 B",
+              itemsViewed: 56,
+              itemsAddedToCart: 33,
+              itemsPurchased: 4,
+              itemRevenue: 55.38
+            },
+            {
+              name: "HydroHumat, 1 l",
+              itemsViewed: 48,
+              itemsAddedToCart: 17,
+              itemsPurchased: 4,
+              itemRevenue: 51.68
+            },
+            {
+              name: "Praktický balíček ochrany rastlín pre záhradkára - Malý, 1 ks",
+              itemsViewed: 42,
+              itemsAddedToCart: 9,
+              itemsPurchased: 2,
+              itemRevenue: 49.2
+            },
+            {
+              name: "Katalóg - Prípravky na ochranu rastlín 2025",
+              itemsViewed: 14,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 44.28
+            },
+            {
+              name: "Karate Zeon 5 CS",
+              itemsViewed: 23,
+              itemsAddedToCart: 19,
+              itemsPurchased: 6,
+              itemRevenue: 41.809999
+            },
+            {
+              name: "Dynali",
+              itemsViewed: 21,
+              itemsAddedToCart: 8,
+              itemsPurchased: 6,
+              itemRevenue: 38.849999
+            },
+            {
+              name: "Predjarný postrek na 10 l, 100+5 ml",
+              itemsViewed: 92,
+              itemsAddedToCart: 75,
+              itemsPurchased: 10,
+              itemRevenue: 38.600002
+            },
+            {
+              name: "Bellis",
+              itemsViewed: 12,
+              itemsAddedToCart: 35,
+              itemsPurchased: 12,
+              itemRevenue: 34.679997
+            },
+            {
+              name: "Flowbrix",
+              itemsViewed: 12,
+              itemsAddedToCart: 4,
+              itemsPurchased: 1,
+              itemRevenue: 33.7
+            },
+            {
+              name: "Spectrum",
+              itemsViewed: 12,
+              itemsAddedToCart: 2,
+              itemsPurchased: 2,
+              itemRevenue: 32.72
+            },
+            {
+              name: "Predjarný postrek na 25 l, 250 + 12,5 ml",
+              itemsViewed: 54,
+              itemsAddedToCart: 10,
+              itemsPurchased: 4,
+              itemRevenue: 27.6
+            },
+            {
+              name: "Vin-OVO-cerit",
+              itemsViewed: 63,
+              itemsAddedToCart: 17,
+              itemsPurchased: 3,
+              itemRevenue: 22.67
+            },
+            {
+              name: "Žlté Moerickeho misky",
+              itemsViewed: 29,
+              itemsAddedToCart: 10,
+              itemsPurchased: 2,
+              itemRevenue: 21.54
+            },
+            {
+              name: "Tráva - Mätonoh jednoročný Mowestra 1 kg",
+              itemsViewed: 1,
+              itemsAddedToCart: 2,
+              itemsPurchased: 5,
+              itemRevenue: 20
+            },
+            {
+              name: "Agil 100 EC",
+              itemsViewed: 14,
+              itemsAddedToCart: 3,
+              itemsPurchased: 2,
+              itemRevenue: 19.44
+            }
+          ]
+        },
       email: {
         sent: null, openRate: 16.97, clickRate: 1.03, uniqueClicks: 227,
         unsubRate: 0.24, orders: 2, revenue: 45.87, campaignsCount: 4,
@@ -560,9 +2998,1216 @@ const sanaplant = {
         ],
       },
       ga: {
-        paid: { sessions: 8964, users: 7538, engagementRate: 45.81, avgDuration: '00:16:34' },
-        organic: { sessions: 13371, users: 10333, engagementRate: 59.02, avgDuration: '00:16:47' },
-      },
+          paid: {
+            sessions: 8964,
+            users: 7538,
+            engagementRate: 45.81,
+            avgDuration: "00:16:34"
+          },
+          organic: {
+            sessions: 13371,
+            users: 10333,
+            engagementRate: 59.02,
+            avgDuration: "00:16:47"
+          },
+          snapshot: {
+            activeUsers: 17403,
+            newUsers: 15179,
+            sessions: 22188,
+            engagedSessions: 11896,
+            engagementRate: 0.5361456643230575,
+            totalRevenue: 25029.650003,
+            keyEvents: 16252
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Cross-network",
+              sessions: 9381,
+              engagedSessions: 5732,
+              engagementRate: 0.6110222790747255,
+              avgEngagementTimePerSession: 61.20328323206481,
+              eventsPerSession: 7.374267135699819,
+              eventCount: 69178,
+              keyEvents: 9844,
+              sessionKeyEventRate: 0.37181537149557614,
+              totalRevenue: 13549.63
+            },
+            {
+              channelGroup: "Organic Search",
+              sessions: 4291,
+              engagedSessions: 2537,
+              engagementRate: 0.5912374737823352,
+              avgEngagementTimePerSession: 48.65532509904451,
+              eventsPerSession: 7.3498019109764625,
+              eventCount: 31538,
+              keyEvents: 3356,
+              sessionKeyEventRate: 0.2840829643439758,
+              totalRevenue: 5117.830001
+            },
+            {
+              channelGroup: "Paid Social",
+              sessions: 4061,
+              engagedSessions: 2197,
+              engagementRate: 0.5409997537552327,
+              avgEngagementTimePerSession: 55.451859147993105,
+              eventsPerSession: 6.607239596158582,
+              eventCount: 26832,
+              keyEvents: 1604,
+              sessionKeyEventRate: 0.1310022162029057,
+              totalRevenue: 2932.260002
+            },
+            {
+              channelGroup: "Direct",
+              sessions: 3120,
+              engagedSessions: 729,
+              engagementRate: 0.23365384615384616,
+              avgEngagementTimePerSession: 19.922115384615385,
+              eventsPerSession: 5.910576923076923,
+              eventCount: 18441,
+              keyEvents: 717,
+              sessionKeyEventRate: 0.06506410256410257,
+              totalRevenue: 2012.7
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 492,
+              engagedSessions: 234,
+              engagementRate: 0.47560975609756095,
+              avgEngagementTimePerSession: 23.414634146341463,
+              eventsPerSession: 5.477642276422764,
+              eventCount: 2695,
+              keyEvents: 67,
+              sessionKeyEventRate: 0.06504065040650407,
+              totalRevenue: 219.72
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 290,
+              engagedSessions: 153,
+              engagementRate: 0.5275862068965518,
+              avgEngagementTimePerSession: 29.44137931034483,
+              eventsPerSession: 6.551724137931035,
+              eventCount: 1900,
+              keyEvents: 211,
+              sessionKeyEventRate: 0.32413793103448274,
+              totalRevenue: 295.42
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 274,
+              engagedSessions: 150,
+              engagementRate: 0.5474452554744526,
+              avgEngagementTimePerSession: 55.558394160583944,
+              eventsPerSession: 9.299270072992702,
+              eventCount: 2548,
+              keyEvents: 236,
+              sessionKeyEventRate: 0.24817518248175183,
+              totalRevenue: 357.98
+            },
+            {
+              channelGroup: "Email",
+              sessions: 128,
+              engagedSessions: 49,
+              engagementRate: 0.3828125,
+              avgEngagementTimePerSession: 51.65625,
+              eventsPerSession: 7.7890625,
+              eventCount: 997,
+              keyEvents: 126,
+              sessionKeyEventRate: 0.1484375,
+              totalRevenue: 215.23
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 96,
+              engagedSessions: 80,
+              engagementRate: 0.8333333333333334,
+              avgEngagementTimePerSession: 17.104166666666668,
+              eventsPerSession: 5.427083333333333,
+              eventCount: 521,
+              keyEvents: 25,
+              sessionKeyEventRate: 0.11458333333333333,
+              totalRevenue: 172.3
+            },
+            {
+              channelGroup: "Organic Shopping",
+              sessions: 55,
+              engagedSessions: 35,
+              engagementRate: 0.6363636363636364,
+              avgEngagementTimePerSession: 93.2909090909091,
+              eventsPerSession: 9.090909090909092,
+              eventCount: 500,
+              keyEvents: 66,
+              sessionKeyEventRate: 0.3090909090909091,
+              totalRevenue: 156.58
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 6780,
+              newUsers: 5807,
+              returningUsers: 1558,
+              avgEngagementTimePerActiveUser: 80.0267071320182,
+              engagedSessionsPerActiveUser: 0.8268588770864946,
+              eventCount: 66058,
+              keyEvents: 9235,
+              userKeyEventRate: 0.31471927162367225
+            },
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 3309,
+              newUsers: 2851,
+              returningUsers: 620,
+              avgEngagementTimePerActiveUser: 63.044209215442095,
+              engagedSessionsPerActiveUser: 0.7833125778331258,
+              eventCount: 30276,
+              keyEvents: 3247,
+              userKeyEventRate: 0.2487546699875467
+            },
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 3164,
+              newUsers: 2918,
+              returningUsers: 273,
+              avgEngagementTimePerActiveUser: 33.819967793880835,
+              engagedSessionsPerActiveUser: 0.3426731078904992,
+              eventCount: 23090,
+              keyEvents: 1398,
+              userKeyEventRate: 0.0856682769726248
+            },
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 3140,
+              newUsers: 2694,
+              returningUsers: 487,
+              avgEngagementTimePerActiveUser: 72.75805904309468,
+              engagedSessionsPerActiveUser: 0.7271801832371904,
+              eventCount: 26078,
+              keyEvents: 1527,
+              userKeyEventRate: 0.13064133016627077
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 434,
+              newUsers: 404,
+              returningUsers: 30,
+              avgEngagementTimePerActiveUser: 24.80235294117647,
+              engagedSessionsPerActiveUser: 0.548235294117647,
+              eventCount: 2512,
+              keyEvents: 50,
+              userKeyEventRate: 0.058823529411764705
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 197,
+              newUsers: 186,
+              returningUsers: 28,
+              avgEngagementTimePerActiveUser: 125.46875,
+              engagedSessionsPerActiveUser: 0.75,
+              eventCount: 2192,
+              keyEvents: 256,
+              userKeyEventRate: 0.2760416666666667
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 183,
+              newUsers: 161,
+              returningUsers: 38,
+              avgEngagementTimePerActiveUser: 72.99444444444444,
+              engagedSessionsPerActiveUser: 0.75,
+              eventCount: 2067,
+              keyEvents: 234,
+              userKeyEventRate: 0.2777777777777778
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 89,
+              newUsers: 77,
+              returningUsers: 15,
+              avgEngagementTimePerActiveUser: 36.47674418604651,
+              engagedSessionsPerActiveUser: 1.0116279069767442,
+              eventCount: 667,
+              keyEvents: 45,
+              userKeyEventRate: 0.1511627906976744
+            },
+            {
+              firstUserChannelGroup: "Email",
+              totalUsers: 68,
+              newUsers: 44,
+              returningUsers: 26,
+              avgEngagementTimePerActiveUser: 208.93939393939394,
+              engagedSessionsPerActiveUser: 1.4242424242424243,
+              eventCount: 1771,
+              keyEvents: 203,
+              userKeyEventRate: 0.3181818181818182
+            },
+            {
+              firstUserChannelGroup: "Organic Shopping",
+              totalUsers: 39,
+              newUsers: 37,
+              returningUsers: 4,
+              avgEngagementTimePerActiveUser: 126.6923076923077,
+              engagedSessionsPerActiveUser: 0.7948717948717948,
+              eventCount: 439,
+              keyEvents: 57,
+              userKeyEventRate: 0.28205128205128205
+            }
+          ],
+          landingPages: [
+            {
+              path: "/produkt/damisol-gold-frigomax-1-l",
+              sessions: 9263,
+              activeUsers: 6846,
+              newUsers: 5955,
+              avgEngagementTimePerSession: 60.14099103961999,
+              totalRevenue: 9555.04,
+              bounceRate: 0.4014897981215589,
+              addToCart: 1396,
+              checkouts: 498,
+              purchases: 322
+            },
+            {
+              path: "/",
+              sessions: 1284,
+              activeUsers: 1110,
+              newUsers: 952,
+              avgEngagementTimePerSession: 45.148753894081,
+              totalRevenue: 1318.05,
+              bounceRate: 0.7032710280373832,
+              addToCart: 155,
+              checkouts: 29,
+              purchases: 15
+            },
+            {
+              path: "/zlate-zltnutie-vinica",
+              sessions: 309,
+              activeUsers: 246,
+              newUsers: 211,
+              avgEngagementTimePerSession: 71.63754045307444,
+              totalRevenue: 0,
+              bounceRate: 0.5080906148867314,
+              addToCart: 5,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/mycofix-mikrobialny-biostimulant-mykorizne-huby",
+              sessions: 270,
+              activeUsers: 215,
+              newUsers: 190,
+              avgEngagementTimePerSession: 18.75925925925926,
+              totalRevenue: 68.88,
+              bounceRate: 0.6444444444444445,
+              addToCart: 2,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/kategoria-produktu/osiva",
+              sessions: 242,
+              activeUsers: 211,
+              newUsers: 194,
+              avgEngagementTimePerSession: 38.38429752066116,
+              totalRevenue: 79.31,
+              bounceRate: 0.49173553719008267,
+              addToCart: 7,
+              checkouts: 3,
+              purchases: 2
+            },
+            {
+              path: "/produkt/predjarny-postrek-na-10-l",
+              sessions: 241,
+              activeUsers: 229,
+              newUsers: 214,
+              avgEngagementTimePerSession: 37.045643153526974,
+              totalRevenue: 0,
+              bounceRate: 0.4107883817427386,
+              addToCart: 7,
+              checkouts: 5,
+              purchases: 0
+            },
+            {
+              path: "/odborna-poradna",
+              sessions: 205,
+              activeUsers: 157,
+              newUsers: 148,
+              avgEngagementTimePerSession: 12.414634146341463,
+              totalRevenue: 0,
+              bounceRate: 0.5609756097560976,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/predjarny-postrek-na-50-l",
+              sessions: 175,
+              activeUsers: 166,
+              newUsers: 130,
+              avgEngagementTimePerSession: 53.38857142857143,
+              totalRevenue: 262.35,
+              bounceRate: 0.3485714285714286,
+              addToCart: 36,
+              checkouts: 6,
+              purchases: 4
+            },
+            {
+              path: "/produkt/hydrohumat_1l",
+              sessions: 174,
+              activeUsers: 133,
+              newUsers: 103,
+              avgEngagementTimePerSession: 34.764367816091955,
+              totalRevenue: 25.95,
+              bounceRate: 0.45977011494252873,
+              addToCart: 5,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "(not set)",
+              sessions: 172,
+              activeUsers: 114,
+              newUsers: 92,
+              avgEngagementTimePerSession: 10.88953488372093,
+              totalRevenue: 64.87,
+              bounceRate: 0.7906976744186046,
+              addToCart: 7,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/special-zemiaky-zahrada-bezchloridove-npk-11-9-2016s15mg005-b",
+              sessions: 116,
+              activeUsers: 103,
+              newUsers: 99,
+              avgEngagementTimePerSession: 49.12068965517241,
+              totalRevenue: 0,
+              bounceRate: 0.4827586206896552,
+              addToCart: 2,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/stabilan-750-sl-20-l",
+              sessions: 100,
+              activeUsers: 82,
+              newUsers: 49,
+              avgEngagementTimePerSession: 24.56,
+              totalRevenue: 0,
+              bounceRate: 0.2,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/garlon-new-5-l",
+              sessions: 87,
+              activeUsers: 78,
+              newUsers: 64,
+              avgEngagementTimePerSession: 40.03448275862069,
+              totalRevenue: 347.58,
+              bounceRate: 0.3333333333333333,
+              addToCart: 8,
+              checkouts: 7,
+              purchases: 2
+            },
+            {
+              path: "/obchod",
+              sessions: 83,
+              activeUsers: 71,
+              newUsers: 59,
+              avgEngagementTimePerSession: 173.25301204819277,
+              totalRevenue: 116.68,
+              bounceRate: 0.3493975903614458,
+              addToCart: 36,
+              checkouts: 8,
+              purchases: 1
+            },
+            {
+              path: "/produkt/delan-700-wdg-1-kg",
+              sessions: 80,
+              activeUsers: 69,
+              newUsers: 49,
+              avgEngagementTimePerSession: 48.875,
+              totalRevenue: 1330.38,
+              bounceRate: 0.3625,
+              addToCart: 5,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/liadok-27",
+              sessions: 75,
+              activeUsers: 74,
+              newUsers: 67,
+              avgEngagementTimePerSession: 32.946666666666665,
+              totalRevenue: 0,
+              bounceRate: 0.5333333333333333,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/sivanto-prime",
+              sessions: 75,
+              activeUsers: 61,
+              newUsers: 42,
+              avgEngagementTimePerSession: 41.666666666666664,
+              totalRevenue: 0,
+              bounceRate: 0.4,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/cyperfor-100-ec",
+              sessions: 73,
+              activeUsers: 60,
+              newUsers: 47,
+              avgEngagementTimePerSession: 88.75342465753425,
+              totalRevenue: 170.51,
+              bounceRate: 0.3835616438356164,
+              addToCart: 3,
+              checkouts: 3,
+              purchases: 2
+            },
+            {
+              path: "/produkt/encyklopedia-chorob-skodcov-a-vyzivy-zahradnickych-rastlin",
+              sessions: 73,
+              activeUsers: 36,
+              newUsers: 34,
+              avgEngagementTimePerSession: 29.767123287671232,
+              totalRevenue: 42.02,
+              bounceRate: 0.6986301369863014,
+              addToCart: 6,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/zlte-moerickeho-misky",
+              sessions: 71,
+              activeUsers: 57,
+              newUsers: 54,
+              avgEngagementTimePerSession: 56.16901408450704,
+              totalRevenue: 136.08,
+              bounceRate: 0.43661971830985913,
+              addToCart: 9,
+              checkouts: 7,
+              purchases: 2
+            },
+            {
+              path: "/produkt/signum-1-kg",
+              sessions: 70,
+              activeUsers: 61,
+              newUsers: 43,
+              avgEngagementTimePerSession: 49.25714285714286,
+              totalRevenue: 275.78,
+              bounceRate: 0.35714285714285715,
+              addToCart: 5,
+              checkouts: 4,
+              purchases: 2
+            },
+            {
+              path: "/produkt/bio-fer-natur-4-3-3-500-kg",
+              sessions: 69,
+              activeUsers: 58,
+              newUsers: 49,
+              avgEngagementTimePerSession: 27.463768115942027,
+              totalRevenue: 23.12,
+              bounceRate: 0.2753623188405797,
+              addToCart: 3,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/flipper-ew-4798-1-l",
+              sessions: 68,
+              activeUsers: 51,
+              newUsers: 41,
+              avgEngagementTimePerSession: 159.7058823529412,
+              totalRevenue: 957,
+              bounceRate: 0.3088235294117647,
+              addToCart: 17,
+              checkouts: 7,
+              purchases: 3
+            },
+            {
+              path: "/produkt/mustang-forte-5-l",
+              sessions: 68,
+              activeUsers: 61,
+              newUsers: 44,
+              avgEngagementTimePerSession: 51.955882352941174,
+              totalRevenue: 0,
+              bounceRate: 0.36764705882352944,
+              addToCart: 6,
+              checkouts: 3,
+              purchases: 0
+            },
+            {
+              path: "/produkt/retacel-extra-r68-10-l",
+              sessions: 64,
+              activeUsers: 56,
+              newUsers: 39,
+              avgEngagementTimePerSession: 103.640625,
+              totalRevenue: 78.23,
+              bounceRate: 0.265625,
+              addToCart: 4,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/vinovcerit-npk",
+              sessions: 60,
+              activeUsers: 40,
+              newUsers: 31,
+              avgEngagementTimePerSession: 197.8,
+              totalRevenue: 0,
+              bounceRate: 0.35,
+              addToCart: 16,
+              checkouts: 4,
+              purchases: 0
+            },
+            {
+              path: "/produkt/huricane-1-kg",
+              sessions: 58,
+              activeUsers: 48,
+              newUsers: 26,
+              avgEngagementTimePerSession: 50.275862068965516,
+              totalRevenue: 0,
+              bounceRate: 0.1724137931034483,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/pocahontas-premiovy-stolovy-zemiak-28-40-mm",
+              sessions: 58,
+              activeUsers: 52,
+              newUsers: 48,
+              avgEngagementTimePerSession: 7.706896551724138,
+              totalRevenue: 0,
+              bounceRate: 0.5344827586206896,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/signum",
+              sessions: 58,
+              activeUsers: 51,
+              newUsers: 45,
+              avgEngagementTimePerSession: 71.65517241379311,
+              totalRevenue: 0,
+              bounceRate: 0.4482758620689655,
+              addToCart: 10,
+              checkouts: 2,
+              purchases: 0
+            },
+            {
+              path: "/produkt/trebon-osr-1-l",
+              sessions: 58,
+              activeUsers: 48,
+              newUsers: 35,
+              avgEngagementTimePerSession: 16.310344827586206,
+              totalRevenue: 0,
+              bounceRate: 0.39655172413793105,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/orgevit-4-3-25",
+              sessions: 56,
+              activeUsers: 44,
+              newUsers: 33,
+              avgEngagementTimePerSession: 140.39285714285714,
+              totalRevenue: 89.53,
+              bounceRate: 0.39285714285714285,
+              addToCart: 7,
+              checkouts: 4,
+              purchases: 2
+            },
+            {
+              path: "/produkt/biopasy",
+              sessions: 53,
+              activeUsers: 48,
+              newUsers: 45,
+              avgEngagementTimePerSession: 57.22641509433962,
+              totalRevenue: 132.77,
+              bounceRate: 0.4339622641509434,
+              addToCart: 16,
+              checkouts: 7,
+              purchases: 3
+            },
+            {
+              path: "/produkt/zlte-lepove-dosky",
+              sessions: 50,
+              activeUsers: 45,
+              newUsers: 35,
+              avgEngagementTimePerSession: 57.8,
+              totalRevenue: 19.68,
+              bounceRate: 0.44,
+              addToCart: 5,
+              checkouts: 3,
+              purchases: 1
+            },
+            {
+              path: "/produkt/impulse-gold-5-l",
+              sessions: 49,
+              activeUsers: 45,
+              newUsers: 37,
+              avgEngagementTimePerSession: 12.755102040816327,
+              totalRevenue: 0,
+              bounceRate: 0.4489795918367347,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/luna-experience-1-l",
+              sessions: 49,
+              activeUsers: 44,
+              newUsers: 22,
+              avgEngagementTimePerSession: 42.40816326530612,
+              totalRevenue: 0,
+              bounceRate: 0.20408163265306123,
+              addToCart: 2,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/serenade-aso-5-l",
+              sessions: 49,
+              activeUsers: 42,
+              newUsers: 34,
+              avgEngagementTimePerSession: 71.48979591836735,
+              totalRevenue: 158.17,
+              bounceRate: 0.3673469387755102,
+              addToCart: 8,
+              checkouts: 5,
+              purchases: 1
+            },
+            {
+              path: "/produkt/airone-sc-5-l",
+              sessions: 48,
+              activeUsers: 40,
+              newUsers: 25,
+              avgEngagementTimePerSession: 37.6875,
+              totalRevenue: 0,
+              bounceRate: 0.3541666666666667,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/kompletny-sprievodca-pestovanim-a-ochranou-repky-slnecnice-maku-a-soje",
+              sessions: 48,
+              activeUsers: 41,
+              newUsers: 33,
+              avgEngagementTimePerSession: 30.75,
+              totalRevenue: 70.9,
+              bounceRate: 0.3958333333333333,
+              addToCart: 2,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/mospilan-mizu-120-sl-1-l",
+              sessions: 48,
+              activeUsers: 44,
+              newUsers: 33,
+              avgEngagementTimePerSession: 50.770833333333336,
+              totalRevenue: 115.88,
+              bounceRate: 0.3125,
+              addToCart: 2,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/machozrut",
+              sessions: 46,
+              activeUsers: 46,
+              newUsers: 41,
+              avgEngagementTimePerSession: 59.65217391304348,
+              totalRevenue: 204.74,
+              bounceRate: 0.391304347826087,
+              addToCart: 13,
+              checkouts: 7,
+              purchases: 3
+            },
+            {
+              path: "/produkt/k-othrine-25-sc-1-l",
+              sessions: 45,
+              activeUsers: 40,
+              newUsers: 39,
+              avgEngagementTimePerSession: 43.93333333333333,
+              totalRevenue: 139.74,
+              bounceRate: 0.3111111111111111,
+              addToCart: 3,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/prakticky-balicek-ochrany-rastlin-pre-zahradkara-maly-1-ks",
+              sessions: 44,
+              activeUsers: 40,
+              newUsers: 32,
+              avgEngagementTimePerSession: 40.52272727272727,
+              totalRevenue: 0,
+              bounceRate: 0.3181818181818182,
+              addToCart: 4,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/kontakt",
+              sessions: 43,
+              activeUsers: 37,
+              newUsers: 29,
+              avgEngagementTimePerSession: 45.41860465116279,
+              totalRevenue: 0,
+              bounceRate: 0.37209302325581395,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/kosik",
+              sessions: 43,
+              activeUsers: 34,
+              newUsers: 24,
+              avgEngagementTimePerSession: 48.604651162790695,
+              totalRevenue: 23.97,
+              bounceRate: 0.4418604651162791,
+              addToCart: 8,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/predjarny-postrek-na-25-l",
+              sessions: 43,
+              activeUsers: 39,
+              newUsers: 30,
+              avgEngagementTimePerSession: 52,
+              totalRevenue: 0,
+              bounceRate: 0.3953488372093023,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/barbarian-super-1-l",
+              sessions: 42,
+              activeUsers: 39,
+              newUsers: 36,
+              avgEngagementTimePerSession: 80.14285714285714,
+              totalRevenue: 0,
+              bounceRate: 0.38095238095238093,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/lynx-5-l",
+              sessions: 42,
+              activeUsers: 37,
+              newUsers: 31,
+              avgEngagementTimePerSession: 61.095238095238095,
+              totalRevenue: 0,
+              bounceRate: 0.38095238095238093,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/superfosfat-18",
+              sessions: 42,
+              activeUsers: 37,
+              newUsers: 20,
+              avgEngagementTimePerSession: 54.26190476190476,
+              totalRevenue: 0,
+              bounceRate: 0.47619047619047616,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/cervacol-extra-15-kg",
+              sessions: 40,
+              activeUsers: 31,
+              newUsers: 28,
+              avgEngagementTimePerSession: 36.825,
+              totalRevenue: 120.93,
+              bounceRate: 0.4,
+              addToCart: 4,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/puma-extra-5-l",
+              sessions: 39,
+              activeUsers: 36,
+              newUsers: 32,
+              avgEngagementTimePerSession: 25.41025641025641,
+              totalRevenue: 0,
+              bounceRate: 0.38461538461538464,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 0
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "Damisol Gold Frigomax, 1 l",
+              itemsViewed: 4962,
+              itemsAddedToCart: 1472,
+              itemsPurchased: 388,
+              itemRevenue: 7154.720009
+            },
+            {
+              name: "Delan 700 WDG, 1 kg",
+              itemsViewed: 65,
+              itemsAddedToCart: 25,
+              itemsPurchased: 20,
+              itemRevenue: 1329.4
+            },
+            {
+              name: "Boogie Xpro, 5 l",
+              itemsViewed: 6,
+              itemsAddedToCart: 5,
+              itemsPurchased: 2,
+              itemRevenue: 914.16
+            },
+            {
+              name: "Flowbrix Profi, 5 l",
+              itemsViewed: 4,
+              itemsAddedToCart: 4,
+              itemsPurchased: 4,
+              itemRevenue: 633.760002
+            },
+            {
+              name: "Barbarian Super, 20 l",
+              itemsViewed: 55,
+              itemsAddedToCart: 107,
+              itemsPurchased: 3,
+              itemRevenue: 577.859999
+            },
+            {
+              name: "Herbavital Extra, 10 l",
+              itemsViewed: 131,
+              itemsAddedToCart: 50,
+              itemsPurchased: 5,
+              itemRevenue: 517.999999
+            },
+            {
+              name: "Signum, 1 kg",
+              itemsViewed: 52,
+              itemsAddedToCart: 7,
+              itemsPurchased: 3,
+              itemRevenue: 410.67
+            },
+            {
+              name: "Flipper EW 479,8, 1 l",
+              itemsViewed: 64,
+              itemsAddedToCart: 37,
+              itemsPurchased: 16,
+              itemRevenue: 401.639999
+            },
+            {
+              name: "Champion 50 WG, 10 kg",
+              itemsViewed: 27,
+              itemsAddedToCart: 5,
+              itemsPurchased: 2,
+              itemRevenue: 388.08
+            },
+            {
+              name: "Garlon New, 5 l",
+              itemsViewed: 48,
+              itemsAddedToCart: 9,
+              itemsPurchased: 2,
+              itemRevenue: 345.58
+            },
+            {
+              name: "LS Prothio-Tebuc",
+              itemsViewed: 5,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 345
+            },
+            {
+              name: "Previcur Energy, 1 l",
+              itemsViewed: 23,
+              itemsAddedToCart: 5,
+              itemsPurchased: 3,
+              itemRevenue: 331.44
+            },
+            {
+              name: "Mustang Forte, 5 l",
+              itemsViewed: 65,
+              itemsAddedToCart: 12,
+              itemsPurchased: 2,
+              itemRevenue: 302.320001
+            },
+            {
+              name: "Melody Combi WG, 5 kg",
+              itemsViewed: 12,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 287.64
+            },
+            {
+              name: "Horizon 250 EW, 5 l",
+              itemsViewed: 4,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 286.25
+            },
+            {
+              name: "Samppi, 5 l",
+              itemsViewed: 17,
+              itemsAddedToCart: 3,
+              itemsPurchased: 2,
+              itemRevenue: 250.920001
+            },
+            {
+              name: "Racer 25 EC, 5 l",
+              itemsViewed: 21,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 233.9
+            },
+            {
+              name: "Dacor, 1 l",
+              itemsViewed: 18,
+              itemsAddedToCart: 4,
+              itemsPurchased: 2,
+              itemRevenue: 225.199999
+            },
+            {
+              name: "Katalóg - Prípravky na ochranu rastlín 2026",
+              itemsViewed: 29,
+              itemsAddedToCart: 12,
+              itemsPurchased: 5,
+              itemRevenue: 219.19
+            },
+            {
+              name: "CAMPOFORT® Forte, 20 l",
+              itemsViewed: 37,
+              itemsAddedToCart: 3,
+              itemsPurchased: 2,
+              itemRevenue: 215.32
+            },
+            {
+              name: "Cyperfor 100 EC",
+              itemsViewed: 65,
+              itemsAddedToCart: 7,
+              itemsPurchased: 5,
+              itemRevenue: 206.97
+            },
+            {
+              name: "Eutrofit, 10 l",
+              itemsViewed: 123,
+              itemsAddedToCart: 36,
+              itemsPurchased: 1,
+              itemRevenue: 203.65
+            },
+            {
+              name: "Machožrút, 1 l",
+              itemsViewed: 30,
+              itemsAddedToCart: 37,
+              itemsPurchased: 17,
+              itemRevenue: 201.620001
+            },
+            {
+              name: "Fusilade Forte, 5 l",
+              itemsViewed: 11,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 195.62
+            },
+            {
+              name: "Nasa, 20 l",
+              itemsViewed: 11,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 192.62
+            },
+            {
+              name: "Ďatelina lúčna - Rozeta",
+              itemsViewed: 18,
+              itemsAddedToCart: 11,
+              itemsPurchased: 5,
+              itemRevenue: 192.379996
+            },
+            {
+              name: "Vivando, 1 l",
+              itemsViewed: 5,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 191.67
+            },
+            {
+              name: "BIOPÁSY",
+              itemsViewed: 88,
+              itemsAddedToCart: 63,
+              itemsPurchased: 37,
+              itemRevenue: 181.160006
+            },
+            {
+              name: "Touchdown System 4",
+              itemsViewed: 19,
+              itemsAddedToCart: 9,
+              itemsPurchased: 6,
+              itemRevenue: 167.159998
+            },
+            {
+              name: "Žlté Moerickeho misky",
+              itemsViewed: 40,
+              itemsAddedToCart: 50,
+              itemsPurchased: 18,
+              itemRevenue: 165.540002
+            },
+            {
+              name: "Ďatelina plazivá - Liflex 1 kg",
+              itemsViewed: 72,
+              itemsAddedToCart: 59,
+              itemsPurchased: 14,
+              itemRevenue: 160.7
+            },
+            {
+              name: "Devrinol 45 F, 5 l",
+              itemsViewed: 4,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 153.14
+            },
+            {
+              name: "Merpan 80 WDG",
+              itemsViewed: 6,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 147.4
+            },
+            {
+              name: "Coltrane SC , 5 l",
+              itemsViewed: 5,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 146.89
+            },
+            {
+              name: "K - Othrine 25 SC, 1 l",
+              itemsViewed: 22,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 138.74
+            },
+            {
+              name: "Flowbrix",
+              itemsViewed: 12,
+              itemsAddedToCart: 5,
+              itemsPurchased: 4,
+              itemRevenue: 134.800001
+            },
+            {
+              name: "Teldor 500 SC, 1 l",
+              itemsViewed: 13,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 132.16
+            },
+            {
+              name: "Signum",
+              itemsViewed: 109,
+              itemsAddedToCart: 53,
+              itemsPurchased: 21,
+              itemRevenue: 126.28
+            },
+            {
+              name: "Luna Experience, 1 l",
+              itemsViewed: 63,
+              itemsAddedToCart: 4,
+              itemsPurchased: 1,
+              itemRevenue: 124.23
+            },
+            {
+              name: "Cyperfor 100 EC, 5 l",
+              itemsViewed: 14,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 124.23
+            },
+            {
+              name: "Cervacol Extra, 15 kg",
+              itemsViewed: 23,
+              itemsAddedToCart: 4,
+              itemsPurchased: 1,
+              itemRevenue: 119.93
+            },
+            {
+              name: "Predjarný postrek na 50 l, 500 + 25 ml",
+              itemsViewed: 108,
+              itemsAddedToCart: 33,
+              itemsPurchased: 10,
+              itemRevenue: 116.510002
+            },
+            {
+              name: "Markate 50, 1 l",
+              itemsViewed: 19,
+              itemsAddedToCart: 16,
+              itemsPurchased: 2,
+              itemRevenue: 114.88
+            },
+            {
+              name: "Šaman, 1 l",
+              itemsViewed: 10,
+              itemsAddedToCart: 6,
+              itemsPurchased: 6,
+              itemRevenue: 113.529999
+            },
+            {
+              name: "Serenade ASO, 5 l",
+              itemsViewed: 30,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 112.24
+            },
+            {
+              name: "Infinito SC",
+              itemsViewed: 15,
+              itemsAddedToCart: 5,
+              itemsPurchased: 2,
+              itemRevenue: 106.220001
+            },
+            {
+              name: "Atonik",
+              itemsViewed: 18,
+              itemsAddedToCart: 3,
+              itemsPurchased: 3,
+              itemRevenue: 103.639999
+            },
+            {
+              name: "Hrach siaty (jarný) - GAMBIT",
+              itemsViewed: 19,
+              itemsAddedToCart: 20,
+              itemsPurchased: 3,
+              itemRevenue: 87.970001
+            },
+            {
+              name: "Síra BL, 25 kg",
+              itemsViewed: 14,
+              itemsAddedToCart: 0,
+              itemsPurchased: 1,
+              itemRevenue: 86.72
+            },
+            {
+              name: "Tráva - Kostrava lúčna Cosmolit 1 kg",
+              itemsViewed: 19,
+              itemsAddedToCart: 99,
+              itemsPurchased: 14,
+              itemRevenue: 84.699996
+            }
+          ]
+        },
       email: {
         sent: null, openRate: 21.2, clickRate: 0.72, uniqueClicks: 129,
         unsubRate: 0.18, orders: 1, revenue: 56.0, campaignsCount: 4,
@@ -653,9 +4298,1216 @@ const sanaplant = {
         ],
       },
       ga: {
-        paid: { sessions: 11074, users: 9976, engagementRate: 33.37, avgDuration: '00:10:56' },
-        organic: { sessions: 7481, users: 6165, engagementRate: 54.94, avgDuration: '00:18:57' },
-      },
+          paid: {
+            sessions: 11074,
+            users: 9976,
+            engagementRate: 33.37,
+            avgDuration: "00:10:56"
+          },
+          organic: {
+            sessions: 7481,
+            users: 6165,
+            engagementRate: 54.94,
+            avgDuration: "00:18:57"
+          },
+          snapshot: {
+            activeUsers: 15630,
+            newUsers: 13547,
+            sessions: 18595,
+            engagedSessions: 7817,
+            engagementRate: 0.4203818230707179,
+            totalRevenue: 13813.840006,
+            keyEvents: 9120
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Cross-network",
+              sessions: 5697,
+              engagedSessions: 3416,
+              engagementRate: 0.59961383184132,
+              avgEngagementTimePerSession: 49.08056872037915,
+              eventsPerSession: 6.636124275934702,
+              eventCount: 37806,
+              keyEvents: 4862,
+              sessionKeyEventRate: 0.3691416535018431,
+              totalRevenue: 5666.950004
+            },
+            {
+              channelGroup: "Direct",
+              sessions: 5582,
+              engagedSessions: 611,
+              engagementRate: 0.10945897527767826,
+              avgEngagementTimePerSession: 5.379792189179506,
+              eventsPerSession: 4.54209960587603,
+              eventCount: 25354,
+              keyEvents: 357,
+              sessionKeyEventRate: 0.02257255463991401,
+              totalRevenue: 1514.5
+            },
+            {
+              channelGroup: "Organic Search",
+              sessions: 4380,
+              engagedSessions: 2461,
+              engagementRate: 0.5618721461187215,
+              avgEngagementTimePerSession: 52.863013698630134,
+              eventsPerSession: 6.420776255707763,
+              eventCount: 28123,
+              keyEvents: 3047,
+              sessionKeyEventRate: 0.30525114155251143,
+              totalRevenue: 4564.040001
+            },
+            {
+              channelGroup: "Paid Social",
+              sessions: 1808,
+              engagedSessions: 760,
+              engagementRate: 0.42035398230088494,
+              avgEngagementTimePerSession: 32.686393805309734,
+              eventsPerSession: 4.830199115044247,
+              eventCount: 8733,
+              keyEvents: 343,
+              sessionKeyEventRate: 0.09015486725663717,
+              totalRevenue: 332.830001
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 303,
+              engagedSessions: 155,
+              engagementRate: 0.5115511551155115,
+              avgEngagementTimePerSession: 31.059405940594058,
+              eventsPerSession: 6.128712871287129,
+              eventCount: 1857,
+              keyEvents: 184,
+              sessionKeyEventRate: 0.32673267326732675,
+              totalRevenue: 660.59
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 285,
+              engagedSessions: 121,
+              engagementRate: 0.4245614035087719,
+              avgEngagementTimePerSession: 29.08421052631579,
+              eventsPerSession: 5.7368421052631575,
+              eventCount: 1635,
+              keyEvents: 55,
+              sessionKeyEventRate: 0.07368421052631578,
+              totalRevenue: 123.85
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 224,
+              engagedSessions: 121,
+              engagementRate: 0.5401785714285714,
+              avgEngagementTimePerSession: 33.54017857142857,
+              eventsPerSession: 5.866071428571429,
+              eventCount: 1314,
+              keyEvents: 82,
+              sessionKeyEventRate: 0.1875,
+              totalRevenue: 514.08
+            },
+            {
+              channelGroup: "Email",
+              sessions: 203,
+              engagedSessions: 96,
+              engagementRate: 0.4729064039408867,
+              avgEngagementTimePerSession: 111.93596059113301,
+              eventsPerSession: 7.54679802955665,
+              eventCount: 1532,
+              keyEvents: 107,
+              sessionKeyEventRate: 0.2019704433497537,
+              totalRevenue: 85.37
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 63,
+              engagedSessions: 43,
+              engagementRate: 0.6825396825396826,
+              avgEngagementTimePerSession: 7.190476190476191,
+              eventsPerSession: 5.333333333333333,
+              eventCount: 336,
+              keyEvents: 12,
+              sessionKeyEventRate: 0.1111111111111111,
+              totalRevenue: 0
+            },
+            {
+              channelGroup: "Organic Shopping",
+              sessions: 50,
+              engagedSessions: 33,
+              engagementRate: 0.66,
+              avgEngagementTimePerSession: 55.56,
+              eventsPerSession: 9.7,
+              eventCount: 485,
+              keyEvents: 71,
+              sessionKeyEventRate: 0.44,
+              totalRevenue: 351.63
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 5676,
+              newUsers: 5498,
+              returningUsers: 185,
+              avgEngagementTimePerActiveUser: 18.61427554289783,
+              engagedSessionsPerActiveUser: 0.15005339978640087,
+              eventCount: 28840,
+              keyEvents: 761,
+              userKeyEventRate: 0.02758988964044144
+            },
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 4360,
+              newUsers: 3578,
+              returningUsers: 1017,
+              avgEngagementTimePerActiveUser: 60.69121140142518,
+              engagedSessionsPerActiveUser: 0.7771971496437055,
+              eventCount: 35812,
+              keyEvents: 4476,
+              userKeyEventRate: 0.32565320665083136
+            },
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 3289,
+              newUsers: 2680,
+              returningUsers: 699,
+              avgEngagementTimePerActiveUser: 58.686590765338394,
+              engagedSessionsPerActiveUser: 0.7798861480075902,
+              eventCount: 27323,
+              keyEvents: 3088,
+              userKeyEventRate: 0.2792536369386464
+            },
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 1471,
+              newUsers: 1080,
+              returningUsers: 230,
+              avgEngagementTimePerActiveUser: 46.0328,
+              engagedSessionsPerActiveUser: 0.5904,
+              eventCount: 8341,
+              keyEvents: 296,
+              userKeyEventRate: 0.0824
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 252,
+              newUsers: 223,
+              returningUsers: 17,
+              avgEngagementTimePerActiveUser: 27.261802575107296,
+              engagedSessionsPerActiveUser: 0.4678111587982833,
+              eventCount: 1412,
+              keyEvents: 42,
+              userKeyEventRate: 0.06437768240343347
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 212,
+              newUsers: 181,
+              returningUsers: 33,
+              avgEngagementTimePerActiveUser: 34.38235294117647,
+              engagedSessionsPerActiveUser: 0.6225490196078431,
+              eventCount: 1560,
+              keyEvents: 123,
+              userKeyEventRate: 0.22549019607843138
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 161,
+              newUsers: 144,
+              returningUsers: 22,
+              avgEngagementTimePerActiveUser: 46.15822784810127,
+              engagedSessionsPerActiveUser: 0.6329113924050633,
+              eventCount: 1248,
+              keyEvents: 95,
+              userKeyEventRate: 0.189873417721519
+            },
+            {
+              firstUserChannelGroup: "Email",
+              totalUsers: 97,
+              newUsers: 71,
+              returningUsers: 31,
+              avgEngagementTimePerActiveUser: 254.89247311827958,
+              engagedSessionsPerActiveUser: 1.2150537634408602,
+              eventCount: 1721,
+              keyEvents: 147,
+              userKeyEventRate: 0.3118279569892473
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 73,
+              newUsers: 58,
+              returningUsers: 16,
+              avgEngagementTimePerActiveUser: 28.82857142857143,
+              engagedSessionsPerActiveUser: 0.8857142857142857,
+              eventCount: 571,
+              keyEvents: 48,
+              userKeyEventRate: 0.17142857142857143
+            },
+            {
+              firstUserChannelGroup: "Organic Shopping",
+              totalUsers: 39,
+              newUsers: 34,
+              returningUsers: 5,
+              avgEngagementTimePerActiveUser: 50.567567567567565,
+              engagedSessionsPerActiveUser: 0.7027027027027027,
+              eventCount: 347,
+              keyEvents: 44,
+              userKeyEventRate: 0.35135135135135137
+            }
+          ],
+          landingPages: [
+            {
+              path: "/produkt/damisol-gold-frigomax-1-l",
+              sessions: 3803,
+              activeUsers: 2847,
+              newUsers: 2317,
+              avgEngagementTimePerSession: 54.60767814882987,
+              totalRevenue: 1861.62,
+              bounceRate: 0.4004733105443071,
+              addToCart: 347,
+              checkouts: 97,
+              purchases: 62
+            },
+            {
+              path: "/",
+              sessions: 1053,
+              activeUsers: 857,
+              newUsers: 719,
+              avgEngagementTimePerSession: 31.47198480531814,
+              totalRevenue: 1176.57,
+              bounceRate: 0.7302943969610636,
+              addToCart: 25,
+              checkouts: 20,
+              purchases: 9
+            },
+            {
+              path: "/produkt/hydrohumat_1l",
+              sessions: 357,
+              activeUsers: 254,
+              newUsers: 214,
+              avgEngagementTimePerSession: 19.77871148459384,
+              totalRevenue: 259.3,
+              bounceRate: 0.5658263305322129,
+              addToCart: 2,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/znacka-produktu/broskyna-celorocna-ochrana-a-vyziva",
+              sessions: 261,
+              activeUsers: 213,
+              newUsers: 188,
+              avgEngagementTimePerSession: 12.804597701149426,
+              totalRevenue: 0,
+              bounceRate: 0.5977011494252874,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/sivanto-prime",
+              sessions: 171,
+              activeUsers: 127,
+              newUsers: 83,
+              avgEngagementTimePerSession: 126.88888888888889,
+              totalRevenue: 233.59,
+              bounceRate: 0.36257309941520466,
+              addToCart: 23,
+              checkouts: 10,
+              purchases: 4
+            },
+            {
+              path: "(not set)",
+              sessions: 133,
+              activeUsers: 94,
+              newUsers: 74,
+              avgEngagementTimePerSession: 10.090225563909774,
+              totalRevenue: 0,
+              bounceRate: 0.6917293233082706,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/huricane-1-kg",
+              sessions: 107,
+              activeUsers: 91,
+              newUsers: 66,
+              avgEngagementTimePerSession: 43.570093457943926,
+              totalRevenue: 334.97,
+              bounceRate: 0.32710280373831774,
+              addToCart: 6,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/special-zemiaky-zahrada-bezchloridove-npk-11-9-2016s15mg005-b",
+              sessions: 101,
+              activeUsers: 95,
+              newUsers: 91,
+              avgEngagementTimePerSession: 19.07920792079208,
+              totalRevenue: 0,
+              bounceRate: 0.5643564356435643,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/stabilan-750-sl-20-l",
+              sessions: 91,
+              activeUsers: 71,
+              newUsers: 44,
+              avgEngagementTimePerSession: 24.32967032967033,
+              totalRevenue: 0,
+              bounceRate: 0.34065934065934067,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/desimo-duo",
+              sessions: 85,
+              activeUsers: 82,
+              newUsers: 74,
+              avgEngagementTimePerSession: 43.576470588235296,
+              totalRevenue: 0,
+              bounceRate: 0.6588235294117647,
+              addToCart: 4,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/mospilan-20-sp",
+              sessions: 81,
+              activeUsers: 77,
+              newUsers: 72,
+              avgEngagementTimePerSession: 35.22222222222222,
+              totalRevenue: 0,
+              bounceRate: 0.5802469135802469,
+              addToCart: 5,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/neemazal-t-s",
+              sessions: 80,
+              activeUsers: 67,
+              newUsers: 66,
+              avgEngagementTimePerSession: 52.85,
+              totalRevenue: 198.5,
+              bounceRate: 0.3375,
+              addToCart: 28,
+              checkouts: 10,
+              purchases: 3
+            },
+            {
+              path: "/produkt/barbarian-super-1-l",
+              sessions: 76,
+              activeUsers: 71,
+              newUsers: 65,
+              avgEngagementTimePerSession: 59.026315789473685,
+              totalRevenue: 0,
+              bounceRate: 0.3684210526315789,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/mustang-forte-5-l",
+              sessions: 76,
+              activeUsers: 62,
+              newUsers: 46,
+              avgEngagementTimePerSession: 19.81578947368421,
+              totalRevenue: 0,
+              bounceRate: 0.40789473684210525,
+              addToCart: 2,
+              checkouts: 3,
+              purchases: 0
+            },
+            {
+              path: "/produkt/signum-1-kg",
+              sessions: 73,
+              activeUsers: 69,
+              newUsers: 43,
+              avgEngagementTimePerSession: 26.63013698630137,
+              totalRevenue: 136.89,
+              bounceRate: 0.3287671232876712,
+              addToCart: 3,
+              checkouts: 3,
+              purchases: 1
+            },
+            {
+              path: "/produkt/bio-fer-natur-4-3-3-500-kg",
+              sessions: 71,
+              activeUsers: 61,
+              newUsers: 52,
+              avgEngagementTimePerSession: 39.66197183098591,
+              totalRevenue: 237.64,
+              bounceRate: 0.30985915492957744,
+              addToCart: 3,
+              checkouts: 2,
+              purchases: 1
+            },
+            {
+              path: "/produkt/cyperfor-100-ec",
+              sessions: 69,
+              activeUsers: 53,
+              newUsers: 34,
+              avgEngagementTimePerSession: 58.84057971014493,
+              totalRevenue: 0,
+              bounceRate: 0.37681159420289856,
+              addToCart: 2,
+              checkouts: 2,
+              purchases: 0
+            },
+            {
+              path: "/produkt/signum",
+              sessions: 69,
+              activeUsers: 60,
+              newUsers: 57,
+              avgEngagementTimePerSession: 14.623188405797102,
+              totalRevenue: 0,
+              bounceRate: 0.6956521739130435,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/k-othrine-25-sc-1-l",
+              sessions: 64,
+              activeUsers: 56,
+              newUsers: 52,
+              avgEngagementTimePerSession: 52.046875,
+              totalRevenue: 854.05,
+              bounceRate: 0.4375,
+              addToCart: 17,
+              checkouts: 10,
+              purchases: 5
+            },
+            {
+              path: "/obchod",
+              sessions: 60,
+              activeUsers: 60,
+              newUsers: 53,
+              avgEngagementTimePerSession: 154.5,
+              totalRevenue: 43.72,
+              bounceRate: 0.31666666666666665,
+              addToCart: 8,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/flipper-ew-4798-1-l",
+              sessions: 59,
+              activeUsers: 53,
+              newUsers: 36,
+              avgEngagementTimePerSession: 44.559322033898304,
+              totalRevenue: 0,
+              bounceRate: 0.3898305084745763,
+              addToCart: 2,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/encyklopedia-chorob-skodcov-a-vyzivy-zahradnickych-rastlin",
+              sessions: 57,
+              activeUsers: 26,
+              newUsers: 21,
+              avgEngagementTimePerSession: 12.543859649122806,
+              totalRevenue: 0,
+              bounceRate: 0.7719298245614035,
+              addToCart: 3,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/herbavital",
+              sessions: 56,
+              activeUsers: 45,
+              newUsers: 32,
+              avgEngagementTimePerSession: 31.821428571428573,
+              totalRevenue: 0,
+              bounceRate: 0.5,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/wing-p-10-l",
+              sessions: 55,
+              activeUsers: 45,
+              newUsers: 26,
+              avgEngagementTimePerSession: 15.8,
+              totalRevenue: 0,
+              bounceRate: 0.45454545454545453,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/campofort-forte",
+              sessions: 54,
+              activeUsers: 51,
+              newUsers: 32,
+              avgEngagementTimePerSession: 57.925925925925924,
+              totalRevenue: 0,
+              bounceRate: 0.3333333333333333,
+              addToCart: 2,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/delan-700-wdg-1-kg",
+              sessions: 50,
+              activeUsers: 44,
+              newUsers: 30,
+              avgEngagementTimePerSession: 51.72,
+              totalRevenue: 0,
+              bounceRate: 0.24,
+              addToCart: 4,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/zlate-zltnutie-vinica",
+              sessions: 50,
+              activeUsers: 45,
+              newUsers: 33,
+              avgEngagementTimePerSession: 82.04,
+              totalRevenue: 0,
+              bounceRate: 0.32,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/predjarny-postrek-na-10-l",
+              sessions: 48,
+              activeUsers: 45,
+              newUsers: 44,
+              avgEngagementTimePerSession: 21.520833333333332,
+              totalRevenue: 0,
+              bounceRate: 0.5625,
+              addToCart: 2,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/zlte-lepove-dosky",
+              sessions: 48,
+              activeUsers: 44,
+              newUsers: 40,
+              avgEngagementTimePerSession: 24.375,
+              totalRevenue: 26.21,
+              bounceRate: 0.5625,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/puma-extra-5-l",
+              sessions: 45,
+              activeUsers: 41,
+              newUsers: 38,
+              avgEngagementTimePerSession: 36.8,
+              totalRevenue: 0,
+              bounceRate: 0.4444444444444444,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/trava-lipnica-lucna-balin-1-kg",
+              sessions: 45,
+              activeUsers: 44,
+              newUsers: 44,
+              avgEngagementTimePerSession: 6.888888888888889,
+              totalRevenue: 0,
+              bounceRate: 0.6,
+              addToCart: 3,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/gallup-super-360-20-l",
+              sessions: 42,
+              activeUsers: 41,
+              newUsers: 33,
+              avgEngagementTimePerSession: 27.714285714285715,
+              totalRevenue: 0,
+              bounceRate: 0.35714285714285715,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/barbarian-super-20-l",
+              sessions: 41,
+              activeUsers: 39,
+              newUsers: 31,
+              avgEngagementTimePerSession: 32.75609756097561,
+              totalRevenue: 0,
+              bounceRate: 0.4634146341463415,
+              addToCart: 4,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/biplay-starane-forte-1-ks-600-g-5-l",
+              sessions: 41,
+              activeUsers: 34,
+              newUsers: 20,
+              avgEngagementTimePerSession: 33.36585365853659,
+              totalRevenue: 0,
+              bounceRate: 0.2926829268292683,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/garlon-new-5-l",
+              sessions: 41,
+              activeUsers: 34,
+              newUsers: 29,
+              avgEngagementTimePerSession: 69.26829268292683,
+              totalRevenue: 173.79,
+              bounceRate: 0.43902439024390244,
+              addToCart: 8,
+              checkouts: 5,
+              purchases: 1
+            },
+            {
+              path: "/produkt/liadok-27",
+              sessions: 41,
+              activeUsers: 40,
+              newUsers: 34,
+              avgEngagementTimePerSession: 12.707317073170731,
+              totalRevenue: 0,
+              bounceRate: 0.6097560975609756,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/superfosfat-18",
+              sessions: 41,
+              activeUsers: 36,
+              newUsers: 31,
+              avgEngagementTimePerSession: 15.146341463414634,
+              totalRevenue: 0,
+              bounceRate: 0.5121951219512195,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/machozrut",
+              sessions: 40,
+              activeUsers: 39,
+              newUsers: 38,
+              avgEngagementTimePerSession: 83.525,
+              totalRevenue: 471.95,
+              bounceRate: 0.375,
+              addToCart: 11,
+              checkouts: 8,
+              purchases: 4
+            },
+            {
+              path: "/produkt/datelina-alexandrijska",
+              sessions: 38,
+              activeUsers: 37,
+              newUsers: 31,
+              avgEngagementTimePerSession: 51.73684210526316,
+              totalRevenue: 23.47,
+              bounceRate: 0.4473684210526316,
+              addToCart: 2,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/dicopur-m-750-10-l",
+              sessions: 38,
+              activeUsers: 32,
+              newUsers: 24,
+              avgEngagementTimePerSession: 128.73684210526315,
+              totalRevenue: 0,
+              bounceRate: 0.39473684210526316,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/kompletny-sprievodca-pestovanim-a-ochranou-repky-slnecnice-maku-a-soje",
+              sessions: 38,
+              activeUsers: 33,
+              newUsers: 26,
+              avgEngagementTimePerSession: 44.973684210526315,
+              totalRevenue: 69.9,
+              bounceRate: 0.34210526315789475,
+              addToCart: 4,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/lucerna-siata-vlasta",
+              sessions: 38,
+              activeUsers: 36,
+              newUsers: 33,
+              avgEngagementTimePerSession: 38.078947368421055,
+              totalRevenue: 0,
+              bounceRate: 0.5,
+              addToCart: 5,
+              checkouts: 1,
+              purchases: 0
+            },
+            {
+              path: "/produkt/pirimor-50-wg-1-kg",
+              sessions: 37,
+              activeUsers: 33,
+              newUsers: 29,
+              avgEngagementTimePerSession: 74.72972972972973,
+              totalRevenue: 112.77,
+              bounceRate: 0.43243243243243246,
+              addToCart: 4,
+              checkouts: 4,
+              purchases: 1
+            },
+            {
+              path: "/produkt/tebucur-250-ew-5-l",
+              sessions: 37,
+              activeUsers: 25,
+              newUsers: 12,
+              avgEngagementTimePerSession: 21.45945945945946,
+              totalRevenue: 0,
+              bounceRate: 0.2702702702702703,
+              addToCart: 3,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/touchdown-system-4",
+              sessions: 37,
+              activeUsers: 33,
+              newUsers: 29,
+              avgEngagementTimePerSession: 24.37837837837838,
+              totalRevenue: 0,
+              bounceRate: 0.3783783783783784,
+              addToCart: 1,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/slape-trio-5-l",
+              sessions: 36,
+              activeUsers: 31,
+              newUsers: 17,
+              avgEngagementTimePerSession: 25.61111111111111,
+              totalRevenue: 0,
+              bounceRate: 0.25,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/pendistar-40-sc-10-l",
+              sessions: 35,
+              activeUsers: 28,
+              newUsers: 19,
+              avgEngagementTimePerSession: 126.94285714285714,
+              totalRevenue: 0,
+              bounceRate: 0.22857142857142856,
+              addToCart: 2,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/retacel-extra-r68-10-l",
+              sessions: 35,
+              activeUsers: 33,
+              newUsers: 22,
+              avgEngagementTimePerSession: 42.25714285714286,
+              totalRevenue: 78.23,
+              bounceRate: 0.34285714285714286,
+              addToCart: 1,
+              checkouts: 1,
+              purchases: 1
+            },
+            {
+              path: "/produkt/ataman-complete-dash-5-l-05-kg-5-l",
+              sessions: 33,
+              activeUsers: 22,
+              newUsers: 11,
+              avgEngagementTimePerSession: 42.333333333333336,
+              totalRevenue: 0,
+              bounceRate: 0.15151515151515152,
+              addToCart: 0,
+              checkouts: 0,
+              purchases: 0
+            },
+            {
+              path: "/produkt/orgevit-4-3-25",
+              sessions: 33,
+              activeUsers: 28,
+              newUsers: 20,
+              avgEngagementTimePerSession: 45.84848484848485,
+              totalRevenue: 0,
+              bounceRate: 0.3333333333333333,
+              addToCart: 6,
+              checkouts: 1,
+              purchases: 0
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "Damisol Gold Frigomax, 1 l",
+              itemsViewed: 2115,
+              itemsAddedToCart: 411,
+              itemsPurchased: 86,
+              itemRevenue: 1585.840012
+            },
+            {
+              name: "K - Othrine 25 SC, 1 l",
+              itemsViewed: 48,
+              itemsAddedToCart: 19,
+              itemsPurchased: 7,
+              itemRevenue: 971.2
+            },
+            {
+              name: "Machožrút, 1 l",
+              itemsViewed: 20,
+              itemsAddedToCart: 58,
+              itemsPurchased: 39,
+              itemRevenue: 462.539996
+            },
+            {
+              name: "Harmavit Špeciál",
+              itemsViewed: 19,
+              itemsAddedToCart: 14,
+              itemsPurchased: 8,
+              itemRevenue: 393.439998
+            },
+            {
+              name: "Nasa, 20 l",
+              itemsViewed: 18,
+              itemsAddedToCart: 1,
+              itemsPurchased: 2,
+              itemRevenue: 385.24
+            },
+            {
+              name: "Samppi, 5 l",
+              itemsViewed: 5,
+              itemsAddedToCart: 4,
+              itemsPurchased: 3,
+              itemRevenue: 376.379999
+            },
+            {
+              name: "Starane Forte, 5 l",
+              itemsViewed: 21,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 353.12
+            },
+            {
+              name: "Huricane, 1 kg",
+              itemsViewed: 71,
+              itemsAddedToCart: 4,
+              itemsPurchased: 1,
+              itemRevenue: 333.97
+            },
+            {
+              name: "Hi Stick, 1 ks = 1 ha (0,4 kg)",
+              itemsViewed: 22,
+              itemsAddedToCart: 42,
+              itemsPurchased: 14,
+              itemRevenue: 298.06
+            },
+            {
+              name: "Puma Extra, 5 l",
+              itemsViewed: 13,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 282.48
+            },
+            {
+              name: "Laudis OD, 1 l",
+              itemsViewed: 37,
+              itemsAddedToCart: 18,
+              itemsPurchased: 5,
+              itemRevenue: 279.439998
+            },
+            {
+              name: "Foxtrot, 5 l",
+              itemsViewed: 5,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 274.3
+            },
+            {
+              name: "Pendiflex 400, 5 l",
+              itemsViewed: 10,
+              itemsAddedToCart: 2,
+              itemsPurchased: 2,
+              itemRevenue: 259.56
+            },
+            {
+              name: "HydroHumat, 1 l",
+              itemsViewed: 37,
+              itemsAddedToCart: 25,
+              itemsPurchased: 20,
+              itemRevenue: 258.399994
+            },
+            {
+              name: "amazoN, 5 kg",
+              itemsViewed: 9,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 253.01
+            },
+            {
+              name: "Butisan 400 SC, 5 l",
+              itemsViewed: 17,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 248.72
+            },
+            {
+              name: "Dicopur M 750, 10 l",
+              itemsViewed: 25,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 241.26
+            },
+            {
+              name: "Bio - Fer Natur (4-3-3), 500 kg",
+              itemsViewed: 36,
+              itemsAddedToCart: 7,
+              itemsPurchased: 1,
+              itemRevenue: 237.64
+            },
+            {
+              name: "Pendistar 40 SC, 10 l",
+              itemsViewed: 30,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 236.79
+            },
+            {
+              name: "Racer 25 EC, 5 l",
+              itemsViewed: 18,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 233.9
+            },
+            {
+              name: "Retacel Extra R68, 10 l",
+              itemsViewed: 36,
+              itemsAddedToCart: 2,
+              itemsPurchased: 3,
+              itemRevenue: 231.69
+            },
+            {
+              name: "Bofix",
+              itemsViewed: 25,
+              itemsAddedToCart: 6,
+              itemsPurchased: 2,
+              itemRevenue: 231.46
+            },
+            {
+              name: "Pony 306 SE, 1 l",
+              itemsViewed: 23,
+              itemsAddedToCart: 5,
+              itemsPurchased: 4,
+              itemRevenue: 213.280001
+            },
+            {
+              name: "Lebosol Aque Bór 150, 10 l",
+              itemsViewed: 27,
+              itemsAddedToCart: 4,
+              itemsPurchased: 3,
+              itemRevenue: 195.57
+            },
+            {
+              name: "Tripali, 0,25 kg",
+              itemsViewed: 15,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 183.49
+            },
+            {
+              name: "Saracen",
+              itemsViewed: 7,
+              itemsAddedToCart: 2,
+              itemsPurchased: 2,
+              itemRevenue: 175.259999
+            },
+            {
+              name: "Garlon New, 5 l",
+              itemsViewed: 23,
+              itemsAddedToCart: 11,
+              itemsPurchased: 1,
+              itemRevenue: 172.79
+            },
+            {
+              name: "Sivanto Prime",
+              itemsViewed: 111,
+              itemsAddedToCart: 24,
+              itemsPurchased: 4,
+              itemRevenue: 166.04
+            },
+            {
+              name: "Trinity, 5 l",
+              itemsViewed: 42,
+              itemsAddedToCart: 34,
+              itemsPurchased: 1,
+              itemRevenue: 163.55
+            },
+            {
+              name: "Kaishi, 5 l",
+              itemsViewed: 2,
+              itemsAddedToCart: 4,
+              itemsPurchased: 4,
+              itemRevenue: 158.040002
+            },
+            {
+              name: "Darium, 5 l",
+              itemsViewed: 7,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 153.14
+            },
+            {
+              name: "Signum, 1 kg",
+              itemsViewed: 45,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 136.89
+            },
+            {
+              name: "Mospilan Mizu 120 SL, 1 l",
+              itemsViewed: 15,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 125
+            },
+            {
+              name: "NeemAZAL T/S, 100 ml",
+              itemsViewed: 61,
+              itemsAddedToCart: 38,
+              itemsPurchased: 8,
+              itemRevenue: 124.879999
+            },
+            {
+              name: "Luna Experience, 1 l",
+              itemsViewed: 20,
+              itemsAddedToCart: 9,
+              itemsPurchased: 1,
+              itemRevenue: 124.23
+            },
+            {
+              name: "Neem Azal",
+              itemsViewed: 6,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 122
+            },
+            {
+              name: "Gibb Plus 10 SL, 1 l",
+              itemsViewed: 7,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 119.78
+            },
+            {
+              name: "Trebon OSR, 1 l",
+              itemsViewed: 29,
+              itemsAddedToCart: 3,
+              itemsPurchased: 1,
+              itemRevenue: 116.22
+            },
+            {
+              name: "Pirimor 50 WG, 1 kg",
+              itemsViewed: 18,
+              itemsAddedToCart: 4,
+              itemsPurchased: 1,
+              itemRevenue: 112.77
+            },
+            {
+              name: "Traton SX , 225 g",
+              itemsViewed: 6,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 112.51
+            },
+            {
+              name: "Serenade ASO, 5 l",
+              itemsViewed: 31,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 112.24
+            },
+            {
+              name: "Previcur Energy, 1 l",
+              itemsViewed: 7,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 110.48
+            },
+            {
+              name: "Legume FIX, 1 ks = 2 ha (0,75 kg)",
+              itemsViewed: 11,
+              itemsAddedToCart: 2,
+              itemsPurchased: 2,
+              itemRevenue: 95.28
+            },
+            {
+              name: "Hoštické NPK hnojivo s guánom",
+              itemsViewed: 26,
+              itemsAddedToCart: 8,
+              itemsPurchased: 2,
+              itemRevenue: 91.66
+            },
+            {
+              name: "Istroekol, 10 l",
+              itemsViewed: 7,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 89.43
+            },
+            {
+              name: "VermiFit B",
+              itemsViewed: 3,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 82.9
+            },
+            {
+              name: "Katalóg - Prípravky na ochranu rastlín 2026",
+              itemsViewed: 15,
+              itemsAddedToCart: 5,
+              itemsPurchased: 2,
+              itemRevenue: 82.08
+            },
+            {
+              name: "Amcel, 10 l",
+              itemsViewed: 8,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 80.02
+            },
+            {
+              name: "Thiovit Jet, 10 kg",
+              itemsViewed: 8,
+              itemsAddedToCart: 1,
+              itemsPurchased: 1,
+              itemRevenue: 75.98
+            },
+            {
+              name: "LS Prothio-Tebuc",
+              itemsViewed: 8,
+              itemsAddedToCart: 2,
+              itemsPurchased: 1,
+              itemRevenue: 72.14
+            }
+          ]
+        },
       email: {
         sent: null, openRate: 28.16, clickRate: 2.5, uniqueClicks: 172,
         unsubRate: 0.57, orders: 4, revenue: 544.23, campaignsCount: 4,

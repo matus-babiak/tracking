@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Kpi, Section, SpendRoasChart, MonthBarChart, SortableTable } from '../components/ui'
-import { monthLabel, monthKey, fmtEur, fmtNum, fmtRoas, sum, pctChange, aggregateMetaBreakdown } from '../lib/helpers'
+import { monthLabel, monthKey, fmtEur, fmtNum, fmtRoas, sum, pctChange, aggregateMetaBreakdown, aggregateMetaCampaignRollup } from '../lib/helpers'
 import { buildMetaBreakdownColumns, buildMetaMonthColumns } from '../lib/metaTableColumns.jsx'
 import { skNakupySub } from '../lib/skGrammar'
 
@@ -45,11 +45,20 @@ export default function MetaAds({ months, compare, client }) {
     atc: m.meta.addToCart,
   }))
 
-  const breakdown = aggregateMetaBreakdown(rows, client)
+  const breakdown = aggregateMetaBreakdown(rows, client, { mode: useAds ? 'ads' : 'campaigns' })
+  const campaignRollup = useMemo(
+    () => (useAds && client?.metaShowCampaigns ? aggregateMetaCampaignRollup(rows, client) : []),
+    [rows, client, useAds],
+  )
 
   const adColumns = useMemo(
     () => buildMetaBreakdownColumns(breakdown, { profile: tableProfile, useAds }),
     [breakdown, tableProfile, useAds],
+  )
+
+  const campaignColumns = useMemo(
+    () => buildMetaBreakdownColumns(campaignRollup, { profile: tableProfile, useAds: false }),
+    [campaignRollup, tableProfile],
   )
 
   const monthColumns = useMemo(
@@ -121,6 +130,17 @@ export default function MetaAds({ months, compare, client }) {
           </>
         )}
       </div>
+
+      {campaignRollup.length > 0 && (
+        <Section title="Kampane" hint="súhrn podľa názvu kampane za vybrané obdobie">
+          <SortableTable
+            columns={campaignColumns}
+            rows={campaignRollup}
+            rowKey={(c) => c.name}
+            defaultSortKey="spend"
+          />
+        </Section>
+      )}
 
       <Section title={useAds ? 'Reklamy' : 'Kampane'} hint="súčet za vybrané obdobie">
         <SortableTable

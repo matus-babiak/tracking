@@ -1,5 +1,6 @@
 import { Kpi, Section, MonthLineChart, MonthBarChart, SortableTable } from '../components/ui'
 import { monthFull, monthLabel, monthKey, fmtEur, fmtNum, fmtPct, sum, pctChange, hasEshopTab } from '../lib/helpers'
+import { isEcommerceClient } from '../lib/clientType'
 import { fmtSkCount } from '../lib/skGrammar'
 import AnalyticsGa4 from './AnalyticsGa4'
 
@@ -56,10 +57,10 @@ const eshopColumns = [
 
 export default function Analytics({ months, compare, client }) {
   if (hasGa4Export(months)) {
-    return <AnalyticsGa4 months={months} compare={compare} />
+    return <AnalyticsGa4 months={months} compare={compare} client={client} />
   }
 
-  const showEshopInGa = !hasEshopTab(client)
+  const showEshopInGa = isEcommerceClient(client) && !hasEshopTab(client)
 
   const rows = months.filter((m) => m.ga)
   const cur = gaStats(months)

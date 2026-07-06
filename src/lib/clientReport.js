@@ -1,6 +1,7 @@
 import { aggregate, fmtEur, fmtNum, fmtPct, fmtRoas, rangeLabel, sum } from './helpers'
 import { metricToneFromLabel } from './metricTone'
 import { getClientUiProfile } from './clientMetrics'
+import { isEcommerceClient } from './clientType'
 import {
   ESHOP_GOOGLE_CONV_LABELS,
   getGoogleConvKeys,
@@ -42,8 +43,8 @@ const CONV_LABELS = {
 }
 
 export function getReportProfile(client) {
-  const profile = getClientUiProfile(client)
-  return profile === 'ads-eshop' ? 'eshop' : profile
+  if (isEcommerceClient(client)) return 'eshop'
+  return getClientUiProfile(client)
 }
 
 function metric(label, value, hint) {
@@ -313,6 +314,7 @@ function buildMetaSection(months, mode, client) {
     : pickMetrics(rows, ['Investícia', 'Dosah', 'Návštevy webu', 'Interakcie', 'Kliknutia'])
 
   return {
+    id: 'meta',
     title: 'Meta Ads (Facebook & Instagram)',
     accent: 'meta',
     intro,
@@ -337,6 +339,7 @@ function buildBoostingSection(months) {
   if (!rows.length) return null
 
   return {
+    id: 'boosting',
     title: 'Boosting organických príspevkov',
     accent: 'boosting',
     intro: 'Platené propagovanie existujúceho obsahu na Meta (samostatne vykazované do 12/2025).',
@@ -426,6 +429,7 @@ function buildGoogleSection(months, mode, client) {
     : pickMetrics(rows, ['Investícia', 'Kliknutia', 'Konverzie celkom'])
 
   return {
+    id: 'google',
     title: 'Google Ads',
     accent: 'google',
     intro,
@@ -436,7 +440,7 @@ function buildGoogleSection(months, mode, client) {
   }
 }
 
-function buildGaSection(months) {
+function buildGaSection(months, client) {
   const ctx = getGaReportContext(months)
   const ga = aggregateGa(months)
   const snapshot = ctx.snapshot
@@ -493,7 +497,10 @@ function buildGaSection(months) {
     snapshot?.engagementRate != null
       ? row('Engagement rate', fmtEngagementRate(snapshot.engagementRate), ga4Hint)
       : null,
-    snapshot?.totalRevenue != null && hasMoney(snapshot.totalRevenue)
+    snapshot?.bounceRate != null
+      ? row('Bounce rate', fmtEngagementRate(snapshot.bounceRate), ga4Hint)
+      : null,
+    snapshot?.totalRevenue != null && hasMoney(snapshot.totalRevenue) && isEcommerceClient(client)
       ? row('Tržby (GA4)', fmtEur(snapshot.totalRevenue), ga4Hint)
       : null,
     snapshot?.keyEvents != null && hasCount(snapshot.keyEvents)
@@ -513,7 +520,9 @@ function buildGaSection(months) {
   }
 
   const metrics = ctx.hasGa4
-    ? pickMetrics(rows, ['Relácie', 'Aktívni používatelia', 'Tržby (GA4)', 'Kľúčové udalosti'])
+    ? pickMetrics(rows, isEcommerceClient(client)
+      ? ['Relácie', 'Aktívni používatelia', 'Tržby (GA4)', 'Bounce rate']
+      : ['Relácie', 'Aktívni používatelia', 'Engagement rate', 'Bounce rate'])
     : pickMetrics(rows, [
         'Návštevy webu celkom',
         'Platená návštevnosť',
@@ -522,13 +531,14 @@ function buildGaSection(months) {
       ])
 
   return {
+    id: 'analytics',
     title: 'Google Analytics',
     accent: 'analytics',
     intro,
     metrics,
     rows,
     topCampaigns: pickTopGaChannels(ctx),
-    topProducts: pickTopGaProducts(ctx),
+    topProducts: isEcommerceClient(client) ? pickTopGaProducts(ctx) : null,
     charts: buildGaCharts(months),
   }
 }
@@ -568,6 +578,7 @@ function buildEshopSection(months) {
   ])
 
   return {
+    id: 'eshop',
     title: 'E-shop',
     accent: 'eshop',
     intro,
@@ -577,7 +588,7 @@ function buildEshopSection(months) {
   }
 }
 
-function buildWebSection(months) {
+function buildWebSection(months, client) {
   const ctx = getGaReportContext(months)
   const ga = aggregateGa(months)
   const snapshot = ctx.snapshot
@@ -610,7 +621,7 @@ function buildWebSection(months) {
     snapshot?.activeUsers != null && hasCount(snapshot.activeUsers)
       ? row('Aktívni používatelia (GA4)', fmtNum(snapshot.activeUsers))
       : null,
-    snapshot?.totalRevenue != null && hasMoney(snapshot.totalRevenue)
+    snapshot?.totalRevenue != null && hasMoney(snapshot.totalRevenue) && isEcommerceClient(client)
       ? row('Tržby (GA4)', fmtEur(snapshot.totalRevenue))
       : null,
   ].filter(Boolean)
@@ -619,6 +630,7 @@ function buildWebSection(months) {
 
   const hasEshop = hasMoney(eshop?.revenue) || hasCount(eshop?.orders)
   return {
+    id: 'web',
     title: hasEshop ? 'Web a e-shop' : 'Web (Google Analytics)',
     intro: hasEshop ? 'Návštevnosť webu a predaje v e-shope.' : 'Návštevnosť webu podľa GA4.',
     rows,
@@ -650,6 +662,7 @@ function buildEmailSection(months) {
   ])
 
   return {
+    id: 'email',
     title: 'E-mail marketing (Mailchimp)',
     accent: 'email',
     intro: 'Newsletter a automatické e-maily: odoslanie, otvorenosť a tržby.',
@@ -792,10 +805,12 @@ function summaryPart(text, bold = false) {
   return { text, bold: !!bold }
 }
 
+/** Bežný text odseku v reporte. */
 function sp(text) {
   return summaryPart(text, false)
 }
 
+/** Kľúčová metrika alebo pojem — v reporte sa zobrazí tučne. */
 function sb(text) {
   return summaryPart(text, true)
 }
@@ -880,7 +895,9 @@ function buildReportSummary(months, profile, agg) {
           adsParts.push(
             sp(', čo zodpovedá návratnosti '),
             sb(`ROAS ${fmtRoas(agg.roas)}`),
-            sp(` (na každé 1 € investície pripadá približne ${fmtRoas(agg.roas)} € v hodnote nákupov)`),
+            sp(' (na každé 1 € investície pripadá približne '),
+            sb(`${fmtRoas(agg.roas)} €`),
+            sp(' v hodnote nákupov)'),
           )
         }
         adsParts.push(sp('. '))
@@ -1181,6 +1198,7 @@ function buildOverview(months, profile, agg) {
   if (!highlights.length && !charts.length) return null
 
   return {
+    id: 'overview',
     title: 'Celkový prehľad',
     highlights,
     charts,
@@ -1193,7 +1211,7 @@ function buildSections(months, profile, agg, client) {
       buildMetaSection(months, profile, client),
       buildBoostingSection(months),
       buildGoogleSection(months, profile, client),
-      buildGaSection(months),
+      buildGaSection(months, client),
       buildEmailSection(months),
       buildEshopSection(months),
     ].filter(Boolean)
@@ -1203,7 +1221,7 @@ function buildSections(months, profile, agg, client) {
     buildMetaSection(months, profile, client),
     buildBoostingSection(months),
     buildGoogleSection(months, profile, client),
-    buildWebSection(months),
+    buildWebSection(months, client),
     buildEmailSection(months),
   ].filter(Boolean)
 }

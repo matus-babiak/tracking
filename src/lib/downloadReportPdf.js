@@ -52,13 +52,17 @@ export async function downloadReportPdf(element, filename) {
           scrollY: -window.scrollY,
           width: element.scrollWidth,
           windowWidth: element.scrollWidth,
-          ignoreElements: (el) => el.classList?.contains('client-report-download'),
+          ignoreElements: (el) => (
+            el.classList?.contains('client-report-download')
+            || el.classList?.contains('client-report-no-pdf')
+          ),
           onclone: (doc) => {
             const clone = doc.querySelector('.client-report-doc')
             if (!clone) return
             clone.classList.add('client-report-doc--exporting')
             clone.style.width = `${A4_CONTENT_WIDTH_MM}mm`
             clone.style.maxWidth = `${A4_CONTENT_WIDTH_MM}mm`
+            clone.querySelectorAll('.client-report-no-pdf').forEach((el) => el.remove())
             clone.querySelector('.client-report-download')?.remove()
           },
         },

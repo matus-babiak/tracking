@@ -3,7 +3,7 @@ import {
   ResponsiveContainer, BarChart, Bar, LineChart, Line, ComposedChart,
   XAxis, YAxis, Tooltip, CartesianGrid, Legend, PieChart, Pie, Cell,
 } from 'recharts'
-import { fmtEur, fmtNum, PRESETS, COMPARE_MODES, monthKey, monthFull, presetRange } from '../lib/helpers'
+import { fmtEur, fmtNum, PRESETS, COMPARE_MODES, monthKey, monthFull, presetRange, canShiftPeriodRange, shiftPeriodRange } from '../lib/helpers'
 import {
   buildMockRow,
   computeTableTotals,
@@ -274,9 +274,30 @@ export function PeriodPicker({ client, from, to, onFrom, onTo, compare, onCompar
     if (key < from) onFrom(key)
   }
 
+  const canBack = canShiftPeriodRange(client, from, to, -1)
+  const canForward = canShiftPeriodRange(client, from, to, 1)
+
+  const shiftPeriod = (direction) => {
+    const next = shiftPeriodRange(client, from, to, direction)
+    if (!next) return
+    onFrom(next.from)
+    onTo(next.to)
+  }
+
   return (
     <div className="period-picker">
       <div className="period-row">
+        <button
+          type="button"
+          className="period-nav-btn"
+          onClick={() => shiftPeriod(-1)}
+          disabled={!canBack}
+          aria-label="Predchádzajúce obdobie"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
         <select className="period-select" value={from} onChange={(e) => setFrom(Number(e.target.value))} aria-label="Od mesiaca">
           {all.map((m) => (
             <option key={monthKey(m)} value={monthKey(m)}>{monthFull(m)}</option>
@@ -288,6 +309,17 @@ export function PeriodPicker({ client, from, to, onFrom, onTo, compare, onCompar
             <option key={monthKey(m)} value={monthKey(m)}>{monthFull(m)}</option>
           ))}
         </select>
+        <button
+          type="button"
+          className="period-nav-btn"
+          onClick={() => shiftPeriod(1)}
+          disabled={!canForward}
+          aria-label="Nasledujúce obdobie"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
       </div>
       <div className="period-row period-actions">
         <div className="period-chips">

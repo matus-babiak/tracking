@@ -17,15 +17,18 @@ Každý klient je **individuálny**. Nemá spoločnú šablónu metrík so Sanap
 ## UI sa prispôsobuje importu
 
 1. **Taby** — `clientTabs()` v `helpers.js`: zobraz len zdroje, ktoré klient v `months` má (`meta`, `google`, `ga`, `email`).
-2. **Profil dashboardu** — voliteľné príznaky na objekte klienta:
+2. **Typ klienta** — povinné `businessType: 'ecommerce' | 'services'` (alebo ID v `ECOMMERCE_CLIENT_IDS` v `clientType.js`):
+   - **ecommerce** (Káva Dante, Sanaplant, HAGARD:HAL) → nákupy, ROAS, tržby, tab E-shop, GA4 e-commerce
+   - **services** (Chillix, Mahax, RentCar, …) → leady, návštevy, engagement; bez e-commerce metrík
+3. **Profil dashboardu** — v rámci typu, voliteľné príznaky:
    - `metaProfile: 'leadgen'` → leadgen variant Meta/Prehľadu
    - `leadgenProfile: 'dual'` → Meta + Google konverzie (RentCarSlovakia)
    - `adsProfile: 'eshop'` → zjednodušené PPC stĺpce (Hagardhal)
-   - default → e-shop (nákupy, ROAS, tržby)
-3. **Stĺpce a KPI** — zobrazuj len metriky, ktoré v dátach klienta existujú. Pri novom importe pridaj polia do mesačného objektu; nepredpokladaj, že každý klient má `purchases`, `landingPageViews`, `eshop.revenue` atď.
-4. **Null** = metrika v danom mesiaci nebola v exporte — nezobrazuj ju ako 0.
-5. **Report pre klienta** — rovnaký princíp: `buildClientReport()` skladá report z dát klienta za obdobie, nie zo Sanaplant šablóny. Pozri `client-report.mdc`.
-6. **Tabuľky PPC** — povinné stĺpce podľa profilu (e-shop / leadgen), pozri `table-metrics.mdc` a `src/lib/metaTableColumns.js`.
+   - default → e-shop metriky len pri `businessType: 'ecommerce'`
+4. **Stĺpce a KPI** — zobrazuj len metriky, ktoré v dátach klienta existujú. Pri novom importe pridaj polia do mesačného objektu; nepredpokladaj, že každý klient má `purchases`, `landingPageViews`, `eshop.revenue` atď.
+5. **Null** = metrika v danom mesiaci nebola v exporte — nezobrazuj ju ako 0.
+6. **Report pre klienta** — rovnaký princíp: `buildClientReport()` skladá report z dát klienta za obdobie, nie zo Sanaplant šablóny. Pozri `client-report.mdc`.
+7. **Tabuľky PPC** — povinné stĺpce podľa profilu (e-shop / leadgen), pozri `table-metrics.mdc` a `src/lib/metaTableColumns.js`.
 
 ## Nový klient / nový import
 

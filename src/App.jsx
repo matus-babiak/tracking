@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import clients from './data'
 import { clientBySlug, isImportOverviewSlug, isGuidesSlug, isSuperAdminRoute, IMPORT_OVERVIEW_SLUG, GUIDES_SLUG } from './lib/routes'
 import { monthKey, resolvePeriod, resolveCompare, rangeLabel, COMPARE_MODES, clientTabs } from './lib/helpers'
+import { isEcommerceClient, isServicesClient } from './lib/clientType'
 import { resolveClientUiState, saveClientUiState, loadSidebarCollapsed, saveSidebarCollapsed } from './lib/uiState'
 import { isAppUnlocked, isClientUnlocked, lockApp, lockClient, getAuthRole, getAccessUserName, clientsForRole, isGuestAllowedClient, isSuperAdmin, GUEST_DEFAULT_CLIENT_ID } from './lib/auth'
 import { PeriodPicker, ClientDropdown } from './components/ui'
@@ -55,6 +56,7 @@ const TAB_SUBTITLES_LEADGEN = {
   overview: 'Meta Ads — investícia, dosah a leady',
   meta: 'Dosah, kliknutia, leady a návštevy cieľovej stránky',
   google: 'Search a Performance Max — kliknutia a konverzie',
+  ga: 'Návštevnosť webu, stránky a udalosti (GA4)',
 }
 
 const TAB_SUBTITLES_DUAL = {
@@ -72,7 +74,7 @@ const TAB_SUBTITLES_ESHOP = {
 }
 
 function resolvePage(client, tab) {
-  const leadgen = client.metaProfile === 'leadgen'
+  const leadgen = isServicesClient(client)
   if (tab === 'overview') return leadgen ? OverviewLeadgen : Overview
   if (tab === 'meta') return leadgen ? MetaAdsLeadgen : MetaAds
   if (tab === 'google') return leadgen ? GoogleAdsLeadgen : GoogleAds
@@ -273,13 +275,11 @@ export default function App() {
     ? { id: 'client-report', label: 'Prehľad pre klienta' }
     : visibleTabs.find((t) => t.id === tab) || visibleTabs[0]
   const tabSubtitle = client
-    ? ((client.leadgenProfile === 'dual'
-        ? TAB_SUBTITLES_DUAL
-        : client.adsProfile === 'eshop'
-          ? TAB_SUBTITLES_ESHOP
-          : client.metaProfile === 'leadgen'
-            ? TAB_SUBTITLES_LEADGEN
-            : TAB_SUBTITLES)[tab] || TAB_SUBTITLES[tab])
+    ? (isEcommerceClient(client)
+        ? TAB_SUBTITLES_ESHOP
+        : client.leadgenProfile === 'dual'
+          ? TAB_SUBTITLES_DUAL
+          : TAB_SUBTITLES_LEADGEN)[tab] || TAB_SUBTITLES[tab]
     : ''
 
   const selectTab = (id) => {

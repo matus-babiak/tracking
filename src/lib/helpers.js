@@ -1,3 +1,5 @@
+import { isEcommerceClient } from './clientType'
+
 export const MONTH_NAMES = {
   1: 'Január', 2: 'Február', 3: 'Marec', 4: 'Apríl', 5: 'Máj', 6: 'Jún',
   7: 'Júl', 8: 'August', 9: 'September', 10: 'Október', 11: 'November', 12: 'December',
@@ -81,9 +83,34 @@ export function presetRange(client, presetId) {
   return { from: monthKey(months[0]), to: monthKey(months[months.length - 1]) }
 }
 
+/** Posun zvoleného rozsahu o rovnaký počet mesiacov dopredu (+1) alebo dozadu (−1). */
+export function shiftPeriodRange(client, from, to, direction) {
+  const all = client?.months ?? []
+  if (!all.length || !from || !to || !direction) return null
+
+  const selected = resolvePeriod(client, 'custom', from, to)
+  if (!selected.length) return null
+
+  const span = selected.length
+  const startIdx = all.findIndex((m) => monthKey(m) === from)
+  if (startIdx < 0) return null
+
+  const newStartIdx = startIdx + direction * span
+  if (newStartIdx < 0 || newStartIdx + span > all.length) return null
+
+  return {
+    from: monthKey(all[newStartIdx]),
+    to: monthKey(all[newStartIdx + span - 1]),
+  }
+}
+
+export function canShiftPeriodRange(client, from, to, direction) {
+  return shiftPeriodRange(client, from, to, direction) != null
+}
+
 export function hasEshopTab(client) {
-  return client.eshopTab === 'woocommerce'
-    || client.months.some((x) => x.eshop?.woocommerce)
+  if (!isEcommerceClient(client)) return false
+  return client.months.some((x) => x.eshop)
 }
 
 // Ktoré taby má klient k dispozícii podľa dostupných dát
@@ -165,11 +192,23 @@ export function pctChange(cur, prev) {
 // ---------- agregácie ----------
 
 /** Riadky Meta tabuľky — reklamy alebo kampane podľa nastavenia klienta. */
-export function metaBreakdownRows(month, client) {
+export function campaignRowToAd(item) {
+  if (!item) return item
+  if (item.campaign) return item
+  if (/^Hagard_/i.test(item.name)) {
+    return { ...item, campaign: item.name, name: '—' }
+  }
+  return { ...item, campaign: '—', name: item.name }
+}
+
+export function metaBreakdownRows(month, client, mode = 'auto') {
   const meta = month?.meta
   if (!meta) return []
-  if (client?.metaBreakdown === 'ads') {
-    return meta.ads?.length ? meta.ads : (meta.campaigns ?? [])
+  const wantAds = mode === 'ads' || (mode === 'auto' && client?.metaBreakdown === 'ads')
+  if (wantAds) {
+    if (meta.ads?.length) return meta.ads
+    if (meta.campaigns?.length) return meta.campaigns.map(campaignRowToAd)
+    return []
   }
   return meta.campaigns ?? []
 }
@@ -193,14 +232,14 @@ export function computeMetaDerived(row) {
 }
 
 /** Súčet reklám/kampaní Meta za obdobie (podľa mena, príp. kampaň + reklama). */
-export function aggregateMetaBreakdown(months, client) {
+export function aggregateMetaBreakdown(months, client, { mode = 'auto' } = {}) {
   const sumKeys = [
     'spend', 'purchases', 'value', 'clicks', 'addToCart', 'impressions', 'reach',
     'landingPageViews', 'engagements', 'saves', 'shares', 'comments',
   ]
   const map = new Map()
   for (const m of months.filter((x) => x.meta)) {
-    for (const item of metaBreakdownRows(m, client)) {
+    for (const item of metaBreakdownRows(m, client, mode)) {
       const key = item.campaign ? `${item.campaign}::${item.name}` : item.name
       const prev = map.get(key) ?? {
         name: item.name,
@@ -214,6 +253,28 @@ export function aggregateMetaBreakdown(months, client) {
       prev.months += 1
       map.set(key, prev)
     }
+  }
+  return [...map.values()].map(computeMetaDerived)
+}
+
+/** Súhrn Meta reklám podľa kampane (pre tabuľku Kampane). */
+export function aggregateMetaCampaignRollup(months, client) {
+  const ads = aggregateMetaBreakdown(months, client, { mode: 'ads' })
+  if (!ads.length) return []
+  const sumKeys = [
+    'spend', 'purchases', 'value', 'clicks', 'addToCart', 'impressions', 'reach',
+    'landingPageViews', 'engagements', 'saves', 'shares', 'comments', 'months',
+  ]
+  const map = new Map()
+  for (const ad of ads) {
+    const campaign = ad.campaign && ad.campaign !== '—' ? ad.campaign : null
+    if (!campaign) continue
+    const prev = map.get(campaign) ?? { name: campaign, months: 0 }
+    for (const k of sumKeys) {
+      if (ad[k] == null) continue
+      prev[k] = (prev[k] ?? 0) + ad[k]
+    }
+    map.set(campaign, prev)
   }
   return [...map.values()].map(computeMetaDerived)
 }

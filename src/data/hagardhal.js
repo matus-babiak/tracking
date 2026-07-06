@@ -4,7 +4,11 @@
 const hagardhal = {
   id: 'hagard-hal',
   name: 'HAGARD:HAL',
+  businessType: 'ecommerce',
   adsProfile: 'eshop',
+  metaBreakdown: 'ads',
+  metaAdsProfile: 'eshop',
+  metaShowCampaigns: true,
   currency: '€',
   notes: [
     "Dáta z mesačných reportov HAGARD:HAL (1/2025 – 6/2026). E-mail marketing v reportoch nie je.",
@@ -1267,19 +1271,1194 @@ const hagardhal = {
         ],
       },
       ga: {
-        organic: {
-          sessions: 91851,
-          users: 33854,
-          engagementRate: 68.25,
-          avgDuration: "00:02:11",
+          organic: {
+            sessions: 91851,
+            users: 33854,
+            engagementRate: 68.25,
+            avgDuration: "00:02:11"
+          },
+          paid: {
+            sessions: 26114,
+            users: 10486,
+            engagementRate: 69.43,
+            avgDuration: "00:02:49"
+          },
+          snapshot: {
+            activeUsers: 41465,
+            newUsers: 28767,
+            sessions: 116512,
+            engagedSessions: 80165,
+            engagementRate: 0.6880407168360341,
+            totalRevenue: 1497445.7400169997,
+            keyEvents: 26810
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Organic Search",
+              sessions: 69632,
+              engagedSessions: 48374,
+              engagementRate: 0.6947093290441176,
+              avgEngagementTimePerSession: 130.85205078125,
+              eventsPerSession: 12.027257582720589,
+              eventCount: 837482,
+              keyEvents: 13633,
+              sessionKeyEventRate: 0.04861270680147059,
+              totalRevenue: 689633.380017
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 16884,
+              engagedSessions: 12417,
+              engagementRate: 0.7354299928926794,
+              avgEngagementTimePerSession: 204.8958777540867,
+              eventsPerSession: 15.372068230277186,
+              eventCount: 259542,
+              keyEvents: 5699,
+              sessionKeyEventRate: 0.07533759772565743,
+              totalRevenue: 308412.709994
+            },
+            {
+              channelGroup: "Direct",
+              sessions: 16640,
+              engagedSessions: 11236,
+              engagementRate: 0.6752403846153846,
+              avgEngagementTimePerSession: 151.70841346153847,
+              eventsPerSession: 12.675120192307693,
+              eventCount: 210914,
+              keyEvents: 4550,
+              sessionKeyEventRate: 0.06796875,
+              totalRevenue: 387955.419999
+            },
+            {
+              channelGroup: "Cross-network",
+              sessions: 6926,
+              engagedSessions: 4731,
+              engagementRate: 0.683078255847531,
+              avgEngagementTimePerSession: 123.6790355183367,
+              eventsPerSession: 11.88521513138897,
+              eventCount: 82317,
+              keyEvents: 1393,
+              sessionKeyEventRate: 0.050534218885359514,
+              totalRevenue: 35497.840006
+            },
+            {
+              channelGroup: "Paid Social",
+              sessions: 2065,
+              engagedSessions: 910,
+              engagementRate: 0.4406779661016949,
+              avgEngagementTimePerSession: 35.53462469733656,
+              eventsPerSession: 6.1307506053268765,
+              eventCount: 12660,
+              keyEvents: 126,
+              sessionKeyEventRate: 0.013559322033898305,
+              totalRevenue: 1197.46
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 2025,
+              engagedSessions: 1433,
+              engagementRate: 0.7076543209876544,
+              avgEngagementTimePerSession: 144.9441975308642,
+              eventsPerSession: 14.519012345679013,
+              eventCount: 29401,
+              keyEvents: 942,
+              sessionKeyEventRate: 0.10518518518518519,
+              totalRevenue: 52605.12
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 960,
+              engagedSessions: 427,
+              engagementRate: 0.44479166666666664,
+              avgEngagementTimePerSession: 33.121875,
+              eventsPerSession: 6.316666666666666,
+              eventCount: 6064,
+              keyEvents: 35,
+              sessionKeyEventRate: 0.010416666666666666,
+              totalRevenue: 121.94
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 803,
+              engagedSessions: 317,
+              engagementRate: 0.39476961394769616,
+              avgEngagementTimePerSession: 131.20174346201745,
+              eventsPerSession: 12.511830635118306,
+              eventCount: 10047,
+              keyEvents: 187,
+              sessionKeyEventRate: 0.0684931506849315,
+              totalRevenue: 6082.65
+            },
+            {
+              channelGroup: "Display",
+              sessions: 572,
+              engagedSessions: 317,
+              engagementRate: 0.5541958041958042,
+              avgEngagementTimePerSession: 109.1381118881119,
+              eventsPerSession: 10.748251748251748,
+              eventCount: 6148,
+              keyEvents: 245,
+              sessionKeyEventRate: 0.08041958041958042,
+              totalRevenue: 15939.220001
+            },
+            {
+              channelGroup: "Organic Video",
+              sessions: 5,
+              engagedSessions: 3,
+              engagementRate: 0.6,
+              avgEngagementTimePerSession: 33.2,
+              eventsPerSession: 7.4,
+              eventCount: 37,
+              keyEvents: 0,
+              sessionKeyEventRate: 0,
+              totalRevenue: 0
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 22554,
+              newUsers: 15668,
+              returningUsers: 9033,
+              avgEngagementTimePerActiveUser: 251.7171204639152,
+              engagedSessionsPerActiveUser: 1.4865672994155756,
+              eventCount: 529405,
+              keyEvents: 6566,
+              userKeyEventRate: 0.04145335930775155
+            },
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 8780,
+              newUsers: 6289,
+              returningUsers: 5866,
+              avgEngagementTimePerActiveUser: 756.5544963822211,
+              engagedSessionsPerActiveUser: 3.398644768577007,
+              eventCount: 580203,
+              keyEvents: 13825,
+              userKeyEventRate: 0.11094521649247732
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 4629,
+              newUsers: 2646,
+              returningUsers: 2890,
+              avgEngagementTimePerActiveUser: 779.6123843102688,
+              engagedSessionsPerActiveUser: 2.702952842661966,
+              eventCount: 252297,
+              keyEvents: 5063,
+              userKeyEventRate: 0.09607756721022477
+            },
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 2865,
+              newUsers: 2213,
+              returningUsers: 1241,
+              avgEngagementTimePerActiveUser: 236.16856735566643,
+              engagedSessionsPerActiveUser: 1.5367070563079117,
+              eventCount: 67395,
+              keyEvents: 1045,
+              userKeyEventRate: 0.04526015680684248
+            },
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 1603,
+              newUsers: 1224,
+              returningUsers: 131,
+              avgEngagementTimePerActiveUser: 47.717205009887934,
+              engagedSessionsPerActiveUser: 0.5919578114700066,
+              eventCount: 12613,
+              keyEvents: 119,
+              userKeyEventRate: 0.01054713249835201
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 690,
+              newUsers: 527,
+              returningUsers: 81,
+              avgEngagementTimePerActiveUser: 40.473851030110936,
+              engagedSessionsPerActiveUser: 0.6085578446909667,
+              eventCount: 5143,
+              keyEvents: 24,
+              userKeyEventRate: 0.00792393026941363
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 303,
+              newUsers: 173,
+              returningUsers: 122,
+              avgEngagementTimePerActiveUser: 255.19723183391002,
+              engagedSessionsPerActiveUser: 1.231833910034602,
+              eventCount: 7203,
+              keyEvents: 167,
+              userKeyEventRate: 0.06920415224913495
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 41,
+              newUsers: 27,
+              returningUsers: 12,
+              avgEngagementTimePerActiveUser: 74.28205128205128,
+              engagedSessionsPerActiveUser: 0.8974358974358975,
+              eventCount: 353,
+              keyEvents: 1,
+              userKeyEventRate: 0.02564102564102564
+            }
+          ],
+          landingPages: [
+            {
+              path: "/",
+              sessions: 41012,
+              activeUsers: 15927,
+              newUsers: 9878,
+              avgEngagementTimePerSession: 183.39907831854092,
+              totalRevenue: 785395.520013,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "(not set)",
+              sessions: 12401,
+              activeUsers: 6168,
+              newUsers: 6,
+              avgEngagementTimePerSession: 32.82251431336183,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/search",
+              sessions: 6981,
+              activeUsers: 2733,
+              newUsers: 371,
+              avgEngagementTimePerSession: 168.51582867783986,
+              totalRevenue: 99729.039999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/user-account",
+              sessions: 1976,
+              activeUsers: 756,
+              newUsers: 75,
+              avgEngagementTimePerSession: 171.12196356275302,
+              totalRevenue: 95883.659994,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty",
+              sessions: 1460,
+              activeUsers: 906,
+              newUsers: 302,
+              avgEngagementTimePerSession: 68.78356164383561,
+              totalRevenue: 1372.15,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/objednavky",
+              sessions: 1132,
+              activeUsers: 563,
+              newUsers: 80,
+              avgEngagementTimePerSession: 146.92137809187278,
+              totalRevenue: 38287.079999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik",
+              sessions: 814,
+              activeUsers: 574,
+              newUsers: 61,
+              avgEngagementTimePerSession: 173.87100737100738,
+              totalRevenue: 93996.780001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-a-rozvadzace",
+              sessions: 666,
+              activeUsers: 589,
+              newUsers: 218,
+              avgEngagementTimePerSession: 161.66066066066065,
+              totalRevenue: 240.15,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/CreateOrder",
+              sessions: 524,
+              activeUsers: 342,
+              newUsers: 55,
+              avgEngagementTimePerSession: 143.75954198473283,
+              totalRevenue: 32455.729996,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svietidla",
+              sessions: 515,
+              activeUsers: 434,
+              newUsers: 134,
+              avgEngagementTimePerSession: 173.53009708737864,
+              totalRevenue: 1075.33,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/faktury",
+              sessions: 508,
+              activeUsers: 242,
+              newUsers: 38,
+              avgEngagementTimePerSession: 130.48818897637796,
+              totalRevenue: 26069.22,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/powertag-3pn-63a-energy-sensor",
+              sessions: 508,
+              activeUsers: 449,
+              newUsers: 333,
+              avgEngagementTimePerSession: 14.98228346456693,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kable-a-vodice2",
+              sessions: 501,
+              activeUsers: 443,
+              newUsers: 105,
+              avgEngagementTimePerSession: 157.44111776447104,
+              totalRevenue: 1080.15,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/modul-bateriovy-huawei-luna2000-5-e1-5kwh",
+              sessions: 374,
+              activeUsers: 337,
+              newUsers: 228,
+              avgEngagementTimePerSession: 11.855614973262032,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/krabice-instalacne",
+              sessions: 365,
+              activeUsers: 327,
+              newUsers: 92,
+              avgEngagementTimePerSession: 138.5041095890411,
+              totalRevenue: 53.88,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-zasuvkove",
+              sessions: 340,
+              activeUsers: 296,
+              newUsers: 114,
+              avgEngagementTimePerSession: 121.04411764705883,
+              totalRevenue: 1313.1,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/domova-instalacia",
+              sessions: 338,
+              activeUsers: 289,
+              newUsers: 34,
+              avgEngagementTimePerSession: 230.37278106508876,
+              totalRevenue: 959.06,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/vs-kabel-vykur-ppc-21-termost",
+              sessions: 322,
+              activeUsers: 285,
+              newUsers: 163,
+              avgEngagementTimePerSession: 64.14285714285714,
+              totalRevenue: 86.45,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/nitra",
+              sessions: 272,
+              activeUsers: 203,
+              newUsers: 77,
+              avgEngagementTimePerSession: 106.65441176470588,
+              totalRevenue: 781.38,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/modul-bateriovy-huawei-luna2000-7-e1-7kwh",
+              sessions: 266,
+              activeUsers: 244,
+              newUsers: 146,
+              avgEngagementTimePerSession: 13.969924812030076,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/z-aby-a-listy-plastove",
+              sessions: 254,
+              activeUsers: 222,
+              newUsers: 98,
+              avgEngagementTimePerSession: 100.55118110236221,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/categories/fotovoltika",
+              sessions: 248,
+              activeUsers: 213,
+              newUsers: 107,
+              avgEngagementTimePerSession: 61.13709677419355,
+              totalRevenue: 59.51,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/manufacturers/huawei-technologies-slovak-s-r-o",
+              sessions: 244,
+              activeUsers: 199,
+              newUsers: 73,
+              avgEngagementTimePerSession: 72.8811475409836,
+              totalRevenue: 135.519999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/spinace-vackove",
+              sessions: 240,
+              activeUsers: 167,
+              newUsers: 97,
+              avgEngagementTimePerSession: 84.01666666666667,
+              totalRevenue: 314.19,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kablove-ukoncenia-a-spojky",
+              sessions: 226,
+              activeUsers: 212,
+              newUsers: 57,
+              avgEngagementTimePerSession: 136.62389380530973,
+              totalRevenue: 153.08,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/bratislava",
+              sessions: 219,
+              activeUsers: 169,
+              newUsers: 73,
+              avgEngagementTimePerSession: 66.83561643835617,
+              totalRevenue: 172.1,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvadzace-elektromerove2",
+              sessions: 218,
+              activeUsers: 195,
+              newUsers: 94,
+              avgEngagementTimePerSession: 60.76605504587156,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/kluc-rozvadzacovy-lk3-01-033000-viacucelovy",
+              sessions: 217,
+              activeUsers: 171,
+              newUsers: 139,
+              avgEngagementTimePerSession: 2.4377880184331797,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/elektroinstalacny-material-1",
+              sessions: 216,
+              activeUsers: 197,
+              newUsers: 98,
+              avgEngagementTimePerSession: 192.8935185185185,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rohoze-vykurovacie",
+              sessions: 216,
+              activeUsers: 166,
+              newUsers: 72,
+              avgEngagementTimePerSession: 66.42129629629629,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-dizajnove-na-povrch1",
+              sessions: 214,
+              activeUsers: 166,
+              newUsers: 67,
+              avgEngagementTimePerSession: 73.81308411214954,
+              totalRevenue: 6.34,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-modularne",
+              sessions: 208,
+              activeUsers: 132,
+              newUsers: 28,
+              avgEngagementTimePerSession: 169.71153846153845,
+              totalRevenue: 240.12,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-dizajnove-zapustene1",
+              sessions: 208,
+              activeUsers: 186,
+              newUsers: 77,
+              avgEngagementTimePerSession: 78.1826923076923,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/kabel-pevny-cyky-j-3x1-5-pvc-cierny",
+              sessions: 207,
+              activeUsers: 147,
+              newUsers: 29,
+              avgEngagementTimePerSession: 70.2512077294686,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorkovnice-a-pripojnice",
+              sessions: 204,
+              activeUsers: 175,
+              newUsers: 49,
+              avgEngagementTimePerSession: 150.22058823529412,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/stoziare-a-prislusenstvo",
+              sessions: 196,
+              activeUsers: 166,
+              newUsers: 67,
+              avgEngagementTimePerSession: 111.3061224489796,
+              totalRevenue: 51.1,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/dodacie-listy",
+              sessions: 185,
+              activeUsers: 66,
+              newUsers: 10,
+              avgEngagementTimePerSession: 115.63243243243244,
+              totalRevenue: 1748.86,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/adaptery-a-redukcie",
+              sessions: 185,
+              activeUsers: 155,
+              newUsers: 78,
+              avgEngagementTimePerSession: 60.79459459459459,
+              totalRevenue: 24.34,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svetelne-zdroje",
+              sessions: 181,
+              activeUsers: 166,
+              newUsers: 34,
+              avgEngagementTimePerSession: 132.70165745856355,
+              totalRevenue: 192.75,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/profily-pre-led-pasy",
+              sessions: 179,
+              activeUsers: 152,
+              newUsers: 69,
+              avgEngagementTimePerSession: 112.74301675977654,
+              totalRevenue: 38.59,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky2",
+              sessions: 179,
+              activeUsers: 74,
+              newUsers: 52,
+              avgEngagementTimePerSession: 121,
+              totalRevenue: 246.16,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/zasuvka-2-nasobna-solight-vstavana-podlahova-5b321",
+              sessions: 177,
+              activeUsers: 160,
+              newUsers: 117,
+              avgEngagementTimePerSession: 4.101694915254237,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorky-pre-bleskozvod",
+              sessions: 176,
+              activeUsers: 133,
+              newUsers: 38,
+              avgEngagementTimePerSession: 89.6875,
+              totalRevenue: 30.18,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/istice-3-fazove",
+              sessions: 175,
+              activeUsers: 100,
+              newUsers: 59,
+              avgEngagementTimePerSession: 153.3257142857143,
+              totalRevenue: 75.57,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/zilina",
+              sessions: 175,
+              activeUsers: 137,
+              newUsers: 56,
+              avgEngagementTimePerSession: 67.16,
+              totalRevenue: 181.81,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-kombinovane-s-nadprudovou-ochranou",
+              sessions: 171,
+              activeUsers: 148,
+              newUsers: 42,
+              avgEngagementTimePerSession: 89.30994152046783,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-prudove1",
+              sessions: 171,
+              activeUsers: 129,
+              newUsers: 49,
+              avgEngagementTimePerSession: 138.2514619883041,
+              totalRevenue: 118.22,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/registration",
+              sessions: 171,
+              activeUsers: 32,
+              newUsers: 12,
+              avgEngagementTimePerSession: 129.24561403508773,
+              totalRevenue: 17.87,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/modularne-a-istiace-pristroje",
+              sessions: 170,
+              activeUsers: 149,
+              newUsers: 10,
+              avgEngagementTimePerSession: 218.97058823529412,
+              totalRevenue: 840.430001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/bleskozvod3",
+              sessions: 167,
+              activeUsers: 98,
+              newUsers: 22,
+              avgEngagementTimePerSession: 251.33532934131736,
+              totalRevenue: 73.25,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "Menič frekvenčný VFX48-244-20DIB 132kW/244A, norm. záťaž, IP20, brzdná jednotka, IT-sieť",
+              itemsViewed: 0,
+              itemsAddedToCart: 8,
+              itemsPurchased: 8,
+              itemRevenue: 77846.562399
+            },
+            {
+              name: "Menič frekvenčný VFX48-142-20DIB 75kW/142A, norm. záťaž, IP20, brzdná jednotka, IT-sie",
+              itemsViewed: 0,
+              itemsAddedToCart: 8,
+              itemsPurchased: 8,
+              itemRevenue: 50934.487997
+            },
+            {
+              name: "Menič frekvenčný VFX48-036-20DIB - FM Emotron, 18,5kW / 36A IP20, brzdná jednotka, IT-sieť",
+              itemsViewed: 0,
+              itemsAddedToCart: 13,
+              itemsPurchased: 13,
+              itemRevenue: 32816.354997
+            },
+            {
+              name: "Vodič ohybný NSGAFoU 1x240 1,8/3kV guma čierny",
+              itemsViewed: 28,
+              itemsAddedToCart: 1576,
+              itemsPurchased: 722,
+              itemRevenue: 23245.396041
+            },
+            {
+              name: "Menič frekvenčný VFX48-171-20DIB 90kW/171A, norm. záťaž, IP20, brzdná jednotka, IT",
+              itemsViewed: 0,
+              itemsAddedToCart: 3,
+              itemsPurchased: 3,
+              itemRevenue: 22420.8603
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 15800,
+              itemsAddedToCart: 63400,
+              itemsPurchased: 21400,
+              itemRevenue: 19402.897568
+            },
+            {
+              name: "Interfejs žeriavový meniča Emotron DSV/VFX typ CI230VAC-DSV-v2, 590059DSV-v2",
+              itemsViewed: 0,
+              itemsAddedToCart: 35,
+              itemsPurchased: 35,
+              itemRevenue: 18093.074991
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x2,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 300,
+              itemsAddedToCart: 63647,
+              itemsPurchased: 13908,
+              itemRevenue: 17950.625213
+            },
+            {
+              name: "Kábel pevný 1-AYKY-J 3x240+120 pvc čierny",
+              itemsViewed: 61,
+              itemsAddedToCart: 4426,
+              itemsPurchased: 1263,
+              itemRevenue: 16314.965632
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny",
+              itemsViewed: 1232,
+              itemsAddedToCart: 154984,
+              itemsPurchased: 16792,
+              itemRevenue: 15438.465316
+            },
+            {
+              name: "Kábel pevný 1-CYKY-J 3x150+70 pvc čierny",
+              itemsViewed: 10,
+              itemsAddedToCart: 600,
+              itemsPurchased: 200,
+              itemRevenue: 13544.000073
+            },
+            {
+              name: "Kábel pevný N2XH-J 3x2,5 bezhalogénový čierny",
+              itemsViewed: 187,
+              itemsAddedToCart: 31944,
+              itemsPurchased: 11400,
+              itemRevenue: 13433.368317
+            },
+            {
+              name: "Menič frekvenčný VFX48-088-20DIB 45kW/88A,norm. záťaž, IP20, brzdná jednotka, IT-sieť",
+              itemsViewed: 0,
+              itemsAddedToCart: 3,
+              itemsPurchased: 3,
+              itemRevenue: 12710.2134
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x6 pvc čierny",
+              itemsViewed: 457,
+              itemsAddedToCart: 10301,
+              itemsPurchased: 3269,
+              itemRevenue: 12456.969739
+            },
+            {
+              name: "FMR67B-T4Q4/m10612",
+              itemsViewed: 0,
+              itemsAddedToCart: 0,
+              itemsPurchased: 4,
+              itemRevenue: 11789.473599
+            },
+            {
+              name: "Odporník BEG17430-3R, 15kW",
+              itemsViewed: 0,
+              itemsAddedToCart: 8,
+              itemsPurchased: 8,
+              itemRevenue: 11524.480799
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x25 B2ca bezhalogénový čierny",
+              itemsViewed: 40,
+              itemsAddedToCart: 1118,
+              itemsPurchased: 588,
+              itemRevenue: 10587.469049
+            },
+            {
+              name: "Svietidlo LED prachotesné DAMP PROOF 81W/840 11000lm 230V IP65",
+              itemsViewed: 7,
+              itemsAddedToCart: 112,
+              itemsPurchased: 112,
+              itemRevenue: 10016.495978
+            },
+            {
+              name: "Odporník BEG15418-4R2, 9kW",
+              itemsViewed: 0,
+              itemsAddedToCart: 11,
+              itemsPurchased: 11,
+              itemRevenue: 9931.679995
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x10 bezhalogénový čierny",
+              itemsViewed: 50,
+              itemsAddedToCart: 4818,
+              itemsPurchased: 1487,
+              itemRevenue: 9921.214394
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 10700,
+              itemsAddedToCart: 53311,
+              itemsPurchased: 18100,
+              itemRevenue: 9765.128388
+            },
+            {
+              name: "Vodič pevný E-YY-O 1x150 pvc",
+              itemsViewed: 0,
+              itemsAddedToCart: 530,
+              itemsPurchased: 500,
+              itemRevenue: 9205.250013
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x6 bezhalogénový čierny",
+              itemsViewed: 115,
+              itemsAddedToCart: 6722,
+              itemsPurchased: 2310,
+              itemRevenue: 9099.688715
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x16 pvc čierny",
+              itemsViewed: 202,
+              itemsAddedToCart: 2100,
+              itemsPurchased: 804,
+              itemRevenue: 9092.793003
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x16 zeleno/žltý pvc",
+              itemsViewed: 319,
+              itemsAddedToCart: 12191,
+              itemsPurchased: 3899,
+              itemRevenue: 8070.802453
+            },
+            {
+              name: "Vodič ohybný NSGAFOU 1x185 1,8/3kV guma čierny",
+              itemsViewed: 21,
+              itemsAddedToCart: 1350,
+              itemsPurchased: 300,
+              itemRevenue: 7931.639979
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x6 B2ca bezhalogénový oranžový [CXKE-R, PRAFlaSafe X]",
+              itemsViewed: 168,
+              itemsAddedToCart: 18117,
+              itemsPurchased: 1538,
+              itemRevenue: 7896.908075
+            },
+            {
+              name: "Kábel pevný 1-CYKY-J 5x50 pvc čierny",
+              itemsViewed: 54,
+              itemsAddedToCart: 925,
+              itemsPurchased: 280,
+              itemRevenue: 7719.650033
+            },
+            {
+              name: "Menič hybridný HUAWEI SUN2000-10KTL-M1-HC 3F 10kW 2xMPPT IP65, WiFi dongle",
+              itemsViewed: 90,
+              itemsAddedToCart: 21,
+              itemsPurchased: 8,
+              itemRevenue: 7633.305699
+            },
+            {
+              name: "Kábel pevný N2XH-J 3x1,5 bezhalogénový čierny",
+              itemsViewed: 208,
+              itemsAddedToCart: 24236,
+              itemsPurchased: 8795,
+              itemRevenue: 7117.700625
+            },
+            {
+              name: "Zvodič prepätia SPBT12 158331 B+C 4P 280/12,5kA vymeniteľný modul",
+              itemsViewed: 136,
+              itemsAddedToCart: 141,
+              itemsPurchased: 67,
+              itemRevenue: 6663.690602
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny",
+              itemsViewed: 992,
+              itemsAddedToCart: 115398,
+              itemsPurchased: 11545,
+              itemRevenue: 6655.026374
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x2,5 pvc čierny",
+              itemsViewed: 469,
+              itemsAddedToCart: 21718,
+              itemsPurchased: 4390,
+              itemRevenue: 6578.207911
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x1,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 342,
+              itemsAddedToCart: 49653,
+              itemsPurchased: 7092,
+              itemRevenue: 6485.741415
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x1,5 pvc čierny",
+              itemsViewed: 277,
+              itemsAddedToCart: 35377,
+              itemsPurchased: 7375,
+              itemRevenue: 6443.456112
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x4 pvc čierny",
+              itemsViewed: 338,
+              itemsAddedToCart: 12003,
+              itemsPurchased: 2710,
+              itemRevenue: 6294.982561
+            },
+            {
+              name: "UNITRONIC® RE-2Y(ST)Yv Počítačový kabel; 8X2X1.3; černá; PVC; Stíněné; Flexibilní 1032459",
+              itemsViewed: 0,
+              itemsAddedToCart: 1120,
+              itemsPurchased: 1120,
+              itemRevenue: 6285.775672
+            },
+            {
+              name: "Kábel pevný CXKH-V-J 5x4 FE180/P60-R B2ca s funk.odol. hnedý [CHKE-V, PRAFlaDur]",
+              itemsViewed: 26,
+              itemsAddedToCart: 4254,
+              itemsPurchased: 1550,
+              itemRevenue: 6273.77945
+            },
+            {
+              name: "Kábel pevný 1-CYKY-J 5x35 pvc čierny",
+              itemsViewed: 81,
+              itemsAddedToCart: 860,
+              itemsPurchased: 285,
+              itemRevenue: 5786.794956
+            },
+            {
+              name: "Žľab káblový M2 100/100 A2 100x100mm 2m drôtený nerez ",
+              itemsViewed: 2,
+              itemsAddedToCart: 250,
+              itemsPurchased: 250,
+              itemRevenue: 5674.999998
+            },
+            {
+              name: "Z-Zlab 250/100x0,80 F NKZIN ziar. pozink.",
+              itemsViewed: 2,
+              itemsAddedToCart: 280,
+              itemsPurchased: 140,
+              itemRevenue: 5608.890023
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x4 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 117,
+              itemsAddedToCart: 4416,
+              itemsPurchased: 1709,
+              itemRevenue: 5553.408256
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x95 B2ca bezhalogénový čierny",
+              itemsViewed: 12,
+              itemsAddedToCart: 220,
+              itemsPurchased: 85,
+              itemRevenue: 5482.00699
+            },
+            {
+              name: "TRJ200H100",
+              itemsViewed: 0,
+              itemsAddedToCart: 160,
+              itemsPurchased: 160,
+              itemRevenue: 5470.111958
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x10 pvc čierny",
+              itemsViewed: 310,
+              itemsAddedToCart: 3367,
+              itemsPurchased: 1020,
+              itemRevenue: 5352.741983
+            },
+            {
+              name: "Zvodič prepätia PO I 3 PV 81.183 3P 1000VDC/12,5kA FV aplikácie typ 1+2",
+              itemsViewed: 71,
+              itemsAddedToCart: 350,
+              itemsPurchased: 90,
+              itemRevenue: 5295.884992
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 3600,
+              itemsAddedToCart: 14900,
+              itemsPurchased: 6100,
+              itemRevenue: 5223.829553
+            },
+            {
+              name: "Kábel pevný CYKY-J 4x10 pvc čierny",
+              itemsViewed: 125,
+              itemsAddedToCart: 2240,
+              itemsPurchased: 947,
+              itemRevenue: 4828.06278
+            },
+            {
+              name: "Zásuvka Valena Life 753180 1-násobná s clonkami biela",
+              itemsViewed: 451,
+              itemsAddedToCart: 9103,
+              itemsPurchased: 1368,
+              itemRevenue: 4618.205
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x6 zeleno/žltý pvc",
+              itemsViewed: 552,
+              itemsAddedToCart: 20737,
+              itemsPurchased: 6053,
+              itemRevenue: 4530.29222
+            }
+          ]
         },
-        paid: {
-          sessions: 26114,
-          users: 10486,
-          engagementRate: 69.43,
-          avgDuration: "00:02:49",
-        },
-      },
       eshop: {
         items: 905664,
         revenue: 1486880.72,
@@ -1390,19 +2569,1182 @@ const hagardhal = {
         ],
       },
       ga: {
-        organic: {
-          sessions: 94603,
-          users: 32941,
-          engagementRate: 69.38,
-          avgDuration: "00:02:09",
+          organic: {
+            sessions: 94603,
+            users: 32941,
+            engagementRate: 69.38,
+            avgDuration: "00:02:09"
+          },
+          paid: {
+            sessions: 30853,
+            users: 11316,
+            engagementRate: 71.51,
+            avgDuration: "00:02:45"
+          },
+          snapshot: {
+            activeUsers: 41233,
+            newUsers: 27225,
+            sessions: 125922,
+            engagedSessions: 86795,
+            engagementRate: 0.6892759009545592,
+            totalRevenue: 1192807.209992,
+            keyEvents: 31433
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Organic Search",
+              sessions: 74563,
+              engagedSessions: 50981,
+              engagementRate: 0.6837305365932165,
+              avgEngagementTimePerSession: 125.26467550930086,
+              eventsPerSession: 11.831283612515591,
+              eventCount: 882176,
+              keyEvents: 15411,
+              sessionKeyEventRate: 0.04990410793557126,
+              totalRevenue: 485680.780007
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 19728,
+              engagedSessions: 14945,
+              engagementRate: 0.7575527169505272,
+              avgEngagementTimePerSession: 201.1676297648013,
+              eventsPerSession: 16.052412814274128,
+              eventCount: 316682,
+              keyEvents: 7225,
+              sessionKeyEventRate: 0.08389091646390917,
+              totalRevenue: 430956.659994
+            },
+            {
+              channelGroup: "Direct",
+              sessions: 17263,
+              engagedSessions: 11763,
+              engagementRate: 0.6813995249956555,
+              avgEngagementTimePerSession: 141.46237618026993,
+              eventsPerSession: 13.001853675490935,
+              eventCount: 224451,
+              keyEvents: 5260,
+              sessionKeyEventRate: 0.07293054509644906,
+              totalRevenue: 155371.649997
+            },
+            {
+              channelGroup: "Cross-network",
+              sessions: 7796,
+              engagedSessions: 5589,
+              engagementRate: 0.7169061056952283,
+              avgEngagementTimePerSession: 130.8444073884043,
+              eventsPerSession: 12.348383786557209,
+              eventCount: 96268,
+              keyEvents: 1862,
+              sessionKeyEventRate: 0.05477167778347871,
+              totalRevenue: 57841.379995
+            },
+            {
+              channelGroup: "Paid Social",
+              sessions: 2357,
+              engagedSessions: 1075,
+              engagementRate: 0.45608824777259227,
+              avgEngagementTimePerSession: 34.90156979210861,
+              eventsPerSession: 6.243954179041154,
+              eventCount: 14717,
+              keyEvents: 95,
+              sessionKeyEventRate: 0.011879507848960543,
+              totalRevenue: 11564.76
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 2011,
+              engagedSessions: 1439,
+              engagementRate: 0.7155643958229736,
+              avgEngagementTimePerSession: 152.921929388364,
+              eventsPerSession: 15.54748881153655,
+              eventCount: 31266,
+              keyEvents: 1110,
+              sessionKeyEventRate: 0.12580805569368472,
+              totalRevenue: 35634.64
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 878,
+              engagedSessions: 317,
+              engagementRate: 0.36104783599088835,
+              avgEngagementTimePerSession: 174.19362186788155,
+              eventsPerSession: 14.79384965831435,
+              eventCount: 12989,
+              keyEvents: 318,
+              sessionKeyEventRate: 0.09225512528473805,
+              totalRevenue: 12460.18
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 665,
+              engagedSessions: 323,
+              engagementRate: 0.4857142857142857,
+              avgEngagementTimePerSession: 42.153383458646616,
+              eventsPerSession: 6.627067669172932,
+              eventCount: 4407,
+              keyEvents: 48,
+              sessionKeyEventRate: 0.02406015037593985,
+              totalRevenue: 950.62
+            },
+            {
+              channelGroup: "Display",
+              sessions: 661,
+              engagedSessions: 363,
+              engagementRate: 0.5491679273827534,
+              avgEngagementTimePerSession: 99.28139183055976,
+              eventsPerSession: 10.61573373676248,
+              eventCount: 7017,
+              keyEvents: 104,
+              sessionKeyEventRate: 0.036308623298033284,
+              totalRevenue: 2346.539999
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 21725,
+              newUsers: 14294,
+              returningUsers: 9267,
+              avgEngagementTimePerActiveUser: 264.441876849373,
+              engagedSessionsPerActiveUser: 1.6132168521910666,
+              eventCount: 548894,
+              keyEvents: 7246,
+              userKeyEventRate: 0.042975905312103706
+            },
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 9037,
+              newUsers: 5995,
+              returningUsers: 6096,
+              avgEngagementTimePerActiveUser: 796.8745683413167,
+              engagedSessionsPerActiveUser: 3.550183803052245,
+              eventCount: 641279,
+              keyEvents: 16309,
+              userKeyEventRate: 0.12008466079982176
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 4752,
+              newUsers: 2704,
+              returningUsers: 3039,
+              avgEngagementTimePerActiveUser: 770.2653846153846,
+              engagedSessionsPerActiveUser: 2.971794871794872,
+              eventCount: 290038,
+              keyEvents: 6066,
+              userKeyEventRate: 0.09722222222222222
+            },
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 3078,
+              newUsers: 2316,
+              returningUsers: 1395,
+              avgEngagementTimePerActiveUser: 274.98480343574494,
+              engagedSessionsPerActiveUser: 1.6980508754542452,
+              eventCount: 81951,
+              keyEvents: 1400,
+              userKeyEventRate: 0.05186653452262967
+            },
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 1818,
+              newUsers: 1378,
+              returningUsers: 158,
+              avgEngagementTimePerActiveUser: 44.75280269058296,
+              engagedSessionsPerActiveUser: 0.5913677130044843,
+              eventCount: 14619,
+              keyEvents: 95,
+              userKeyEventRate: 0.011210762331838564
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 546,
+              newUsers: 375,
+              returningUsers: 74,
+              avgEngagementTimePerActiveUser: 53.783400809716596,
+              engagedSessionsPerActiveUser: 0.6497975708502024,
+              eventCount: 4263,
+              keyEvents: 41,
+              userKeyEventRate: 0.024291497975708502
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 257,
+              newUsers: 140,
+              returningUsers: 116,
+              avgEngagementTimePerActiveUser: 279.44074074074075,
+              engagedSessionsPerActiveUser: 1.4037037037037037,
+              eventCount: 8452,
+              keyEvents: 271,
+              userKeyEventRate: 0.07037037037037037
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 20,
+              newUsers: 23,
+              returningUsers: 7,
+              avgEngagementTimePerActiveUser: 200.36363636363637,
+              engagedSessionsPerActiveUser: 1.1363636363636365,
+              eventCount: 477,
+              keyEvents: 5,
+              userKeyEventRate: 0
+            }
+          ],
+          landingPages: [
+            {
+              path: "/",
+              sessions: 42185,
+              activeUsers: 15912,
+              newUsers: 9034,
+              avgEngagementTimePerSession: 192.94874955552922,
+              totalRevenue: 560954.89999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "(not set)",
+              sessions: 13620,
+              activeUsers: 6451,
+              newUsers: 10,
+              avgEngagementTimePerSession: 12.261600587371513,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/search",
+              sessions: 8258,
+              activeUsers: 2968,
+              newUsers: 485,
+              avgEngagementTimePerSession: 169.07265681763138,
+              totalRevenue: 65575.449992,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/user-account",
+              sessions: 2232,
+              activeUsers: 888,
+              newUsers: 62,
+              avgEngagementTimePerSession: 160.21818996415772,
+              totalRevenue: 61725.849994,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty",
+              sessions: 1254,
+              activeUsers: 912,
+              newUsers: 154,
+              avgEngagementTimePerSession: 62.17304625199362,
+              totalRevenue: 706.53,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/objednavky",
+              sessions: 1212,
+              activeUsers: 467,
+              newUsers: 84,
+              avgEngagementTimePerSession: 141.05610561056105,
+              totalRevenue: 19835.670002,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik",
+              sessions: 986,
+              activeUsers: 593,
+              newUsers: 74,
+              avgEngagementTimePerSession: 231.54158215010142,
+              totalRevenue: 86513.390001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/modul-bateriovy-huawei-luna2000-5-e1-5kwh",
+              sessions: 662,
+              activeUsers: 579,
+              newUsers: 392,
+              avgEngagementTimePerSession: 10.169184290030211,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-a-rozvadzace",
+              sessions: 621,
+              activeUsers: 566,
+              newUsers: 155,
+              avgEngagementTimePerSession: 156.38808373590982,
+              totalRevenue: 924.28,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kable-a-vodice2",
+              sessions: 532,
+              activeUsers: 443,
+              newUsers: 101,
+              avgEngagementTimePerSession: 184.69172932330827,
+              totalRevenue: 868.96,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/CreateOrder",
+              sessions: 513,
+              activeUsers: 356,
+              newUsers: 38,
+              avgEngagementTimePerSession: 141.76413255360623,
+              totalRevenue: 76452.990004,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/nabijacie-stanice",
+              sessions: 432,
+              activeUsers: 358,
+              newUsers: 252,
+              avgEngagementTimePerSession: 18.997685185185187,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/faktury",
+              sessions: 402,
+              activeUsers: 227,
+              newUsers: 22,
+              avgEngagementTimePerSession: 113.29353233830845,
+              totalRevenue: 798.53,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svietidla",
+              sessions: 402,
+              activeUsers: 351,
+              newUsers: 94,
+              avgEngagementTimePerSession: 189.29601990049753,
+              totalRevenue: 1501.44,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/ci-klieste-lisovacie-25-a-50mm",
+              sessions: 373,
+              activeUsers: 318,
+              newUsers: 217,
+              avgEngagementTimePerSession: 4.257372654155496,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/krabice-instalacne",
+              sessions: 359,
+              activeUsers: 280,
+              newUsers: 111,
+              avgEngagementTimePerSession: 112.6908077994429,
+              totalRevenue: 444.95,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-zasuvkove",
+              sessions: 343,
+              activeUsers: 310,
+              newUsers: 113,
+              avgEngagementTimePerSession: 95.59183673469387,
+              totalRevenue: 851.12,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvadzace-elektromerove2",
+              sessions: 336,
+              activeUsers: 297,
+              newUsers: 113,
+              avgEngagementTimePerSession: 67.43452380952381,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/powertag-3pn-63a-energy-sensor",
+              sessions: 324,
+              activeUsers: 283,
+              newUsers: 206,
+              avgEngagementTimePerSession: 15.339506172839506,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/modul-bateriovy-huawei-luna2000-7-e1-7kwh",
+              sessions: 305,
+              activeUsers: 276,
+              newUsers: 166,
+              avgEngagementTimePerSession: 8.104918032786886,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/domova-instalacia",
+              sessions: 297,
+              activeUsers: 257,
+              newUsers: 26,
+              avgEngagementTimePerSession: 198.37373737373738,
+              totalRevenue: 577.82,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/bratislava",
+              sessions: 280,
+              activeUsers: 206,
+              newUsers: 64,
+              avgEngagementTimePerSession: 34.225,
+              totalRevenue: 8.36,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/nitra",
+              sessions: 278,
+              activeUsers: 200,
+              newUsers: 63,
+              avgEngagementTimePerSession: 100.60791366906474,
+              totalRevenue: 502.56,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/bleskozvod3",
+              sessions: 260,
+              activeUsers: 201,
+              newUsers: 40,
+              avgEngagementTimePerSession: 226.02692307692308,
+              totalRevenue: 489.500001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kablove-ukoncenia-a-spojky",
+              sessions: 253,
+              activeUsers: 228,
+              newUsers: 54,
+              avgEngagementTimePerSession: 154.7193675889328,
+              totalRevenue: 343.39,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/spinace-vackove",
+              sessions: 252,
+              activeUsers: 218,
+              newUsers: 100,
+              avgEngagementTimePerSession: 87.90873015873017,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorky-pre-bleskozvod",
+              sessions: 247,
+              activeUsers: 179,
+              newUsers: 42,
+              avgEngagementTimePerSession: 88.63157894736842,
+              totalRevenue: 180.53,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/stoziare-a-prislusenstvo",
+              sessions: 238,
+              activeUsers: 219,
+              newUsers: 70,
+              avgEngagementTimePerSession: 66.97478991596638,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/z-aby-a-listy-plastove",
+              sessions: 226,
+              activeUsers: 216,
+              newUsers: 101,
+              avgEngagementTimePerSession: 129.46017699115043,
+              totalRevenue: 215.12,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/panely-fotovolticke",
+              sessions: 219,
+              activeUsers: 103,
+              newUsers: 31,
+              avgEngagementTimePerSession: 103.38812785388127,
+              totalRevenue: 150,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-dizajnove-na-povrch1",
+              sessions: 219,
+              activeUsers: 164,
+              newUsers: 69,
+              avgEngagementTimePerSession: 83.10045662100457,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/modularne-a-istiace-pristroje",
+              sessions: 212,
+              activeUsers: 177,
+              newUsers: 17,
+              avgEngagementTimePerSession: 243.6556603773585,
+              totalRevenue: 247.82,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/kabel-pevny-cyky-j-3x1-5-pvc-cierny",
+              sessions: 206,
+              activeUsers: 174,
+              newUsers: 37,
+              avgEngagementTimePerSession: 99.76699029126213,
+              totalRevenue: 224.91,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-modularne",
+              sessions: 203,
+              activeUsers: 45,
+              newUsers: 25,
+              avgEngagementTimePerSession: 146.27093596059115,
+              totalRevenue: 138.55,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/istice-3-fazove",
+              sessions: 200,
+              activeUsers: 167,
+              newUsers: 61,
+              avgEngagementTimePerSession: 128.89,
+              totalRevenue: 2784.84,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/profily-pre-led-pasy",
+              sessions: 192,
+              activeUsers: 164,
+              newUsers: 64,
+              avgEngagementTimePerSession: 127.91666666666667,
+              totalRevenue: 4,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/ayky-nayy-e-ayy",
+              sessions: 190,
+              activeUsers: 172,
+              newUsers: 56,
+              avgEngagementTimePerSession: 58.17368421052632,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/cxkh-r-chke-r-n2xh-b2ca",
+              sessions: 190,
+              activeUsers: 168,
+              newUsers: 24,
+              avgEngagementTimePerSession: 65.66842105263157,
+              totalRevenue: 174,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/registration",
+              sessions: 190,
+              activeUsers: 159,
+              newUsers: 19,
+              avgEngagementTimePerSession: 142.4578947368421,
+              totalRevenue: 39.43,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky2",
+              sessions: 186,
+              activeUsers: 165,
+              newUsers: 62,
+              avgEngagementTimePerSession: 137.4784946236559,
+              totalRevenue: 24.2,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-dizajnove-zapustene1",
+              sessions: 183,
+              activeUsers: 165,
+              newUsers: 63,
+              avgEngagementTimePerSession: 78.46448087431693,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/oka-a-vidlice-lisovacie",
+              sessions: 182,
+              activeUsers: 162,
+              newUsers: 35,
+              avgEngagementTimePerSession: 126.04395604395604,
+              totalRevenue: 3.87,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/kabel-pevny-cyky-j-3x2-5-pvc-cierny",
+              sessions: 180,
+              activeUsers: 154,
+              newUsers: 12,
+              avgEngagementTimePerSession: 118.52222222222223,
+              totalRevenue: 2820.76,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zelena-energia",
+              sessions: 179,
+              activeUsers: 156,
+              newUsers: 33,
+              avgEngagementTimePerSession: 166.73743016759778,
+              totalRevenue: 2182.3,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorky-a-pasy-zemniace",
+              sessions: 178,
+              activeUsers: 140,
+              newUsers: 43,
+              avgEngagementTimePerSession: 134,
+              totalRevenue: 213.29,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/categories/fotovoltika",
+              sessions: 176,
+              activeUsers: 129,
+              newUsers: 55,
+              avgEngagementTimePerSession: 82.39204545454545,
+              totalRevenue: 74.52,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/SendOrder",
+              sessions: 173,
+              activeUsers: 99,
+              newUsers: 11,
+              avgEngagementTimePerSession: 69.03468208092485,
+              totalRevenue: 3740.950001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-kombinovane-s-nadprudovou-ochranou",
+              sessions: 170,
+              activeUsers: 153,
+              newUsers: 42,
+              avgEngagementTimePerSession: 105.28235294117647,
+              totalRevenue: 567.17,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/elektroinstalacny-material-1",
+              sessions: 168,
+              activeUsers: 132,
+              newUsers: 74,
+              avgEngagementTimePerSession: 182.08333333333334,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/sady-kablovych-spojok",
+              sessions: 168,
+              activeUsers: 142,
+              newUsers: 55,
+              avgEngagementTimePerSession: 86.21428571428571,
+              totalRevenue: 96.69,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "NSHXAFÖ 1,8/3kV 1X150 BK",
+              itemsViewed: 0,
+              itemsAddedToCart: 10000,
+              itemsPurchased: 2000,
+              itemRevenue: 39511.200593
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x2,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 291,
+              itemsAddedToCart: 86204,
+              itemsPurchased: 16367,
+              itemRevenue: 21365.471868
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x2,5 bezhalogénový čierny",
+              itemsViewed: 62,
+              itemsAddedToCart: 40648,
+              itemsPurchased: 10814,
+              itemRevenue: 20888.8552
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 21600,
+              itemsAddedToCart: 60820,
+              itemsPurchased: 15600,
+              itemRevenue: 15764.797434
+            },
+            {
+              name: "Rebrík káblový DUP200H100/3 N 200x100mm 3m kovový zinkovaný",
+              itemsViewed: 3,
+              itemsAddedToCart: 1203,
+              itemsPurchased: 1203,
+              itemRevenue: 15468.710482
+            },
+            {
+              name: "Kábel pevný N2XH-J 3x2,5 bezhalogénový čierny",
+              itemsViewed: 160,
+              itemsAddedToCart: 34434,
+              itemsPurchased: 10434,
+              itemRevenue: 13187.026246
+            },
+            {
+              name: "Príchytka SONAP 52-58 402850",
+              itemsViewed: 10,
+              itemsAddedToCart: 6010,
+              itemsPurchased: 6010,
+              itemRevenue: 12448.022392
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny",
+              itemsViewed: 1441,
+              itemsAddedToCart: 126791,
+              itemsPurchased: 12251,
+              itemRevenue: 12339.334079
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x1,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 334,
+              itemsAddedToCart: 49502,
+              itemsPurchased: 13240,
+              itemRevenue: 11871.88639
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x16 zeleno/žltý pvc",
+              itemsViewed: 363,
+              itemsAddedToCart: 17142,
+              itemsPurchased: 5092,
+              itemRevenue: 10812.792905
+            },
+            {
+              name: "Kábel pevný 1-CYKY-J 5x25 pvc čierny",
+              itemsViewed: 148,
+              itemsAddedToCart: 1298,
+              itemsPurchased: 511,
+              itemRevenue: 8887.964924
+            },
+            {
+              name: "Príchytka strmeňová UK2/UKO2/28-34 28-34mm",
+              itemsViewed: 0,
+              itemsAddedToCart: 5000,
+              itemsPurchased: 5000,
+              itemRevenue: 8646.999631
+            },
+            {
+              name: "Modul batériový HUAWEI LUNA2000-5-E0 5kWh LiFePO4 350-560V/1F 600-980V/3F",
+              itemsViewed: 81,
+              itemsAddedToCart: 32,
+              itemsPurchased: 5,
+              itemRevenue: 8231.599499
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 14900,
+              itemsAddedToCart: 50605,
+              itemsPurchased: 12600,
+              itemRevenue: 8022.259773
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x16 pvc čierny",
+              itemsViewed: 297,
+              itemsAddedToCart: 5209,
+              itemsPurchased: 704,
+              itemRevenue: 7826.036096
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny",
+              itemsViewed: 1109,
+              itemsAddedToCart: 92318,
+              itemsPurchased: 11878,
+              itemRevenue: 7530.084442
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x2,5 pvc čierny",
+              itemsViewed: 578,
+              itemsAddedToCart: 21224,
+              itemsPurchased: 4418,
+              itemRevenue: 7401.616723
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x6 zeleno/žltý pvc",
+              itemsViewed: 531,
+              itemsAddedToCart: 28636,
+              itemsPurchased: 9242,
+              itemRevenue: 7382.252283
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x6 pvc čierny",
+              itemsViewed: 602,
+              itemsAddedToCart: 7994,
+              itemsPurchased: 1777,
+              itemRevenue: 7263.158649
+            },
+            {
+              name: "Kábel pevný N2XH-J 3x1,5 bezhalogénový čierny",
+              itemsViewed: 201,
+              itemsAddedToCart: 38820,
+              itemsPurchased: 8428,
+              itemRevenue: 7116.338159
+            },
+            {
+              name: "Kábel ohybný H07RN-F 5G16 guma čierny",
+              itemsViewed: 45,
+              itemsAddedToCart: 592,
+              itemsPurchased: 520,
+              itemRevenue: 6952.057966
+            },
+            {
+              name: "Kábel ohybný H07RN-F 5G6 guma čierny",
+              itemsViewed: 149,
+              itemsAddedToCart: 2738,
+              itemsPurchased: 1366,
+              itemRevenue: 6703.796172
+            },
+            {
+              name: "Drôt zvodový 8mm AlMgSi (1kg 7,40m) bal.20kg",
+              itemsViewed: 4180,
+              itemsAddedToCart: 2882,
+              itemsPurchased: 1040,
+              itemRevenue: 6587.178125
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x6 B2ca bezhalogénový oranžový [CXKE-R, PRAFlaSafe X]",
+              itemsViewed: 177,
+              itemsAddedToCart: 15189,
+              itemsPurchased: 1150,
+              itemRevenue: 6094.707843
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x6 bezhalogénový čierny",
+              itemsViewed: 103,
+              itemsAddedToCart: 8994,
+              itemsPurchased: 1294,
+              itemRevenue: 6002.790893
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový červený",
+              itemsViewed: 78,
+              itemsAddedToCart: 12114,
+              itemsPurchased: 6990,
+              itemRevenue: 5837.400141
+            },
+            {
+              name: "Kábel pevný NAYY-J 4x150 pvc čierny [(N)AYY, E-AYY, 1-AYKY]",
+              itemsViewed: 79,
+              itemsAddedToCart: 2181,
+              itemsPurchased: 560,
+              itemRevenue: 5569.177974
+            },
+            {
+              name: "Menič hybridný HUAWEI SUN2000-10KTL-M1-HC 3F 10kW 2xMPPT IP65, WiFi dongle",
+              itemsViewed: 108,
+              itemsAddedToCart: 20,
+              itemsPurchased: 6,
+              itemRevenue: 5315.8044
+            },
+            {
+              name: "PLM D 0810 FS",
+              itemsViewed: 0,
+              itemsAddedToCart: 50,
+              itemsPurchased: 50,
+              itemRevenue: 5231.610011
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový čierny",
+              itemsViewed: 138,
+              itemsAddedToCart: 16039,
+              itemsPurchased: 6340,
+              itemRevenue: 5214.280051
+            },
+            {
+              name: "Vodič ohybný bezhalogénový H07Z-K 1x25 zeleno/žltý",
+              itemsViewed: 24,
+              itemsAddedToCart: 5200,
+              itemsPurchased: 1400,
+              itemRevenue: 5213.739614
+            },
+            {
+              name: "Kábel pevný NAYY-J 4x240 pvc čierny [(N)AYY, E-AYY, 1-AYKY]",
+              itemsViewed: 243,
+              itemsAddedToCart: 13269,
+              itemsPurchased: 303,
+              itemRevenue: 5113.45508
+            },
+            {
+              name: "Kábel pevný CYKY-J 4x16 pvc čierny",
+              itemsViewed: 149,
+              itemsAddedToCart: 3157,
+              itemsPurchased: 593,
+              itemRevenue: 5081.42332
+            },
+            {
+              name: "Kábel pevný CYKY-J 4x10 pvc čierny",
+              itemsViewed: 150,
+              itemsAddedToCart: 3857,
+              itemsPurchased: 961,
+              itemRevenue: 5043.004823
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x25 B2ca bezhalogénový čierny",
+              itemsViewed: 18,
+              itemsAddedToCart: 547,
+              itemsPurchased: 220,
+              itemRevenue: 4937.635977
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x4 pvc čierny",
+              itemsViewed: 474,
+              itemsAddedToCart: 9767,
+              itemsPurchased: 1779,
+              itemRevenue: 4921.975755
+            },
+            {
+              name: "Kábel pevný SSKFH-V180 1x2x0,8 P60-90R B2ca tienený [PRAFlaGuard F, JXFE-V]",
+              itemsViewed: 144,
+              itemsAddedToCart: 18704,
+              itemsPurchased: 8450,
+              itemRevenue: 4851.288061
+            },
+            {
+              name: "Zásuvka Valena Life 753180 1-násobná s clonkami biela",
+              itemsViewed: 549,
+              itemsAddedToCart: 4776,
+              itemsPurchased: 1224,
+              itemRevenue: 4758.918506
+            },
+            {
+              name: "Kábel pevný 1-CYKY-J 5x50 pvc čierny",
+              itemsViewed: 88,
+              itemsAddedToCart: 678,
+              itemsPurchased: 135,
+              itemRevenue: 4584.285986
+            },
+            {
+              name: "Kábel dátový pevný STP (U/FTP) cat.6a LSOH AWG23 interiér [500m]",
+              itemsViewed: 110,
+              itemsAddedToCart: 22147,
+              itemsPurchased: 9050,
+              itemRevenue: 4508.146266
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x25 zeleno/žltý pvc",
+              itemsViewed: 229,
+              itemsAddedToCart: 7073,
+              itemsPurchased: 1215,
+              itemRevenue: 4175.270929
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x1,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 136,
+              itemsAddedToCart: 11245,
+              itemsPurchased: 2983,
+              itemRevenue: 4113.636054
+            },
+            {
+              name: "Páska viazacia 839.54300 4,8x290mm čierna",
+              itemsViewed: 700,
+              itemsAddedToCart: 70002,
+              itemsPurchased: 70200,
+              itemRevenue: 4028.487241
+            },
+            {
+              name: "Zvodič prepätia PO I 3 PV 81.183 3P 1000VDC/12,5kA FV aplikácie typ 1+2",
+              itemsViewed: 100,
+              itemsAddedToCart: 176,
+              itemsPurchased: 63,
+              itemRevenue: 3985.464392
+            },
+            {
+              name: "Kábel pevný plochý CYBY-J 3x2,5 pvc čierny",
+              itemsViewed: 119,
+              itemsAddedToCart: 6952,
+              itemsPurchased: 6333,
+              itemRevenue: 3799.800695
+            },
+            {
+              name: "Páska uzemňovacia 30x4mm FeZn 1kg=1m",
+              itemsViewed: 12925,
+              itemsAddedToCart: 19789,
+              itemsPurchased: 2275,
+              itemRevenue: 3778.835018
+            },
+            {
+              name: "Panel fotovoltický CanadianSolar CS6.2-48TD-460W mono 460W čierny rám",
+              itemsViewed: 121,
+              itemsAddedToCart: 279,
+              itemsPurchased: 64,
+              itemRevenue: 3776.59998
+            },
+            {
+              name: "Kábel pevný CXKH-V-O 2x1,5 FE180/P60-R B2ca s funk.odol. hnedý [CHKE-V, PRAFlaDur]",
+              itemsViewed: 156,
+              itemsAddedToCart: 13734,
+              itemsPurchased: 4630,
+              itemRevenue: 3641.350535
+            },
+            {
+              name: "S-Kryt žľabu PDDP200/3",
+              itemsViewed: 0,
+              itemsAddedToCart: 402,
+              itemsPurchased: 402,
+              itemRevenue: 3480.837589
+            },
+            {
+              name: "Zvodič prepätia PO I 81.004 B+C+D 4P 280/12,5kA vymeniteľný modul",
+              itemsViewed: 86,
+              itemsAddedToCart: 92,
+              itemsPurchased: 48,
+              itemRevenue: 3478.751204
+            }
+          ]
         },
-        paid: {
-          sessions: 30853,
-          users: 11316,
-          engagementRate: 71.51,
-          avgDuration: "00:02:45",
-        },
-      },
       eshop: {
         items: 1018226,
         revenue: 1192131.98,
@@ -1419,9 +3761,10 @@ const hagardhal = {
         purchaseValue: 242182.57,
         roas: 251.18,
         costPerPurchase: 9.03,
-        campaigns: [
+        ads: [
           {
-            name: "Hagard_sales_test",
+            name: '—',
+            campaign: 'Hagard_sales_test',
             spend: 640.8,
             clicks: 1416,
             purchases: 626,
@@ -1523,19 +3866,1205 @@ const hagardhal = {
         ],
       },
       ga: {
-        organic: {
-          sessions: 108145,
-          users: 35633,
-          engagementRate: 66.9,
-          avgDuration: "00:02:11",
+          organic: {
+            sessions: 108145,
+            users: 35633,
+            engagementRate: 66.9,
+            avgDuration: "00:02:11"
+          },
+          paid: {
+            sessions: 29655,
+            users: 10604,
+            engagementRate: 69.72,
+            avgDuration: "00:02:49"
+          },
+          snapshot: {
+            activeUsers: 43093,
+            newUsers: 28236,
+            sessions: 137094,
+            engagedSessions: 93192,
+            engagementRate: 0.6797671670532627,
+            totalRevenue: 1475184.8299840002,
+            keyEvents: 37872
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Organic Search",
+              sessions: 84208,
+              engagedSessions: 56777,
+              engagementRate: 0.6742471024130724,
+              avgEngagementTimePerSession: 129.49007220216606,
+              eventsPerSession: 12.41712188865666,
+              eventCount: 1045621,
+              keyEvents: 20171,
+              sessionKeyEventRate: 0.05748859965798974,
+              totalRevenue: 732480.079992
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 19534,
+              engagedSessions: 14418,
+              engagementRate: 0.7380976758472407,
+              avgEngagementTimePerSession: 198.2543769837207,
+              eventsPerSession: 15.780843657213065,
+              eventCount: 308263,
+              keyEvents: 7317,
+              sessionKeyEventRate: 0.08682297532507423,
+              totalRevenue: 379076.849987
+            },
+            {
+              channelGroup: "Direct",
+              sessions: 18972,
+              engagedSessions: 12781,
+              engagementRate: 0.6736769976807927,
+              avgEngagementTimePerSession: 141.91629770187646,
+              eventsPerSession: 13.485768500948767,
+              eventCount: 255852,
+              keyEvents: 6414,
+              sessionKeyEventRate: 0.08412397216951296,
+              totalRevenue: 244194.740001
+            },
+            {
+              channelGroup: "Cross-network",
+              sessions: 7766,
+              engagedSessions: 5619,
+              engagementRate: 0.7235385011588977,
+              avgEngagementTimePerSession: 136.13726500128766,
+              eventsPerSession: 12.703579706412567,
+              eventCount: 98656,
+              keyEvents: 2032,
+              sessionKeyEventRate: 0.06219417975791913,
+              totalRevenue: 58652.040005
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 2405,
+              engagedSessions: 1768,
+              engagementRate: 0.7351351351351352,
+              avgEngagementTimePerSession: 176.27983367983367,
+              eventsPerSession: 16.445322245322245,
+              eventCount: 39551,
+              keyEvents: 1283,
+              sessionKeyEventRate: 0.13471933471933473,
+              totalRevenue: 43093.720001
+            },
+            {
+              channelGroup: "Paid Social",
+              sessions: 2092,
+              engagedSessions: 950,
+              engagementRate: 0.4541108986615679,
+              avgEngagementTimePerSession: 35.375717017208416,
+              eventsPerSession: 6.842734225621415,
+              eventCount: 14315,
+              keyEvents: 181,
+              sessionKeyEventRate: 0.02055449330783939,
+              totalRevenue: 2210.76
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 1072,
+              engagedSessions: 444,
+              engagementRate: 0.4141791044776119,
+              avgEngagementTimePerSession: 137.5457089552239,
+              eventsPerSession: 13.911380597014926,
+              eventCount: 14913,
+              keyEvents: 391,
+              sessionKeyEventRate: 0.08955223880597014,
+              totalRevenue: 11998.039998
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 603,
+              engagedSessions: 186,
+              engagementRate: 0.30845771144278605,
+              avgEngagementTimePerSession: 19.487562189054728,
+              eventsPerSession: 5.02653399668325,
+              eventCount: 3031,
+              keyEvents: 6,
+              sessionKeyEventRate: 0.004975124378109453,
+              totalRevenue: 0
+            },
+            {
+              channelGroup: "Display",
+              sessions: 441,
+              engagedSessions: 248,
+              engagementRate: 0.562358276643991,
+              avgEngagementTimePerSession: 101.2766439909297,
+              eventsPerSession: 10.430839002267573,
+              eventCount: 4600,
+              keyEvents: 77,
+              sessionKeyEventRate: 0.04308390022675737,
+              totalRevenue: 3478.6
+            },
+            {
+              channelGroup: "Paid Other",
+              sessions: 1,
+              engagedSessions: 1,
+              engagementRate: 1,
+              avgEngagementTimePerSession: 16,
+              eventsPerSession: 5,
+              eventCount: 5,
+              keyEvents: 0,
+              sessionKeyEventRate: 0,
+              totalRevenue: 0
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 23535,
+              newUsers: 15428,
+              returningUsers: 9959,
+              avgEngagementTimePerActiveUser: 280.2074772795796,
+              engagedSessionsPerActiveUser: 1.5996898824137487,
+              eventCount: 636435,
+              keyEvents: 9761,
+              userKeyEventRate: 0.048455872851789636
+            },
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 9645,
+              newUsers: 6424,
+              returningUsers: 6575,
+              avgEngagementTimePerActiveUser: 841.6443413142074,
+              engagedSessionsPerActiveUser: 3.7820904967830398,
+              eventCount: 737322,
+              keyEvents: 20204,
+              userKeyEventRate: 0.13078789157261891
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 4642,
+              newUsers: 2612,
+              returningUsers: 3109,
+              avgEngagementTimePerActiveUser: 800.5696202531645,
+              engagedSessionsPerActiveUser: 2.994850890366874,
+              eventCount: 306104,
+              keyEvents: 6284,
+              userKeyEventRate: 0.10555674747908174
+            },
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 3105,
+              newUsers: 2254,
+              returningUsers: 1452,
+              avgEngagementTimePerActiveUser: 278.1709373986377,
+              engagedSessionsPerActiveUser: 1.5828738241972105,
+              eventCount: 81434,
+              keyEvents: 1330,
+              userKeyEventRate: 0.04832954914044762
+            },
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 1416,
+              newUsers: 1026,
+              returningUsers: 126,
+              avgEngagementTimePerActiveUser: 45.16933638443936,
+              engagedSessionsPerActiveUser: 0.6125095347063311,
+              eventCount: 12312,
+              keyEvents: 127,
+              userKeyEventRate: 0.014492753623188406
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 461,
+              newUsers: 313,
+              returningUsers: 84,
+              avgEngagementTimePerActiveUser: 33.2933025404157,
+              engagedSessionsPerActiveUser: 0.5057736720554272,
+              eventCount: 3389,
+              keyEvents: 5,
+              userKeyEventRate: 0.009237875288683603
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 244,
+              newUsers: 139,
+              returningUsers: 103,
+              avgEngagementTimePerActiveUser: 279.80632411067194,
+              engagedSessionsPerActiveUser: 1.407114624505929,
+              eventCount: 6724,
+              keyEvents: 145,
+              userKeyEventRate: 0.05928853754940711
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 44,
+              newUsers: 39,
+              returningUsers: 21,
+              avgEngagementTimePerActiveUser: 162.94915254237287,
+              engagedSessionsPerActiveUser: 1.1864406779661016,
+              eventCount: 1082,
+              keyEvents: 16,
+              userKeyEventRate: 0.05084745762711865
+            },
+            {
+              firstUserChannelGroup: "Paid Other",
+              totalUsers: 1,
+              newUsers: 1,
+              returningUsers: 0,
+              avgEngagementTimePerActiveUser: 16,
+              engagedSessionsPerActiveUser: 1,
+              eventCount: 5,
+              keyEvents: 0,
+              userKeyEventRate: 0
+            }
+          ],
+          landingPages: [
+            {
+              path: "/",
+              sessions: 47092,
+              activeUsers: 17634,
+              newUsers: 9949,
+              avgEngagementTimePerSession: 193.69663637135818,
+              totalRevenue: 738728.600005,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "(not set)",
+              sessions: 14975,
+              activeUsers: 6533,
+              newUsers: 9,
+              avgEngagementTimePerSession: 12.305776293823039,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/search",
+              sessions: 9108,
+              activeUsers: 3260,
+              newUsers: 562,
+              avgEngagementTimePerSession: 155.56763285024155,
+              totalRevenue: 88806.05,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/user-account",
+              sessions: 2452,
+              activeUsers: 845,
+              newUsers: 67,
+              avgEngagementTimePerSession: 184.41639477977162,
+              totalRevenue: 189201.699995,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/objednavky",
+              sessions: 1596,
+              activeUsers: 414,
+              newUsers: 90,
+              avgEngagementTimePerSession: 157.8640350877193,
+              totalRevenue: 27159.069999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty",
+              sessions: 1416,
+              activeUsers: 810,
+              newUsers: 171,
+              avgEngagementTimePerSession: 61.65607344632768,
+              totalRevenue: 1032.8,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik",
+              sessions: 1220,
+              activeUsers: 883,
+              newUsers: 81,
+              avgEngagementTimePerSession: 228.7032786885246,
+              totalRevenue: 53168.84,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/CreateOrder",
+              sessions: 667,
+              activeUsers: 395,
+              newUsers: 39,
+              avgEngagementTimePerSession: 170.9535232383808,
+              totalRevenue: 34674.699992,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-a-rozvadzace",
+              sessions: 644,
+              activeUsers: 591,
+              newUsers: 155,
+              avgEngagementTimePerSession: 129.50310559006212,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kable-a-vodice2",
+              sessions: 608,
+              activeUsers: 486,
+              newUsers: 106,
+              avgEngagementTimePerSession: 172.68421052631578,
+              totalRevenue: 4209.15,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/faktury",
+              sessions: 531,
+              activeUsers: 212,
+              newUsers: 40,
+              avgEngagementTimePerSession: 101.22410546139359,
+              totalRevenue: 560.95,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/krabice-instalacne",
+              sessions: 469,
+              activeUsers: 378,
+              newUsers: 120,
+              avgEngagementTimePerSession: 114.47547974413646,
+              totalRevenue: 7450.81,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvadzace-elektromerove2",
+              sessions: 463,
+              activeUsers: 384,
+              newUsers: 153,
+              avgEngagementTimePerSession: 68.14686825053995,
+              totalRevenue: 226,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-zasuvkove",
+              sessions: 448,
+              activeUsers: 398,
+              newUsers: 146,
+              avgEngagementTimePerSession: 126.76116071428571,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/bleskozvod3",
+              sessions: 359,
+              activeUsers: 287,
+              newUsers: 56,
+              avgEngagementTimePerSession: 218.88022284122562,
+              totalRevenue: 1024.240001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svietidla",
+              sessions: 350,
+              activeUsers: 328,
+              newUsers: 59,
+              avgEngagementTimePerSession: 191.02285714285713,
+              totalRevenue: 436.72,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kablove-ukoncenia-a-spojky",
+              sessions: 330,
+              activeUsers: 300,
+              newUsers: 76,
+              avgEngagementTimePerSession: 125.08484848484848,
+              totalRevenue: 90.15,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/nabijacie-stanice",
+              sessions: 322,
+              activeUsers: 289,
+              newUsers: 176,
+              avgEngagementTimePerSession: 28.27639751552795,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/panely-fotovolticke",
+              sessions: 311,
+              activeUsers: 149,
+              newUsers: 41,
+              avgEngagementTimePerSession: 81.7652733118971,
+              totalRevenue: 1298.03,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/domova-instalacia",
+              sessions: 303,
+              activeUsers: 50,
+              newUsers: 15,
+              avgEngagementTimePerSession: 188.04290429042905,
+              totalRevenue: 438.22,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorky-pre-bleskozvod",
+              sessions: 301,
+              activeUsers: 249,
+              newUsers: 94,
+              avgEngagementTimePerSession: 83.95681063122923,
+              totalRevenue: 460.48,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/nitra",
+              sessions: 300,
+              activeUsers: 213,
+              newUsers: 61,
+              avgEngagementTimePerSession: 66.86,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/stoziare-a-prislusenstvo",
+              sessions: 285,
+              activeUsers: 240,
+              newUsers: 68,
+              avgEngagementTimePerSession: 84.56140350877193,
+              totalRevenue: 4571,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/podpery-vedenia1",
+              sessions: 269,
+              activeUsers: 147,
+              newUsers: 49,
+              avgEngagementTimePerSession: 100.71747211895911,
+              totalRevenue: 24.94,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/bratislava",
+              sessions: 258,
+              activeUsers: 217,
+              newUsers: 69,
+              avgEngagementTimePerSession: 48.46511627906977,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/spinace-vackove",
+              sessions: 256,
+              activeUsers: 216,
+              newUsers: 98,
+              avgEngagementTimePerSession: 86.8828125,
+              totalRevenue: 1512.9,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/SendOrder",
+              sessions: 250,
+              activeUsers: 118,
+              newUsers: 16,
+              avgEngagementTimePerSession: 104.6,
+              totalRevenue: 12637.91,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/z-aby-a-listy-plastove",
+              sessions: 249,
+              activeUsers: 224,
+              newUsers: 87,
+              avgEngagementTimePerSession: 97.49397590361446,
+              totalRevenue: 373.9,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-dizajnove-na-povrch1",
+              sessions: 239,
+              activeUsers: 172,
+              newUsers: 50,
+              avgEngagementTimePerSession: 100.48535564853556,
+              totalRevenue: 202.42,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/adaptery-a-redukcie",
+              sessions: 238,
+              activeUsers: 205,
+              newUsers: 129,
+              avgEngagementTimePerSession: 61.45798319327731,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/registration",
+              sessions: 227,
+              activeUsers: 185,
+              newUsers: 12,
+              avgEngagementTimePerSession: 139.21145374449338,
+              totalRevenue: 442.09,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/modul-bateriovy-huawei-luna2000-5-e1-5kwh",
+              sessions: 224,
+              activeUsers: 190,
+              newUsers: 117,
+              avgEngagementTimePerSession: 16.075892857142858,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/kabel-pevny-cyky-j-3x2-5-pvc-cierny",
+              sessions: 223,
+              activeUsers: 141,
+              newUsers: 17,
+              avgEngagementTimePerSession: 96.71748878923766,
+              totalRevenue: 409.38,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/dodacie-listy",
+              sessions: 218,
+              activeUsers: 136,
+              newUsers: 24,
+              avgEngagementTimePerSession: 150.045871559633,
+              totalRevenue: 262.51,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/istice-3-fazove",
+              sessions: 218,
+              activeUsers: 198,
+              newUsers: 83,
+              avgEngagementTimePerSession: 73.46330275229357,
+              totalRevenue: 122.76,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/sady-kablovych-spojok",
+              sessions: 218,
+              activeUsers: 200,
+              newUsers: 62,
+              avgEngagementTimePerSession: 115.57339449541284,
+              totalRevenue: 973.25,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-modularne",
+              sessions: 217,
+              activeUsers: 183,
+              newUsers: 33,
+              avgEngagementTimePerSession: 123.38248847926268,
+              totalRevenue: 206.88,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/modularne-a-istiace-pristroje",
+              sessions: 216,
+              activeUsers: 188,
+              newUsers: 17,
+              avgEngagementTimePerSession: 206.38888888888889,
+              totalRevenue: 615.24,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady",
+              sessions: 215,
+              activeUsers: 75,
+              newUsers: 1,
+              avgEngagementTimePerSession: 145.7767441860465,
+              totalRevenue: 557.16,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/kabel-pevny-cyky-j-3x1-5-pvc-cierny",
+              sessions: 213,
+              activeUsers: 185,
+              newUsers: 25,
+              avgEngagementTimePerSession: 86.14553990610328,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-prudove1",
+              sessions: 210,
+              activeUsers: 179,
+              newUsers: 48,
+              avgEngagementTimePerSession: 144.73809523809524,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-kombinovane-s-nadprudovou-ochranou",
+              sessions: 208,
+              activeUsers: 191,
+              newUsers: 47,
+              avgEngagementTimePerSession: 84.79807692307692,
+              totalRevenue: 286.43,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/ayky-nayy-e-ayy",
+              sessions: 206,
+              activeUsers: 182,
+              newUsers: 53,
+              avgEngagementTimePerSession: 47.05825242718446,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/categories/kablove-chrani-ky-a-kanaly",
+              sessions: 204,
+              activeUsers: 191,
+              newUsers: 93,
+              avgEngagementTimePerSession: 88.88235294117646,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/elektroinstalacny-material-1",
+              sessions: 202,
+              activeUsers: 187,
+              newUsers: 81,
+              avgEngagementTimePerSession: 221.6089108910891,
+              totalRevenue: 336.82,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorkovnice-a-pripojnice",
+              sessions: 201,
+              activeUsers: 179,
+              newUsers: 36,
+              avgEngagementTimePerSession: 126.30348258706468,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/paska-uzem-ovacia-30x4mm-fezn-1kg-1m",
+              sessions: 201,
+              activeUsers: 160,
+              newUsers: 39,
+              avgEngagementTimePerSession: 79.46268656716418,
+              totalRevenue: 2058.45,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky2",
+              sessions: 200,
+              activeUsers: 184,
+              newUsers: 72,
+              avgEngagementTimePerSession: 180.405,
+              totalRevenue: 53.87,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/categories/fotovoltika",
+              sessions: 192,
+              activeUsers: 157,
+              newUsers: 58,
+              avgEngagementTimePerSession: 85.27604166666667,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zelena-energia",
+              sessions: 192,
+              activeUsers: 158,
+              newUsers: 15,
+              avgEngagementTimePerSession: 219.31770833333334,
+              totalRevenue: 3678.15,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 23400,
+              itemsAddedToCart: 61515,
+              itemsPurchased: 22500,
+              itemRevenue: 23192.063893
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny",
+              itemsViewed: 1483,
+              itemsAddedToCart: 191172,
+              itemsPurchased: 20171,
+              itemRevenue: 20027.59074
+            },
+            {
+              name: "Modul batériový HUAWEI LUNA2000-7-E1 7kWh",
+              itemsViewed: 184,
+              itemsAddedToCart: 73,
+              itemsPurchased: 8,
+              itemRevenue: 18493.490499
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x16 zeleno/žltý pvc",
+              itemsViewed: 427,
+              itemsAddedToCart: 31664,
+              itemsPurchased: 8426,
+              itemRevenue: 17602.552386
+            },
+            {
+              name: "UNITRONIC LiHCH (TP) 4x2x0,75",
+              itemsViewed: 0,
+              itemsAddedToCart: 5000,
+              itemsPurchased: 5000,
+              itemRevenue: 16496.498343
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x6 pvc čierny",
+              itemsViewed: 767,
+              itemsAddedToCart: 12042,
+              itemsPurchased: 3472,
+              itemRevenue: 14770.582592
+            },
+            {
+              name: "Kábel ohybný HSLH-JB 750 5x2,5 sivý",
+              itemsViewed: 0,
+              itemsAddedToCart: 5500,
+              itemsPurchased: 5500,
+              itemRevenue: 14688.851535
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x2,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 316,
+              itemsAddedToCart: 95296,
+              itemsPurchased: 10635,
+              itemRevenue: 13806.208887
+            },
+            {
+              name: "3VA2716-7AC03-0AB1-Z K52",
+              itemsViewed: 0,
+              itemsAddedToCart: 12,
+              itemsPurchased: 4,
+              itemRevenue: 13680.166799
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 17200,
+              itemsAddedToCart: 61204,
+              itemsPurchased: 21400,
+              itemRevenue: 13198.361854
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x6 B2ca bezhalogénový oranžový [CXKE-R, PRAFlaSafe X]",
+              itemsViewed: 181,
+              itemsAddedToCart: 12644,
+              itemsPurchased: 2796,
+              itemRevenue: 12961.310762
+            },
+            {
+              name: "Vodič ohybný 1-CHBU 1x240 guma čierny",
+              itemsViewed: 40,
+              itemsAddedToCart: 818,
+              itemsPurchased: 335,
+              itemRevenue: 12744.270012
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x1,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 361,
+              itemsAddedToCart: 103798,
+              itemsPurchased: 13385,
+              itemRevenue: 11886.744076
+            },
+            {
+              name: "Páska uzemňovacia 30x4mm FeZn 1kg=1m",
+              itemsViewed: 18925,
+              itemsAddedToCart: 24962,
+              itemsPurchased: 7275,
+              itemRevenue: 11710.409932
+            },
+            {
+              name: "Príchytka strmeňová SONAP 1186456 52-58mm ALU",
+              itemsViewed: 0,
+              itemsAddedToCart: 6000,
+              itemsPurchased: 6000,
+              itemRevenue: 11504.401952
+            },
+            {
+              name: "Príchytka strmeňová SONAP 1186437 34-40mm ALU",
+              itemsViewed: 0,
+              itemsAddedToCart: 6000,
+              itemsPurchased: 5000,
+              itemRevenue: 10408.995948
+            },
+            {
+              name: "Panel fotovoltický JAM54D40-465/LR 465Wp",
+              itemsViewed: 0,
+              itemsAddedToCart: 288,
+              itemsPurchased: 180,
+              itemRevenue: 10220.201968
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x10 pvc čierny",
+              itemsViewed: 532,
+              itemsAddedToCart: 15327,
+              itemsPurchased: 1493,
+              itemRevenue: 10102.048845
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x6 zeleno/žltý pvc",
+              itemsViewed: 636,
+              itemsAddedToCart: 49657,
+              itemsPurchased: 12422,
+              itemRevenue: 9629.254357
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x16 pvc čierny",
+              itemsViewed: 303,
+              itemsAddedToCart: 4160,
+              itemsPurchased: 851,
+              itemRevenue: 9149.487465
+            },
+            {
+              name: "Menič hybridný HUAWEI SUN2000-10KTL-M1-HC 3F 10kW 2xMPPT IP65, WiFi dongle",
+              itemsViewed: 154,
+              itemsAddedToCart: 30,
+              itemsPurchased: 10,
+              itemRevenue: 9147.045201
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový čierny",
+              itemsViewed: 203,
+              itemsAddedToCart: 28565,
+              itemsPurchased: 10690,
+              itemRevenue: 8781.050435
+            },
+            {
+              name: "Modul batériový HUAWEI LUNA2000-5-E0 5kWh LiFePO4 350-560V/1F 600-980V/3F",
+              itemsViewed: 130,
+              itemsAddedToCart: 41,
+              itemsPurchased: 5,
+              itemRevenue: 8706.499999
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x6 bezhalogénový čierny",
+              itemsViewed: 116,
+              itemsAddedToCart: 25955,
+              itemsPurchased: 2001,
+              itemRevenue: 8230.243517
+            },
+            {
+              name: "Kábel pevný NAYY-J 4x240 pvc čierny [(N)AYY, E-AYY, 1-AYKY]",
+              itemsViewed: 200,
+              itemsAddedToCart: 7442,
+              itemsPurchased: 547,
+              itemRevenue: 8228.50677
+            },
+            {
+              name: "Zásuvka Valena Life 753180 1-násobná s clonkami biela",
+              itemsViewed: 544,
+              itemsAddedToCart: 10418,
+              itemsPurchased: 2136,
+              itemRevenue: 7962.409682
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny",
+              itemsViewed: 1198,
+              itemsAddedToCart: 122750,
+              itemsPurchased: 12334,
+              itemRevenue: 7771.842997
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 5000,
+              itemsAddedToCart: 26003,
+              itemsPurchased: 7700,
+              itemRevenue: 7703.359615
+            },
+            {
+              name: "Optimizér HUAWEI SUN2000-600W-P",
+              itemsViewed: 140,
+              itemsAddedToCart: 578,
+              itemsPurchased: 198,
+              itemRevenue: 7562.883656
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový červený",
+              itemsViewed: 118,
+              itemsAddedToCart: 39590,
+              itemsPurchased: 9106,
+              itemRevenue: 7471.703678
+            },
+            {
+              name: "Modul batériový Pylontech force H3 5,12kWh",
+              itemsViewed: 0,
+              itemsAddedToCart: 10,
+              itemsPurchased: 10,
+              itemRevenue: 7373.052998
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x4 pvc čierny",
+              itemsViewed: 583,
+              itemsAddedToCart: 13830,
+              itemsPurchased: 2694,
+              itemRevenue: 7329.907498
+            },
+            {
+              name: "Drôt zvodový 8mm AlMgSi (1kg 7,40m) bal.20kg",
+              itemsViewed: 5460,
+              itemsAddedToCart: 5027,
+              itemsPurchased: 1120,
+              itemRevenue: 7233.43199
+            },
+            {
+              name: "Kábel pevný CXKH-V-J 3x1,5 FE180/P60-R B2ca s funk.odol. hnedý [CHKE-V, PRAFlaDur]",
+              itemsViewed: 167,
+              itemsAddedToCart: 42666,
+              itemsPurchased: 6725,
+              itemRevenue: 7017.728002
+            },
+            {
+              name: "Vodič ohybný 1-CHBU 1x70 guma čierny",
+              itemsViewed: 22,
+              itemsAddedToCart: 1082,
+              itemsPurchased: 572,
+              itemRevenue: 6775.912102
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x1,5 pvc čierny",
+              itemsViewed: 425,
+              itemsAddedToCart: 733594,
+              itemsPurchased: 6358,
+              itemRevenue: 6709.840768
+            },
+            {
+              name: "Panel Fotovoltický JA Solar JAM60D42LB-535W bifacial 535W čierny rám",
+              itemsViewed: 384,
+              itemsAddedToCart: 600,
+              itemsPurchased: 99,
+              itemRevenue: 6505.559165
+            },
+            {
+              name: "Kábel pevný N2XH-J 3x2,5 bezhalogénový čierny",
+              itemsViewed: 166,
+              itemsAddedToCart: 13075,
+              itemsPurchased: 5142,
+              itemRevenue: 6481.268507
+            },
+            {
+              name: "Kábel pevný CXKH-V-O 2x1,5 FE180/P60-R B2ca s funk.odol. hnedý [CHKE-V, PRAFlaDur]",
+              itemsViewed: 214,
+              itemsAddedToCart: 23059,
+              itemsPurchased: 7653,
+              itemRevenue: 6186.734084
+            },
+            {
+              name: "panel fotovoltický JAM54D40-465/LR 465Wp",
+              itemsViewed: 0,
+              itemsAddedToCart: 288,
+              itemsPurchased: 108,
+              itemRevenue: 6132.121226
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x2,5 pvc čierny",
+              itemsViewed: 312,
+              itemsAddedToCart: 14691,
+              itemsPurchased: 3301,
+              itemRevenue: 5645.191274
+            },
+            {
+              name: "Kábel pevný 1-AYKY-J 4x25 pvc čierny",
+              itemsViewed: 408,
+              itemsAddedToCart: 9179,
+              itemsPurchased: 2214,
+              itemRevenue: 5122.200858
+            },
+            {
+              name: "Kábel pevný plochý CYKYLO-J 3x1,5 pvc čierny",
+              itemsViewed: 96,
+              itemsAddedToCart: 14822,
+              itemsPurchased: 8573,
+              itemRevenue: 5088.884295
+            },
+            {
+              name: "Zvodič prepätia PO I 3 PV 81.183 3P 1000VDC/12,5kA FV aplikácie typ 1+2",
+              itemsViewed: 143,
+              itemsAddedToCart: 221,
+              itemsPurchased: 87,
+              itemRevenue: 5083.514097
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x10 B2ca bezhalogénový oranžový [CXKE-R, PRAFlaSafe X]",
+              itemsViewed: 128,
+              itemsAddedToCart: 18978,
+              itemsPurchased: 660,
+              itemRevenue: 4985.408924
+            },
+            {
+              name: "Kábel dátový pevný FTP cat.5e PE AWG24 exteriér [305m]",
+              itemsViewed: 279,
+              itemsAddedToCart: 15337,
+              itemsPurchased: 14123,
+              itemRevenue: 4955.207586
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x25 zeleno/žltý pvc",
+              itemsViewed: 259,
+              itemsAddedToCart: 3211,
+              itemsPurchased: 1494,
+              itemRevenue: 4815.775578
+            },
+            {
+              name: "Kábel pevný NAYY-J 5x50 pvc čierny [(N)AYY, E-AYY, 1-AYKY]",
+              itemsViewed: 37,
+              itemsAddedToCart: 3170,
+              itemsPurchased: 1140,
+              itemRevenue: 4807.321812
+            },
+            {
+              name: "Vodič ohybný NSGAFoU 1x240 1,8/3kV guma čierny",
+              itemsViewed: 37,
+              itemsAddedToCart: 1915,
+              itemsPurchased: 151,
+              itemRevenue: 4789.128961
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 7500,
+              itemsAddedToCart: 12900,
+              itemsPurchased: 2700,
+              itemRevenue: 4741.319807
+            }
+          ]
         },
-        paid: {
-          sessions: 29655,
-          users: 10604,
-          engagementRate: 69.72,
-          avgDuration: "00:02:49",
-        },
-      },
       eshop: {
         items: 1140950,
         revenue: 1475037.77,
@@ -1646,19 +5175,1193 @@ const hagardhal = {
         ],
       },
       ga: {
-        organic: {
-          sessions: 103083,
-          users: 33550,
-          engagementRate: 64.21,
-          avgDuration: "00:02:00",
+          organic: {
+            sessions: 103083,
+            users: 33550,
+            engagementRate: 64.21,
+            avgDuration: "00:02:00"
+          },
+          paid: {
+            sessions: 33458,
+            users: 12119,
+            engagementRate: 68.91,
+            avgDuration: "00:02:33"
+          },
+          snapshot: {
+            activeUsers: 42791,
+            newUsers: 28056,
+            sessions: 136485,
+            engagedSessions: 89049,
+            engagementRate: 0.6524453236619409,
+            totalRevenue: 1711650.14,
+            keyEvents: 34491
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Organic Search",
+              sessions: 79759,
+              engagedSessions: 51331,
+              engagementRate: 0.643576273523991,
+              avgEngagementTimePerSession: 117.58778319688061,
+              eventsPerSession: 11.987424616657682,
+              eventCount: 956105,
+              keyEvents: 17264,
+              sessionKeyEventRate: 0.051918905703431585,
+              totalRevenue: 837992.520005
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 20781,
+              engagedSessions: 15211,
+              engagementRate: 0.7319667003512824,
+              avgEngagementTimePerSession: 183.17400510081325,
+              eventsPerSession: 15.2482556181127,
+              eventCount: 316874,
+              keyEvents: 7262,
+              sessionKeyEventRate: 0.08021750637601656,
+              totalRevenue: 441778.95999
+            },
+            {
+              channelGroup: "Direct",
+              sessions: 17587,
+              engagedSessions: 11201,
+              engagementRate: 0.6368908853130153,
+              avgEngagementTimePerSession: 129.85040086427475,
+              eventsPerSession: 12.942514357195655,
+              eventCount: 227620,
+              keyEvents: 5306,
+              sessionKeyEventRate: 0.07414567578324899,
+              totalRevenue: 220384.340006
+            },
+            {
+              channelGroup: "Cross-network",
+              sessions: 9220,
+              engagedSessions: 6535,
+              engagementRate: 0.7087852494577006,
+              avgEngagementTimePerSession: 127.88362255965293,
+              eventsPerSession: 13.169197396963124,
+              eventCount: 121420,
+              keyEvents: 2270,
+              sessionKeyEventRate: 0.061605206073752715,
+              totalRevenue: 79956.749994
+            },
+            {
+              channelGroup: "Paid Social",
+              sessions: 3189,
+              engagedSessions: 1188,
+              engagementRate: 0.37253057384760113,
+              avgEngagementTimePerSession: 36.74788334901223,
+              eventsPerSession: 6.377547820633428,
+              eventCount: 20338,
+              keyEvents: 204,
+              sessionKeyEventRate: 0.018187519598620257,
+              totalRevenue: 5360.21
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 2845,
+              engagedSessions: 2028,
+              engagementRate: 0.712829525483304,
+              avgEngagementTimePerSession: 171.02425307557118,
+              eventsPerSession: 16.12091388400703,
+              eventCount: 45864,
+              keyEvents: 1377,
+              sessionKeyEventRate: 0.10615114235500879,
+              totalRevenue: 57471.790004
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 1907,
+              engagedSessions: 1023,
+              engagementRate: 0.5364446775039329,
+              avgEngagementTimePerSession: 141.0555846879916,
+              eventsPerSession: 13.254850550603042,
+              eventCount: 25277,
+              keyEvents: 621,
+              sessionKeyEventRate: 0.08442579968536969,
+              totalRevenue: 49851.950002
+            },
+            {
+              channelGroup: "Display",
+              sessions: 626,
+              engagedSessions: 326,
+              engagementRate: 0.5207667731629393,
+              avgEngagementTimePerSession: 88.98242811501598,
+              eventsPerSession: 9.1741214057508,
+              eventCount: 5743,
+              keyEvents: 75,
+              sessionKeyEventRate: 0.027156549520766772,
+              totalRevenue: 3962.73
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 571,
+              engagedSessions: 206,
+              engagementRate: 0.3607705779334501,
+              avgEngagementTimePerSession: 66.49737302977233,
+              eventsPerSession: 8.280210157618214,
+              eventCount: 4728,
+              keyEvents: 112,
+              sessionKeyEventRate: 0.024518388791593695,
+              totalRevenue: 14890.889999
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 22372,
+              newUsers: 14610,
+              returningUsers: 9322,
+              avgEngagementTimePerActiveUser: 264.1141788632901,
+              engagedSessionsPerActiveUser: 1.5798975021930837,
+              eventCount: 617335,
+              keyEvents: 8542,
+              userKeyEventRate: 0.04644720439540145
+            },
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 9564,
+              newUsers: 6354,
+              returningUsers: 6161,
+              avgEngagementTimePerActiveUser: 760.3710349247036,
+              engagedSessionsPerActiveUser: 3.5267542454341556,
+              eventCount: 676342,
+              keyEvents: 17571,
+              userKeyEventRate: 0.1247463419844067
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 4679,
+              newUsers: 2603,
+              returningUsers: 3050,
+              avgEngagementTimePerActiveUser: 775.6693582660433,
+              engagedSessionsPerActiveUser: 3.0418614534636634,
+              eventCount: 301594,
+              keyEvents: 6516,
+              userKeyEventRate: 0.10539736506587336
+            },
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 3427,
+              newUsers: 2547,
+              returningUsers: 1494,
+              avgEngagementTimePerActiveUser: 269.4868735083532,
+              engagedSessionsPerActiveUser: 1.5999403341288783,
+              eventCount: 97408,
+              keyEvents: 1424,
+              userKeyEventRate: 0.050119331742243436
+            },
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 1949,
+              newUsers: 1493,
+              returningUsers: 254,
+              avgEngagementTimePerActiveUser: 62.48296059637913,
+              engagedSessionsPerActiveUser: 0.5814696485623003,
+              eventCount: 19631,
+              keyEvents: 239,
+              userKeyEventRate: 0.01597444089456869
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 462,
+              newUsers: 269,
+              returningUsers: 107,
+              avgEngagementTimePerActiveUser: 77.10714285714286,
+              engagedSessionsPerActiveUser: 0.5459183673469388,
+              eventCount: 4436,
+              keyEvents: 70,
+              userKeyEventRate: 0.017857142857142856
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 290,
+              newUsers: 151,
+              returningUsers: 132,
+              avgEngagementTimePerActiveUser: 234.90357142857144,
+              engagedSessionsPerActiveUser: 1.2714285714285714,
+              eventCount: 6447,
+              keyEvents: 119,
+              userKeyEventRate: 0.07142857142857142
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 47,
+              newUsers: 29,
+              returningUsers: 17,
+              avgEngagementTimePerActiveUser: 166.15217391304347,
+              engagedSessionsPerActiveUser: 1.1304347826086956,
+              eventCount: 774,
+              keyEvents: 10,
+              userKeyEventRate: 0.021739130434782608
+            },
+            {
+              firstUserChannelGroup: "Display",
+              totalUsers: 1,
+              newUsers: 0,
+              returningUsers: 0,
+              avgEngagementTimePerActiveUser: 0,
+              engagedSessionsPerActiveUser: 0,
+              eventCount: 2,
+              keyEvents: 0,
+              userKeyEventRate: 0
+            }
+          ],
+          landingPages: [
+            {
+              path: "/",
+              sessions: 44935,
+              activeUsers: 16910,
+              newUsers: 9326,
+              avgEngagementTimePerSession: 184.13681985089573,
+              totalRevenue: 854572.130009,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "(not set)",
+              sessions: 13776,
+              activeUsers: 6235,
+              newUsers: 16,
+              avgEngagementTimePerSession: 9.799796747967479,
+              totalRevenue: 325.14,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/search",
+              sessions: 8672,
+              activeUsers: 3147,
+              newUsers: 797,
+              avgEngagementTimePerSession: 153.58856088560884,
+              totalRevenue: 81489.589997,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/user-account",
+              sessions: 2417,
+              activeUsers: 957,
+              newUsers: 71,
+              avgEngagementTimePerSession: 184.19114604882085,
+              totalRevenue: 114932.120003,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/objednavky",
+              sessions: 1524,
+              activeUsers: 637,
+              newUsers: 106,
+              avgEngagementTimePerSession: 141.9284776902887,
+              totalRevenue: 19290.090003,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty",
+              sessions: 1383,
+              activeUsers: 915,
+              newUsers: 190,
+              avgEngagementTimePerSession: 51.783080260303684,
+              totalRevenue: 30.76,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik",
+              sessions: 1048,
+              activeUsers: 653,
+              newUsers: 91,
+              avgEngagementTimePerSession: 206.1020992366412,
+              totalRevenue: 73953.209998,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-a-rozvadzace",
+              sessions: 784,
+              activeUsers: 678,
+              newUsers: 182,
+              avgEngagementTimePerSession: 133.56632653061226,
+              totalRevenue: 754.24,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/modul-bateriovy-huawei-luna2000-7-e1-7kwh",
+              sessions: 638,
+              activeUsers: 448,
+              newUsers: 301,
+              avgEngagementTimePerSession: 25.08934169278997,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kable-a-vodice2",
+              sessions: 637,
+              activeUsers: 541,
+              newUsers: 97,
+              avgEngagementTimePerSession: 144.1993720565149,
+              totalRevenue: 2131.94,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/CreateOrder",
+              sessions: 593,
+              activeUsers: 352,
+              newUsers: 42,
+              avgEngagementTimePerSession: 173.5008431703204,
+              totalRevenue: 78166.759998,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-zasuvkove",
+              sessions: 499,
+              activeUsers: 407,
+              newUsers: 167,
+              avgEngagementTimePerSession: 96.61523046092185,
+              totalRevenue: 3.27,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/krabice-instalacne",
+              sessions: 479,
+              activeUsers: 381,
+              newUsers: 113,
+              avgEngagementTimePerSession: 106.03966597077245,
+              totalRevenue: 99.28,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/faktury",
+              sessions: 460,
+              activeUsers: 236,
+              newUsers: 38,
+              avgEngagementTimePerSession: 110.62608695652175,
+              totalRevenue: 1169.86,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svietidla",
+              sessions: 431,
+              activeUsers: 238,
+              newUsers: 50,
+              avgEngagementTimePerSession: 134.78190255220417,
+              totalRevenue: 393.97,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/bleskozvod3",
+              sessions: 398,
+              activeUsers: 301,
+              newUsers: 65,
+              avgEngagementTimePerSession: 204.94472361809045,
+              totalRevenue: 790.78,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/domova-instalacia",
+              sessions: 395,
+              activeUsers: 317,
+              newUsers: 7,
+              avgEngagementTimePerSession: 127.88607594936708,
+              totalRevenue: 1646.959999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/panel-fotovolticky-aiko-neostar-2s-a-mah60mb-500w-mono-500w-celocierny",
+              sessions: 394,
+              activeUsers: 322,
+              newUsers: 167,
+              avgEngagementTimePerSession: 21.129441624365484,
+              totalRevenue: 74.44,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/panely-fotovolticke",
+              sessions: 351,
+              activeUsers: 160,
+              newUsers: 70,
+              avgEngagementTimePerSession: 84.86609686609687,
+              totalRevenue: 1720.41,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kablove-ukoncenia-a-spojky",
+              sessions: 350,
+              activeUsers: 296,
+              newUsers: 80,
+              avgEngagementTimePerSession: 106.05428571428571,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvadzace-elektromerove2",
+              sessions: 341,
+              activeUsers: 295,
+              newUsers: 122,
+              avgEngagementTimePerSession: 77.35483870967742,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/podpery-vedenia1",
+              sessions: 315,
+              activeUsers: 243,
+              newUsers: 56,
+              avgEngagementTimePerSession: 91.07936507936508,
+              totalRevenue: 153.96,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorky-pre-bleskozvod",
+              sessions: 295,
+              activeUsers: 266,
+              newUsers: 74,
+              avgEngagementTimePerSession: 126.52542372881356,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/bratislava",
+              sessions: 293,
+              activeUsers: 239,
+              newUsers: 66,
+              avgEngagementTimePerSession: 26.49146757679181,
+              totalRevenue: 1204.57,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/stoziare-a-prislusenstvo",
+              sessions: 280,
+              activeUsers: 228,
+              newUsers: 69,
+              avgEngagementTimePerSession: 54.246428571428574,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/meni-hybridny-huawei-sun2000-10k-map0-3f-10kw-asymetricky-2xmppt-ip66-1",
+              sessions: 276,
+              activeUsers: 211,
+              newUsers: 107,
+              avgEngagementTimePerSession: 16.81159420289855,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-dizajnove-na-povrch1",
+              sessions: 270,
+              activeUsers: 168,
+              newUsers: 65,
+              avgEngagementTimePerSession: 102.72222222222223,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/rozvodnica-zasuvkova-633-312222-012fb-4x230v-1x16a-1x32a-400v-5p-istena-chranicom",
+              sessions: 264,
+              activeUsers: 190,
+              newUsers: 157,
+              avgEngagementTimePerSession: 11.488636363636363,
+              totalRevenue: 195.21,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/sady-kablovych-spojok",
+              sessions: 257,
+              activeUsers: 225,
+              newUsers: 92,
+              avgEngagementTimePerSession: 88.26070038910505,
+              totalRevenue: 569.55,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady",
+              sessions: 252,
+              activeUsers: 88,
+              newUsers: 19,
+              avgEngagementTimePerSession: 203.29365079365078,
+              totalRevenue: 7554.609999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/rozvadzac-stavebny-bst4-4011-1",
+              sessions: 252,
+              activeUsers: 207,
+              newUsers: 126,
+              avgEngagementTimePerSession: 14.015873015873016,
+              totalRevenue: 444.76,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky2",
+              sessions: 245,
+              activeUsers: 205,
+              newUsers: 52,
+              avgEngagementTimePerSession: 127.26938775510204,
+              totalRevenue: 143.35,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/adaptery-a-redukcie",
+              sessions: 240,
+              activeUsers: 216,
+              newUsers: 104,
+              avgEngagementTimePerSession: 59.854166666666664,
+              totalRevenue: 2.92,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/z-aby-a-listy-plastove",
+              sessions: 233,
+              activeUsers: 214,
+              newUsers: 82,
+              avgEngagementTimePerSession: 110.27038626609442,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/istice-3-fazove",
+              sessions: 229,
+              activeUsers: 203,
+              newUsers: 55,
+              avgEngagementTimePerSession: 73.46288209606988,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-kombinovane-s-nadprudovou-ochranou",
+              sessions: 225,
+              activeUsers: 163,
+              newUsers: 56,
+              avgEngagementTimePerSession: 128.95111111111112,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-dizajnove-zapustene1",
+              sessions: 225,
+              activeUsers: 154,
+              newUsers: 28,
+              avgEngagementTimePerSession: 42.19111111111111,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/modularne-a-istiace-pristroje",
+              sessions: 219,
+              activeUsers: 192,
+              newUsers: 20,
+              avgEngagementTimePerSession: 170.9543378995434,
+              totalRevenue: 279.15,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/nitra",
+              sessions: 218,
+              activeUsers: 168,
+              newUsers: 50,
+              avgEngagementTimePerSession: 102.61467889908256,
+              totalRevenue: 100.4,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/SendOrder",
+              sessions: 218,
+              activeUsers: 81,
+              newUsers: 13,
+              avgEngagementTimePerSession: 110.73853211009174,
+              totalRevenue: 2390.16,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/categories/kablove-chrani-ky-a-kanaly",
+              sessions: 217,
+              activeUsers: 201,
+              newUsers: 77,
+              avgEngagementTimePerSession: 74.33179723502305,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/spinace-vackove",
+              sessions: 216,
+              activeUsers: 171,
+              newUsers: 76,
+              avgEngagementTimePerSession: 91.29629629629629,
+              totalRevenue: 241.38,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorkovnice-a-pripojnice",
+              sessions: 216,
+              activeUsers: 150,
+              newUsers: 42,
+              avgEngagementTimePerSession: 130.45833333333334,
+              totalRevenue: 228.49,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/ayky-nayy-e-ayy",
+              sessions: 212,
+              activeUsers: 184,
+              newUsers: 55,
+              avgEngagementTimePerSession: 71.08490566037736,
+              totalRevenue: 84.02,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-priemyselne",
+              sessions: 212,
+              activeUsers: 190,
+              newUsers: 52,
+              avgEngagementTimePerSession: 87.74528301886792,
+              totalRevenue: 62.14,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-modularne",
+              sessions: 207,
+              activeUsers: 165,
+              newUsers: 25,
+              avgEngagementTimePerSession: 129.03381642512076,
+              totalRevenue: 87.28,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/ulozny-material",
+              sessions: 199,
+              activeUsers: 35,
+              newUsers: 8,
+              avgEngagementTimePerSession: 115.19095477386935,
+              totalRevenue: 67.59,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/fotovoltika",
+              sessions: 198,
+              activeUsers: 156,
+              newUsers: 21,
+              avgEngagementTimePerSession: 83.70707070707071,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zelena-energia",
+              sessions: 194,
+              activeUsers: 165,
+              newUsers: 7,
+              avgEngagementTimePerSession: 157.5979381443299,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorky-radove2",
+              sessions: 193,
+              activeUsers: 102,
+              newUsers: 36,
+              avgEngagementTimePerSession: 73.65284974093264,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "Kábel pevný NYY-O 4x150 pvc čierny",
+              itemsViewed: 0,
+              itemsAddedToCart: 700,
+              itemsPurchased: 700,
+              itemRevenue: 50073.590296
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 62600,
+              itemsAddedToCart: 110918,
+              itemsPurchased: 41500,
+              itemRevenue: 41364.13355
+            },
+            {
+              name: "Vodič pevný NAYY-O 1x240 pvc [(N)AYY, E-AYY, AYY]",
+              itemsViewed: 25,
+              itemsAddedToCart: 19439,
+              itemsPurchased: 8000,
+              itemRevenue: 31943.998761
+            },
+            {
+              name: "Tyč plochá Cu 50x10mm (4m teor. hmotnosť 17,8kg)",
+              itemsViewed: 15,
+              itemsAddedToCart: 3571,
+              itemsPurchased: 1782,
+              itemRevenue: 26413.243697
+            },
+            {
+              name: "Modul batériový HUAWEI LUNA2000-7-E1 7kWh",
+              itemsViewed: 279,
+              itemsAddedToCart: 93,
+              itemsPurchased: 11,
+              itemRevenue: 25944.800001
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x16 zeleno/žltý pvc",
+              itemsViewed: 420,
+              itemsAddedToCart: 33146,
+              itemsPurchased: 12130,
+              itemRevenue: 25364.447333
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny",
+              itemsViewed: 813,
+              itemsAddedToCart: 357749,
+              itemsPurchased: 24608,
+              itemRevenue: 23120.497563
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x10 bezhalogénový čierny",
+              itemsViewed: 74,
+              itemsAddedToCart: 12063,
+              itemsPurchased: 3483,
+              itemRevenue: 22815.396373
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 45100,
+              itemsAddedToCart: 87423,
+              itemsPurchased: 35600,
+              itemRevenue: 22321.510337
+            },
+            {
+              name: "Panel fotovoltický AIKO Neostar 2S A-MAH60Mb-500W mono 500W celočierny",
+              itemsViewed: 226,
+              itemsAddedToCart: 428,
+              itemsPurchased: 270,
+              itemRevenue: 21577.499976
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x6 B2ca bezhalogénový oranžový [CXKE-R, PRAFlaSafe X]",
+              itemsViewed: 117,
+              itemsAddedToCart: 67593,
+              itemsPurchased: 3689,
+              itemRevenue: 16380.828385
+            },
+            {
+              name: "Vodič ohybný NSGAFoU 1x240 1,8/3kV guma čierny",
+              itemsViewed: 25,
+              itemsAddedToCart: 1057,
+              itemsPurchased: 480,
+              itemRevenue: 15120.000021
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x16 pvc čierny",
+              itemsViewed: 288,
+              itemsAddedToCart: 4763,
+              itemsPurchased: 1318,
+              itemRevenue: 14341.895328
+            },
+            {
+              name: "Kábel pevný 1-AYKY-J 4x25 pvc čierny",
+              itemsViewed: 371,
+              itemsAddedToCart: 15930,
+              itemsPurchased: 5849,
+              itemRevenue: 13025.697777
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x4 pvc čierny",
+              itemsViewed: 630,
+              itemsAddedToCart: 17420,
+              itemsPurchased: 4447,
+              itemRevenue: 12558.500679
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x6 pvc čierny",
+              itemsViewed: 630,
+              itemsAddedToCart: 17763,
+              itemsPurchased: 2959,
+              itemRevenue: 11892.425212
+            },
+            {
+              name: "Menič hybridný HUAWEI SUN2000-10KTL-M1-HC 3F 10kW 2xMPPT IP65, WiFi dongle",
+              itemsViewed: 132,
+              itemsAddedToCart: 29,
+              itemsPurchased: 12,
+              itemRevenue: 11548.3059
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x6 zeleno/žltý pvc",
+              itemsViewed: 598,
+              itemsAddedToCart: 36180,
+              itemsPurchased: 14958,
+              itemRevenue: 11542.658772
+            },
+            {
+              name: "Páska uzemňovacia 30x4mm FeZn 1kg=1m",
+              itemsViewed: 16400,
+              itemsAddedToCart: 26012,
+              itemsPurchased: 6800,
+              itemRevenue: 10914.819907
+            },
+            {
+              name: "Kábel pevný N2XH-J 3x2,5 bezhalogénový čierny",
+              itemsViewed: 156,
+              itemsAddedToCart: 17455,
+              itemsPurchased: 8326,
+              itemRevenue: 10510.363903
+            },
+            {
+              name: "Panel fotovoltický DAH Solar DHN-48Z20-DG(BW)-475W bifacial 475W čierny rám",
+              itemsViewed: 379,
+              itemsAddedToCart: 827,
+              itemsPurchased: 178,
+              itemRevenue: 10452.282783
+            },
+            {
+              name: "Modul batériový Pylontech force H3 5,12kWh",
+              itemsViewed: 0,
+              itemsAddedToCart: 13,
+              itemsPurchased: 13,
+              itemRevenue: 9791.096905
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 17200,
+              itemsAddedToCart: 19805,
+              itemsPurchased: 9500,
+              itemRevenue: 9575.497863
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x10 pvc čierny",
+              itemsViewed: 454,
+              itemsAddedToCart: 6128,
+              itemsPurchased: 1322,
+              itemRevenue: 9559.694403
+            },
+            {
+              name: "Kábel ohybný H07RN-F 2x4 guma čierny",
+              itemsViewed: 20,
+              itemsAddedToCart: 4581,
+              itemsPurchased: 4581,
+              itemRevenue: 9514.874051
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x6 bezhalogénový čierny",
+              itemsViewed: 114,
+              itemsAddedToCart: 18407,
+              itemsPurchased: 2305,
+              itemRevenue: 9475.038055
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x2,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 248,
+              itemsAddedToCart: 85562,
+              itemsPurchased: 7070,
+              itemRevenue: 9316.831817
+            },
+            {
+              name: "Kábel ohybný H07RN-F 5G6 guma čierny",
+              itemsViewed: 154,
+              itemsAddedToCart: 3457,
+              itemsPurchased: 1906,
+              itemRevenue: 9184.143435
+            },
+            {
+              name: "Kábel pevný NYY-J 5x150 pvc čierny",
+              itemsViewed: 0,
+              itemsAddedToCart: 100,
+              itemsPurchased: 100,
+              itemRevenue: 8990.720033
+            },
+            {
+              name: "Kábel pevný 1-AYKY-J 3x240+120 pvc čierny",
+              itemsViewed: 111,
+              itemsAddedToCart: 4442,
+              itemsPurchased: 616,
+              itemRevenue: 8641.729639
+            },
+            {
+              name: "Modul batériový HUAWEI LUNA2000-5-E0 5kWh LiFePO4 350-560V/1F 600-980V/3F",
+              itemsViewed: 112,
+              itemsAddedToCart: 37,
+              itemsPurchased: 5,
+              itemRevenue: 8536.535699
+            },
+            {
+              name: "Zvodič prepätia PO I 81.004 B+C+D 4P 280/12,5kA vymeniteľný modul",
+              itemsViewed: 113,
+              itemsAddedToCart: 154,
+              itemsPurchased: 113,
+              itemRevenue: 8212.174603
+            },
+            {
+              name: "Kábel dátový pevný STP (U/FTP) cat.6a LSOH AWG23 interiér [500m]",
+              itemsViewed: 101,
+              itemsAddedToCart: 14733,
+              itemsPurchased: 16000,
+              itemRevenue: 8158.597715
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x10 B2ca bezhalogénový oranžový [CXKE-R, PRAFlaSafe X]",
+              itemsViewed: 89,
+              itemsAddedToCart: 18985,
+              itemsPurchased: 1036,
+              itemRevenue: 7843.52342
+            },
+            {
+              name: "Zvodič prepätia PO I 3 PV 81.183 3P 1000VDC/12,5kA FV aplikácie typ 1+2",
+              itemsViewed: 85,
+              itemsAddedToCart: 428,
+              itemsPurchased: 137,
+              itemRevenue: 7843.208005
+            },
+            {
+              name: "Rozvádzač plechový VX 8245000 1200x1400x500 s MP IP55",
+              itemsViewed: 0,
+              itemsAddedToCart: 11,
+              itemsPurchased: 11,
+              itemRevenue: 7704.311998
+            },
+            {
+              name: "Kábel pevný 1-CYKY-J 5x25 pvc čierny",
+              itemsViewed: 144,
+              itemsAddedToCart: 1150,
+              itemsPurchased: 405,
+              itemRevenue: 7621.471062
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x25 zeleno/žltý pvc",
+              itemsViewed: 217,
+              itemsAddedToCart: 6404,
+              itemsPurchased: 2296,
+              itemRevenue: 7497.355337
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový červený",
+              itemsViewed: 118,
+              itemsAddedToCart: 17876,
+              itemsPurchased: 8327,
+              itemRevenue: 7198.556678
+            },
+            {
+              name: "Kábel pevný plochý CYKYLO-J 3x1,5 pvc čierny",
+              itemsViewed: 133,
+              itemsAddedToCart: 226119,
+              itemsPurchased: 12035,
+              itemRevenue: 6863.196511
+            },
+            {
+              name: "Zvodič prepätia PO I 5 PV 1000V DC/12,5kA 81.220 typ 1+2",
+              itemsViewed: 22,
+              itemsAddedToCart: 110,
+              itemsPurchased: 84,
+              itemRevenue: 6842.37601
+            },
+            {
+              name: "Vodič ohybný NSGAFOU 1x95 1,8/3kV guma čierny",
+              itemsViewed: 12,
+              itemsAddedToCart: 634,
+              itemsPurchased: 534,
+              itemRevenue: 6743.971158
+            },
+            {
+              name: "Kábel ohybný H07RN-F 5G35 guma čierny",
+              itemsViewed: 24,
+              itemsAddedToCart: 261,
+              itemsPurchased: 261,
+              itemRevenue: 6707.700065
+            },
+            {
+              name: "Optimizér HUAWEI MERC-600W-PA0",
+              itemsViewed: 105,
+              itemsAddedToCart: 532,
+              itemsPurchased: 162,
+              itemRevenue: 6530.579197
+            },
+            {
+              name: "Kábel pevný CYKY-J 4x10 pvc čierny",
+              itemsViewed: 245,
+              itemsAddedToCart: 2459,
+              itemsPurchased: 1195,
+              itemRevenue: 6368.566776
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový čierny",
+              itemsViewed: 205,
+              itemsAddedToCart: 20961,
+              itemsPurchased: 7078,
+              itemRevenue: 6215.828996
+            },
+            {
+              name: "Chránič prúdový RX3 402062 25A/4P/30mA 6kA AC",
+              itemsViewed: 34,
+              itemsAddedToCart: 1317,
+              itemsPurchased: 265,
+              itemRevenue: 5951.423295
+            },
+            {
+              name: "Kábel pevný N2XH-J 3x1,5 bezhalogénový čierny",
+              itemsViewed: 192,
+              itemsAddedToCart: 26515,
+              itemsPurchased: 7065,
+              itemRevenue: 5929.195502
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 19900,
+              itemsAddedToCart: 11202,
+              itemsPurchased: 3400,
+              itemRevenue: 5699.999874
+            },
+            {
+              name: "Drôt zvodový 10mm FeZn (1kg 1,61m) bal.50kg",
+              itemsViewed: 612,
+              itemsAddedToCart: 5979,
+              itemsPurchased: 3311,
+              itemRevenue: 5625.70945
+            }
+          ]
         },
-        paid: {
-          sessions: 33458,
-          users: 12119,
-          engagementRate: 68.91,
-          avgDuration: "00:02:33",
-        },
-      },
       eshop: {
         items: 1111915,
         revenue: 1709542.1,
@@ -1677,28 +6380,28 @@ const hagardhal = {
         roas: 107.64,
         costPerPurchase: 2.77,
         cpc: 0.25,
-        campaigns: [
-          { name: 'Hľadáte spoľahlivý elektroinštalačný materiál?', spend: 236.6, clicks: 1530, purchases: 140, value: 35006.99, roas: 147.96 },
-          { name: 'Ad5', spend: 155.32, clicks: 221, purchases: 4, value: 1322.19, roas: 8.51 },
-          { name: 'DAH Solar 465–485 W', spend: 153.41, clicks: 325, purchases: 86, value: 26090.82, roas: 170.07 },
-          { name: 'Nakupujte NOARK počas mája', spend: 51.41, clicks: 73, purchases: 44, value: 18317.56, roas: 356.3 },
-          { name: 'Nová séria HUAWEI LUNA2000-241', spend: 41.7, clicks: 235, purchases: 7, value: 7107.32, roas: 170.44 },
-          { name: 'Hľadáte elektroinštalačný materiál a svietidlá', spend: 39.63, clicks: 30, purchases: 30, value: 7562.55, roas: 190.83 },
-          { name: 'HAGARD:HAL', spend: 38.63, clicks: 53, purchases: 2, value: 123.28, roas: 3.19 },
-          { name: 'Jarné prezentačné dni pokračujú: V júni sa vidíme v Poprade a Trenčíne!', spend: 19.99, clicks: 0, purchases: 0, value: 0, roas: 0 },
-          { name: 'Medzinárodný deň Slnka', spend: 19.97, clicks: 116, purchases: 4, value: 941.73, roas: 47.16 },
-          { name: 'SolaX X3-Hybrid G4: Inteligentné srdce vašej fotovoltiky', spend: 19.96, clicks: 168, purchases: 2, value: 444.88, roas: 22.29 },
-          { name: 'ROZVODNICE ETI', spend: 19.96, clicks: 99, purchases: 2, value: 104.04, roas: 5.21 },
-          { name: 'Skladujte slnečnú energiu inteligentne: Spoznajte batérie SolaX', spend: 19.94, clicks: 146, purchases: 2, value: 212.64, roas: 10.66 },
-          { name: 'Sezónne práce okolo domu?', spend: 19.93, clicks: 181, purchases: 1, value: 146.48, roas: 7.35 },
-          { name: 'Jarné prezentačné dni pokračujú', spend: 15.39, clicks: 0, purchases: 0, value: 0, roas: 0 },
-          { name: 'Huawei SmartGuard-63A-T0-AUT0', spend: 10.71, clicks: 38, purchases: 4, value: 376.1, roas: 35.12 },
-          { name: 'Hľadáte ideálne vonkajšie svetlo?', spend: 10.11, clicks: 64, purchases: 1, value: 298.5, roas: 29.53 },
-          { name: 'Búrková sezóna sa blíži', spend: 9.87, clicks: 256, purchases: 0, value: 0, roas: 0 },
-          { name: 'Zavŕšte s nami prezentačné dni so značkou EMOS: Vidíme sa v Nitre a Dolnom Kubíne!', spend: 9.4, clicks: 0, purchases: 0, value: 0, roas: 0 },
-          { name: 'Vedeli ste, že Paúhor elektrický...', spend: 6.85, clicks: 50, purchases: 0, value: 0, roas: 0 },
-          { name: 'Huawei SmartDesign', spend: 6.37, clicks: 41, purchases: 0, value: 0, roas: 0 },
-          { name: 'Ad6', spend: 5.81, clicks: 6, purchases: 0, value: 0, roas: 0 },
+        ads: [
+          { name: 'Hľadáte spoľahlivý elektroinštalačný materiál?', campaign: '—', spend: 236.6, clicks: 1530, purchases: 140, value: 35006.99, roas: 147.96 },
+          { name: 'Ad5', campaign: '—', spend: 155.32, clicks: 221, purchases: 4, value: 1322.19, roas: 8.51 },
+          { name: 'DAH Solar 465–485 W', campaign: '—', spend: 153.41, clicks: 325, purchases: 86, value: 26090.82, roas: 170.07 },
+          { name: 'Nakupujte NOARK počas mája', campaign: '—', spend: 51.41, clicks: 73, purchases: 44, value: 18317.56, roas: 356.3 },
+          { name: 'Nová séria HUAWEI LUNA2000-241', campaign: '—', spend: 41.7, clicks: 235, purchases: 7, value: 7107.32, roas: 170.44 },
+          { name: 'Hľadáte elektroinštalačný materiál a svietidlá', campaign: '—', spend: 39.63, clicks: 30, purchases: 30, value: 7562.55, roas: 190.83 },
+          { name: 'HAGARD:HAL', campaign: '—', spend: 38.63, clicks: 53, purchases: 2, value: 123.28, roas: 3.19 },
+          { name: 'Jarné prezentačné dni pokračujú: V júni sa vidíme v Poprade a Trenčíne!', campaign: '—', spend: 19.99, clicks: 0, purchases: 0, value: 0, roas: 0 },
+          { name: 'Medzinárodný deň Slnka', campaign: '—', spend: 19.97, clicks: 116, purchases: 4, value: 941.73, roas: 47.16 },
+          { name: 'SolaX X3-Hybrid G4: Inteligentné srdce vašej fotovoltiky', campaign: '—', spend: 19.96, clicks: 168, purchases: 2, value: 444.88, roas: 22.29 },
+          { name: 'ROZVODNICE ETI', campaign: '—', spend: 19.96, clicks: 99, purchases: 2, value: 104.04, roas: 5.21 },
+          { name: 'Skladujte slnečnú energiu inteligentne: Spoznajte batérie SolaX', campaign: '—', spend: 19.94, clicks: 146, purchases: 2, value: 212.64, roas: 10.66 },
+          { name: 'Sezónne práce okolo domu?', campaign: '—', spend: 19.93, clicks: 181, purchases: 1, value: 146.48, roas: 7.35 },
+          { name: 'Jarné prezentačné dni pokračujú', campaign: '—', spend: 15.39, clicks: 0, purchases: 0, value: 0, roas: 0 },
+          { name: 'Huawei SmartGuard-63A-T0-AUT0', campaign: '—', spend: 10.71, clicks: 38, purchases: 4, value: 376.1, roas: 35.12 },
+          { name: 'Hľadáte ideálne vonkajšie svetlo?', campaign: '—', spend: 10.11, clicks: 64, purchases: 1, value: 298.5, roas: 29.53 },
+          { name: 'Búrková sezóna sa blíži', campaign: '—', spend: 9.87, clicks: 256, purchases: 0, value: 0, roas: 0 },
+          { name: 'Zavŕšte s nami prezentačné dni so značkou EMOS: Vidíme sa v Nitre a Dolnom Kubíne!', campaign: '—', spend: 9.4, clicks: 0, purchases: 0, value: 0, roas: 0 },
+          { name: 'Vedeli ste, že Paúhor elektrický...', campaign: '—', spend: 6.85, clicks: 50, purchases: 0, value: 0, roas: 0 },
+          { name: 'Huawei SmartDesign', campaign: '—', spend: 6.37, clicks: 41, purchases: 0, value: 0, roas: 0 },
+          { name: 'Ad6', campaign: '—', spend: 5.81, clicks: 6, purchases: 0, value: 0, roas: 0 },
         ],
       },
       google: {
@@ -1723,19 +6426,1193 @@ const hagardhal = {
         ],
       },
       ga: {
-        organic: {
-          sessions: 102703,
-          users: 35975,
-          engagementRate: 67.37,
-          avgDuration: '00:02:12',
+          organic: {
+            sessions: 102703,
+            users: 35975,
+            engagementRate: 67.37,
+            avgDuration: "00:02:12"
+          },
+          paid: {
+            sessions: 23377,
+            users: 8597,
+            engagementRate: 70.89,
+            avgDuration: "00:02:42"
+          },
+          snapshot: {
+            activeUsers: 41877,
+            newUsers: 26982,
+            sessions: 125311,
+            engagedSessions: 84548,
+            engagementRate: 0.6747053331311696,
+            totalRevenue: 1501969.1800050004,
+            keyEvents: 34614
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Organic Search",
+              sessions: 80317,
+              engagedSessions: 54331,
+              engagementRate: 0.6764570389830298,
+              avgEngagementTimePerSession: 132.98436196571086,
+              eventsPerSession: 12.413586164821893,
+              eventCount: 997022,
+              keyEvents: 19674,
+              sessionKeyEventRate: 0.0587546845624214,
+              totalRevenue: 788824.239999
+            },
+            {
+              channelGroup: "Direct",
+              sessions: 17285,
+              engagedSessions: 11297,
+              engagementRate: 0.6535724616719699,
+              avgEngagementTimePerSession: 138.34122071159965,
+              eventsPerSession: 12.87723459647093,
+              eventCount: 222583,
+              keyEvents: 5436,
+              sessionKeyEventRate: 0.07677176742840613,
+              totalRevenue: 283599.010001
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 15089,
+              engagedSessions: 11125,
+              engagementRate: 0.7372920670687255,
+              avgEngagementTimePerSession: 192.97905759162305,
+              eventsPerSession: 15.794751143216914,
+              eventCount: 238327,
+              keyEvents: 6237,
+              sessionKeyEventRate: 0.09046325137517397,
+              totalRevenue: 316463.610013
+            },
+            {
+              channelGroup: "Cross-network",
+              sessions: 5968,
+              engagedSessions: 4272,
+              engagementRate: 0.7158176943699732,
+              avgEngagementTimePerSession: 129.3339477211796,
+              eventsPerSession: 12.126508042895443,
+              eventCount: 72371,
+              keyEvents: 1571,
+              sessionKeyEventRate: 0.0653485254691689,
+              totalRevenue: 49550.259998
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 2734,
+              engagedSessions: 1929,
+              engagementRate: 0.7055596196049744,
+              avgEngagementTimePerSession: 150.53474762253109,
+              eventsPerSession: 14.910387710314557,
+              eventCount: 40765,
+              keyEvents: 1210,
+              sessionKeyEventRate: 0.10643745427944404,
+              totalRevenue: 41827.079998
+            },
+            {
+              channelGroup: "Paid Social",
+              sessions: 2048,
+              engagedSessions: 869,
+              engagementRate: 0.42431640625,
+              avgEngagementTimePerSession: 50.51123046875,
+              eventsPerSession: 7.5185546875,
+              eventCount: 15398,
+              keyEvents: 195,
+              sessionKeyEventRate: 0.025390625,
+              totalRevenue: 6975.389998
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 913,
+              engagedSessions: 397,
+              engagementRate: 0.4348302300109529,
+              avgEngagementTimePerSession: 129.79299014238774,
+              eventsPerSession: 12.431544359255202,
+              eventCount: 11350,
+              keyEvents: 233,
+              sessionKeyEventRate: 0.0755750273822563,
+              totalRevenue: 12029.129998
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 580,
+              engagedSessions: 126,
+              engagementRate: 0.21724137931034482,
+              avgEngagementTimePerSession: 27.73103448275862,
+              eventsPerSession: 5.824137931034483,
+              eventCount: 3378,
+              keyEvents: 18,
+              sessionKeyEventRate: 0.006896551724137931,
+              totalRevenue: 176.61
+            },
+            {
+              channelGroup: "Display",
+              sessions: 377,
+              engagedSessions: 202,
+              engagementRate: 0.5358090185676393,
+              avgEngagementTimePerSession: 74.54641909814323,
+              eventsPerSession: 7.917771883289125,
+              eventCount: 2985,
+              keyEvents: 40,
+              sessionKeyEventRate: 0.03183023872679045,
+              totalRevenue: 2523.85
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 24090,
+              newUsers: 15681,
+              returningUsers: 9849,
+              avgEngagementTimePerActiveUser: 258.8107548684155,
+              engagedSessionsPerActiveUser: 1.4610737971528747,
+              eventCount: 593571,
+              keyEvents: 9191,
+              userKeyEventRate: 0.049550120390318086
+            },
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 9536,
+              newUsers: 6360,
+              returningUsers: 6267,
+              avgEngagementTimePerActiveUser: 785.546445139713,
+              engagedSessionsPerActiveUser: 3.4412557988995576,
+              eventCount: 651195,
+              keyEvents: 18055,
+              userKeyEventRate: 0.1276297335203366
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 3710,
+              newUsers: 1863,
+              returningUsers: 2675,
+              avgEngagementTimePerActiveUser: 854.8188010899182,
+              engagedSessionsPerActiveUser: 3.346866485013624,
+              eventCount: 265285,
+              keyEvents: 5891,
+              userKeyEventRate: 0.11743869209809264
+            },
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 2476,
+              newUsers: 1813,
+              returningUsers: 1280,
+              avgEngagementTimePerActiveUser: 301.0584498094028,
+              engagedSessionsPerActiveUser: 1.8568403218975011,
+              eventCount: 69330,
+              keyEvents: 1164,
+              userKeyEventRate: 0.05972045743329098
+            },
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 1334,
+              newUsers: 800,
+              returningUsers: 180,
+              avgEngagementTimePerActiveUser: 68.9082332761578,
+              engagedSessionsPerActiveUser: 0.6355060034305318,
+              eventCount: 13251,
+              keyEvents: 156,
+              userKeyEventRate: 0.02058319039451115
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 404,
+              newUsers: 267,
+              returningUsers: 45,
+              avgEngagementTimePerActiveUser: 33.48717948717949,
+              engagedSessionsPerActiveUser: 0.3333333333333333,
+              eventCount: 3142,
+              keyEvents: 22,
+              userKeyEventRate: 0.017094017094017096
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 255,
+              newUsers: 145,
+              returningUsers: 99,
+              avgEngagementTimePerActiveUser: 262.56,
+              engagedSessionsPerActiveUser: 1.352,
+              eventCount: 6003,
+              keyEvents: 121,
+              userKeyEventRate: 0.072
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 69,
+              newUsers: 49,
+              returningUsers: 24,
+              avgEngagementTimePerActiveUser: 290.5,
+              engagedSessionsPerActiveUser: 1.3676470588235294,
+              eventCount: 2380,
+              keyEvents: 14,
+              userKeyEventRate: 0.058823529411764705
+            },
+            {
+              firstUserChannelGroup: "Display",
+              totalUsers: 3,
+              newUsers: 4,
+              returningUsers: 0,
+              avgEngagementTimePerActiveUser: 7,
+              engagedSessionsPerActiveUser: 0.6666666666666666,
+              eventCount: 22,
+              keyEvents: 0,
+              userKeyEventRate: 0
+            }
+          ],
+          landingPages: [
+            {
+              path: "/",
+              sessions: 44168,
+              activeUsers: 16616,
+              newUsers: 9180,
+              avgEngagementTimePerSession: 187.6317922477812,
+              totalRevenue: 773469.090016,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "(not set)",
+              sessions: 13195,
+              activeUsers: 5931,
+              newUsers: 14,
+              avgEngagementTimePerSession: 25.487836301629404,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/search",
+              sessions: 8405,
+              activeUsers: 3037,
+              newUsers: 611,
+              avgEngagementTimePerSession: 142.77013682331946,
+              totalRevenue: 104419.569998,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/user-account",
+              sessions: 2429,
+              activeUsers: 974,
+              newUsers: 90,
+              avgEngagementTimePerSession: 178.93989296006586,
+              totalRevenue: 139894.480001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/objednavky",
+              sessions: 1560,
+              activeUsers: 564,
+              newUsers: 82,
+              avgEngagementTimePerSession: 135.33525641025642,
+              totalRevenue: 17897.97,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty",
+              sessions: 1361,
+              activeUsers: 910,
+              newUsers: 196,
+              avgEngagementTimePerSession: 54.7200587803086,
+              totalRevenue: 1045.52,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik",
+              sessions: 1012,
+              activeUsers: 663,
+              newUsers: 77,
+              avgEngagementTimePerSession: 204.100790513834,
+              totalRevenue: 57969.959998,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-a-rozvadzace",
+              sessions: 635,
+              activeUsers: 572,
+              newUsers: 168,
+              avgEngagementTimePerSession: 155.1811023622047,
+              totalRevenue: 530.74,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/CreateOrder",
+              sessions: 584,
+              activeUsers: 373,
+              newUsers: 53,
+              avgEngagementTimePerSession: 144.04280821917808,
+              totalRevenue: 37622.049997,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/bleskozvod3",
+              sessions: 558,
+              activeUsers: 468,
+              newUsers: 151,
+              avgEngagementTimePerSession: 137.8189964157706,
+              totalRevenue: 1833.99,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kable-a-vodice2",
+              sessions: 538,
+              activeUsers: 450,
+              newUsers: 115,
+              avgEngagementTimePerSession: 171.57620817843866,
+              totalRevenue: 3019.4,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-zasuvkove",
+              sessions: 469,
+              activeUsers: 371,
+              newUsers: 156,
+              avgEngagementTimePerSession: 92.04690831556503,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/faktury",
+              sessions: 404,
+              activeUsers: 239,
+              newUsers: 30,
+              avgEngagementTimePerSession: 96.88118811881188,
+              totalRevenue: 648.38,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/krabice-instalacne",
+              sessions: 397,
+              activeUsers: 303,
+              newUsers: 114,
+              avgEngagementTimePerSession: 137.85138539042822,
+              totalRevenue: 576.63,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-dizajnove-na-povrch1",
+              sessions: 379,
+              activeUsers: 310,
+              newUsers: 139,
+              avgEngagementTimePerSession: 39.80474934036939,
+              totalRevenue: 280.429999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvadzace-elektromerove2",
+              sessions: 373,
+              activeUsers: 318,
+              newUsers: 130,
+              avgEngagementTimePerSession: 78.1260053619303,
+              totalRevenue: 471.7,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svietidla",
+              sessions: 309,
+              activeUsers: 277,
+              newUsers: 77,
+              avgEngagementTimePerSession: 142.46925566343043,
+              totalRevenue: 277.490001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/domova-instalacia",
+              sessions: 304,
+              activeUsers: 238,
+              newUsers: 16,
+              avgEngagementTimePerSession: 294.6578947368421,
+              totalRevenue: 488.97,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorky-pre-bleskozvod",
+              sessions: 300,
+              activeUsers: 243,
+              newUsers: 80,
+              avgEngagementTimePerSession: 103.30666666666667,
+              totalRevenue: 72.76,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/bratislava",
+              sessions: 293,
+              activeUsers: 242,
+              newUsers: 83,
+              avgEngagementTimePerSession: 45.14675767918089,
+              totalRevenue: 124.9,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kablove-ukoncenia-a-spojky",
+              sessions: 284,
+              activeUsers: 259,
+              newUsers: 61,
+              avgEngagementTimePerSession: 129.79929577464787,
+              totalRevenue: 280.67,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/podpery-vedenia1",
+              sessions: 277,
+              activeUsers: 203,
+              newUsers: 54,
+              avgEngagementTimePerSession: 141.26714801444044,
+              totalRevenue: 835.28,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/panely-fotovolticke",
+              sessions: 254,
+              activeUsers: 139,
+              newUsers: 39,
+              avgEngagementTimePerSession: 114.29133858267717,
+              totalRevenue: 790.27,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/stoziare-a-prislusenstvo",
+              sessions: 241,
+              activeUsers: 215,
+              newUsers: 64,
+              avgEngagementTimePerSession: 78.88381742738589,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/elektroinstalacny-material-1",
+              sessions: 229,
+              activeUsers: 208,
+              newUsers: 101,
+              avgEngagementTimePerSession: 131.51965065502182,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/categories/kablove-chrani-ky-a-kanaly",
+              sessions: 228,
+              activeUsers: 202,
+              newUsers: 86,
+              avgEngagementTimePerSession: 63.925438596491226,
+              totalRevenue: 15.96,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/adaptery-a-redukcie",
+              sessions: 226,
+              activeUsers: 205,
+              newUsers: 118,
+              avgEngagementTimePerSession: 58.517699115044245,
+              totalRevenue: 1072.66,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-prudove1",
+              sessions: 222,
+              activeUsers: 169,
+              newUsers: 42,
+              avgEngagementTimePerSession: 135.97297297297297,
+              totalRevenue: 278.26,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/sady-kablovych-spojok",
+              sessions: 219,
+              activeUsers: 193,
+              newUsers: 77,
+              avgEngagementTimePerSession: 84.40639269406392,
+              totalRevenue: 170.46,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/z-aby-a-listy-plastove",
+              sessions: 215,
+              activeUsers: 190,
+              newUsers: 80,
+              avgEngagementTimePerSession: 99.10697674418604,
+              totalRevenue: 22.29,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady",
+              sessions: 212,
+              activeUsers: 96,
+              newUsers: 11,
+              avgEngagementTimePerSession: 198.03301886792454,
+              totalRevenue: 2824.54,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky2",
+              sessions: 212,
+              activeUsers: 189,
+              newUsers: 56,
+              avgEngagementTimePerSession: 133.0943396226415,
+              totalRevenue: 65.08,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/nitra",
+              sessions: 210,
+              activeUsers: 169,
+              newUsers: 58,
+              avgEngagementTimePerSession: 89.38095238095238,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/spinace-vackove",
+              sessions: 208,
+              activeUsers: 185,
+              newUsers: 81,
+              avgEngagementTimePerSession: 75.75,
+              totalRevenue: 30.23,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorkovnice-a-pripojnice",
+              sessions: 207,
+              activeUsers: 163,
+              newUsers: 44,
+              avgEngagementTimePerSession: 104.65700483091787,
+              totalRevenue: 12.87,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/categories/fotovoltika",
+              sessions: 199,
+              activeUsers: 162,
+              newUsers: 63,
+              avgEngagementTimePerSession: 103.04020100502512,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/istice-3-fazove",
+              sessions: 198,
+              activeUsers: 161,
+              newUsers: 58,
+              avgEngagementTimePerSession: 130.5252525252525,
+              totalRevenue: 291.23,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-modularne",
+              sessions: 197,
+              activeUsers: 155,
+              newUsers: 38,
+              avgEngagementTimePerSession: 123.46192893401015,
+              totalRevenue: 1934.78,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-kombinovane-s-nadprudovou-ochranou",
+              sessions: 196,
+              activeUsers: 171,
+              newUsers: 48,
+              avgEngagementTimePerSession: 101.60204081632654,
+              totalRevenue: 65.62,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/zilina",
+              sessions: 196,
+              activeUsers: 160,
+              newUsers: 70,
+              avgEngagementTimePerSession: 53.86734693877551,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/meni-hybridny-solax-g4-x3-hybrid-10-0-d-wifi-3-0-ct-3f-10kw",
+              sessions: 195,
+              activeUsers: 56,
+              newUsers: 102,
+              avgEngagementTimePerSession: 10.98974358974359,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/SendOrder",
+              sessions: 192,
+              activeUsers: 90,
+              newUsers: 11,
+              avgEngagementTimePerSession: 98.19270833333333,
+              totalRevenue: 16009.099998,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/modularne-a-istiace-pristroje",
+              sessions: 189,
+              activeUsers: 168,
+              newUsers: 27,
+              avgEngagementTimePerSession: 174.2275132275132,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/paska-uzem-ovacia-30x4mm-fezn-1kg-1m",
+              sessions: 186,
+              activeUsers: 160,
+              newUsers: 46,
+              avgEngagementTimePerSession: 74.56989247311827,
+              totalRevenue: 197.21,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/povrchova-montaz1",
+              sessions: 185,
+              activeUsers: 77,
+              newUsers: 22,
+              avgEngagementTimePerSession: 118.68648648648649,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/ty-e-zachytavacie-a-prislusenstvo",
+              sessions: 170,
+              activeUsers: 147,
+              newUsers: 46,
+              avgEngagementTimePerSession: 105.81176470588235,
+              totalRevenue: 468.54,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-priemyselne",
+              sessions: 169,
+              activeUsers: 149,
+              newUsers: 52,
+              avgEngagementTimePerSession: 90.01775147928994,
+              totalRevenue: 41.69,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/products/kabel-pevny-cyky-j-3x2-5-pvc-cierny",
+              sessions: 166,
+              activeUsers: 151,
+              newUsers: 60,
+              avgEngagementTimePerSession: 47.19277108433735,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kluce-energeticke-zamky1",
+              sessions: 165,
+              activeUsers: 144,
+              newUsers: 67,
+              avgEngagementTimePerSession: 34.412121212121214,
+              totalRevenue: 2.67,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/kosice",
+              sessions: 163,
+              activeUsers: 134,
+              newUsers: 52,
+              avgEngagementTimePerSession: 39.32515337423313,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "Modul batériový HUAWEI LUNA2000-7-E1 7kWh",
+              itemsViewed: 236,
+              itemsAddedToCart: 117,
+              itemsPurchased: 25,
+              itemRevenue: 58453.039104
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 105400,
+              itemsAddedToCart: 93945,
+              itemsPurchased: 39400,
+              itemRevenue: 41228.670806
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x16 zeleno/žltý pvc",
+              itemsViewed: 429,
+              itemsAddedToCart: 17641,
+              itemsPurchased: 10581,
+              itemRevenue: 23071.775844
+            },
+            {
+              name: "panel fotovoltický JAM54D41-465/LR",
+              itemsViewed: 0,
+              itemsAddedToCart: 360,
+              itemsPurchased: 360,
+              itemRevenue: 22626.935913
+            },
+            {
+              name: "Panel fotovoltický AIKO Neostar 2S A-MAH60Mb-510W mono 510W celočierny",
+              itemsViewed: 278,
+              itemsAddedToCart: 704,
+              itemsPurchased: 309,
+              itemRevenue: 22285.572177
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 83500,
+              itemsAddedToCart: 82436,
+              itemsPurchased: 33200,
+              itemRevenue: 21644.018243
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x16 pvc čierny",
+              itemsViewed: 327,
+              itemsAddedToCart: 7731,
+              itemsPurchased: 1875,
+              itemRevenue: 20521.915015
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny",
+              itemsViewed: 339,
+              itemsAddedToCart: 384923,
+              itemsPurchased: 18737,
+              itemRevenue: 17592.59222
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x6 B2ca bezhalogénový oranžový [CXKE-R, PRAFlaSafe X]",
+              itemsViewed: 141,
+              itemsAddedToCart: 90196,
+              itemsPurchased: 2981,
+              itemRevenue: 14045.358906
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x6 pvc čierny",
+              itemsViewed: 663,
+              itemsAddedToCart: 124658,
+              itemsPurchased: 3085,
+              itemRevenue: 13671.575434
+            },
+            {
+              name: "Optimizér TIGO TS4-A-O 700W, 1500V, 15A, 16-80V, MC4, kabel 0.12m/1.2m",
+              itemsViewed: 47,
+              itemsAddedToCart: 885,
+              itemsPurchased: 425,
+              itemRevenue: 13051.035545
+            },
+            {
+              name: "Modul batériový HUAWEI LUNA2000-5-E0 5kWh LiFePO4 350-560V/1F 600-980V/3F",
+              itemsViewed: 82,
+              itemsAddedToCart: 24,
+              itemsPurchased: 7,
+              itemRevenue: 11897.831598
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 26600,
+              itemsAddedToCart: 25016,
+              itemsPurchased: 10800,
+              itemRevenue: 11306.248698
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x2,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 229,
+              itemsAddedToCart: 74878,
+              itemsPurchased: 7835,
+              itemRevenue: 10634.49719
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x1,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 303,
+              itemsAddedToCart: 92005,
+              itemsPurchased: 11595,
+              itemRevenue: 10396.370487
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x4 pvc čierny",
+              itemsViewed: 582,
+              itemsAddedToCart: 27486,
+              itemsPurchased: 3520,
+              itemRevenue: 10076.32769
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny bal.(500m)",
+              itemsViewed: 523000,
+              itemsAddedToCart: 151009,
+              itemsPurchased: 8500,
+              itemRevenue: 9611.747547
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x10 B2ca bezhalogénový oranžový [CXKE-R, PRAFlaSafe X]",
+              itemsViewed: 98,
+              itemsAddedToCart: 17448,
+              itemsPurchased: 1264,
+              itemRevenue: 9485.415473
+            },
+            {
+              name: "Kábel ohybný H07RN-F 5G6 guma čierny",
+              itemsViewed: 153,
+              itemsAddedToCart: 3555,
+              itemsPurchased: 1721,
+              itemRevenue: 8598.345719
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x2,5 pvc čierny",
+              itemsViewed: 167,
+              itemsAddedToCart: 32539,
+              itemsPurchased: 5061,
+              itemRevenue: 8487.1545
+            },
+            {
+              name: "Modul napájania HUAWEI LUNA2000-10KW-C1 (BMS)",
+              itemsViewed: 104,
+              itemsAddedToCart: 57,
+              itemsPurchased: 10,
+              itemRevenue: 8318.571201
+            },
+            {
+              name: "Vodič pevný NYY-O 1x240 pvc [1-YY, E-YY]",
+              itemsViewed: 24,
+              itemsAddedToCart: 280,
+              itemsPurchased: 280,
+              itemRevenue: 8069.04011
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový čierny",
+              itemsViewed: 208,
+              itemsAddedToCart: 17111,
+              itemsPurchased: 8878,
+              itemRevenue: 7929.007213
+            },
+            {
+              name: "Kábel pevný plochý CYKYLO-J 3x1,5 pvc čierny",
+              itemsViewed: 137,
+              itemsAddedToCart: 167228,
+              itemsPurchased: 13965,
+              itemRevenue: 7919.098874
+            },
+            {
+              name: "Kábel pevný 1-CYKY-J 4x70 pvc čierny",
+              itemsViewed: 48,
+              itemsAddedToCart: 532,
+              itemsPurchased: 222,
+              itemRevenue: 7281.739466
+            },
+            {
+              name: "Panel fotovoltický NORD EcoSeries II DAS-DH108NA-445 bifacial 445W čierny rám transparent",
+              itemsViewed: 290,
+              itemsAddedToCart: 614,
+              itemsPurchased: 129,
+              itemRevenue: 7263.420026
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x6 zeleno/žltý pvc",
+              itemsViewed: 578,
+              itemsAddedToCart: 41431,
+              itemsPurchased: 8762,
+              itemRevenue: 7206.337812
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 37100,
+              itemsAddedToCart: 13200,
+              itemsPurchased: 4000,
+              itemRevenue: 7180.869067
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový červený",
+              itemsViewed: 97,
+              itemsAddedToCart: 14923,
+              itemsPurchased: 8208,
+              itemRevenue: 7154.555333
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x10 pvc čierny",
+              itemsViewed: 513,
+              itemsAddedToCart: 26656,
+              itemsPurchased: 922,
+              itemRevenue: 6847.979611
+            },
+            {
+              name: "Páska uzemňovacia 30x4mm FeZn 1kg=1m",
+              itemsViewed: 17475,
+              itemsAddedToCart: 11359,
+              itemsPurchased: 3800,
+              itemRevenue: 6771.962877
+            },
+            {
+              name: "Kábel pevný plochý CYKYLO-J 3x2,5 pvc čierny",
+              itemsViewed: 147,
+              itemsAddedToCart: 16268,
+              itemsPurchased: 6623,
+              itemRevenue: 6712.820454
+            },
+            {
+              name: "Vodič pevný NA2XS(F)2Y 1x240/25 12,7/22kV XLPE čierny",
+              itemsViewed: 54,
+              itemsAddedToCart: 1261,
+              itemsPurchased: 636,
+              itemRevenue: 6629.982093
+            },
+            {
+              name: "Menič hybridný HUAWEI SUN2000-10KTL-M1-HC 3F 10kW 2xMPPT IP65, WiFi dongle",
+              itemsViewed: 111,
+              itemsAddedToCart: 23,
+              itemsPurchased: 7,
+              itemRevenue: 6613.709999
+            },
+            {
+              name: "Zvodič prepätia PO I 81.004 B+C+D 4P 280/12,5kA vymeniteľný modul",
+              itemsViewed: 136,
+              itemsAddedToCart: 130,
+              itemsPurchased: 85,
+              itemRevenue: 6347.089078
+            },
+            {
+              name: "Kábel pevný JYTY-O 4x1 pvc sivý",
+              itemsViewed: 78,
+              itemsAddedToCart: 10877,
+              itemsPurchased: 9428,
+              itemRevenue: 5860.189085
+            },
+            {
+              name: "Kábel pevný SSKFH-V180 1x2x0,8 P60-90R B2ca tienený [PRAFlaGuard F, JXFE-V]",
+              itemsViewed: 101,
+              itemsAddedToCart: 17589,
+              itemsPurchased: 10442,
+              itemRevenue: 5774.108363
+            },
+            {
+              name: "Keline kábel Cat 7, S/FTP, LSOH, Dca - s2, d2, a1",
+              itemsViewed: 0,
+              itemsAddedToCart: 9000,
+              itemsPurchased: 10000,
+              itemRevenue: 5524.000612
+            },
+            {
+              name: "Optimizér HUAWEI MERC-600W-PA0",
+              itemsViewed: 119,
+              itemsAddedToCart: 518,
+              itemsPurchased: 137,
+              itemRevenue: 5487.251077
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x1,5 pvc čierny",
+              itemsViewed: 106,
+              itemsAddedToCart: 15294,
+              itemsPurchased: 5212,
+              itemRevenue: 5455.538561
+            },
+            {
+              name: "Nabíjačka automobilová HUAWEI AC Smart SCharger-22KT-S0 3F 22kW/32A",
+              itemsViewed: 139,
+              itemsAddedToCart: 27,
+              itemsPurchased: 12,
+              itemRevenue: 5317.239698
+            },
+            {
+              name: "Kábel pevný N2XH-J 3x2,5 bezhalogénový čierny",
+              itemsViewed: 153,
+              itemsAddedToCart: 10030,
+              itemsPurchased: 4025,
+              itemRevenue: 5276.740027
+            },
+            {
+              name: "Vodič ohybný 1-CHBU 1x240 guma čierny",
+              itemsViewed: 25,
+              itemsAddedToCart: 160,
+              itemsPurchased: 110,
+              itemRevenue: 5243.083981
+            },
+            {
+              name: "Z-Zlab 250/100x0,80 F NKZIN ziar. pozink.",
+              itemsViewed: 2,
+              itemsAddedToCart: 0,
+              itemsPurchased: 130,
+              itemRevenue: 5208.254997
+            },
+            {
+              name: "Panel fotovoltický DAH Solar DHN-48Z20-DG(BW)-475W bifacial 475W čierny rám",
+              itemsViewed: 254,
+              itemsAddedToCart: 404,
+              itemsPurchased: 78,
+              itemRevenue: 5076.800008
+            },
+            {
+              name: "Panel LED UGR PL CMFT 600x600 33/30/28W/840 (za 4x18W) 4320/3900/3640lm 4000K IP40/IP20 MP",
+              itemsViewed: 46,
+              itemsAddedToCart: 340,
+              itemsPurchased: 158,
+              itemRevenue: 5075.199969
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny bal.(500m)",
+              itemsViewed: 371500,
+              itemsAddedToCart: 98006,
+              itemsPurchased: 7000,
+              itemRevenue: 5040.349585
+            },
+            {
+              name: "SF FLAT RD SEN 500 P 27W CPS       LEDV",
+              itemsViewed: 0,
+              itemsAddedToCart: 62,
+              itemsPurchased: 62,
+              itemRevenue: 4953.80001
+            },
+            {
+              name: "Zásuvka Valena Life 753180 1-násobná s clonkami biela",
+              itemsViewed: 375,
+              itemsAddedToCart: 13039,
+              itemsPurchased: 1190,
+              itemRevenue: 4775.799923
+            },
+            {
+              name: "Drôt zvodový 8mm AlMgSi (1kg 7,40m) bal.20kg",
+              itemsViewed: 4740,
+              itemsAddedToCart: 2585,
+              itemsPurchased: 600,
+              itemRevenue: 4480.674
+            }
+          ]
         },
-        paid: {
-          sessions: 23377,
-          users: 8597,
-          engagementRate: 70.89,
-          avgDuration: '00:02:42',
-        },
-      },
       eshop: {
         items: 1077578,
         revenue: 1500974.43,
@@ -1754,27 +7631,27 @@ const hagardhal = {
         roas: 82.04,
         costPerPurchase: 3.82,
         cpc: 0.31,
-        campaigns: [
-          { name: 'Hľadáte spoľahlivý elektroinštalačný materiál?', spend: 236.75, clicks: 883, purchases: 83, value: 27094.65, roas: 114.44 },
-          { name: 'Nová séria HUAWEI LUNA2000-241', spend: 185.56, clicks: 707, purchases: 68, value: 14651.88, roas: 78.96 },
-          { name: 'Ad5', spend: 152.4, clicks: 224, purchases: 8, value: 1071.69, roas: 7.03 },
-          { name: 'Hľadáte elektroinštalačný materiál a svietidlá', spend: 92.15, clicks: 66, purchases: 48, value: 26299.62, roas: 285.4 },
-          { name: 'SolaX TRENE', spend: 90.62, clicks: 98, purchases: 19, value: 6029.44, roas: 66.54 },
-          { name: 'DAH Solar 465–485 W', spend: 63.41, clicks: 161, purchases: 21, value: 3623.58, roas: 57.15 },
-          { name: 'HAGARD:HAL', spend: 41.07, clicks: 58, purchases: 0, value: 0, roas: 0 },
-          { name: 'Rýchly test pre elektrikára', spend: 25, clicks: 0, purchases: 0, value: 0, roas: 0 },
-          { name: 'Modernizujte osvetlenie jednoducho a bez zbytočných stavebných úprav', spend: 19.96, clicks: 146, purchases: 3, value: 64.44, roas: 3.23 },
-          { name: 'Novinka: Elegantný termostat FINDER radu 1T, ktorý splynie so stenou', spend: 19.95, clicks: 120, purchases: 11, value: 4220.99, roas: 211.58 },
-          { name: 'Elektro okolo domu?', spend: 19.91, clicks: 199, purchases: 1, value: 256.7, roas: 12.89 },
-          { name: 'Vedeli ste, že Paúhor elektrický...', spend: 13.04, clicks: 146, purchases: 0, value: 0, roas: 0 },
-          { name: 'SKY od DANIELLA', spend: 12.72, clicks: 50, purchases: 3, value: 505.04, roas: 39.7 },
-          { name: 'Zavŕšte s nami prezentačné dni so značkou EMOS: Vidíme sa v Nitre a Dolnom Kubíne!', spend: 10.6, clicks: 0, purchases: 0, value: 0, roas: 0 },
-          { name: 'Búrková sezóna sa blíži', spend: 10.08, clicks: 250, purchases: 0, value: 0, roas: 0 },
-          { name: 'Nehrajte sa s ohňom', spend: 9.99, clicks: 0, purchases: 1, value: 46.61, roas: 4.67 },
-          { name: 'Vypadáva vám WiFi počas dôležitého hovoru?', spend: 8.19, clicks: 119, purchases: 0, value: 0, roas: 0 },
-          { name: 'Ad6', spend: 6.81, clicks: 10, purchases: 0, value: 0, roas: 0 },
-          { name: 'Huawei SmartGuard-63A-T0-AUT0', spend: 2.98, clicks: 8, purchases: 2, value: 106.02, roas: 35.58 },
-          { name: 'SolaX Smart EV Charger G2', spend: 2.34, clicks: 35, purchases: 0, value: 0, roas: 0 },
+        ads: [
+          { name: 'Hľadáte spoľahlivý elektroinštalačný materiál?', campaign: '—', spend: 236.75, clicks: 883, purchases: 83, value: 27094.65, roas: 114.44 },
+          { name: 'Nová séria HUAWEI LUNA2000-241', campaign: '—', spend: 185.56, clicks: 707, purchases: 68, value: 14651.88, roas: 78.96 },
+          { name: 'Ad5', campaign: '—', spend: 152.4, clicks: 224, purchases: 8, value: 1071.69, roas: 7.03 },
+          { name: 'Hľadáte elektroinštalačný materiál a svietidlá', campaign: '—', spend: 92.15, clicks: 66, purchases: 48, value: 26299.62, roas: 285.4 },
+          { name: 'SolaX TRENE', campaign: '—', spend: 90.62, clicks: 98, purchases: 19, value: 6029.44, roas: 66.54 },
+          { name: 'DAH Solar 465–485 W', campaign: '—', spend: 63.41, clicks: 161, purchases: 21, value: 3623.58, roas: 57.15 },
+          { name: 'HAGARD:HAL', campaign: '—', spend: 41.07, clicks: 58, purchases: 0, value: 0, roas: 0 },
+          { name: 'Rýchly test pre elektrikára', campaign: '—', spend: 25, clicks: 0, purchases: 0, value: 0, roas: 0 },
+          { name: 'Modernizujte osvetlenie jednoducho a bez zbytočných stavebných úprav', campaign: '—', spend: 19.96, clicks: 146, purchases: 3, value: 64.44, roas: 3.23 },
+          { name: 'Novinka: Elegantný termostat FINDER radu 1T, ktorý splynie so stenou', campaign: '—', spend: 19.95, clicks: 120, purchases: 11, value: 4220.99, roas: 211.58 },
+          { name: 'Elektro okolo domu?', campaign: '—', spend: 19.91, clicks: 199, purchases: 1, value: 256.7, roas: 12.89 },
+          { name: 'Vedeli ste, že Paúhor elektrický...', campaign: '—', spend: 13.04, clicks: 146, purchases: 0, value: 0, roas: 0 },
+          { name: 'SKY od DANIELLA', campaign: '—', spend: 12.72, clicks: 50, purchases: 3, value: 505.04, roas: 39.7 },
+          { name: 'Zavŕšte s nami prezentačné dni so značkou EMOS: Vidíme sa v Nitre a Dolnom Kubíne!', campaign: '—', spend: 10.6, clicks: 0, purchases: 0, value: 0, roas: 0 },
+          { name: 'Búrková sezóna sa blíži', campaign: '—', spend: 10.08, clicks: 250, purchases: 0, value: 0, roas: 0 },
+          { name: 'Nehrajte sa s ohňom', campaign: '—', spend: 9.99, clicks: 0, purchases: 1, value: 46.61, roas: 4.67 },
+          { name: 'Vypadáva vám WiFi počas dôležitého hovoru?', campaign: '—', spend: 8.19, clicks: 119, purchases: 0, value: 0, roas: 0 },
+          { name: 'Ad6', campaign: '—', spend: 6.81, clicks: 10, purchases: 0, value: 0, roas: 0 },
+          { name: 'Huawei SmartGuard-63A-T0-AUT0', campaign: '—', spend: 2.98, clicks: 8, purchases: 2, value: 106.02, roas: 35.58 },
+          { name: 'SolaX Smart EV Charger G2', campaign: '—', spend: 2.34, clicks: 35, purchases: 0, value: 0, roas: 0 },
         ],
       },
       google: {
@@ -1800,19 +7677,1216 @@ const hagardhal = {
         ],
       },
       ga: {
-        organic: {
-          sessions: 98892,
-          users: 33675,
-          engagementRate: 66.84,
-          avgDuration: '00:02:10',
+          organic: {
+            sessions: 98892,
+            users: 33675,
+            engagementRate: 66.84,
+            avgDuration: "00:02:10"
+          },
+          paid: {
+            sessions: 27189,
+            users: 9059,
+            engagementRate: 71.83,
+            avgDuration: "00:02:42"
+          },
+          snapshot: {
+            activeUsers: 39808,
+            newUsers: 25580,
+            sessions: 126221,
+            engagedSessions: 86254,
+            engagementRate: 0.6833569691255813,
+            totalRevenue: 1606894.3300209998,
+            keyEvents: 38249
+          },
+          trafficAcquisition: [
+            {
+              channelGroup: "Organic Search",
+              sessions: 76232,
+              engagedSessions: 52134,
+              engagementRate: 0.6838860321124987,
+              avgEngagementTimePerSession: 128.45357592612027,
+              eventsPerSession: 12.78363416937769,
+              eventCount: 974522,
+              keyEvents: 20537,
+              sessionKeyEventRate: 0.06316245146395215,
+              totalRevenue: 877265.450009
+            },
+            {
+              channelGroup: "Paid Search",
+              sessions: 18455,
+              engagedSessions: 13746,
+              engagementRate: 0.7448387970739637,
+              avgEngagementTimePerSession: 186.51947981576808,
+              eventsPerSession: 15.629585478190192,
+              eventCount: 288444,
+              keyEvents: 7538,
+              sessionKeyEventRate: 0.08935247900298023,
+              totalRevenue: 386223.710017
+            },
+            {
+              channelGroup: "Direct",
+              sessions: 17543,
+              engagedSessions: 11553,
+              engagementRate: 0.6585532691101864,
+              avgEngagementTimePerSession: 133.55896938950008,
+              eventsPerSession: 13.218206692127914,
+              eventCount: 231887,
+              keyEvents: 6202,
+              sessionKeyEventRate: 0.08561819529156929,
+              totalRevenue: 219130.08999
+            },
+            {
+              channelGroup: "Cross-network",
+              sessions: 7450,
+              engagedSessions: 5173,
+              engagementRate: 0.6943624161073826,
+              avgEngagementTimePerSession: 118.74255033557047,
+              eventsPerSession: 11.77489932885906,
+              eventCount: 87723,
+              keyEvents: 1868,
+              sessionKeyEventRate: 0.06630872483221477,
+              totalRevenue: 57028.650008
+            },
+            {
+              channelGroup: "Referral",
+              sessions: 2900,
+              engagedSessions: 2034,
+              engagementRate: 0.7013793103448276,
+              avgEngagementTimePerSession: 148.8951724137931,
+              eventsPerSession: 15.376206896551723,
+              eventCount: 44591,
+              keyEvents: 1416,
+              sessionKeyEventRate: 0.11206896551724138,
+              totalRevenue: 42060.429997
+            },
+            {
+              channelGroup: "Unassigned",
+              sessions: 1410,
+              engagedSessions: 676,
+              engagementRate: 0.4794326241134752,
+              avgEngagementTimePerSession: 186.9049645390071,
+              eventsPerSession: 13.310638297872341,
+              eventCount: 18768,
+              keyEvents: 455,
+              sessionKeyEventRate: 0.08014184397163121,
+              totalRevenue: 18374.649999
+            },
+            {
+              channelGroup: "Paid Social",
+              sessions: 1166,
+              engagedSessions: 510,
+              engagementRate: 0.43739279588336194,
+              avgEngagementTimePerSession: 52.11578044596912,
+              eventsPerSession: 7.434819897084048,
+              eventCount: 8669,
+              keyEvents: 87,
+              sessionKeyEventRate: 0.02058319039451115,
+              totalRevenue: 792.07
+            },
+            {
+              channelGroup: "Organic Social",
+              sessions: 580,
+              engagedSessions: 168,
+              engagementRate: 0.2896551724137931,
+              avgEngagementTimePerSession: 37.525862068965516,
+              eventsPerSession: 6.510344827586207,
+              eventCount: 3776,
+              keyEvents: 31,
+              sessionKeyEventRate: 0.02586206896551724,
+              totalRevenue: 773.86
+            },
+            {
+              channelGroup: "Display",
+              sessions: 376,
+              engagedSessions: 187,
+              engagementRate: 0.4973404255319149,
+              avgEngagementTimePerSession: 97.01595744680851,
+              eventsPerSession: 9.372340425531915,
+              eventCount: 3524,
+              keyEvents: 87,
+              sessionKeyEventRate: 0.05053191489361702,
+              totalRevenue: 3728.020001
+            },
+            {
+              channelGroup: "AI Assistant",
+              sessions: 109,
+              engagedSessions: 73,
+              engagementRate: 0.6697247706422018,
+              avgEngagementTimePerSession: 110.8348623853211,
+              eventsPerSession: 9.963302752293577,
+              eventCount: 1086,
+              keyEvents: 28,
+              sessionKeyEventRate: 0.045871559633027525,
+              totalRevenue: 1517.4
+            }
+          ],
+          userAcquisition: [
+            {
+              firstUserChannelGroup: "Organic Search",
+              totalUsers: 21576,
+              newUsers: 13698,
+              returningUsers: 9373,
+              avgEngagementTimePerActiveUser: 264.27013454614365,
+              engagedSessionsPerActiveUser: 1.5470911502747773,
+              eventCount: 567919,
+              keyEvents: 9526,
+              userKeyEventRate: 0.05088118249005116
+            },
+            {
+              firstUserChannelGroup: "Direct",
+              totalUsers: 9841,
+              newUsers: 6407,
+              returningUsers: 6627,
+              avgEngagementTimePerActiveUser: 773.9319333816076,
+              engagedSessionsPerActiveUser: 3.632460949622427,
+              eventCount: 707639,
+              keyEvents: 20470,
+              userKeyEventRate: 0.13799524154339504
+            },
+            {
+              firstUserChannelGroup: "Paid Search",
+              totalUsers: 4042,
+              newUsers: 2350,
+              returningUsers: 2697,
+              avgEngagementTimePerActiveUser: 833.9716417910448,
+              engagedSessionsPerActiveUser: 3.421144278606965,
+              eventCount: 292629,
+              keyEvents: 6691,
+              userKeyEventRate: 0.11766169154228856
+            },
+            {
+              firstUserChannelGroup: "Cross-network",
+              totalUsers: 3003,
+              newUsers: 2103,
+              returningUsers: 1313,
+              avgEngagementTimePerActiveUser: 253.65406162464987,
+              engagedSessionsPerActiveUser: 1.6211484593837535,
+              eventCount: 75691,
+              keyEvents: 1279,
+              userKeyEventRate: 0.05392156862745098
+            },
+            {
+              firstUserChannelGroup: "Paid Social",
+              totalUsers: 712,
+              newUsers: 554,
+              returningUsers: 77,
+              avgEngagementTimePerActiveUser: 78.02061855670104,
+              engagedSessionsPerActiveUser: 0.6568483063328424,
+              eventCount: 7628,
+              keyEvents: 72,
+              userKeyEventRate: 0.014727540500736377
+            },
+            {
+              firstUserChannelGroup: "Organic Social",
+              totalUsers: 336,
+              newUsers: 290,
+              returningUsers: 47,
+              avgEngagementTimePerActiveUser: 36.90930787589499,
+              engagedSessionsPerActiveUser: 0.36992840095465396,
+              eventCount: 3311,
+              keyEvents: 15,
+              userKeyEventRate: 0.011933174224343675
+            },
+            {
+              firstUserChannelGroup: "Referral",
+              totalUsers: 232,
+              newUsers: 127,
+              returningUsers: 91,
+              avgEngagementTimePerActiveUser: 287.2073732718894,
+              engagedSessionsPerActiveUser: 1.4700460829493087,
+              eventCount: 5888,
+              keyEvents: 130,
+              userKeyEventRate: 0.055299539170506916
+            },
+            {
+              firstUserChannelGroup: "AI Assistant",
+              totalUsers: 53,
+              newUsers: 35,
+              returningUsers: 10,
+              avgEngagementTimePerActiveUser: 134.80392156862746,
+              engagedSessionsPerActiveUser: 0.9607843137254902,
+              eventCount: 789,
+              keyEvents: 27,
+              userKeyEventRate: 0.09803921568627451
+            },
+            {
+              firstUserChannelGroup: "Unassigned",
+              totalUsers: 12,
+              newUsers: 15,
+              returningUsers: 4,
+              avgEngagementTimePerActiveUser: 1411.4,
+              engagedSessionsPerActiveUser: 4.8,
+              eventCount: 1491,
+              keyEvents: 39,
+              userKeyEventRate: 0.1
+            },
+            {
+              firstUserChannelGroup: "Display",
+              totalUsers: 1,
+              newUsers: 1,
+              returningUsers: 0,
+              avgEngagementTimePerActiveUser: 0,
+              engagedSessionsPerActiveUser: 0,
+              eventCount: 5,
+              keyEvents: 0,
+              userKeyEventRate: 0
+            }
+          ],
+          landingPages: [
+            {
+              path: "/",
+              sessions: 45132,
+              activeUsers: 15918,
+              newUsers: 8819,
+              avgEngagementTimePerSession: 187.15394841797394,
+              totalRevenue: 771540.740005,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "(not set)",
+              sessions: 14202,
+              activeUsers: 6438,
+              newUsers: 10,
+              avgEngagementTimePerSession: 11.557175045768203,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/search",
+              sessions: 8702,
+              activeUsers: 3042,
+              newUsers: 535,
+              avgEngagementTimePerSession: 137.725695242473,
+              totalRevenue: 103272.680008,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/user-account",
+              sessions: 2558,
+              activeUsers: 992,
+              newUsers: 89,
+              avgEngagementTimePerSession: 181.096168881939,
+              totalRevenue: 166802.840009,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty",
+              sessions: 1590,
+              activeUsers: 1066,
+              newUsers: 231,
+              avgEngagementTimePerSession: 58.376100628930814,
+              totalRevenue: 3688.37,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/objednavky",
+              sessions: 1451,
+              activeUsers: 641,
+              newUsers: 112,
+              avgEngagementTimePerSession: 159.01791867677463,
+              totalRevenue: 36363.28,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik",
+              sessions: 1134,
+              activeUsers: 682,
+              newUsers: 65,
+              avgEngagementTimePerSession: 196.63403880070547,
+              totalRevenue: 69772.450001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kable-a-vodice2",
+              sessions: 742,
+              activeUsers: 603,
+              newUsers: 173,
+              avgEngagementTimePerSession: 139.0458221024259,
+              totalRevenue: 2533.36,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-a-rozvadzace",
+              sessions: 685,
+              activeUsers: 616,
+              newUsers: 160,
+              avgEngagementTimePerSession: 166.34014598540145,
+              totalRevenue: 4397.33,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/faktury",
+              sessions: 583,
+              activeUsers: 250,
+              newUsers: 62,
+              avgEngagementTimePerSession: 113.21269296740995,
+              totalRevenue: 4195.24,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/CreateOrder",
+              sessions: 545,
+              activeUsers: 368,
+              newUsers: 53,
+              avgEngagementTimePerSession: 161.5926605504587,
+              totalRevenue: 77641.570003,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/bleskozvod3",
+              sessions: 522,
+              activeUsers: 436,
+              newUsers: 127,
+              avgEngagementTimePerSession: 130.84291187739464,
+              totalRevenue: 2632.539999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/krabice-instalacne",
+              sessions: 439,
+              activeUsers: 394,
+              newUsers: 101,
+              avgEngagementTimePerSession: 104.57630979498862,
+              totalRevenue: 20.25,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-zasuvkove",
+              sessions: 429,
+              activeUsers: 324,
+              newUsers: 137,
+              avgEngagementTimePerSession: 112.73193473193473,
+              totalRevenue: 3650.77,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvadzace-elektromerove2",
+              sessions: 326,
+              activeUsers: 262,
+              newUsers: 117,
+              avgEngagementTimePerSession: 49.99079754601227,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svietidla",
+              sessions: 326,
+              activeUsers: 282,
+              newUsers: 66,
+              avgEngagementTimePerSession: 156.38036809815952,
+              totalRevenue: 155.02,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/domova-instalacia",
+              sessions: 316,
+              activeUsers: 245,
+              newUsers: 15,
+              avgEngagementTimePerSession: 205.2405063291139,
+              totalRevenue: 1375.5,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/kablove-ukoncenia-a-spojky",
+              sessions: 313,
+              activeUsers: 273,
+              newUsers: 63,
+              avgEngagementTimePerSession: 129.89456869009584,
+              totalRevenue: 17.79,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky2",
+              sessions: 313,
+              activeUsers: 273,
+              newUsers: 90,
+              avgEngagementTimePerSession: 100.51757188498402,
+              totalRevenue: 42.15,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorky-pre-bleskozvod",
+              sessions: 271,
+              activeUsers: 222,
+              newUsers: 86,
+              avgEngagementTimePerSession: 104.91881918819188,
+              totalRevenue: 152.45,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/podpery-vedenia1",
+              sessions: 249,
+              activeUsers: 84,
+              newUsers: 39,
+              avgEngagementTimePerSession: 126.38955823293173,
+              totalRevenue: 112.86,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/bratislava",
+              sessions: 246,
+              activeUsers: 184,
+              newUsers: 64,
+              avgEngagementTimePerSession: 43.0609756097561,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/z-aby-a-listy-plastove",
+              sessions: 240,
+              activeUsers: 220,
+              newUsers: 86,
+              avgEngagementTimePerSession: 96.4375,
+              totalRevenue: 562.919999,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/sady-kablovych-spojok",
+              sessions: 238,
+              activeUsers: 205,
+              newUsers: 65,
+              avgEngagementTimePerSession: 78.22268907563026,
+              totalRevenue: 149.24,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/panely-fotovolticke",
+              sessions: 231,
+              activeUsers: 133,
+              newUsers: 34,
+              avgEngagementTimePerSession: 112.16450216450217,
+              totalRevenue: 4937.97,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady",
+              sessions: 225,
+              activeUsers: 143,
+              newUsers: 14,
+              avgEngagementTimePerSession: 156.82666666666665,
+              totalRevenue: 5570.33,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-dizajnove-na-povrch1",
+              sessions: 224,
+              activeUsers: 184,
+              newUsers: 55,
+              avgEngagementTimePerSession: 106.51785714285714,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/rozvodnice-modularne",
+              sessions: 217,
+              activeUsers: 172,
+              newUsers: 35,
+              avgEngagementTimePerSession: 127.71428571428571,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/stoziare-a-prislusenstvo",
+              sessions: 216,
+              activeUsers: 178,
+              newUsers: 51,
+              avgEngagementTimePerSession: 91.39351851851852,
+              totalRevenue: 293.68,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/adaptery-a-redukcie",
+              sessions: 212,
+              activeUsers: 178,
+              newUsers: 92,
+              avgEngagementTimePerSession: 68.91037735849056,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-prudove1",
+              sessions: 205,
+              activeUsers: 137,
+              newUsers: 40,
+              avgEngagementTimePerSession: 87.77073170731707,
+              totalRevenue: 38.26,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zvodice-prepatia2",
+              sessions: 202,
+              activeUsers: 153,
+              newUsers: 29,
+              avgEngagementTimePerSession: 71.71782178217822,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kosik/SendOrder",
+              sessions: 202,
+              activeUsers: 130,
+              newUsers: 13,
+              avgEngagementTimePerSession: 74.58415841584159,
+              totalRevenue: 3067.840001,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-datove-a-telefonne1",
+              sessions: 200,
+              activeUsers: 189,
+              newUsers: 77,
+              avgEngagementTimePerSession: 31.5,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/doklady/dodacie-listy",
+              sessions: 199,
+              activeUsers: 120,
+              newUsers: 26,
+              avgEngagementTimePerSession: 142.2964824120603,
+              totalRevenue: 348.15,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/modularne-a-istiace-pristroje",
+              sessions: 199,
+              activeUsers: 171,
+              newUsers: 14,
+              avgEngagementTimePerSession: 194.9246231155779,
+              totalRevenue: 720.1,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/nitra",
+              sessions: 199,
+              activeUsers: 160,
+              newUsers: 51,
+              avgEngagementTimePerSession: 63.336683417085425,
+              totalRevenue: 335.7,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/chranice-kombinovane-s-nadprudovou-ochranou",
+              sessions: 194,
+              activeUsers: 172,
+              newUsers: 55,
+              avgEngagementTimePerSession: 94.71134020618557,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/istice-3-fazove",
+              sessions: 194,
+              activeUsers: 150,
+              newUsers: 40,
+              avgEngagementTimePerSession: 141.9536082474227,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/categories/kablove-chrani-ky-a-kanaly",
+              sessions: 188,
+              activeUsers: 143,
+              newUsers: 75,
+              avgEngagementTimePerSession: 70.36702127659575,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/svorkovnice-a-pripojnice",
+              sessions: 186,
+              activeUsers: 165,
+              newUsers: 24,
+              avgEngagementTimePerSession: 111.71505376344086,
+              totalRevenue: 261.95,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/spinace-vackove",
+              sessions: 178,
+              activeUsers: 167,
+              newUsers: 74,
+              avgEngagementTimePerSession: 76.91573033707866,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/zasuvky-priemyselne",
+              sessions: 175,
+              activeUsers: 132,
+              newUsers: 44,
+              avgEngagementTimePerSession: 81.56571428571428,
+              totalRevenue: 145.32,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/categories/fotovoltika",
+              sessions: 171,
+              activeUsers: 141,
+              newUsers: 42,
+              avgEngagementTimePerSession: 69.64912280701755,
+              totalRevenue: 17.36,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/ventilatory-instalacne-domove",
+              sessions: 171,
+              activeUsers: 151,
+              newUsers: 58,
+              avgEngagementTimePerSession: 71.85380116959064,
+              totalRevenue: 40.18,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kontakty/zilina",
+              sessions: 170,
+              activeUsers: 146,
+              newUsers: 53,
+              avgEngagementTimePerSession: 56.53529411764706,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/produkty/paska-uzem-ovacia-30x4mm-fezn-1kg-1m",
+              sessions: 169,
+              activeUsers: 134,
+              newUsers: 34,
+              avgEngagementTimePerSession: 69.4733727810651,
+              totalRevenue: 1708.51,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/elektroinstalacny-material-1",
+              sessions: 168,
+              activeUsers: 152,
+              newUsers: 74,
+              avgEngagementTimePerSession: 126.27380952380952,
+              totalRevenue: 0,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/ulozny-material",
+              sessions: 164,
+              activeUsers: 135,
+              newUsers: 3,
+              avgEngagementTimePerSession: 147.09756097560975,
+              totalRevenue: 519.9,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            },
+            {
+              path: "/kategorie/ayky-nayy-e-ayy",
+              sessions: 163,
+              activeUsers: 140,
+              newUsers: 32,
+              avgEngagementTimePerSession: 92.26993865030674,
+              totalRevenue: 25.96,
+              bounceRate: null,
+              addToCart: null,
+              checkouts: null,
+              purchases: null
+            }
+          ],
+          ecommerceItems: [
+            {
+              name: "Vodič pevný NA2XS(F)2Y 1x150/25 12,7/22kV XLPE čierny",
+              itemsViewed: 26,
+              itemsAddedToCart: 10780,
+              itemsPurchased: 4350,
+              itemRevenue: 40595.504504
+            },
+            {
+              name: "KSA400ED45010 canalis dist.ved. 400 A / 5 M 10 VYV.",
+              itemsViewed: 0,
+              itemsAddedToCart: 63,
+              itemsPurchased: 63,
+              itemRevenue: 39969.997187
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 105000,
+              itemsAddedToCart: 120335,
+              itemsPurchased: 29900,
+              itemRevenue: 34453.142157
+            },
+            {
+              name: "Panel fotovoltický DAH Solar DHN-48Z20-DG(BW)-475W bifacial 475W čierny rám",
+              itemsViewed: 206,
+              itemsAddedToCart: 617,
+              itemsPurchased: 365,
+              itemRevenue: 24965.66674
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x16 zeleno/žltý pvc",
+              itemsViewed: 389,
+              itemsAddedToCart: 32587,
+              itemsPurchased: 9272,
+              itemRevenue: 20848.884773
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x6 pvc čierny",
+              itemsViewed: 764,
+              itemsAddedToCart: 25333,
+              itemsPurchased: 4811,
+              itemRevenue: 20741.454184
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 77800,
+              itemsAddedToCart: 92825,
+              itemsPurchased: 25400,
+              itemRevenue: 18397.440086
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x16 pvc čierny",
+              itemsViewed: 306,
+              itemsAddedToCart: 3877,
+              itemsPurchased: 1503,
+              itemRevenue: 18180.229649
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x10 pvc čierny",
+              itemsViewed: 493,
+              itemsAddedToCart: 11258,
+              itemsPurchased: 2221,
+              itemRevenue: 16307.458449
+            },
+            {
+              name: "Kábel pevný 1-AYKY-J 3x240+120 pvc čierny",
+              itemsViewed: 118,
+              itemsAddedToCart: 7442,
+              itemsPurchased: 1089,
+              itemRevenue: 15742.10801
+            },
+            {
+              name: "Panel fotovoltický DAH Solar DHN-54Z16/DG(BB) bifacial 500W celočierny",
+              itemsViewed: 289,
+              itemsAddedToCart: 797,
+              itemsPurchased: 221,
+              itemRevenue: 15121.418995
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový čierny",
+              itemsViewed: 206,
+              itemsAddedToCart: 42487,
+              itemsPurchased: 15115,
+              itemRevenue: 13694.703175
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 5x6 B2ca bezhalogénový oranžový [CXKE-R, PRAFlaSafe X]",
+              itemsViewed: 206,
+              itemsAddedToCart: 56098,
+              itemsPurchased: 2610,
+              itemRevenue: 12987.291211
+            },
+            {
+              name: "Modul batériový HUAWEI LUNA2000-5-E1 5kWh",
+              itemsViewed: 120,
+              itemsAddedToCart: 41,
+              itemsPurchased: 8,
+              itemRevenue: 12295.900001
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x2,5 pvc čierny bal.(100m)",
+              itemsViewed: 35600,
+              itemsAddedToCart: 21302,
+              itemsPurchased: 6200,
+              itemRevenue: 12145.659881
+            },
+            {
+              name: "Modul batériový HUAWEI LUNA2000-7-E1 7kWh",
+              itemsViewed: 141,
+              itemsAddedToCart: 51,
+              itemsPurchased: 5,
+              itemRevenue: 11769.551399
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x4 pvc čierny",
+              itemsViewed: 579,
+              itemsAddedToCart: 21768,
+              itemsPurchased: 3970,
+              itemRevenue: 11542.21945
+            },
+            {
+              name: "Vodič ohybný H1Z2Z2-K 1x6 solárny bezhalogénový červený",
+              itemsViewed: 102,
+              itemsAddedToCart: 38381,
+              itemsPurchased: 12204,
+              itemRevenue: 10888.810044
+            },
+            {
+              name: "Kábel pevný CYKY-J 5x1,5 pvc čierny bal.(100m)",
+              itemsViewed: 30800,
+              itemsAddedToCart: 30106,
+              itemsPurchased: 9400,
+              itemRevenue: 10782.449588
+            },
+            {
+              name: "Kábel ohybný H07RN-F 5G6 guma čierny",
+              itemsViewed: 173,
+              itemsAddedToCart: 3211,
+              itemsPurchased: 2066,
+              itemRevenue: 10423.204804
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x6 zeleno/žltý pvc",
+              itemsViewed: 581,
+              itemsAddedToCart: 31561,
+              itemsPurchased: 11335,
+              itemRevenue: 9774.442759
+            },
+            {
+              name: "Kábel pevný NYY-J 4x150 pvc čierny",
+              itemsViewed: 0,
+              itemsAddedToCart: 300,
+              itemsPurchased: 125,
+              itemRevenue: 9690.787504
+            },
+            {
+              name: "Zásuvka Valena Life 753180 1-násobná s clonkami biela",
+              itemsViewed: 466,
+              itemsAddedToCart: 9547,
+              itemsPurchased: 2329,
+              itemRevenue: 8813.452406
+            },
+            {
+              name: "Páska uzemňovacia 30x4mm FeZn 1kg=1m",
+              itemsViewed: 16850,
+              itemsAddedToCart: 31377,
+              itemsPurchased: 4900,
+              itemRevenue: 8749.322776
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x2,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 272,
+              itemsAddedToCart: 67836,
+              itemsPurchased: 5866,
+              itemRevenue: 8626.096451
+            },
+            {
+              name: "Kábel pevný CXKH-R-J 3x1,5 B2ca bezhalogénový oranžový [CHKE-R, PRAFlaSafe X]",
+              itemsViewed: 306,
+              itemsAddedToCart: 54170,
+              itemsPurchased: 9169,
+              itemRevenue: 8551.417225
+            },
+            {
+              name: "Vodič ohybný NSGAFoU 1x240 1,8/3kV guma čierny",
+              itemsViewed: 41,
+              itemsAddedToCart: 280,
+              itemsPurchased: 240,
+              itemRevenue: 8133.939935
+            },
+            {
+              name: "Menič hybridný HUAWEI SUN2000-10K-MAP0 3F 10kW asymetrický 2xMPPT IP66",
+              itemsViewed: 69,
+              itemsAddedToCart: 21,
+              itemsPurchased: 6,
+              itemRevenue: 8133.0688
+            },
+            {
+              name: "Batéria GoodWe Lynx D 5.0-10 5kWh",
+              itemsViewed: 15,
+              itemsAddedToCart: 13,
+              itemsPurchased: 7,
+              itemRevenue: 7427.303498
+            },
+            {
+              name: "Vodič ohybný 1-CHBU 1x70 guma čierny",
+              itemsViewed: 28,
+              itemsAddedToCart: 3470,
+              itemsPurchased: 600,
+              itemRevenue: 7265.700181
+            },
+            {
+              name: "Vodič pevný NYY-O 1x240 pvc [1-YY, E-YY]",
+              itemsViewed: 19,
+              itemsAddedToCart: 235,
+              itemsPurchased: 235,
+              itemRevenue: 7167.292984
+            },
+            {
+              name: "Zvodič prepätia PO I 81.004 B+C+D 4P 280/12,5kA vymeniteľný modul",
+              itemsViewed: 108,
+              itemsAddedToCart: 206,
+              itemsPurchased: 89,
+              itemRevenue: 6754.149609
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny bal.(500m)",
+              itemsViewed: 532500,
+              itemsAddedToCart: 1033002,
+              itemsPurchased: 6000,
+              itemRevenue: 6614.700157
+            },
+            {
+              name: "Stožiar ulično-diaľničný OSUD 89/12-Z pozink.",
+              itemsViewed: 0,
+              itemsAddedToCart: 20,
+              itemsPurchased: 10,
+              itemRevenue: 6533.332999
+            },
+            {
+              name: "Kábel pevný plochý CYKYLO-J 3x1,5 pvc čierny",
+              itemsViewed: 140,
+              itemsAddedToCart: 37082,
+              itemsPurchased: 10437,
+              itemRevenue: 6520.070419
+            },
+            {
+              name: "Zvodič prepätia PO I 5 PV 1000V DC/12,5kA 81.220 typ 1+2",
+              itemsViewed: 16,
+              itemsAddedToCart: 119,
+              itemsPurchased: 80,
+              itemRevenue: 6479.29599
+            },
+            {
+              name: "Vodič pevný CXKH-R-O 1x70 B2ca bezhalogénový",
+              itemsViewed: 0,
+              itemsAddedToCart: 570,
+              itemsPurchased: 570,
+              itemRevenue: 6451.373757
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x25 zeleno/žltý pvc",
+              itemsViewed: 234,
+              itemsAddedToCart: 3246,
+              itemsPurchased: 1807,
+              itemRevenue: 6425.444987
+            },
+            {
+              name: "Vodič ohybný H07V-K 1x120 zeleno/žltý pvc",
+              itemsViewed: 23,
+              itemsAddedToCart: 850,
+              itemsPurchased: 300,
+              itemRevenue: 6229.234895
+            },
+            {
+              name: "Žiarič germicídny PROLUX G 72W A SPH02 so spínacími hodinami IP20",
+              itemsViewed: 6,
+              itemsAddedToCart: 28,
+              itemsPurchased: 14,
+              itemRevenue: 6020.000003
+            },
+            {
+              name: "Panel fotovoltický DAH Solar DHN-48Z16/DG(BB)-455W bifacial 455W celočierny",
+              itemsViewed: 180,
+              itemsAddedToCart: 1141,
+              itemsPurchased: 98,
+              itemRevenue: 6011.844607
+            },
+            {
+              name: "Drôt zvodový 8mm AlMgSi (1kg 7,40m) bal.20kg",
+              itemsViewed: 4460,
+              itemsAddedToCart: 3761,
+              itemsPurchased: 760,
+              itemRevenue: 6007.498049
+            },
+            {
+              name: "Kábel pevný CYKY-J 3x2,5 pvc čierny",
+              itemsViewed: 308,
+              itemsAddedToCart: 165498,
+              itemsPurchased: 5634,
+              itemRevenue: 5914.764685
+            },
+            {
+              name: "Kábel pevný NAYY-J 4x240 pvc čierny [(N)AYY, E-AYY, 1-AYKY]",
+              itemsViewed: 232,
+              itemsAddedToCart: 5090,
+              itemsPurchased: 346,
+              itemRevenue: 5804.066497
+            },
+            {
+              name: "Kábel pevný 1-CYKY-J 5x35 pvc čierny",
+              itemsViewed: 106,
+              itemsAddedToCart: 1070,
+              itemsPurchased: 247,
+              itemRevenue: 5699.482407
+            },
+            {
+              name: "Zvodič prepätia PO I 3 PV 81.183 3P 1000VDC/12,5kA FV aplikácie typ 1+2",
+              itemsViewed: 136,
+              itemsAddedToCart: 335,
+              itemsPurchased: 87,
+              itemRevenue: 5630.400397
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x50 B2ca bezhalogénový čierny",
+              itemsViewed: 28,
+              itemsAddedToCart: 690,
+              itemsPurchased: 160,
+              itemRevenue: 5571.749986
+            },
+            {
+              name: "Kábel pevný N2XH-J 5x70 B2ca bezhalogénový čierny",
+              itemsViewed: 17,
+              itemsAddedToCart: 330,
+              itemsPurchased: 110,
+              itemRevenue: 5360.399041
+            },
+            {
+              name: "Kábel pevný N2XH-J 3x2,5 bezhalogénový čierny",
+              itemsViewed: 187,
+              itemsAddedToCart: 49477,
+              itemsPurchased: 3585,
+              itemRevenue: 5017.272418
+            },
+            {
+              name: "Kábel pevný 1-CYKY-J 5x25 pvc čierny",
+              itemsViewed: 155,
+              itemsAddedToCart: 1172,
+              itemsPurchased: 273,
+              itemRevenue: 4815.749824
+            }
+          ]
         },
-        paid: {
-          sessions: 27189,
-          users: 9059,
-          engagementRate: 71.83,
-          avgDuration: '00:02:42',
-        },
-      },
       eshop: {
         items: 1102063,
         revenue: 1606234.21,

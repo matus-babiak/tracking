@@ -1,11 +1,13 @@
-import { useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend,
 } from 'recharts'
 import { MonthBarChart, MonthLineChart, SpendRoasChart } from '../components/ui'
+import ReportEditableText from '../components/ReportEditableText'
 import { buildClientReport } from '../lib/clientReport'
 import { downloadReportPdf, reportPdfFilename } from '../lib/downloadReportPdf'
 import { metricToneClass, resolveMetricTone } from '../lib/metricTone'
+import { buildDefaultEdits } from '../lib/reportEdits'
 import { skZaObdobieMesiace } from '../lib/skGrammar'
 
 function toneClass(item) {
@@ -15,13 +17,10 @@ function toneClass(item) {
 function ReportRows({ rows }) {
   if (!rows?.length) return null
   return (
-    <dl className="client-report-rows">
+    <dl className="client-report-rows client-report-rows--metrics">
       {rows.map((r) => (
         <div key={r.label} className="client-report-row client-report-pdf-avoid">
-          <dt className="client-report-row-label">
-            {r.label}
-            {r.hint && <span className="client-report-row-hint">{r.hint}</span>}
-          </dt>
+          <dt className="client-report-row-label">{r.label}</dt>
           <dd className={`client-report-row-value ${toneClass(r)}`.trim()}>{r.value}</dd>
         </div>
       ))}
@@ -100,7 +99,91 @@ function ReportCharts({ charts, chart }) {
   )
 }
 
-function ReportSection({ title, intro, rows, topCampaigns, topProducts, charts, chart }) {
+function ReportSectionCommentary({
+  value,
+  onChange,
+  forceDisplay,
+}) {
+  const [open, setOpen] = useState(!!value?.trim())
+  const [startEdit, setStartEdit] = useState(false)
+  const show = open || !!value?.trim()
+
+  useEffect(() => {
+    if (startEdit) setStartEdit(false)
+  }, [startEdit])
+
+  if (!show) {
+    return (
+      <div className="client-report-commentary client-report-no-pdf">
+        <button
+          type="button"
+          className="client-report-commentary-add"
+          onClick={() => {
+            setOpen(true)
+            setStartEdit(true)
+          }}
+        >
+          Text k výsledkom
+        </button>
+      </div>
+    )
+  }
+
+  if (forceDisplay && !value?.trim()) return null
+
+  return (
+    <div className={`client-report-commentary client-report-pdf-avoid${startEdit ? ' client-report-commentary--editing' : ''}`}>
+      <ReportEditableText
+        value={value}
+        onChange={onChange}
+        placeholder="Text k výsledkom tejto sekcie…"
+        displayClassName="client-report-commentary-text"
+        inputClassName="client-report-commentary-input"
+        forceDisplay={forceDisplay}
+        startInEditMode={startEdit}
+        variant="inline"
+        minRows={3}
+        onEditEnd={() => {
+          if (!value?.trim()) setOpen(false)
+        }}
+      />
+    </div>
+  )
+}
+
+function ReportDownloadButton({ onClick, downloading, className }) {
+  return (
+    <button
+      type="button"
+      className={className}
+      onClick={onClick}
+      disabled={downloading}
+      aria-label="Stiahnuť PDF"
+      title="Stiahnuť PDF"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
+      </svg>
+      {downloading ? 'Generujem…' : 'Stiahnuť PDF'}
+    </button>
+  )
+}
+
+function ReportSection({
+  id,
+  title,
+  intro,
+  rows,
+  topCampaigns,
+  topProducts,
+  charts,
+  chart,
+  sectionComment,
+  onSectionCommentChange,
+  forceDisplay,
+}) {
   if (!rows?.length) return null
   return (
     <section className="client-report-section client-report-pdf-avoid">
@@ -140,34 +223,39 @@ function ReportSection({ title, intro, rows, topCampaigns, topProducts, charts, 
           </dl>
         </div>
       )}
+      <ReportSectionCommentary
+        value={sectionComment}
+        onChange={onSectionCommentChange}
+        forceDisplay={forceDisplay}
+      />
     </section>
   )
 }
 
-function RichParts({ parts }) {
-  if (!parts?.length) return null
-  return parts.map((p, i) => (
-    p.bold
-      ? <strong key={i}>{p.text}</strong>
-      : <span key={i}>{p.text}</span>
-  ))
-}
-
-function ReportSummary({ summary }) {
-  if (!summary?.paragraphs?.length) return null
+function ReportSummary({ title, summaryText, onSummaryChange, forceDisplay }) {
+  if (!summaryText && !title) return null
   return (
     <section className="client-report-section client-report-section--summary client-report-pdf-avoid">
-      <h3 className="client-report-section-title">{summary.title}</h3>
-      {summary.paragraphs.map((parts, i) => (
-        <p key={i} className="client-report-summary-p">
-          <RichParts parts={parts} />
-        </p>
-      ))}
+      <h3 className="client-report-section-title">{title}</h3>
+      <ReportEditableText
+        value={summaryText}
+        onChange={onSummaryChange}
+        placeholder="Zhrnutie za obdobie…"
+        displayClassName="client-report-summary-p"
+        inputClassName="client-report-editable-input client-report-summary-input"
+        forceDisplay={forceDisplay}
+        minRows={8}
+      />
     </section>
   )
 }
 
-function ReportOverview({ overview }) {
+function ReportOverview({
+  overview,
+  sectionComment,
+  onSectionCommentChange,
+  forceDisplay,
+}) {
   if (!overview) return null
   const metrics = (overview.highlights ?? []).slice(0, 6)
 
@@ -188,6 +276,12 @@ function ReportOverview({ overview }) {
       )}
 
       <ReportCharts charts={overview.charts} />
+
+      <ReportSectionCommentary
+        value={sectionComment}
+        onChange={onSectionCommentChange}
+        forceDisplay={forceDisplay}
+      />
     </section>
   )
 }
@@ -195,11 +289,31 @@ function ReportOverview({ overview }) {
 export default function ClientReport({ client, months }) {
   const docRef = useRef(null)
   const [downloading, setDownloading] = useState(false)
+  const [pdfMode, setPdfMode] = useState(false)
   const report = useMemo(() => buildClientReport(client, months), [client, months])
+
+  const [edits, setEdits] = useState(() => buildDefaultEdits(report))
+
+  useEffect(() => {
+    setEdits(buildDefaultEdits(report))
+  }, [report])
+
+  const setSummaryText = useCallback((summary) => {
+    setEdits((prev) => ({ ...prev, summary }))
+  }, [])
+
+  const setSectionComment = useCallback((sectionId, text) => {
+    setEdits((prev) => ({
+      ...prev,
+      sections: { ...prev.sections, [sectionId]: text },
+    }))
+  }, [])
 
   const handleDownload = async () => {
     if (!docRef.current || downloading) return
     setDownloading(true)
+    setPdfMode(true)
+    await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
     try {
       await downloadReportPdf(
         docRef.current,
@@ -208,6 +322,7 @@ export default function ClientReport({ client, months }) {
     } catch {
       window.alert('PDF sa nepodarilo vygenerovať. Skúste to znova.')
     } finally {
+      setPdfMode(false)
       setDownloading(false)
     }
   }
@@ -227,21 +342,11 @@ export default function ClientReport({ client, months }) {
 
   return (
     <article className="client-report-doc" ref={docRef}>
-      <button
-        type="button"
-        className="client-report-download"
+      <ReportDownloadButton
         onClick={handleDownload}
-        disabled={downloading}
-        aria-label="Stiahnuť PDF"
-        title="Stiahnuť PDF"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="7 10 12 15 17 10" />
-          <line x1="12" y1="15" x2="12" y2="3" />
-        </svg>
-        {downloading ? 'Generujem…' : 'PDF'}
-      </button>
+        downloading={downloading}
+        className="client-report-download client-report-download--top client-report-no-pdf"
+      />
 
       <header className="client-report-cover client-report-pdf-avoid">
         <p className="client-report-kicker">Marketingový report</p>
@@ -256,12 +361,36 @@ export default function ClientReport({ client, months }) {
 
       <div className="client-report-body">
         {report.sections.map((section) => (
-          <ReportSection key={section.title} {...section} />
+          <ReportSection
+            key={section.id ?? section.title}
+            {...section}
+            sectionComment={edits.sections[section.id] ?? ''}
+            onSectionCommentChange={(text) => setSectionComment(section.id, text)}
+            forceDisplay={pdfMode}
+          />
         ))}
 
-        <ReportOverview overview={report.overview} />
+        <ReportOverview
+          overview={report.overview}
+          sectionComment={edits.sections.overview ?? ''}
+          onSectionCommentChange={(text) => setSectionComment('overview', text)}
+          forceDisplay={pdfMode}
+        />
 
-        <ReportSummary summary={report.summary} />
+        <ReportSummary
+          title={report.summary?.title}
+          summaryText={edits.summary}
+          onSummaryChange={setSummaryText}
+          forceDisplay={pdfMode}
+        />
+
+        <div className="client-report-download-bar client-report-no-pdf">
+          <ReportDownloadButton
+            onClick={handleDownload}
+            downloading={downloading}
+            className="client-report-download client-report-download--bottom"
+          />
+        </div>
       </div>
 
       <footer className="client-report-footer client-report-pdf-avoid">

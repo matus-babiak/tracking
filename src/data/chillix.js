@@ -3,6 +3,7 @@
 const chillix = {
   id: 'chillix',
   name: 'Chillix',
+  businessType: 'services',
   metaProfile: 'leadgen',
   currency: '€',
   notes: [

@@ -2,7 +2,7 @@ import { fmtEur, fmtNum, fmtPct, monthLabel, sum } from './helpers'
 import { skPhrase } from './skGrammar'
 
 export function isGa4ExportMonth(m) {
-  return !!(m.ga?.trafficAcquisition?.length || m.ga?.landingPages?.length)
+  return !!(m.ga?.trafficAcquisition?.length || m.ga?.landingPages?.length || m.ga?.events?.length)
 }
 
 export function ga4ExportMonths(months) {
@@ -18,13 +18,15 @@ export function aggregateGaSnapshot(months) {
   if (!rows.length) return null
   const sessions = sum(rows, (m) => m.ga.snapshot.sessions)
   const engagedSessions = sum(rows, (m) => m.ga.snapshot.engagedSessions)
+  const engagementRate = sessions > 0 && engagedSessions != null ? engagedSessions / sessions : null
   return {
     activeUsers: sum(rows, (m) => m.ga.snapshot.activeUsers),
     sessions,
     newUsers: sum(rows, (m) => m.ga.snapshot.newUsers),
     totalRevenue: sum(rows, (m) => m.ga.snapshot.totalRevenue) || null,
     keyEvents: sum(rows, (m) => m.ga.snapshot.keyEvents) || null,
-    engagementRate: sessions > 0 && engagedSessions ? engagedSessions / sessions : null,
+    engagementRate,
+    bounceRate: engagementRate != null ? 1 - engagementRate : null,
   }
 }
 

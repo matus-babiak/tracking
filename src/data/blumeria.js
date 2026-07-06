@@ -2,6 +2,7 @@
 
 const blumeria = {
   id: 'blumeria-consulting',
+  businessType: 'services',
   name: 'Blumeria Consulting',
   metaProfile: 'leadgen',
   currency: '€',

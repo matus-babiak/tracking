@@ -26,7 +26,8 @@ Keď pridávaš klienta, urob len toto:
 | Heslo / guest prístup | `scripts/seal-passwords.mjs`, `src/lib/auth.js` ak treba výnimku |
 | Postup exportu z platformy | `guideExport` v `src/data/guides.jsx` |
 | Poznámky k metrikám | pole `notes` v súbore klienta (zobrazí sa v Návody) |
-| Profil dashboardu | `metaProfile`, `leadgenProfile`, `adsProfile` — pozri `.cursor/rules/client-metrics.mdc` |
+| Typ klienta | `businessType: 'ecommerce'` alebo `'services'` — pozri `client-metrics.mdc` |
+| Profil dashboardu | `metaProfile`, `leadgenProfile`, `adsProfile` — v rámci typu |
 
 ## Metriky
 

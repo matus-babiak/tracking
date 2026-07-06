@@ -344,6 +344,34 @@ body {
 .period-select.compare { color: var(--text-secondary); flex-shrink: 0; }
 .range-sep { color: var(--text-tertiary); font-size: 13px; }
 
+.period-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s, background 0.15s, opacity 0.15s;
+}
+
+.period-nav-btn:hover:not(:disabled) {
+  border-color: #c5c5c5;
+  color: var(--text);
+  background: #fafafa;
+}
+
+.period-nav-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  color: var(--text-tertiary);
+}
+
 .period-actions {
   justify-content: space-between;
   gap: 10px;
@@ -1530,6 +1558,10 @@ tr.total.compare-row td {
   color: var(--green);
 }
 
+.import-check--partial {
+  color: #c98a1a;
+}
+
 .import-check--no {
   color: var(--text-tertiary);
   font-size: 14px;
@@ -1557,6 +1589,31 @@ tr.total.compare-row td {
   font-size: 8px;
   font-weight: 700;
   line-height: 1;
+}
+
+.import-source-dot--legacy {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px dashed var(--border);
+}
+
+.import-source-dot--export {
+  background: #e8f5ee;
+  color: #1a7f4b;
+  box-shadow: inset 0 0 0 1px #b8e0c8;
+}
+
+.import-cell-inner--partial {
+  opacity: 0.92;
+}
+
+.import-cell-inner--ga-export .import-check--yes,
+.import-cell-inner--ga-export .import-check--partial {
+  color: #1a7f4b;
+}
+
+.import-cell-inner--ga-legacy .import-check--partial {
+  color: #c98a1a;
 }
 
 .import-client-link {
@@ -1794,21 +1851,35 @@ tr.total.compare-row td {
 }
 
 .client-report-download {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  z-index: 2;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
+  gap: 8px;
+  padding: 8px 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background: #fff;
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
+}
+
+.client-report-download--top {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+}
+
+.client-report-download-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.client-report-download--bottom {
+  position: static;
 }
 
 .client-report-download:hover:not(:disabled) {
@@ -2000,18 +2071,34 @@ tr.total.compare-row td {
   border-top: 1px solid #e0e0e0;
 }
 
+@media (min-width: 641px) {
+  .client-report-rows--metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+  }
+}
+
+.client-report-doc--exporting .client-report-rows--metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 20px;
+}
+
 .client-report-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  gap: 24px;
-  padding: 11px 0;
+  gap: 16px;
+  padding: 9px 0;
   margin: 0;
   border-bottom: 1px solid #e0e0e0;
 }
 
 .client-report-row-label {
-  font-size: 14px;
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
   font-weight: 400;
   color: var(--text);
 }
@@ -2025,7 +2112,7 @@ tr.total.compare-row td {
 
 .client-report-row-value {
   margin: 0;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   text-align: right;
   white-space: nowrap;
@@ -2269,6 +2356,144 @@ tr.total.compare-row td {
   border-top: 1px solid #e8e8e8;
   font-size: 12px;
   color: var(--text-secondary);
+}
+
+.client-report-editable {
+  position: relative;
+}
+
+.client-report-editable-body {
+  padding-right: 36px;
+}
+
+.client-report-editable-body--clickable {
+  cursor: text;
+  border-radius: 6px;
+}
+
+.client-report-editable-body--clickable:focus {
+  outline: 2px solid #ccc;
+  outline-offset: 2px;
+}
+
+.client-report-editable-edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.client-report-editable-edit:hover {
+  color: var(--text);
+  border-color: #bbb;
+}
+
+.client-report-editable--editing .client-report-editable-edit {
+  display: none;
+}
+
+.client-report-editable-input,
+.client-report-summary-input {
+  display: block;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.65;
+  resize: vertical;
+  min-height: 96px;
+}
+
+.client-report-summary-input {
+  font-size: 14px;
+  min-height: 180px;
+}
+
+.client-report-editable-placeholder {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.client-report-commentary {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px dashed #e0e0e0;
+  width: 100%;
+}
+
+.client-report-commentary--editing {
+  border-top-style: solid;
+}
+
+.client-report-editable--inline {
+  width: 100%;
+}
+
+.client-report-editable--inline .client-report-editable-body {
+  padding-right: 0;
+  width: 100%;
+}
+
+.client-report-commentary-input {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 72px;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  font-family: inherit;
+  resize: vertical;
+}
+
+.client-report-commentary-add {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.client-report-commentary-add:hover {
+  color: var(--text);
+}
+
+.client-report-commentary-text {
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+
+.client-report-commentary-text strong {
+  font-weight: 700;
+}
+
+.client-report-commentary-text:last-child {
+  margin-bottom: 0;
 }
 
 .client-report-footer {
